@@ -289,7 +289,7 @@ histórico e apagar um Pokémon, desfazendo cada ação.
 - [X] T101 [P] Ajustar `src/EvTrainer.Web/wwwroot/manifest.webmanifest`: `name` "EVs Trainer", `short_name` "EVs", `display` "standalone", `start_url` "./", `scope` "./", `lang` "pt-BR", `background_color`/`theme_color` de `--bg`/`--accent`; substituir `icon-192.png`/`icon-512.png` e `favicon.png`
 - [X] T102 Revisar acessibilidade em todos os componentes: `aria-label` em controles só com ícone, `aria-pressed` nos toggles, foco visível, alvos de toque ≥ 44 px; e layout sem rolagem horizontal em 360 px nas 3 abas, temas claro e escuro (quickstart §2 passo 8)
 - [X] T103 Validar publish e offline localmente: `dotnet publish src/EvTrainer.Web -c Release -o artifacts/publish` + `dotnet serve -d artifacts/publish/wwwroot -p 5080` ([quickstart.md §4](./quickstart.md)): service worker ativo, modo offline funcional, manifest instalável, nenhuma requisição externa
-- [ ] T104 Rodar `dotnet format PokemonEvTrainer.slnx --verify-no-changes` e `dotnet test --solution PokemonEvTrainer.slnx` (tudo verde), fazer push na `main` e validar o deploy em `https://albertomonteiro.github.io/ev-trainer/` ([quickstart.md §5](./quickstart.md)); habilitar antes Settings → Pages → Source: GitHub Actions
+- [X] T104 Rodar `dotnet format PokemonEvTrainer.slnx --verify-no-changes` e `dotnet test --solution PokemonEvTrainer.slnx` (tudo verde), fazer push na `main` e validar o deploy em `https://albertomonteiro.github.io/ev-trainer/` ([quickstart.md §5](./quickstart.md)); habilitar antes Settings → Pages → Source: GitHub Actions
 - [X] T105 Remover o comentário "Sync Impact Report" do topo de `.specify/memory/constitution.md` antes do commit final (é material temporário de revisão, conforme o comando de constituição)
 
 ---
