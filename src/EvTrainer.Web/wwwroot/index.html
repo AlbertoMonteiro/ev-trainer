@@ -41,7 +41,26 @@
     </div>
     <script src="js/interop.js"></script>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
+    <script>
+        // Offline cache + updates: check for a new version on start and whenever the app comes back to the
+        // foreground; when the new service worker takes control, reload once to run the new version.
+        if ('serviceWorker' in navigator) {
+            const hadController = !!navigator.serviceWorker.controller;
+            let reloading = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!hadController || reloading) return;
+                reloading = true;
+                location.reload();
+            });
+            navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' }).then(registration => {
+                const check = () => registration.update().catch(() => { });
+                document.addEventListener('visibilitychange', () => {
+                    if (document.visibilityState === 'visible') check();
+                });
+                setInterval(check, 60 * 60 * 1000);
+            });
+        }
+    </script>
 </body>
 
 </html>

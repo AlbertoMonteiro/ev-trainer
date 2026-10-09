@@ -19,6 +19,7 @@
   "Menu.Language": "Idioma",
   "Menu.Credits": "Sprites: PokeAPI/sprites · imagens © The Pokémon Company.",
   "Menu.Credits.Link": "Ver repositório",
+  "Menu.Version": "Versão {0}",
   "Empty.NoPokemon": "Nenhum Pokémon ainda.",
   "Empty.AddPokemon": "Adicionar Pokémon",
   "Status.Saved": "Salvo neste aparelho",

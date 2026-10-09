@@ -128,6 +128,7 @@ public class PokemonMenuSpriteTests : AppTestContext
         Assert.Equal("https://github.com/PokeAPI/sprites", link.GetAttribute("href"));
         Assert.Equal("_blank", link.GetAttribute("target"));
         Assert.Contains("noopener", link.GetAttribute("rel"));
+        Assert.Equal(T("Menu.Version", EvTrainer.Web.AppInfo.DisplayVersion), cut.Find(".menu-panel .menu-version").TextContent.Trim());
     }
 }
 

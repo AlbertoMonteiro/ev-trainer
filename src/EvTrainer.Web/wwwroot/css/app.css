@@ -1035,6 +1035,14 @@ button.link, button.change-species {
     color: var(--muted);
 }
 
+.menu-version {
+    margin: 0 0 4px;
+    padding: 0 14px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+}
+
 .menu-credits a {
     color: var(--accent);
 }
