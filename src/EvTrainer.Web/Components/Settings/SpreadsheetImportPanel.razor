@@ -1,0 +1,53 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is { } pokemon)
+{
+    var preview = Preview(pokemon);
+    <details class="card import-card">
+        <summary>@L["Import.Title"]</summary>
+        <div class="form-grid">
+            <div class="segmented" role="group" aria-label="@L["Import.Mode"]">
+                <button type="button" class="battles" aria-pressed="@(!_levels ? "true" : "false")" @onclick="() => _levels = false">@L["Import.Mode.Battles"]</button>
+                <button type="button" class="levels" aria-pressed="@(_levels ? "true" : "false")" @onclick="() => _levels = true">@L["Import.Mode.Levels"]</button>
+            </div>
+            <p class="hint">@(_levels ? L["Import.Hint.Levels"] : L["Import.Hint.Battles"])</p>
+            <textarea aria-label="@L["Import.Paste"]" placeholder="@L["Import.Paste"]" value="@_text"
+                      @oninput="e => _text = e.Value?.ToString() ?? string.Empty"></textarea>
+            @if (!string.IsNullOrWhiteSpace(_text))
+            {
+                <p class="import-preview hint">@L["Import.Preview", preview.Recognized, preview.Ignored]</p>
+            }
+            <button type="button" class="primary confirm" disabled="@(preview.Recognized == 0)" @onclick="() => Confirm(pokemon)">@L["Import.Confirm"]</button>
+        </div>
+    </details>
+}
+
+@code {
+    private bool _levels;
+    private string _text = string.Empty;
+
+    private (int Recognized, int Ignored) Preview(TrainingPokemon pokemon) => _levels
+        ? SpreadsheetImport.Levels(_text, pokemon) is var levels ? (levels.Recognized, levels.Ignored) : default
+        : SpreadsheetImport.Battles(_text, Store.Data) is var battles ? (battles.Recognized, battles.Ignored) : default;
+
+    private void Confirm(TrainingPokemon pokemon)
+    {
+        int count;
+        if (_levels)
+        {
+            var preview = SpreadsheetImport.Levels(_text, pokemon);
+            Store.ImportLevels(preview.Items);
+            count = preview.Recognized;
+        }
+        else
+        {
+            var preview = SpreadsheetImport.Battles(_text, Store.Data);
+            Store.ImportBattles(preview.Items);
+            count = preview.Recognized;
+        }
+
+        _text = string.Empty;
+        Toasts.Show(L["Import.Done", count]);
+    }
+}

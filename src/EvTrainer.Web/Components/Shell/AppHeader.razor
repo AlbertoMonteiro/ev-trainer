@@ -1,0 +1,33 @@
+@inherits StoreAwareComponent
+
+<header class="app-header">
+    <div class="left">
+        <button type="button" class="icon-button menu" aria-label="@L["Menu.Open"]" aria-expanded="@(_menuOpen ? "true" : "false")"
+                @onclick="() => _menuOpen = !_menuOpen">☰</button>
+        <h1 class="title"><span class="accent">@L["App.TitleAccent"]</span> @L["App.TitleRest"]</h1>
+    </div>
+    <div class="right">
+        <StatusIndicator Status="Store.Status" />
+        @if (Store.Selected is { } pokemon)
+        {
+            <button type="button" class="toggle" aria-pressed="@(pokemon.Pokerus ? "true" : "false")"
+                    aria-label="@L["Header.Pokerus.Label"]" title="@L["Header.Pokerus.Label"]"
+                    @onclick="Store.TogglePokerus">@L["Header.Pokerus"]@(pokemon.Pokerus ? " " + L["Header.Double"] : "")</button>
+            <button type="button" class="toggle" aria-pressed="@(pokemon.MachoBrace ? "true" : "false")"
+                    aria-label="@L["Header.Macho.Label"]" title="@L["Header.Macho.Label"]"
+                    @onclick="Store.ToggleMacho">@L["Header.Macho"]@(pokemon.MachoBrace ? " " + L["Header.Double"] : "")</button>
+        }
+    </div>
+</header>
+
+@if (_menuOpen)
+{
+    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" />
+}
+
+@code {
+    private bool _menuOpen;
+
+    [Parameter]
+    public EventCallback<Tab> OnNavigate { get; set; }
+}

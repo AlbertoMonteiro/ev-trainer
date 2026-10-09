@@ -1,0 +1,94 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+@inject IBrowserApi Browser
+@inject TimeProvider Time
+
+<section class="@(ImportOnly ? "backup inline" : "card backup")">
+    @if (!ImportOnly)
+    {
+        <h2>@L["Backup.Title"]</h2>
+        <p class="hint">@L["Backup.LocalOnlyNotice"]</p>
+    }
+    <div class="row-actions">
+        @if (!ImportOnly)
+        {
+            <button type="button" class="export" @onclick="Export">@L["Backup.Export"]</button>
+        }
+        <label class="file-button">
+            <span>@L["Menu.ImportBackup"]</span>
+            <InputFile accept=".json,application/json" OnChange="LoadFile" />
+        </label>
+    </div>
+
+    @if (_error is { } error)
+    {
+        <p class="error">@L[$"Backup.Error.{error}"]</p>
+    }
+
+    @if (_pending is { } pending)
+    {
+        var preview = BackupFormat.Preview(Store.All, pending.Items);
+        <p class="import-preview">@L["Backup.ImportPreview", pending.Items.Count, preview.New, preview.Replaced]</p>
+        <div class="row-actions">
+            <button type="button" class="primary confirm-import" @onclick="Confirm">@L["Backup.ConfirmImport"]</button>
+            <button type="button" @onclick="() => _pending = null">@L["Backup.CancelImport"]</button>
+        </div>
+    }
+</section>
+
+@code {
+    private const long MaxFileSize = 5 * 1024 * 1024;
+
+    private BackupDocuments? _pending;
+    private BackupErrorKind? _error;
+
+    /// <summary>Compact variant for the empty state: only the import button.</summary>
+    [Parameter]
+    public bool ImportOnly { get; set; }
+
+    private void Export()
+    {
+        var date = Time.GetLocalNow().ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        Browser.DownloadText($"evs-trainer-backup-{date}.json", Store.ExportBackup());
+        Toasts.Show(L["Backup.Exported"]);
+    }
+
+    private async Task LoadFile(InputFileChangeEventArgs e)
+    {
+        _pending = null;
+        _error = null;
+        string text;
+        try
+        {
+            using var reader = new StreamReader(e.File.OpenReadStream(MaxFileSize));
+            text = await reader.ReadToEndAsync();
+        }
+        catch (IOException)
+        {
+            _error = BackupErrorKind.InvalidJson;
+            return;
+        }
+
+        switch (BackupFormat.Read(text))
+        {
+            case BackupDocuments documents:
+                _pending = documents;
+                break;
+            case BackupError error:
+                _error = error.Kind;
+                break;
+        }
+    }
+
+    private void Confirm()
+    {
+        if (_pending is not { } pending)
+        {
+            return;
+        }
+
+        var result = Store.ImportBackup(pending);
+        _pending = null;
+        Toasts.Show(L["Backup.Imported", result.New, result.Replaced]);
+    }
+}

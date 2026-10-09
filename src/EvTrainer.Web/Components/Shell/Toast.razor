@@ -1,0 +1,25 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Toasts.Message is { } message)
+{
+    <div class="toast" role="status" aria-live="polite">
+        <span class="msg">@message</span>
+        @if (Toasts.Undo is not null)
+        {
+            <button type="button" @onclick="Toasts.RunUndo">@L["Toast.Undo"]</button>
+        }
+    </div>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Toasts.Changed += OnToastChanged;
+    }
+
+    private void OnToastChanged() => InvokeAsync(StateHasChanged);
+
+    protected override void OnDispose() => Toasts.Changed -= OnToastChanged;
+}

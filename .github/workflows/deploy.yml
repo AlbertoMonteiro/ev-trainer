@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Install wasm-tools workload
+        run: dotnet workload install wasm-tools
+
+      - name: Verify formatting
+        run: dotnet format PokemonEvTrainer.slnx --verify-no-changes
+
+      - name: Test
+        run: dotnet test --solution PokemonEvTrainer.slnx
+
+      # Before publish, so the service worker manifest hashes the final index.html (research R2).
+      - name: Set base href for the repository sub-path
+        run: sed -i 's|<base href="/" />|<base href="/${{ github.event.repository.name }}/" />|' src/EvTrainer.Web/wwwroot/index.html
+
+      - name: Publish
+        run: dotnet publish src/EvTrainer.Web -c Release -o artifacts/publish
+
+      - name: SPA fallback and .nojekyll
+        run: |
+          cp artifacts/publish/wwwroot/index.html artifacts/publish/wwwroot/404.html
+          touch artifacts/publish/wwwroot/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: artifacts/publish/wwwroot
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

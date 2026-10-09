@@ -1,0 +1,28 @@
+{
+  "name": "EVs Trainer",
+  "short_name": "EVs",
+  "description": "Contador de EVs e calculadora de IVs para Pokémon FireRed (Gen 3).",
+  "lang": "pt-BR",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#12151a",
+  "theme_color": "#c8202f",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    }
+  ]
+}

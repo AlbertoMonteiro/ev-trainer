@@ -1,0 +1,76 @@
+using Bunit;
+
+using EvTrainer.Tests.Support;
+using EvTrainer.Web.Pages;
+
+namespace EvTrainer.Tests.Components.Evs;
+
+public class EvTabFlowTests : AppTestContext
+{
+    private IRenderedComponent<Home> RenderWithAll()
+    {
+        var cut = Render<Home>();
+        // US1 lists every opponent; US3 adds the "Úteis" filter, so force "Todos" when present.
+        cut.FindAll(".segmented button").LastOrDefault()?.Click();
+        return cut;
+    }
+
+    private static void Tap(IRenderedComponent<Home> cut, string name) =>
+        cut.Find($".opponent-grid button.opponent[data-opp='{name}']").Click();
+
+    [Fact]
+    public void Tapping_records_the_battle_shows_the_gain_and_saves()
+    {
+        Seed(Pokemons.Squirtle(targets: [252, 0, 2, 252, 0, 4]));
+        var cut = RenderWithAll();
+
+        Tap(cut, "Caterpie");
+
+        Assert.Equal("1/252", cut.FindAll(".mini .value")[0].TextContent.Trim());
+        Assert.Equal(T("Evs.Card.Count", 1), cut.Find(".opponent-grid button.opponent[data-opp='Caterpie'] .count").TextContent.Trim());
+        Assert.Equal(T("Toast.EvGain", "Caterpie", T("Evs.Gain.Part", 1, T("Stat.Long.0"))), cut.Find(".toast .msg").TextContent);
+        Assert.Equal(1, Repository.Stored["p1"].Events.Sum(e => e.Count));
+    }
+
+    [Fact]
+    public void Undo_reverts_the_battle()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = RenderWithAll();
+        Tap(cut, "Caterpie");
+
+        cut.Find(".toast button").Click();
+
+        Assert.Equal("0/252", cut.FindAll(".mini .value")[0].TextContent.Trim());
+        Assert.Empty(Repository.Stored["p1"].Events);
+    }
+
+    [Fact]
+    public void Pokerus_and_macho_brace_give_four_times()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = RenderWithAll();
+        var toggles = cut.FindAll("header button.toggle");
+        Assert.Equal(["false", "false"], toggles.Select(t => t.GetAttribute("aria-pressed")));
+
+        cut.FindAll("header button.toggle")[0].Click();
+        cut.FindAll("header button.toggle")[1].Click();
+        Tap(cut, "Caterpie");
+
+        toggles = cut.FindAll("header button.toggle");
+        Assert.Equal(["true", "true"], toggles.Select(t => t.GetAttribute("aria-pressed")));
+        Assert.All(toggles, t => Assert.Contains(T("Header.Double"), t.TextContent));
+        Assert.Equal("4/252", cut.FindAll(".mini .value")[0].TextContent.Trim());
+    }
+
+    [Fact]
+    public void At_the_cap_the_toast_says_no_ev()
+    {
+        Seed(Pokemons.Squirtle().WithEvents(("Caterpie", 255, 1)));
+        var cut = RenderWithAll();
+
+        Tap(cut, "Caterpie");
+
+        Assert.Equal(T("Toast.NoEvGain", "Caterpie"), cut.Find(".toast .msg").TextContent);
+    }
+}

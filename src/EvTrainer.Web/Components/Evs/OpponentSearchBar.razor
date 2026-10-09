@@ -1,0 +1,27 @@
+@inherits StoreAwareComponent
+
+<div class="search-row">
+    <input class="search" type="search" value="@Query" autocomplete="off"
+           aria-label="@L["Evs.Search.Label"]" placeholder="@L["Evs.Search.Placeholder"]"
+           @oninput="e => QueryChanged.InvokeAsync(e.Value?.ToString() ?? string.Empty)" />
+    <div class="segmented" role="group" aria-label="@L["Evs.Filter.Label"]">
+        <button type="button" class="useful" aria-pressed="@(Filter != "all" ? "true" : "false")"
+                @onclick="@(() => FilterChanged.InvokeAsync("useful"))">@L["Evs.Filter.Useful"]</button>
+        <button type="button" class="all" aria-pressed="@(Filter == "all" ? "true" : "false")"
+                @onclick="@(() => FilterChanged.InvokeAsync("all"))">@L["Evs.Filter.All"]</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Query { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> QueryChanged { get; set; }
+
+    [Parameter]
+    public string Filter { get; set; } = "useful";
+
+    [Parameter]
+    public EventCallback<string> FilterChanged { get; set; }
+}

@@ -1,0 +1,24 @@
+@inherits StoreAwareComponent
+
+<nav class="tabs" role="tablist" aria-label="@L["Tabs.Label"]">
+    @foreach (var (tab, key) in Items)
+    {
+        <button type="button" role="tab" class="tab" aria-selected="@(tab == Active ? "true" : "false")"
+                @onclick="() => ActiveChanged.InvokeAsync(tab)">@L[key]</button>
+    }
+</nav>
+
+@code {
+    private static readonly (Tab Tab, string Key)[] Items =
+    [
+        (Tab.Evs, "Tabs.Evs"),
+        (Tab.Ivs, "Tabs.Ivs"),
+        (Tab.Settings, "Tabs.Settings"),
+    ];
+
+    [Parameter]
+    public Tab Active { get; set; }
+
+    [Parameter]
+    public EventCallback<Tab> ActiveChanged { get; set; }
+}

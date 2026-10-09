@@ -1,0 +1,46 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is { } pokemon)
+{
+    <details class="card history-card">
+        <summary>@L["History.Title"]</summary>
+        @if (pokemon.Events.Count == 0)
+        {
+            <p class="history-empty hint">@L["History.Empty"]</p>
+        }
+        else
+        {
+            <ul class="history">
+                @for (var i = pokemon.Events.Count - 1; i >= Math.Max(0, pokemon.Events.Count - MaxItems); i--)
+                {
+                    var index = i;
+                    var e = pokemon.Events[i];
+                    <li>
+                        <span class="what">
+                            @L["History.Item", e.Opponent, e.Count]
+                            @if (e.Multiplier > 1)
+                            {
+                                <span class="meta">@(" " + L["History.Multiplier", e.Multiplier])</span>
+                            }
+                        </span>
+                        <button type="button" class="remove icon-button" aria-label="@L["History.Remove", e.Opponent]"
+                                @onclick="() => Remove(index, e.Opponent)">×</button>
+                    </li>
+                }
+            </ul>
+        }
+    </details>
+}
+
+@code {
+    private const int MaxItems = 12;
+
+    private void Remove(int index, string opponent)
+    {
+        if (Store.RemoveEvent(index) is { } undo)
+        {
+            Toasts.Show(L["History.Removed", opponent], undo);
+        }
+    }
+}

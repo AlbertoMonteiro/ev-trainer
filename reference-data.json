@@ -1,0 +1,2843 @@
+{
+  "_fonte": {
+    "evYields": "Bulbapedia – List of Pokémon by effort value yield (Generation III)",
+    "treinadores": "GameFAQs – FireRed Trainer Index (Joon) v1.02, até a Rota 19",
+    "locaisSelvagens": "curadoria manual (FireRed)"
+  },
+  "stats": [
+    "HP",
+    "Ataque",
+    "Defesa",
+    "SpAtk",
+    "SpDef",
+    "Speed"
+  ],
+  "statsShort": [
+    "HP",
+    "ATK",
+    "DEF",
+    "SPA",
+    "SPD",
+    "SPE"
+  ],
+  "opponents": [
+    {
+      "dex": 1,
+      "name": "Bulbasaur",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Rival: Laboratório, Rota 22, Cerulean",
+      "isVitamin": false
+    },
+    {
+      "dex": 2,
+      "name": "Ivysaur",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "wildLocation": "Rival: S.S. Anne",
+      "isVitamin": false
+    },
+    {
+      "dex": 3,
+      "name": "Venusaur",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 4,
+      "name": "Charmander",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 5,
+      "name": "Charmeleon",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 6,
+      "name": "Charizard",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 7,
+      "name": "Squirtle",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 8,
+      "name": "Wartortle",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 9,
+      "name": "Blastoise",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 10,
+      "name": "Caterpie",
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Viridian Forest, Rota 2, 24, 25",
+      "isVitamin": false
+    },
+    {
+      "dex": 11,
+      "name": "Metapod",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Viridian Forest",
+      "isVitamin": false
+    },
+    {
+      "dex": 12,
+      "name": "Butterfree",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 13,
+      "name": "Weedle",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Viridian Forest, Rota 2",
+      "isVitamin": false
+    },
+    {
+      "dex": 14,
+      "name": "Kakuna",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Viridian Forest",
+      "isVitamin": false
+    },
+    {
+      "dex": 15,
+      "name": "Beedrill",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 16,
+      "name": "Pidgey",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Rota 1, 2, 24, 25; rival Rota 22",
+      "isVitamin": false
+    },
+    {
+      "dex": 17,
+      "name": "Pidgeotto",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Rival: Cerulean, S.S. Anne",
+      "isVitamin": false
+    },
+    {
+      "dex": 18,
+      "name": "Pidgeot",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 19,
+      "name": "Rattata",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Rota 1, 2, 4, 22; rival em Cerulean",
+      "isVitamin": false
+    },
+    {
+      "dex": 20,
+      "name": "Raticate",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Rival: S.S. Anne",
+      "isVitamin": false
+    },
+    {
+      "dex": 21,
+      "name": "Spearow",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Rota 3, 4, 22",
+      "isVitamin": false
+    },
+    {
+      "dex": 22,
+      "name": "Fearow",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 23,
+      "name": "Ekans",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 4",
+      "isVitamin": false
+    },
+    {
+      "dex": 24,
+      "name": "Arbok",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 25,
+      "name": "Pikachu",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Viridian Forest (raro); Lt. Surge",
+      "isVitamin": false
+    },
+    {
+      "dex": 26,
+      "name": "Raichu",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "wildLocation": "Lt. Surge",
+      "isVitamin": false
+    },
+    {
+      "dex": 27,
+      "name": "Sandshrew",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 28,
+      "name": "Sandslash",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 29,
+      "name": "Nidoran♀",
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 3, 22",
+      "isVitamin": false
+    },
+    {
+      "dex": 30,
+      "name": "Nidorina",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 31,
+      "name": "Nidoqueen",
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Giovanni",
+      "isVitamin": false
+    },
+    {
+      "dex": 32,
+      "name": "Nidoran♂",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 3, 22",
+      "isVitamin": false
+    },
+    {
+      "dex": 33,
+      "name": "Nidorino",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 34,
+      "name": "Nidoking",
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Giovanni",
+      "isVitamin": false
+    },
+    {
+      "dex": 35,
+      "name": "Clefairy",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Mt. Moon (raro)",
+      "isVitamin": false
+    },
+    {
+      "dex": 36,
+      "name": "Clefable",
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 37,
+      "name": "Vulpix",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 38,
+      "name": "Ninetales",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 39,
+      "name": "Jigglypuff",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 3",
+      "isVitamin": false
+    },
+    {
+      "dex": 40,
+      "name": "Wigglytuff",
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 41,
+      "name": "Zubat",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Mt. Moon",
+      "isVitamin": false
+    },
+    {
+      "dex": 42,
+      "name": "Golbat",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 43,
+      "name": "Oddish",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 24, 25, 5, 6, 7",
+      "isVitamin": false
+    },
+    {
+      "dex": 44,
+      "name": "Gloom",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": "Rotas 12–15",
+      "isVitamin": false
+    },
+    {
+      "dex": 45,
+      "name": "Vileplume",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": "Erika",
+      "isVitamin": false
+    },
+    {
+      "dex": 46,
+      "name": "Paras",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Mt. Moon",
+      "isVitamin": false
+    },
+    {
+      "dex": 47,
+      "name": "Parasect",
+      "evYield": [
+        0,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 48,
+      "name": "Venonat",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": "Rotas 12–15, Safari",
+      "isVitamin": false
+    },
+    {
+      "dex": 49,
+      "name": "Venomoth",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "wildLocation": "Sabrina",
+      "isVitamin": false
+    },
+    {
+      "dex": 50,
+      "name": "Diglett",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Diglett's Cave",
+      "isVitamin": false
+    },
+    {
+      "dex": 51,
+      "name": "Dugtrio",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Giovanni",
+      "isVitamin": false
+    },
+    {
+      "dex": 52,
+      "name": "Meowth",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Rota 5–8",
+      "isVitamin": false
+    },
+    {
+      "dex": 53,
+      "name": "Persian",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 54,
+      "name": "Psyduck",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Surf / Seafoam",
+      "isVitamin": false
+    },
+    {
+      "dex": 55,
+      "name": "Golduck",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 56,
+      "name": "Mankey",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 3, 4, 22",
+      "isVitamin": false
+    },
+    {
+      "dex": 57,
+      "name": "Primeape",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 58,
+      "name": "Growlithe",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 7, 8 (FR); Blaine",
+      "isVitamin": false
+    },
+    {
+      "dex": 59,
+      "name": "Arcanine",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Blaine",
+      "isVitamin": false
+    },
+    {
+      "dex": 60,
+      "name": "Poliwag",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 61,
+      "name": "Poliwhirl",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 62,
+      "name": "Poliwrath",
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 63,
+      "name": "Abra",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Rota 24, 25 (foge); rival em Cerulean",
+      "isVitamin": false
+    },
+    {
+      "dex": 64,
+      "name": "Kadabra",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": "Rival: S.S. Anne; Sabrina",
+      "isVitamin": false
+    },
+    {
+      "dex": 65,
+      "name": "Alakazam",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": "Sabrina",
+      "isVitamin": false
+    },
+    {
+      "dex": 66,
+      "name": "Machop",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Rock Tunnel",
+      "isVitamin": false
+    },
+    {
+      "dex": 67,
+      "name": "Machoke",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 68,
+      "name": "Machamp",
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 69,
+      "name": "Bellsprout",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 70,
+      "name": "Weepinbell",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 71,
+      "name": "Victreebel",
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Erika",
+      "isVitamin": false
+    },
+    {
+      "dex": 72,
+      "name": "Tentacool",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": "Surf",
+      "isVitamin": false
+    },
+    {
+      "dex": 73,
+      "name": "Tentacruel",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 74,
+      "name": "Geodude",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Mt. Moon; Brock",
+      "isVitamin": false
+    },
+    {
+      "dex": 75,
+      "name": "Graveler",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 76,
+      "name": "Golem",
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 77,
+      "name": "Ponyta",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Blaine",
+      "isVitamin": false
+    },
+    {
+      "dex": 78,
+      "name": "Rapidash",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Blaine",
+      "isVitamin": false
+    },
+    {
+      "dex": 79,
+      "name": "Slowpoke",
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Seafoam / Surf",
+      "isVitamin": false
+    },
+    {
+      "dex": 80,
+      "name": "Slowbro",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 81,
+      "name": "Magnemite",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Power Plant",
+      "isVitamin": false
+    },
+    {
+      "dex": 82,
+      "name": "Magneton",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 83,
+      "name": "Farfetch'd",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 84,
+      "name": "Doduo",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 85,
+      "name": "Dodrio",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 86,
+      "name": "Seel",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 87,
+      "name": "Dewgong",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 88,
+      "name": "Grimer",
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Pokémon Mansion",
+      "isVitamin": false
+    },
+    {
+      "dex": 89,
+      "name": "Muk",
+      "evYield": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Koga",
+      "isVitamin": false
+    },
+    {
+      "dex": 90,
+      "name": "Shellder",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 91,
+      "name": "Cloyster",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 92,
+      "name": "Gastly",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": "Pokémon Tower",
+      "isVitamin": false
+    },
+    {
+      "dex": 93,
+      "name": "Haunter",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": "Pokémon Tower (raro)",
+      "isVitamin": false
+    },
+    {
+      "dex": 94,
+      "name": "Gengar",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 95,
+      "name": "Onix",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Brock",
+      "isVitamin": false
+    },
+    {
+      "dex": 96,
+      "name": "Drowzee",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": "Rota 11",
+      "isVitamin": false
+    },
+    {
+      "dex": 97,
+      "name": "Hypno",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 98,
+      "name": "Krabby",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 99,
+      "name": "Kingler",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 100,
+      "name": "Voltorb",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Power Plant; Lt. Surge",
+      "isVitamin": false
+    },
+    {
+      "dex": 101,
+      "name": "Electrode",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 102,
+      "name": "Exeggcute",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 103,
+      "name": "Exeggutor",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 104,
+      "name": "Cubone",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 105,
+      "name": "Marowak",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 106,
+      "name": "Hitmonlee",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 107,
+      "name": "Hitmonchan",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 108,
+      "name": "Lickitung",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 109,
+      "name": "Koffing",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Koga",
+      "isVitamin": false
+    },
+    {
+      "dex": 110,
+      "name": "Weezing",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Koga",
+      "isVitamin": false
+    },
+    {
+      "dex": 111,
+      "name": "Rhyhorn",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Giovanni",
+      "isVitamin": false
+    },
+    {
+      "dex": 112,
+      "name": "Rhydon",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 113,
+      "name": "Chansey",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Safari Zone",
+      "isVitamin": false
+    },
+    {
+      "dex": 114,
+      "name": "Tangela",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Erika",
+      "isVitamin": false
+    },
+    {
+      "dex": 115,
+      "name": "Kangaskhan",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 116,
+      "name": "Horsea",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 117,
+      "name": "Seadra",
+      "evYield": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 118,
+      "name": "Goldeen",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Pesca",
+      "isVitamin": false
+    },
+    {
+      "dex": 119,
+      "name": "Seaking",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 120,
+      "name": "Staryu",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Misty",
+      "isVitamin": false
+    },
+    {
+      "dex": 121,
+      "name": "Starmie",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": "Misty",
+      "isVitamin": false
+    },
+    {
+      "dex": 122,
+      "name": "Mr. Mime",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "wildLocation": "Sabrina",
+      "isVitamin": false
+    },
+    {
+      "dex": 123,
+      "name": "Scyther",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 124,
+      "name": "Jynx",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 125,
+      "name": "Electabuzz",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 126,
+      "name": "Magmar",
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 127,
+      "name": "Pinsir",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 128,
+      "name": "Tauros",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 129,
+      "name": "Magikarp",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "wildLocation": "Old Rod",
+      "isVitamin": false
+    },
+    {
+      "dex": 130,
+      "name": "Gyarados",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 131,
+      "name": "Lapras",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 132,
+      "name": "Ditto",
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 133,
+      "name": "Eevee",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 134,
+      "name": "Vaporeon",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 135,
+      "name": "Jolteon",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 136,
+      "name": "Flareon",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 137,
+      "name": "Porygon",
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 138,
+      "name": "Omanyte",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 139,
+      "name": "Omastar",
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 140,
+      "name": "Kabuto",
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 141,
+      "name": "Kabutops",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 142,
+      "name": "Aerodactyl",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 143,
+      "name": "Snorlax",
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 144,
+      "name": "Articuno",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 145,
+      "name": "Zapdos",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 146,
+      "name": "Moltres",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 147,
+      "name": "Dratini",
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 148,
+      "name": "Dragonair",
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 149,
+      "name": "Dragonite",
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 150,
+      "name": "Mewtwo",
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": 151,
+      "name": "Mew",
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": null,
+      "isVitamin": false
+    },
+    {
+      "dex": null,
+      "name": "HP Up",
+      "evYield": [
+        10,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    },
+    {
+      "dex": null,
+      "name": "Protein",
+      "evYield": [
+        0,
+        10,
+        0,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    },
+    {
+      "dex": null,
+      "name": "Iron",
+      "evYield": [
+        0,
+        0,
+        10,
+        0,
+        0,
+        0
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    },
+    {
+      "dex": null,
+      "name": "Calcium",
+      "evYield": [
+        0,
+        0,
+        0,
+        10,
+        0,
+        0
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    },
+    {
+      "dex": null,
+      "name": "Zinc",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        10,
+        0
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    },
+    {
+      "dex": null,
+      "name": "Carbos",
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        10
+      ],
+      "wildLocation": "Vitamina · Celadon Dept. Store · até 100",
+      "isVitamin": true
+    }
+  ],
+  "aliases": {
+    "Bulbasaur (rival)": "Bulbasaur",
+    "Nidoran F": "Nidoran♀",
+    "Nidoran M": "Nidoran♂"
+  },
+  "trainersByLocation": {
+    "Laboratório do Prof. Oak": [
+      "Bulbasaur",
+      "Charmander",
+      "Squirtle"
+    ],
+    "Viridian Forest": [
+      "Weedle",
+      "Kakuna",
+      "Caterpie",
+      "Metapod"
+    ],
+    "Rota 22": [
+      "Pidgey",
+      "Bulbasaur",
+      "Charmander",
+      "Squirtle"
+    ],
+    "Ginásio de Pewter (Brock)": [
+      "Geodude",
+      "Sandshrew",
+      "Onix"
+    ],
+    "Rota 3": [
+      "Pidgey",
+      "Pidgeotto",
+      "Caterpie",
+      "Weedle",
+      "Metapod",
+      "Butterfree",
+      "Kakuna",
+      "Beedrill",
+      "Rattata",
+      "Ekans",
+      "Raticate",
+      "Arbok",
+      "Nidoran♀",
+      "Spearow",
+      "Jigglypuff"
+    ],
+    "Mt. Moon": [
+      "Clefairy",
+      "Weedle",
+      "Kakuna",
+      "Magnemite",
+      "Voltorb",
+      "Caterpie",
+      "Metapod",
+      "Oddish",
+      "Bellsprout",
+      "Zubat",
+      "Sandshrew",
+      "Rattata",
+      "Ekans",
+      "Geodude",
+      "Onix",
+      "Grimer",
+      "Koffing"
+    ],
+    "Rota 4": [
+      "Paras",
+      "Parasect"
+    ],
+    "Rota 24": [
+      "Pidgeotto",
+      "Abra",
+      "Rattata",
+      "Bulbasaur",
+      "Charmander",
+      "Squirtle",
+      "Caterpie",
+      "Weedle",
+      "Metapod",
+      "Kakuna",
+      "Pidgey",
+      "Oddish",
+      "Bellsprout",
+      "Sandshrew",
+      "Ekans",
+      "Raticate",
+      "Arbok",
+      "Golbat",
+      "Zubat",
+      "Nidoran♂",
+      "Nidoran♀",
+      "Nidorina",
+      "Mankey"
+    ],
+    "Rota 25": [
+      "Machop",
+      "Geodude",
+      "Machoke",
+      "Graveler",
+      "Onix",
+      "Rattata",
+      "Spearow",
+      "Slowpoke",
+      "Nidoran♂",
+      "Nidoran♀",
+      "Nidorino",
+      "Nidorina",
+      "Ekans",
+      "Sandshrew",
+      "Arbok",
+      "Sandslash",
+      "Oddish",
+      "Pidgey"
+    ],
+    "Ginásio de Cerulean (Misty)": [
+      "Horsea",
+      "Shellder",
+      "Goldeen",
+      "Staryu",
+      "Starmie"
+    ],
+    "Cerulean City": [
+      "Machop",
+      "Drowzee"
+    ],
+    "Rota 6": [
+      "Weedle",
+      "Caterpie",
+      "Squirtle",
+      "Wartortle",
+      "Pikachu",
+      "Rattata",
+      "Pidgey",
+      "Pidgeotto",
+      "Butterfree",
+      "Spearow",
+      "Raticate",
+      "Fearow"
+    ],
+    "Rota 11": [
+      "Ekans",
+      "Poliwag",
+      "Horsea",
+      "Magnemite",
+      "Magneton",
+      "Bellsprout",
+      "Oddish",
+      "Nidoran♂",
+      "Nidorino",
+      "Sandshrew",
+      "Zubat",
+      "Rattata",
+      "Raticate",
+      "Growlithe",
+      "Vulpix",
+      "Voltorb"
+    ],
+    "S.S. Anne": [
+      "Tentacool",
+      "Staryu",
+      "Shellder",
+      "Machop",
+      "Horsea",
+      "Growlithe",
+      "Nidoran♂",
+      "Nidoran♀",
+      "Pidgey",
+      "Pikachu",
+      "Goldeen",
+      "Rattata",
+      "Ponyta",
+      "Pidgeotto",
+      "Raticate",
+      "Kadabra",
+      "Ivysaur",
+      "Charmeleon",
+      "Wartortle"
+    ],
+    "Ginásio de Vermilion (Lt. Surge)": [
+      "Pikachu",
+      "Voltorb",
+      "Magnemite",
+      "Raichu"
+    ],
+    "Rota 9": [
+      "Oddish",
+      "Bellsprout",
+      "Meowth",
+      "Persian",
+      "Machop",
+      "Onix",
+      "Machoke",
+      "Growlithe",
+      "Charmander",
+      "Charmeleon",
+      "Arcanine",
+      "Beedrill",
+      "Caterpie",
+      "Weedle",
+      "Venonat",
+      "Rattata",
+      "Sandshrew",
+      "Ekans",
+      "Geodude",
+      "Graveler"
+    ],
+    "Rota 10": [
+      "Pikachu",
+      "Clefairy",
+      "Pidgey",
+      "Pidgeotto",
+      "Geodude",
+      "Onix",
+      "Graveler",
+      "Cubone",
+      "Slowpoke",
+      "Marowak",
+      "Slowbro",
+      "Rhyhorn",
+      "Lickitung",
+      "Rhydon"
+    ],
+    "Rock Tunnel": [
+      "Cubone",
+      "Slowpoke",
+      "Oddish",
+      "Bulbasaur",
+      "Charmander",
+      "Geodude",
+      "Machop",
+      "Onix",
+      "Graveler",
+      "Jigglypuff",
+      "Pidgey",
+      "Meowth",
+      "Bellsprout",
+      "Clefairy",
+      "Rattata"
+    ],
+    "Rota 8": [
+      "Clefairy",
+      "Growlithe",
+      "Vulpix",
+      "Grimer",
+      "Muk",
+      "Jigglypuff",
+      "Pidgey",
+      "Rattata",
+      "Nidoran♂",
+      "Meowth",
+      "Pikachu",
+      "Pidgeotto",
+      "Raticate",
+      "Pidgeot",
+      "Persian",
+      "Raichu",
+      "Nidorino",
+      "Koffing",
+      "Nidoran♀",
+      "Nidorina",
+      "Voltorb",
+      "Magnemite",
+      "Poliwag",
+      "Poliwhirl"
+    ],
+    "Ginásio de Celadon (Erika)": [
+      "Bellsprout",
+      "Weepinbell",
+      "Oddish",
+      "Bulbasaur",
+      "Ivysaur",
+      "Exeggcute",
+      "Gloom",
+      "Victreebel",
+      "Tangela",
+      "Vileplume"
+    ],
+    "Rocket Hideout": [
+      "Raticate",
+      "Zubat",
+      "Rattata",
+      "Drowzee",
+      "Machop",
+      "Grimer",
+      "Koffing",
+      "Ekans",
+      "Sandshrew",
+      "Arbok",
+      "Sandslash",
+      "Onix",
+      "Rhyhorn",
+      "Kangaskhan"
+    ],
+    "Pokémon Tower": [
+      "Pidgeotto",
+      "Exeggcute",
+      "Growlithe",
+      "Gyarados",
+      "Kadabra",
+      "Ivysaur",
+      "Charmeleon",
+      "Wartortle",
+      "Gastly",
+      "Haunter",
+      "Zubat",
+      "Golbat",
+      "Koffing",
+      "Drowzee",
+      "Rattata",
+      "Raticate"
+    ],
+    "Rota 16": [
+      "Ninetales",
+      "Rapidash",
+      "Grimer",
+      "Koffing",
+      "Mankey",
+      "Machop",
+      "Weezing",
+      "Primeape",
+      "Machoke"
+    ],
+    "Rota 17": [
+      "Machop",
+      "Machamp",
+      "Weezing",
+      "Koffing",
+      "Mankey",
+      "Primeape",
+      "Muk",
+      "Voltorb",
+      "Machoke"
+    ],
+    "Rota 18": [
+      "Spearow",
+      "Fearow",
+      "Dodrio"
+    ],
+    "Ginásio de Fuchsia (Koga)": [
+      "Drowzee",
+      "Kadabra",
+      "Hypno",
+      "Arbok",
+      "Sandslash",
+      "Koffing",
+      "Muk",
+      "Weezing"
+    ],
+    "Fighting Dojo": [
+      "Machop",
+      "Mankey",
+      "Primeape",
+      "Machoke",
+      "Hitmonlee",
+      "Hitmonchan"
+    ],
+    "Silph Co.": [
+      "Golbat",
+      "Zubat",
+      "Raticate",
+      "Cubone",
+      "Magnemite",
+      "Voltorb",
+      "Magneton",
+      "Hypno",
+      "Weezing",
+      "Electrode",
+      "Ekans",
+      "Machop",
+      "Drowzee",
+      "Koffing",
+      "Arbok",
+      "Kadabra",
+      "Mr. Mime",
+      "Machoke",
+      "Sandshrew",
+      "Sandslash",
+      "Rattata",
+      "Muk",
+      "Pidgeot",
+      "Exeggcute",
+      "Growlithe",
+      "Gyarados",
+      "Alakazam",
+      "Venusaur",
+      "Charizard",
+      "Blastoise",
+      "Grimer",
+      "Marowak",
+      "Nidorino",
+      "Kangaskhan",
+      "Rhyhorn",
+      "Nidoqueen"
+    ],
+    "Ginásio de Saffron (Sabrina)": [
+      "Slowpoke",
+      "Slowbro",
+      "Gastly",
+      "Haunter",
+      "Kadabra",
+      "Mr. Mime",
+      "Venomoth",
+      "Alakazam"
+    ],
+    "Rota 12": [
+      "Goldeen",
+      "Poliwag",
+      "Tentacool",
+      "Shellder",
+      "Horsea",
+      "Seaking",
+      "Cloyster",
+      "Seadra",
+      "Poliwhirl",
+      "Nidoran♀",
+      "Nidoran♂",
+      "Nidorina",
+      "Nidorino",
+      "Nidoking",
+      "Nidoqueen",
+      "Voltorb",
+      "Electrode",
+      "Magikarp"
+    ],
+    "Rota 13": [
+      "Goldeen",
+      "Poliwag",
+      "Horsea",
+      "Pidgey",
+      "Pidgeotto",
+      "Meowth",
+      "Rattata",
+      "Pikachu",
+      "Raticate",
+      "Persian",
+      "Pidgeot",
+      "Raichu",
+      "Clefairy",
+      "Koffing",
+      "Spearow",
+      "Fearow"
+    ],
+    "Rota 14": [
+      "Pidgey",
+      "Doduo",
+      "Pidgeotto",
+      "Spearow",
+      "Fearow",
+      "Dodrio",
+      "Farfetch'd",
+      "Koffing",
+      "Muk",
+      "Grimer",
+      "Weezing",
+      "Squirtle",
+      "Charmander"
+    ],
+    "Rota 15": [
+      "Pikachu",
+      "Raichu",
+      "Hitmonlee",
+      "Hitmonchan",
+      "Clefairy",
+      "Koffing",
+      "Weezing",
+      "Grimer",
+      "Pidgeotto",
+      "Wigglytuff",
+      "Pidgeot",
+      "Bulbasaur",
+      "Ivysaur",
+      "Gloom",
+      "Oddish",
+      "Dodrio",
+      "Doduo",
+      "Pidgey",
+      "Farfetch'd",
+      "Bellsprout",
+      "Tangela"
+    ],
+    "Rota 19 (parcial)": [
+      "Tentacool",
+      "Shellder",
+      "Goldeen",
+      "Horsea",
+      "Staryu",
+      "Seadra",
+      "Seaking",
+      "Poliwag",
+      "Poliwhirl",
+      "Poliwrath",
+      "Tentacruel"
+    ]
+  },
+  "natures": [
+    {
+      "name": "Hardy",
+      "increases": null,
+      "decreases": null
+    },
+    {
+      "name": "Lonely",
+      "increases": "Ataque",
+      "decreases": "Defesa"
+    },
+    {
+      "name": "Brave",
+      "increases": "Ataque",
+      "decreases": "Speed"
+    },
+    {
+      "name": "Adamant",
+      "increases": "Ataque",
+      "decreases": "SpAtk"
+    },
+    {
+      "name": "Naughty",
+      "increases": "Ataque",
+      "decreases": "SpDef"
+    },
+    {
+      "name": "Bold",
+      "increases": "Defesa",
+      "decreases": "Ataque"
+    },
+    {
+      "name": "Docile",
+      "increases": null,
+      "decreases": null
+    },
+    {
+      "name": "Relaxed",
+      "increases": "Defesa",
+      "decreases": "Speed"
+    },
+    {
+      "name": "Impish",
+      "increases": "Defesa",
+      "decreases": "SpAtk"
+    },
+    {
+      "name": "Lax",
+      "increases": "Defesa",
+      "decreases": "SpDef"
+    },
+    {
+      "name": "Timid",
+      "increases": "Speed",
+      "decreases": "Ataque"
+    },
+    {
+      "name": "Hasty",
+      "increases": "Speed",
+      "decreases": "Defesa"
+    },
+    {
+      "name": "Serious",
+      "increases": null,
+      "decreases": null
+    },
+    {
+      "name": "Jolly",
+      "increases": "Speed",
+      "decreases": "SpAtk"
+    },
+    {
+      "name": "Naive",
+      "increases": "Speed",
+      "decreases": "SpDef"
+    },
+    {
+      "name": "Modest",
+      "increases": "SpAtk",
+      "decreases": "Ataque"
+    },
+    {
+      "name": "Mild",
+      "increases": "SpAtk",
+      "decreases": "Defesa"
+    },
+    {
+      "name": "Quiet",
+      "increases": "SpAtk",
+      "decreases": "Speed"
+    },
+    {
+      "name": "Bashful",
+      "increases": null,
+      "decreases": null
+    },
+    {
+      "name": "Rash",
+      "increases": "SpAtk",
+      "decreases": "SpDef"
+    },
+    {
+      "name": "Calm",
+      "increases": "SpDef",
+      "decreases": "Ataque"
+    },
+    {
+      "name": "Gentle",
+      "increases": "SpDef",
+      "decreases": "Defesa"
+    },
+    {
+      "name": "Sassy",
+      "increases": "SpDef",
+      "decreases": "Speed"
+    },
+    {
+      "name": "Careful",
+      "increases": "SpDef",
+      "decreases": "SpAtk"
+    },
+    {
+      "name": "Quirky",
+      "increases": null,
+      "decreases": null
+    }
+  ]
+}

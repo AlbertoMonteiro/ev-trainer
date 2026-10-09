@@ -1,0 +1,114 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is { } pokemon)
+{
+    EnsureLoaded(pokemon);
+    <section class="card level-form">
+        <h2>@L["Ivs.Form.Title"]</h2>
+        <div class="form-grid">
+            <div class="two">
+                <div class="field">
+                    <label for="level-number">@L["Ivs.Form.Level"]</label>
+                    <input id="level-number" inputmode="numeric" value="@_level"
+                           @oninput="e => _level = e.Value?.ToString() ?? string.Empty" />
+                </div>
+                <div class="field">
+                    <label for="level-species">@L["Ivs.Form.Species"]</label>
+                    <select id="level-species" value="@_species" @onchange="e => _species = e.Value?.ToString() ?? string.Empty">
+                        @foreach (var species in pokemon.Species)
+                        {
+                            <option value="@species.Name">@species.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="field stats">
+                <span class="label">@L["Ivs.Form.Stats"]</span>
+                <div class="six">
+                    @for (var i = 0; i < StatVector.Count; i++)
+                    {
+                        var stat = i;
+                        <div class="cell">
+                            <label for="level-stat-@stat">@StatShort(stat)</label>
+                            <input id="level-stat-@stat" inputmode="numeric" value="@_stats[stat]"
+                                   @oninput="e => _stats[stat] = e.Value?.ToString() ?? string.Empty" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="field evs">
+                <span class="label">@L["Ivs.Form.Evs"]</span>
+                <div class="six">
+                    @for (var i = 0; i < StatVector.Count; i++)
+                    {
+                        var stat = i;
+                        <div class="cell">
+                            <label for="level-ev-@stat">@StatShort(stat)</label>
+                            <input id="level-ev-@stat" inputmode="numeric" value="@_evs[stat]"
+                                   @oninput="e => _evs[stat] = e.Value?.ToString() ?? string.Empty" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <button type="button" class="primary save-level" disabled="@(!IsValid)" @onclick="Save">@L["Ivs.Form.Save"]</button>
+        </div>
+    </section>
+}
+
+@code {
+    private string? _loadedId;
+    private string _level = string.Empty;
+    private string _species = string.Empty;
+    private string[] _stats = new string[StatVector.Count];
+    private string[] _evs = new string[StatVector.Count];
+
+    private void EnsureLoaded(TrainingPokemon pokemon)
+    {
+        if (_loadedId == Store.SelectedId)
+        {
+            return;
+        }
+
+        _loadedId = Store.SelectedId;
+        Reset(pokemon);
+    }
+
+    /// <summary>Clears the form: species = last used (or first of the line), EVs = current totals.</summary>
+    private void Reset(TrainingPokemon pokemon)
+    {
+        _level = string.Empty;
+        _species = pokemon.IvLog.LastOrDefault()?.Species is { } last && pokemon.Species.Any(s => s.Name == last)
+            ? last
+            : pokemon.Species.FirstOrDefault()?.Name ?? string.Empty;
+        _stats = [.. Enumerable.Repeat(string.Empty, StatVector.Count)];
+        _evs = [.. Store.SelectedTotals.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];
+    }
+
+    private static int? Parse(string text, int min, int max) => Settings.SettingsFormModel.ParseInRange(text, min, max);
+
+    private bool IsValid =>
+        Parse(_level, 1, 100) is not null
+        && !string.IsNullOrEmpty(_species)
+        && _stats.All(s => Parse(s, 1, 999) is not null)
+        && _evs.All(e => Parse(e, 0, 255) is not null);
+
+    private void Save()
+    {
+        if (!IsValid || Store.Selected is not { } pokemon)
+        {
+            return;
+        }
+
+        var level = Parse(_level, 1, 100)!.Value;
+        Store.AddLevel(new LevelEntry
+        {
+            Level = level,
+            Species = _species,
+            Stats = [.. _stats.Select(s => Parse(s, 1, 999)!.Value)],
+            Evs = [.. _evs.Select(e => Parse(e, 0, 255)!.Value)],
+        });
+        Toasts.Show(L["Ivs.Saved", level]);
+        Reset(pokemon);
+    }
+}

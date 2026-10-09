@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+    <StaticWebAssetSpaFallbackEnabled>true</StaticWebAssetSpaFallbackEnabled>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="../../reference-data.json" LogicalName="EvTrainer.reference-data.json" />
+    <EmbeddedResource Include="../../pokedex-gen3.json" LogicalName="EvTrainer.pokedex-gen3.json" />
+    <!-- WithCulture=false: keep "strings.pt-BR.json" in the main assembly instead of a satellite assembly. -->
+    <EmbeddedResource Include="Localization/strings.*.json" LogicalName="EvTrainer.%(Filename)%(Extension)" WithCulture="false" />
+    <Content Remove="Localization/**" />
+    <InternalsVisibleTo Include="EvTrainer.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0-rc.1.26425.128" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Gateway" Version="11.0.0-rc.1.26425.128" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="11.0.0-rc.1.26425.128" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+</Project>

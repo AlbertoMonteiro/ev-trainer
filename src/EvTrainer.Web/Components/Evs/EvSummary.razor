@@ -1,0 +1,26 @@
+@inherits StoreAwareComponent
+
+@if (Store.Selected is { } pokemon)
+{
+    var totals = Store.SelectedTotals;
+    <section class="card summary">
+        <div class="card-head">
+            <h2>@L["Evs.Summary.Title", pokemon.Name]</h2>
+            <span class="totals num muted">@L["Evs.Summary.Totals", totals.Sum(), pokemon.Targets.Sum()]</span>
+        </div>
+        <div class="summary-grid">
+            @for (var i = 0; i < StatVector.Count; i++)
+            {
+                var current = totals[i];
+                var target = pokemon.Targets[i];
+                var state = current > target ? "over" : current == target && target > 0 ? "done" : "";
+                var percent = target > 0 ? Math.Min(100, current * 100 / target) : 0;
+                <div class="mini @state">
+                    <div class="label">@StatShort(i)</div>
+                    <div class="value">@current/@target</div>
+                    <div class="bar"><span class="stat-@i" style="width: @(percent)%"></span></div>
+                </div>
+            }
+        </div>
+    </section>
+}

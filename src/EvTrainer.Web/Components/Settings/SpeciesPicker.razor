@@ -1,0 +1,74 @@
+@inherits StoreAwareComponent
+@inject Pokedex Dex
+
+<div class="species-picker">
+    @if (Line.Count == 0 || _searching)
+    {
+        <input class="species-search" type="search" autocomplete="off" value="@_query"
+               aria-label="@L["Settings.Species.SearchLabel"]" placeholder="@L["Settings.Species.SearchPlaceholder"]"
+               @oninput="e => _query = e.Value?.ToString() ?? string.Empty" />
+        <div class="species-options">
+            @foreach (var species in Dex.Search(_query))
+            {
+                <button type="button" class="species-option" data-name="@species.Name" @onclick="() => Pick(species)">
+                    <span class="num muted">@L["Settings.Species.Dex", species.Dex]</span> @species.Name
+                </button>
+            }
+        </div>
+        @if (Line.Count > 0)
+        {
+            <button type="button" class="link" @onclick="() => _searching = false">@L["Settings.Species.CancelChange"]</button>
+        }
+    }
+    else
+    {
+        <ol class="line">
+            @foreach (var entry in Line)
+            {
+                <li class="species-chip">
+                    <span class="name">@entry.Name</span>
+                    <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
+                </li>
+            }
+        </ol>
+        @if (Line.Count < 3 && Dex.Find(Line[^1].Name) is { } last && Dex.EvolutionsOf(last) is { Count: > 0 } evolutions)
+        {
+            <div class="evolutions">
+                <span class="label">@L["Settings.Species.EvolvesTo"]</span>
+                @foreach (var evolution in evolutions)
+                {
+                    <button type="button" class="evolution-option" data-name="@evolution.Name" @onclick="() => Evolve(evolution)">@evolution.Name</button>
+                }
+            </div>
+        }
+        <button type="button" class="change-species" @onclick="StartChange">@L["Settings.Species.Change"]</button>
+    }
+</div>
+
+@code {
+    private string _query = string.Empty;
+    private bool _searching;
+
+    /// <summary>Current evolution line (empty for a new Pokémon).</summary>
+    [Parameter]
+    public IReadOnlyList<SpeciesEntry> Line { get; set; } = [];
+
+    [Parameter]
+    public EventCallback<SpeciesPick> OnPick { get; set; }
+
+    private void StartChange()
+    {
+        _query = string.Empty;
+        _searching = true;
+    }
+
+    private Task Pick(PokedexSpecies species)
+    {
+        _searching = false;
+        _query = string.Empty;
+        return OnPick.InvokeAsync(new SpeciesPick([.. Dex.LineFor(species).Select(s => s.ToEntry())], species.Name));
+    }
+
+    private Task Evolve(PokedexSpecies evolution) =>
+        OnPick.InvokeAsync(new SpeciesPick([.. Line.Select(s => s.Clone()), .. Dex.LineFor(evolution).SkipWhile(s => Line.Any(l => l.Name == s.Name)).Select(s => s.ToEntry())], evolution.Name));
+}

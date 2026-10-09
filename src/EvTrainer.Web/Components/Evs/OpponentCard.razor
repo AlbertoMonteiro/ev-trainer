@@ -1,0 +1,46 @@
+@inherits StoreAwareComponent
+
+<button type="button" class="opponent @BumpClass" data-opp="@Opponent.Name" @onclick="Pick">
+    <span class="row1">
+        <span class="name">@Opponent.Name</span>
+        <span class="count">@L["Evs.Card.Count", Count]</span>
+    </span>
+    <span class="yields">
+        @for (var i = 0; i < Opponent.EvYield.Length; i++)
+        {
+            if (Opponent.EvYield[i] > 0)
+            {
+                <span class="ev-tag stat-@i">@L["Evs.Card.Yield", Opponent.EvYield[i], StatShort(i)]</span>
+            }
+        }
+    </span>
+    @if (TrainerLocations is { Count: > 0 })
+    {
+        <span class="trainers">@L["Evs.Card.Trainers", string.Join(", ", TrainerLocations)]</span>
+    }
+</button>
+
+@code {
+    private int _bumps;
+
+    [Parameter, EditorRequired]
+    public Opponent Opponent { get; set; } = default!;
+
+    [Parameter]
+    public int Count { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<string>? TrainerLocations { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnPick { get; set; }
+
+    // Alternating between two identical animations restarts the "bump" on every tap.
+    private string BumpClass => _bumps == 0 ? "" : _bumps % 2 == 0 ? "bump" : "bump-alt";
+
+    private async Task Pick()
+    {
+        _bumps++;
+        await OnPick.InvokeAsync(Opponent.Name);
+    }
+}

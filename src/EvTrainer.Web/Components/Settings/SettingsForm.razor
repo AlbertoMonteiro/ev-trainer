@@ -1,0 +1,113 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (_form is not null)
+{
+    <section class="card settings">
+        <h2>@L["Settings.Title"]</h2>
+        <div class="form-grid">
+            <div class="two">
+                <div class="field">
+                    <label for="settings-name">@L["Settings.Name"]</label>
+                    <input id="settings-name" value="@_form.Name" maxlength="20"
+                           aria-invalid="@(string.IsNullOrWhiteSpace(_form.Name) ? "true" : "false")"
+                           @oninput="e => _form.Name = e.Value?.ToString() ?? string.Empty" />
+                </div>
+                <div class="field">
+                    <label for="settings-nature">@L["Settings.Nature"]</label>
+                    <select id="settings-nature" value="@_form.Nature" @onchange="e => _form.Nature = e.Value?.ToString() ?? string.Empty">
+                        <option value="">@L["Settings.Nature.None"]</option>
+                        @foreach (var nature in Store.Data.Natures)
+                        {
+                            <option value="@nature.Name">@NatureLabel(nature)</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="field targets">
+                <span class="label">@L["Settings.Targets"]</span>
+                <div class="six">
+                    @for (var i = 0; i < StatVector.Count; i++)
+                    {
+                        var stat = i;
+                        <div class="cell">
+                            <label for="target-@stat">@StatShort(stat)</label>
+                            <input id="target-@stat" inputmode="numeric" value="@_form.Targets[stat]"
+                                   aria-invalid="@(SettingsFormModel.ParseInRange(_form.Targets[stat], 0, 255) is null ? "true" : "false")"
+                                   @oninput="e => _form.Targets[stat] = e.Value?.ToString() ?? string.Empty" />
+                        </div>
+                    }
+                </div>
+                <div class="targets-sum hint num">@L["Settings.Targets.Sum", _form.TargetSum]</div>
+                @if (_form.TargetSum > StatVector.MaxEvTotal)
+                {
+                    <div class="warn">@L["Settings.Targets.OverLimit"]</div>
+                }
+            </div>
+
+            <div class="field species">
+                <span class="label">@L["Settings.Species"]</span>
+                <SpeciesPicker Line="_form.Species" OnPick="PickSpecies" />
+            </div>
+
+            <button type="button" class="primary save" disabled="@(!_form.IsValid)" @onclick="Save">@L["Settings.Save"]</button>
+        </div>
+    </section>
+}
+
+@code {
+    private SettingsFormModel? _form;
+    private string? _loadedId;
+
+    protected override void OnParametersSet() => LoadIfSelectionChanged();
+
+    protected override bool ShouldRender()
+    {
+        LoadIfSelectionChanged();
+        return true;
+    }
+
+    private void LoadIfSelectionChanged()
+    {
+        if (Store.SelectedId != _loadedId)
+        {
+            _loadedId = Store.SelectedId;
+            _form = Store.Selected is { } pokemon ? SettingsFormModel.From(pokemon) : null;
+        }
+    }
+
+    private string NatureLabel(Nature nature) => L[
+        "Settings.Nature.Option",
+        nature.Name,
+        nature is { Increases: { } up, Decreases: { } down }
+            ? L["Settings.Nature.Effect", StatShort(up), StatShort(down)].Value
+            : L["Settings.Nature.Neutral"].Value];
+
+    private void PickSpecies(SpeciesPick pick)
+    {
+        if (_form is null)
+        {
+            return;
+        }
+
+        // Keep a nickname; replace the name only when it is empty or was just a species name.
+        if (string.IsNullOrWhiteSpace(_form.Name) || _form.Species.Any(s => s.Name == _form.Name.Trim()))
+        {
+            _form.Name = pick.Picked;
+        }
+
+        _form.Species = [.. pick.Line];
+    }
+
+    private void Save()
+    {
+        if (_form is not { IsValid: true })
+        {
+            return;
+        }
+
+        Store.SaveSettings(_form.Name, _form.Nature, _form.ParsedTargets, _form.Species);
+        Toasts.Show(L["Settings.Saved"]);
+    }
+}

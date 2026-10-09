@@ -1,0 +1,49 @@
+@page "/"
+@inherits StoreAwareComponent
+
+<PageTitle>@L["App.Title"]</PageTitle>
+
+<AppHeader OnNavigate="tab => _tab = tab" />
+
+<main class="page">
+    @if (Store.Selected is null)
+    {
+        <EmptyState OnAdd="AddPokemon">
+            <BackupPanel ImportOnly />
+        </EmptyState>
+    }
+    else
+    {
+        <Tabs Active="_tab" ActiveChanged="tab => _tab = tab" />
+        <section class="tab-panel" role="tabpanel">
+            @switch (_tab)
+            {
+                case Tab.Evs:
+                    <EvTab />
+                    break;
+                case Tab.Ivs:
+                    <IvTable />
+                    <LevelForm />
+                    break;
+                case Tab.Settings:
+                    <SettingsForm />
+                    <BackupPanel />
+                    <SpreadsheetImportPanel />
+                    <DeletePanel />
+                    break;
+            }
+        </section>
+    }
+</main>
+
+<Toast />
+
+@code {
+    private Tab _tab = Tab.Evs;
+
+    private void AddPokemon()
+    {
+        Store.AddPokemon();
+        _tab = Tab.Settings;
+    }
+}

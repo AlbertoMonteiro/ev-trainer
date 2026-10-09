@@ -1,0 +1,72 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+@inject OpponentSearch Search
+
+<EvSummary />
+
+<OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
+
+@if (Store.Selected is { } pokemon)
+{
+    var searching = !string.IsNullOrWhiteSpace(_query);
+    var recent = searching ? [] : Evs.Recent(pokemon.Events, Store.Data);
+    var recentNames = recent.Select(o => o.Name).ToHashSet(StringComparer.Ordinal);
+    var useful = Store.Preferences.Filter != "all";
+
+    @if (recent.Count > 0)
+    {
+        <div class="recent-list">
+            <OpponentGrid Title="@L["Evs.List.Recent"]" Items="@([.. recent.Select(o => new SearchHit(o))])" OnPick="Record" />
+        </div>
+    }
+
+    <div class="main-list">
+        <OpponentGrid Title="@ListTitle(searching, useful)"
+                      Items="@MainItems(pokemon, searching, useful, recentNames)"
+                      EmptyText="@(searching || !useful ? L["Empty.NoResults"] : L["Empty.NoUseful"])"
+                      OnPick="Record" />
+    </div>
+
+    <RecentHistory />
+}
+
+@code {
+    private string _query = string.Empty;
+
+    private string ListTitle(bool searching, bool useful) =>
+        searching ? L["Evs.List.Results"] : useful ? L["Evs.List.Useful"] : L["Evs.List.All"];
+
+    private IReadOnlyList<SearchHit> MainItems(TrainingPokemon pokemon, bool searching, bool useful, HashSet<string> recent)
+    {
+        if (searching)
+        {
+            return Search.Find(_query);
+        }
+
+        var totals = Store.SelectedTotals;
+        return
+        [
+            .. Store.Data.Opponents
+                .Where(o => !recent.Contains(o.Name))
+                .Where(o => !useful || Evs.IsUseful(o, totals, pokemon.Targets))
+                .Select(o => new SearchHit(o)),
+        ];
+    }
+
+    private void Record(string opponent)
+    {
+        if (Store.SelectedId is not { } id || Store.RecordBattle(opponent) is not { } result)
+        {
+            return;
+        }
+
+        var message = result.GainedAny
+            ? L["Toast.EvGain", opponent, string.Join(", ", result.Gain
+                .Select((gain, i) => (gain, i))
+                .Where(x => x.gain > 0)
+                .Select(x => L["Evs.Gain.Part", x.gain, L[$"Stat.Long.{x.i}"].Value].Value))]
+            : L["Toast.NoEvGain", opponent];
+
+        Toasts.Show(message, () => Store.UndoLastBattle(id));
+    }
+}

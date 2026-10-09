@@ -1,0 +1,17 @@
+@inherits StoreAwareComponent
+
+<div class="card empty">
+    <p>@L["Empty.NoPokemon"]</p>
+    <div class="actions">
+        <button type="button" class="primary" @onclick="OnAdd">@L["Empty.AddPokemon"]</button>
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback OnAdd { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

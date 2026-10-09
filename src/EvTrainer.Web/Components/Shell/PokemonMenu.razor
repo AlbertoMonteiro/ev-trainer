@@ -1,0 +1,124 @@
+@inherits StoreAwareComponent
+@inject IBrowserApi Browser
+@inject ToastService Toasts
+@inject TimeProvider Time
+@inject LocalizationCatalog Catalog
+
+<button type="button" class="menu-backdrop" tabindex="-1" aria-hidden="true" @onclick="OnClose"></button>
+<div class="menu-panel" role="menu" tabindex="-1" @ref="_panel" @onkeydown="KeyDown">
+    <ul>
+        @foreach (var (id, pokemon) in Store.Ordered)
+        {
+            var selected = id == Store.SelectedId;
+            <li>
+                <button type="button" class="pokemon-item" role="menuitem" data-id="@id" aria-current="@(selected ? "true" : "false")"
+                        @onclick="() => Choose(id)">
+                    <span><span class="mark">@(selected ? "●" : "")</span>@pokemon.Name</span>
+                    <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
+                </button>
+            </li>
+        }
+    </ul>
+    <hr />
+    <button type="button" class="add" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: true)">@L["Menu.AddPokemon"]</button>
+    @if (Store.Ordered.Count > 0)
+    {
+        <button type="button" class="export" role="menuitem" @onclick="Export">@L["Menu.ExportBackup"]</button>
+    }
+    <button type="button" class="import" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: false)">@L["Menu.ImportBackup"]</button>
+    <hr />
+    <div class="group-label">@L["Menu.Theme"]</div>
+    <div class="choices themes">
+        @foreach (var (theme, key) in Themes)
+        {
+            <button type="button" data-theme="@theme" aria-pressed="@(Store.Preferences.Theme == theme ? "true" : "false")"
+                    @onclick="() => SetTheme(theme)">@L[key]</button>
+        }
+    </div>
+    @if (Language.Available.Count > 1)
+    {
+        <div class="group-label">@L["Menu.Language"]</div>
+        <div class="choices languages">
+            @foreach (var language in Language.Available)
+            {
+                <button type="button" data-lang="@language" aria-pressed="@(Language.Current == language ? "true" : "false")"
+                        @onclick="() => SetLanguage(language)">@(Catalog.Find(language, "Language.Name") ?? language)</button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private static readonly (string Theme, string Key)[] Themes =
+    [
+        ("system", "Menu.Theme.System"),
+        ("light", "Menu.Theme.Light"),
+        ("dark", "Menu.Theme.Dark"),
+    ];
+
+    private ElementReference _panel;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    /// <summary>Asks the page to show a tab (e.g. settings after adding a Pokémon).</summary>
+    [Parameter]
+    public EventCallback<Tab> OnNavigate { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await _panel.FocusAsync();
+            }
+            catch (Exception)
+            {
+                // Focus is a convenience (Esc to close); ignore when there is no browser.
+            }
+        }
+    }
+
+    private async Task Choose(string id)
+    {
+        Store.Select(id);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task Navigate(Tab tab, bool add)
+    {
+        if (add)
+        {
+            Store.AddPokemon();
+        }
+
+        await OnNavigate.InvokeAsync(tab);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task Export()
+    {
+        var date = Time.GetLocalNow().ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        Browser.DownloadText($"evs-trainer-backup-{date}.json", Store.ExportBackup());
+        Toasts.Show(L["Backup.Exported"]);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task SetTheme(string theme)
+    {
+        Store.SetTheme(theme);
+        Browser.SetTheme(theme);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task SetLanguage(string language)
+    {
+        Store.SetLanguage(language);
+        Language.Current = language;
+        Browser.SetLanguage(language);
+        await OnClose.InvokeAsync();
+    }
+
+    private Task KeyDown(KeyboardEventArgs e) => e.Key == "Escape" ? OnClose.InvokeAsync() : Task.CompletedTask;
+}

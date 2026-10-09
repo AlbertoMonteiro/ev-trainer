@@ -1,0 +1,41 @@
+@inherits StoreAwareComponent
+
+@if (Title is not null)
+{
+    <h3 class="section-title">@Title</h3>
+}
+<div class="opponent-grid">
+    @if (Items.Count == 0)
+    {
+        if (EmptyText is not null)
+        {
+            <p class="grid-empty">@EmptyText</p>
+        }
+    }
+    else
+    {
+        var events = Store.Selected?.Events ?? [];
+        foreach (var item in Items)
+        {
+            <OpponentCard @key="item.Opponent.Name"
+                          Opponent="item.Opponent"
+                          Count="Evs.CountFor(events, item.Opponent.Name, Store.Data)"
+                          TrainerLocations="item.TrainerLocations"
+                          OnPick="OnPick" />
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<SearchHit> Items { get; set; } = [];
+
+    [Parameter]
+    public string? EmptyText { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnPick { get; set; }
+}

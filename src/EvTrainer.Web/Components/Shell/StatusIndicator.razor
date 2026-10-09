@@ -1,0 +1,22 @@
+@inherits StoreAwareComponent
+
+<span class="status" role="status" aria-label="@Text" title="@Text">@Emoji</span>
+
+@code {
+    [Parameter]
+    public SaveStatus Status { get; set; }
+
+    private string Emoji => Status switch
+    {
+        SaveStatus.Saving => "🔄",
+        SaveStatus.Failed => "⚠️",
+        _ => "📱",
+    };
+
+    private string Text => Status switch
+    {
+        SaveStatus.Saving => L["Status.Saving"],
+        SaveStatus.Failed => L["Status.Failed"],
+        _ => L["Status.Saved"],
+    };
+}

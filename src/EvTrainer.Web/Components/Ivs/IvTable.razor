@@ -1,0 +1,84 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is { } pokemon)
+{
+    var rows = pokemon.IvLog.Select(entry => (Entry: entry, Cells: Ivs.RangeFor(entry, pokemon, Store.Data))).ToList();
+    var final = Ivs.Final(pokemon, Store.Data);
+    var nature = Store.Data.FindNature(pokemon.Nature);
+
+    <section class="card">
+        <div class="card-head">
+            <h2>@L["Ivs.Title", pokemon.Name]</h2>
+            <span class="muted">@(nature is null ? L["Ivs.NoNature"] : nature.Name)</span>
+        </div>
+        <div class="table-scroll">
+            <table class="iv-table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        @for (var i = 0; i < StatVector.Count; i++)
+                        {
+                            <th scope="col">@StatShort(i)</th>
+                        }
+                        <th scope="col"><span class="visually-hidden">@L["Ivs.Actions"]</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="final">
+                        <th scope="row">@L["Ivs.Row.Final"]</th>
+                        @foreach (var cell in final)
+                        {
+                            <td class="iv">@Show(cell)</td>
+                        }
+                        <td></td>
+                    </tr>
+                    @for (var r = 0; r < rows.Count; r++)
+                    {
+                        var index = r;
+                        var (entry, cells) = rows[r];
+                        <tr>
+                            <th scope="row" title="@entry.Species">@L["Ivs.Row.Level", entry.Level]</th>
+                            @foreach (var cell in cells)
+                            {
+                                <td class="iv @(cell is IvInconsistent ? "bad" : "")">@Show(cell)</td>
+                            }
+                            <td>
+                                <button type="button" class="remove" aria-label="@L["Ivs.Remove", entry.Level]" @onclick="() => Remove(index, entry.Level)">×</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (rows.Any(r => r.Cells.Any(c => c is IvInconsistent)))
+        {
+            <p class="iv-note hint">@L["Ivs.InconsistentNote"]</p>
+        }
+    </section>
+}
+
+@code {
+    private string Show(IvCell cell) => cell switch
+    {
+        IvSpan(var min, var max) => min == max ? $"{min}" : $"{min}–{max}",
+        IvInconsistent => L["Ivs.Cell.Inconsistent"],
+        IvNoData => L["Ivs.Cell.NoData"],
+    };
+
+    private string Show(FinalCell cell) => cell switch
+    {
+        FinalSpan(var low, var high) => $"{low}–{high}",
+        FinalSingle(var value) => $"{value}",
+        FinalConflict => L["Ivs.Final.Conflict"],
+        FinalNoData => L["Ivs.Final.NoData"],
+    };
+
+    private void Remove(int index, int level)
+    {
+        if (Store.RemoveLevel(index) is { } undo)
+        {
+            Toasts.Show(L["Ivs.Removed", level], undo);
+        }
+    }
+}

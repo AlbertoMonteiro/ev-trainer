@@ -1,0 +1,5031 @@
+{
+  "_fonte": "PokéAPI (pokeapi.co), stats base da Geração III (past_stats aplicados). Gerado por scripts/BuildPokedex.cs.",
+  "stats": [
+    "HP",
+    "Ataque",
+    "Defesa",
+    "SpAtk",
+    "SpDef",
+    "Speed"
+  ],
+  "species": [
+    {
+      "dex": 1,
+      "name": "Bulbasaur",
+      "base": [
+        45,
+        49,
+        49,
+        65,
+        65,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 2,
+      "name": "Ivysaur",
+      "base": [
+        60,
+        62,
+        63,
+        80,
+        80,
+        60
+      ],
+      "evolvesFrom": 1
+    },
+    {
+      "dex": 3,
+      "name": "Venusaur",
+      "base": [
+        80,
+        82,
+        83,
+        100,
+        100,
+        80
+      ],
+      "evolvesFrom": 2
+    },
+    {
+      "dex": 4,
+      "name": "Charmander",
+      "base": [
+        39,
+        52,
+        43,
+        60,
+        50,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 5,
+      "name": "Charmeleon",
+      "base": [
+        58,
+        64,
+        58,
+        80,
+        65,
+        80
+      ],
+      "evolvesFrom": 4
+    },
+    {
+      "dex": 6,
+      "name": "Charizard",
+      "base": [
+        78,
+        84,
+        78,
+        109,
+        85,
+        100
+      ],
+      "evolvesFrom": 5
+    },
+    {
+      "dex": 7,
+      "name": "Squirtle",
+      "base": [
+        44,
+        48,
+        65,
+        50,
+        64,
+        43
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 8,
+      "name": "Wartortle",
+      "base": [
+        59,
+        63,
+        80,
+        65,
+        80,
+        58
+      ],
+      "evolvesFrom": 7
+    },
+    {
+      "dex": 9,
+      "name": "Blastoise",
+      "base": [
+        79,
+        83,
+        100,
+        85,
+        105,
+        78
+      ],
+      "evolvesFrom": 8
+    },
+    {
+      "dex": 10,
+      "name": "Caterpie",
+      "base": [
+        45,
+        30,
+        35,
+        20,
+        20,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 11,
+      "name": "Metapod",
+      "base": [
+        50,
+        20,
+        55,
+        25,
+        25,
+        30
+      ],
+      "evolvesFrom": 10
+    },
+    {
+      "dex": 12,
+      "name": "Butterfree",
+      "base": [
+        60,
+        45,
+        50,
+        80,
+        80,
+        70
+      ],
+      "evolvesFrom": 11
+    },
+    {
+      "dex": 13,
+      "name": "Weedle",
+      "base": [
+        40,
+        35,
+        30,
+        20,
+        20,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 14,
+      "name": "Kakuna",
+      "base": [
+        45,
+        25,
+        50,
+        25,
+        25,
+        35
+      ],
+      "evolvesFrom": 13
+    },
+    {
+      "dex": 15,
+      "name": "Beedrill",
+      "base": [
+        65,
+        80,
+        40,
+        45,
+        80,
+        75
+      ],
+      "evolvesFrom": 14
+    },
+    {
+      "dex": 16,
+      "name": "Pidgey",
+      "base": [
+        40,
+        45,
+        40,
+        35,
+        35,
+        56
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 17,
+      "name": "Pidgeotto",
+      "base": [
+        63,
+        60,
+        55,
+        50,
+        50,
+        71
+      ],
+      "evolvesFrom": 16
+    },
+    {
+      "dex": 18,
+      "name": "Pidgeot",
+      "base": [
+        83,
+        80,
+        75,
+        70,
+        70,
+        91
+      ],
+      "evolvesFrom": 17
+    },
+    {
+      "dex": 19,
+      "name": "Rattata",
+      "base": [
+        30,
+        56,
+        35,
+        25,
+        35,
+        72
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 20,
+      "name": "Raticate",
+      "base": [
+        55,
+        81,
+        60,
+        50,
+        70,
+        97
+      ],
+      "evolvesFrom": 19
+    },
+    {
+      "dex": 21,
+      "name": "Spearow",
+      "base": [
+        40,
+        60,
+        30,
+        31,
+        31,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 22,
+      "name": "Fearow",
+      "base": [
+        65,
+        90,
+        65,
+        61,
+        61,
+        100
+      ],
+      "evolvesFrom": 21
+    },
+    {
+      "dex": 23,
+      "name": "Ekans",
+      "base": [
+        35,
+        60,
+        44,
+        40,
+        54,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 24,
+      "name": "Arbok",
+      "base": [
+        60,
+        85,
+        69,
+        65,
+        79,
+        80
+      ],
+      "evolvesFrom": 23
+    },
+    {
+      "dex": 25,
+      "name": "Pikachu",
+      "base": [
+        35,
+        55,
+        30,
+        50,
+        40,
+        90
+      ],
+      "evolvesFrom": 172
+    },
+    {
+      "dex": 26,
+      "name": "Raichu",
+      "base": [
+        60,
+        90,
+        55,
+        90,
+        80,
+        100
+      ],
+      "evolvesFrom": 25
+    },
+    {
+      "dex": 27,
+      "name": "Sandshrew",
+      "base": [
+        50,
+        75,
+        85,
+        20,
+        30,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 28,
+      "name": "Sandslash",
+      "base": [
+        75,
+        100,
+        110,
+        45,
+        55,
+        65
+      ],
+      "evolvesFrom": 27
+    },
+    {
+      "dex": 29,
+      "name": "Nidoran♀",
+      "base": [
+        55,
+        47,
+        52,
+        40,
+        40,
+        41
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 30,
+      "name": "Nidorina",
+      "base": [
+        70,
+        62,
+        67,
+        55,
+        55,
+        56
+      ],
+      "evolvesFrom": 29
+    },
+    {
+      "dex": 31,
+      "name": "Nidoqueen",
+      "base": [
+        90,
+        82,
+        87,
+        75,
+        85,
+        76
+      ],
+      "evolvesFrom": 30
+    },
+    {
+      "dex": 32,
+      "name": "Nidoran♂",
+      "base": [
+        46,
+        57,
+        40,
+        40,
+        40,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 33,
+      "name": "Nidorino",
+      "base": [
+        61,
+        72,
+        57,
+        55,
+        55,
+        65
+      ],
+      "evolvesFrom": 32
+    },
+    {
+      "dex": 34,
+      "name": "Nidoking",
+      "base": [
+        81,
+        92,
+        77,
+        85,
+        75,
+        85
+      ],
+      "evolvesFrom": 33
+    },
+    {
+      "dex": 35,
+      "name": "Clefairy",
+      "base": [
+        70,
+        45,
+        48,
+        60,
+        65,
+        35
+      ],
+      "evolvesFrom": 173
+    },
+    {
+      "dex": 36,
+      "name": "Clefable",
+      "base": [
+        95,
+        70,
+        73,
+        85,
+        90,
+        60
+      ],
+      "evolvesFrom": 35
+    },
+    {
+      "dex": 37,
+      "name": "Vulpix",
+      "base": [
+        38,
+        41,
+        40,
+        50,
+        65,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 38,
+      "name": "Ninetales",
+      "base": [
+        73,
+        76,
+        75,
+        81,
+        100,
+        100
+      ],
+      "evolvesFrom": 37
+    },
+    {
+      "dex": 39,
+      "name": "Jigglypuff",
+      "base": [
+        115,
+        45,
+        20,
+        45,
+        25,
+        20
+      ],
+      "evolvesFrom": 174
+    },
+    {
+      "dex": 40,
+      "name": "Wigglytuff",
+      "base": [
+        140,
+        70,
+        45,
+        75,
+        50,
+        45
+      ],
+      "evolvesFrom": 39
+    },
+    {
+      "dex": 41,
+      "name": "Zubat",
+      "base": [
+        40,
+        45,
+        35,
+        30,
+        40,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 42,
+      "name": "Golbat",
+      "base": [
+        75,
+        80,
+        70,
+        65,
+        75,
+        90
+      ],
+      "evolvesFrom": 41
+    },
+    {
+      "dex": 43,
+      "name": "Oddish",
+      "base": [
+        45,
+        50,
+        55,
+        75,
+        65,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 44,
+      "name": "Gloom",
+      "base": [
+        60,
+        65,
+        70,
+        85,
+        75,
+        40
+      ],
+      "evolvesFrom": 43
+    },
+    {
+      "dex": 45,
+      "name": "Vileplume",
+      "base": [
+        75,
+        80,
+        85,
+        100,
+        90,
+        50
+      ],
+      "evolvesFrom": 44
+    },
+    {
+      "dex": 46,
+      "name": "Paras",
+      "base": [
+        35,
+        70,
+        55,
+        45,
+        55,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 47,
+      "name": "Parasect",
+      "base": [
+        60,
+        95,
+        80,
+        60,
+        80,
+        30
+      ],
+      "evolvesFrom": 46
+    },
+    {
+      "dex": 48,
+      "name": "Venonat",
+      "base": [
+        60,
+        55,
+        50,
+        40,
+        55,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 49,
+      "name": "Venomoth",
+      "base": [
+        70,
+        65,
+        60,
+        90,
+        75,
+        90
+      ],
+      "evolvesFrom": 48
+    },
+    {
+      "dex": 50,
+      "name": "Diglett",
+      "base": [
+        10,
+        55,
+        25,
+        35,
+        45,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 51,
+      "name": "Dugtrio",
+      "base": [
+        35,
+        80,
+        50,
+        50,
+        70,
+        120
+      ],
+      "evolvesFrom": 50
+    },
+    {
+      "dex": 52,
+      "name": "Meowth",
+      "base": [
+        40,
+        45,
+        35,
+        40,
+        40,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 53,
+      "name": "Persian",
+      "base": [
+        65,
+        70,
+        60,
+        65,
+        65,
+        115
+      ],
+      "evolvesFrom": 52
+    },
+    {
+      "dex": 54,
+      "name": "Psyduck",
+      "base": [
+        50,
+        52,
+        48,
+        65,
+        50,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 55,
+      "name": "Golduck",
+      "base": [
+        80,
+        82,
+        78,
+        95,
+        80,
+        85
+      ],
+      "evolvesFrom": 54
+    },
+    {
+      "dex": 56,
+      "name": "Mankey",
+      "base": [
+        40,
+        80,
+        35,
+        35,
+        45,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 57,
+      "name": "Primeape",
+      "base": [
+        65,
+        105,
+        60,
+        60,
+        70,
+        95
+      ],
+      "evolvesFrom": 56
+    },
+    {
+      "dex": 58,
+      "name": "Growlithe",
+      "base": [
+        55,
+        70,
+        45,
+        70,
+        50,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 59,
+      "name": "Arcanine",
+      "base": [
+        90,
+        110,
+        80,
+        100,
+        80,
+        95
+      ],
+      "evolvesFrom": 58
+    },
+    {
+      "dex": 60,
+      "name": "Poliwag",
+      "base": [
+        40,
+        50,
+        40,
+        40,
+        40,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 61,
+      "name": "Poliwhirl",
+      "base": [
+        65,
+        65,
+        65,
+        50,
+        50,
+        90
+      ],
+      "evolvesFrom": 60
+    },
+    {
+      "dex": 62,
+      "name": "Poliwrath",
+      "base": [
+        90,
+        85,
+        95,
+        70,
+        90,
+        70
+      ],
+      "evolvesFrom": 61
+    },
+    {
+      "dex": 63,
+      "name": "Abra",
+      "base": [
+        25,
+        20,
+        15,
+        105,
+        55,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 64,
+      "name": "Kadabra",
+      "base": [
+        40,
+        35,
+        30,
+        120,
+        70,
+        105
+      ],
+      "evolvesFrom": 63
+    },
+    {
+      "dex": 65,
+      "name": "Alakazam",
+      "base": [
+        55,
+        50,
+        45,
+        135,
+        85,
+        120
+      ],
+      "evolvesFrom": 64
+    },
+    {
+      "dex": 66,
+      "name": "Machop",
+      "base": [
+        70,
+        80,
+        50,
+        35,
+        35,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 67,
+      "name": "Machoke",
+      "base": [
+        80,
+        100,
+        70,
+        50,
+        60,
+        45
+      ],
+      "evolvesFrom": 66
+    },
+    {
+      "dex": 68,
+      "name": "Machamp",
+      "base": [
+        90,
+        130,
+        80,
+        65,
+        85,
+        55
+      ],
+      "evolvesFrom": 67
+    },
+    {
+      "dex": 69,
+      "name": "Bellsprout",
+      "base": [
+        50,
+        75,
+        35,
+        70,
+        30,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 70,
+      "name": "Weepinbell",
+      "base": [
+        65,
+        90,
+        50,
+        85,
+        45,
+        55
+      ],
+      "evolvesFrom": 69
+    },
+    {
+      "dex": 71,
+      "name": "Victreebel",
+      "base": [
+        80,
+        105,
+        65,
+        100,
+        60,
+        70
+      ],
+      "evolvesFrom": 70
+    },
+    {
+      "dex": 72,
+      "name": "Tentacool",
+      "base": [
+        40,
+        40,
+        35,
+        50,
+        100,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 73,
+      "name": "Tentacruel",
+      "base": [
+        80,
+        70,
+        65,
+        80,
+        120,
+        100
+      ],
+      "evolvesFrom": 72
+    },
+    {
+      "dex": 74,
+      "name": "Geodude",
+      "base": [
+        40,
+        80,
+        100,
+        30,
+        30,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 75,
+      "name": "Graveler",
+      "base": [
+        55,
+        95,
+        115,
+        45,
+        45,
+        35
+      ],
+      "evolvesFrom": 74
+    },
+    {
+      "dex": 76,
+      "name": "Golem",
+      "base": [
+        80,
+        110,
+        130,
+        55,
+        65,
+        45
+      ],
+      "evolvesFrom": 75
+    },
+    {
+      "dex": 77,
+      "name": "Ponyta",
+      "base": [
+        50,
+        85,
+        55,
+        65,
+        65,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 78,
+      "name": "Rapidash",
+      "base": [
+        65,
+        100,
+        70,
+        80,
+        80,
+        105
+      ],
+      "evolvesFrom": 77
+    },
+    {
+      "dex": 79,
+      "name": "Slowpoke",
+      "base": [
+        90,
+        65,
+        65,
+        40,
+        40,
+        15
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 80,
+      "name": "Slowbro",
+      "base": [
+        95,
+        75,
+        110,
+        100,
+        80,
+        30
+      ],
+      "evolvesFrom": 79
+    },
+    {
+      "dex": 81,
+      "name": "Magnemite",
+      "base": [
+        25,
+        35,
+        70,
+        95,
+        55,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 82,
+      "name": "Magneton",
+      "base": [
+        50,
+        60,
+        95,
+        120,
+        70,
+        70
+      ],
+      "evolvesFrom": 81
+    },
+    {
+      "dex": 83,
+      "name": "Farfetch'd",
+      "base": [
+        52,
+        65,
+        55,
+        58,
+        62,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 84,
+      "name": "Doduo",
+      "base": [
+        35,
+        85,
+        45,
+        35,
+        35,
+        75
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 85,
+      "name": "Dodrio",
+      "base": [
+        60,
+        110,
+        70,
+        60,
+        60,
+        100
+      ],
+      "evolvesFrom": 84
+    },
+    {
+      "dex": 86,
+      "name": "Seel",
+      "base": [
+        65,
+        45,
+        55,
+        45,
+        70,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 87,
+      "name": "Dewgong",
+      "base": [
+        90,
+        70,
+        80,
+        70,
+        95,
+        70
+      ],
+      "evolvesFrom": 86
+    },
+    {
+      "dex": 88,
+      "name": "Grimer",
+      "base": [
+        80,
+        80,
+        50,
+        40,
+        50,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 89,
+      "name": "Muk",
+      "base": [
+        105,
+        105,
+        75,
+        65,
+        100,
+        50
+      ],
+      "evolvesFrom": 88
+    },
+    {
+      "dex": 90,
+      "name": "Shellder",
+      "base": [
+        30,
+        65,
+        100,
+        45,
+        25,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 91,
+      "name": "Cloyster",
+      "base": [
+        50,
+        95,
+        180,
+        85,
+        45,
+        70
+      ],
+      "evolvesFrom": 90
+    },
+    {
+      "dex": 92,
+      "name": "Gastly",
+      "base": [
+        30,
+        35,
+        30,
+        100,
+        35,
+        80
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 93,
+      "name": "Haunter",
+      "base": [
+        45,
+        50,
+        45,
+        115,
+        55,
+        95
+      ],
+      "evolvesFrom": 92
+    },
+    {
+      "dex": 94,
+      "name": "Gengar",
+      "base": [
+        60,
+        65,
+        60,
+        130,
+        75,
+        110
+      ],
+      "evolvesFrom": 93
+    },
+    {
+      "dex": 95,
+      "name": "Onix",
+      "base": [
+        35,
+        45,
+        160,
+        30,
+        45,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 96,
+      "name": "Drowzee",
+      "base": [
+        60,
+        48,
+        45,
+        43,
+        90,
+        42
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 97,
+      "name": "Hypno",
+      "base": [
+        85,
+        73,
+        70,
+        73,
+        115,
+        67
+      ],
+      "evolvesFrom": 96
+    },
+    {
+      "dex": 98,
+      "name": "Krabby",
+      "base": [
+        30,
+        105,
+        90,
+        25,
+        25,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 99,
+      "name": "Kingler",
+      "base": [
+        55,
+        130,
+        115,
+        50,
+        50,
+        75
+      ],
+      "evolvesFrom": 98
+    },
+    {
+      "dex": 100,
+      "name": "Voltorb",
+      "base": [
+        40,
+        30,
+        50,
+        55,
+        55,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 101,
+      "name": "Electrode",
+      "base": [
+        60,
+        50,
+        70,
+        80,
+        80,
+        140
+      ],
+      "evolvesFrom": 100
+    },
+    {
+      "dex": 102,
+      "name": "Exeggcute",
+      "base": [
+        60,
+        40,
+        80,
+        60,
+        45,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 103,
+      "name": "Exeggutor",
+      "base": [
+        95,
+        95,
+        85,
+        125,
+        65,
+        55
+      ],
+      "evolvesFrom": 102
+    },
+    {
+      "dex": 104,
+      "name": "Cubone",
+      "base": [
+        50,
+        50,
+        95,
+        40,
+        50,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 105,
+      "name": "Marowak",
+      "base": [
+        60,
+        80,
+        110,
+        50,
+        80,
+        45
+      ],
+      "evolvesFrom": 104
+    },
+    {
+      "dex": 106,
+      "name": "Hitmonlee",
+      "base": [
+        50,
+        120,
+        53,
+        35,
+        110,
+        87
+      ],
+      "evolvesFrom": 236
+    },
+    {
+      "dex": 107,
+      "name": "Hitmonchan",
+      "base": [
+        50,
+        105,
+        79,
+        35,
+        110,
+        76
+      ],
+      "evolvesFrom": 236
+    },
+    {
+      "dex": 108,
+      "name": "Lickitung",
+      "base": [
+        90,
+        55,
+        75,
+        60,
+        75,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 109,
+      "name": "Koffing",
+      "base": [
+        40,
+        65,
+        95,
+        60,
+        45,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 110,
+      "name": "Weezing",
+      "base": [
+        65,
+        90,
+        120,
+        85,
+        70,
+        60
+      ],
+      "evolvesFrom": 109
+    },
+    {
+      "dex": 111,
+      "name": "Rhyhorn",
+      "base": [
+        80,
+        85,
+        95,
+        30,
+        30,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 112,
+      "name": "Rhydon",
+      "base": [
+        105,
+        130,
+        120,
+        45,
+        45,
+        40
+      ],
+      "evolvesFrom": 111
+    },
+    {
+      "dex": 113,
+      "name": "Chansey",
+      "base": [
+        250,
+        5,
+        5,
+        35,
+        105,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 114,
+      "name": "Tangela",
+      "base": [
+        65,
+        55,
+        115,
+        100,
+        40,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 115,
+      "name": "Kangaskhan",
+      "base": [
+        105,
+        95,
+        80,
+        40,
+        80,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 116,
+      "name": "Horsea",
+      "base": [
+        30,
+        40,
+        70,
+        70,
+        25,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 117,
+      "name": "Seadra",
+      "base": [
+        55,
+        65,
+        95,
+        95,
+        45,
+        85
+      ],
+      "evolvesFrom": 116
+    },
+    {
+      "dex": 118,
+      "name": "Goldeen",
+      "base": [
+        45,
+        67,
+        60,
+        35,
+        50,
+        63
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 119,
+      "name": "Seaking",
+      "base": [
+        80,
+        92,
+        65,
+        65,
+        80,
+        68
+      ],
+      "evolvesFrom": 118
+    },
+    {
+      "dex": 120,
+      "name": "Staryu",
+      "base": [
+        30,
+        45,
+        55,
+        70,
+        55,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 121,
+      "name": "Starmie",
+      "base": [
+        60,
+        75,
+        85,
+        100,
+        85,
+        115
+      ],
+      "evolvesFrom": 120
+    },
+    {
+      "dex": 122,
+      "name": "Mr. Mime",
+      "base": [
+        40,
+        45,
+        65,
+        100,
+        120,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 123,
+      "name": "Scyther",
+      "base": [
+        70,
+        110,
+        80,
+        55,
+        80,
+        105
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 124,
+      "name": "Jynx",
+      "base": [
+        65,
+        50,
+        35,
+        115,
+        95,
+        95
+      ],
+      "evolvesFrom": 238
+    },
+    {
+      "dex": 125,
+      "name": "Electabuzz",
+      "base": [
+        65,
+        83,
+        57,
+        95,
+        85,
+        105
+      ],
+      "evolvesFrom": 239
+    },
+    {
+      "dex": 126,
+      "name": "Magmar",
+      "base": [
+        65,
+        95,
+        57,
+        100,
+        85,
+        93
+      ],
+      "evolvesFrom": 240
+    },
+    {
+      "dex": 127,
+      "name": "Pinsir",
+      "base": [
+        65,
+        125,
+        100,
+        55,
+        70,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 128,
+      "name": "Tauros",
+      "base": [
+        75,
+        100,
+        95,
+        40,
+        70,
+        110
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 129,
+      "name": "Magikarp",
+      "base": [
+        20,
+        10,
+        55,
+        15,
+        20,
+        80
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 130,
+      "name": "Gyarados",
+      "base": [
+        95,
+        125,
+        79,
+        60,
+        100,
+        81
+      ],
+      "evolvesFrom": 129
+    },
+    {
+      "dex": 131,
+      "name": "Lapras",
+      "base": [
+        130,
+        85,
+        80,
+        85,
+        95,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 132,
+      "name": "Ditto",
+      "base": [
+        48,
+        48,
+        48,
+        48,
+        48,
+        48
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 133,
+      "name": "Eevee",
+      "base": [
+        55,
+        55,
+        50,
+        45,
+        65,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 134,
+      "name": "Vaporeon",
+      "base": [
+        130,
+        65,
+        60,
+        110,
+        95,
+        65
+      ],
+      "evolvesFrom": 133
+    },
+    {
+      "dex": 135,
+      "name": "Jolteon",
+      "base": [
+        65,
+        65,
+        60,
+        110,
+        95,
+        130
+      ],
+      "evolvesFrom": 133
+    },
+    {
+      "dex": 136,
+      "name": "Flareon",
+      "base": [
+        65,
+        130,
+        60,
+        95,
+        110,
+        65
+      ],
+      "evolvesFrom": 133
+    },
+    {
+      "dex": 137,
+      "name": "Porygon",
+      "base": [
+        65,
+        60,
+        70,
+        85,
+        75,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 138,
+      "name": "Omanyte",
+      "base": [
+        35,
+        40,
+        100,
+        90,
+        55,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 139,
+      "name": "Omastar",
+      "base": [
+        70,
+        60,
+        125,
+        115,
+        70,
+        55
+      ],
+      "evolvesFrom": 138
+    },
+    {
+      "dex": 140,
+      "name": "Kabuto",
+      "base": [
+        30,
+        80,
+        90,
+        55,
+        45,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 141,
+      "name": "Kabutops",
+      "base": [
+        60,
+        115,
+        105,
+        65,
+        70,
+        80
+      ],
+      "evolvesFrom": 140
+    },
+    {
+      "dex": 142,
+      "name": "Aerodactyl",
+      "base": [
+        80,
+        105,
+        65,
+        60,
+        75,
+        130
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 143,
+      "name": "Snorlax",
+      "base": [
+        160,
+        110,
+        65,
+        65,
+        110,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 144,
+      "name": "Articuno",
+      "base": [
+        90,
+        85,
+        100,
+        95,
+        125,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 145,
+      "name": "Zapdos",
+      "base": [
+        90,
+        90,
+        85,
+        125,
+        90,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 146,
+      "name": "Moltres",
+      "base": [
+        90,
+        100,
+        90,
+        125,
+        85,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 147,
+      "name": "Dratini",
+      "base": [
+        41,
+        64,
+        45,
+        50,
+        50,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 148,
+      "name": "Dragonair",
+      "base": [
+        61,
+        84,
+        65,
+        70,
+        70,
+        70
+      ],
+      "evolvesFrom": 147
+    },
+    {
+      "dex": 149,
+      "name": "Dragonite",
+      "base": [
+        91,
+        134,
+        95,
+        100,
+        100,
+        80
+      ],
+      "evolvesFrom": 148
+    },
+    {
+      "dex": 150,
+      "name": "Mewtwo",
+      "base": [
+        106,
+        110,
+        90,
+        154,
+        90,
+        130
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 151,
+      "name": "Mew",
+      "base": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 152,
+      "name": "Chikorita",
+      "base": [
+        45,
+        49,
+        65,
+        49,
+        65,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 153,
+      "name": "Bayleef",
+      "base": [
+        60,
+        62,
+        80,
+        63,
+        80,
+        60
+      ],
+      "evolvesFrom": 152
+    },
+    {
+      "dex": 154,
+      "name": "Meganium",
+      "base": [
+        80,
+        82,
+        100,
+        83,
+        100,
+        80
+      ],
+      "evolvesFrom": 153
+    },
+    {
+      "dex": 155,
+      "name": "Cyndaquil",
+      "base": [
+        39,
+        52,
+        43,
+        60,
+        50,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 156,
+      "name": "Quilava",
+      "base": [
+        58,
+        64,
+        58,
+        80,
+        65,
+        80
+      ],
+      "evolvesFrom": 155
+    },
+    {
+      "dex": 157,
+      "name": "Typhlosion",
+      "base": [
+        78,
+        84,
+        78,
+        109,
+        85,
+        100
+      ],
+      "evolvesFrom": 156
+    },
+    {
+      "dex": 158,
+      "name": "Totodile",
+      "base": [
+        50,
+        65,
+        64,
+        44,
+        48,
+        43
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 159,
+      "name": "Croconaw",
+      "base": [
+        65,
+        80,
+        80,
+        59,
+        63,
+        58
+      ],
+      "evolvesFrom": 158
+    },
+    {
+      "dex": 160,
+      "name": "Feraligatr",
+      "base": [
+        85,
+        105,
+        100,
+        79,
+        83,
+        78
+      ],
+      "evolvesFrom": 159
+    },
+    {
+      "dex": 161,
+      "name": "Sentret",
+      "base": [
+        35,
+        46,
+        34,
+        35,
+        45,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 162,
+      "name": "Furret",
+      "base": [
+        85,
+        76,
+        64,
+        45,
+        55,
+        90
+      ],
+      "evolvesFrom": 161
+    },
+    {
+      "dex": 163,
+      "name": "Hoothoot",
+      "base": [
+        60,
+        30,
+        30,
+        36,
+        56,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 164,
+      "name": "Noctowl",
+      "base": [
+        100,
+        50,
+        50,
+        76,
+        96,
+        70
+      ],
+      "evolvesFrom": 163
+    },
+    {
+      "dex": 165,
+      "name": "Ledyba",
+      "base": [
+        40,
+        20,
+        30,
+        40,
+        80,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 166,
+      "name": "Ledian",
+      "base": [
+        55,
+        35,
+        50,
+        55,
+        110,
+        85
+      ],
+      "evolvesFrom": 165
+    },
+    {
+      "dex": 167,
+      "name": "Spinarak",
+      "base": [
+        40,
+        60,
+        40,
+        40,
+        40,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 168,
+      "name": "Ariados",
+      "base": [
+        70,
+        90,
+        70,
+        60,
+        60,
+        40
+      ],
+      "evolvesFrom": 167
+    },
+    {
+      "dex": 169,
+      "name": "Crobat",
+      "base": [
+        85,
+        90,
+        80,
+        70,
+        80,
+        130
+      ],
+      "evolvesFrom": 42
+    },
+    {
+      "dex": 170,
+      "name": "Chinchou",
+      "base": [
+        75,
+        38,
+        38,
+        56,
+        56,
+        67
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 171,
+      "name": "Lanturn",
+      "base": [
+        125,
+        58,
+        58,
+        76,
+        76,
+        67
+      ],
+      "evolvesFrom": 170
+    },
+    {
+      "dex": 172,
+      "name": "Pichu",
+      "base": [
+        20,
+        40,
+        15,
+        35,
+        35,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 173,
+      "name": "Cleffa",
+      "base": [
+        50,
+        25,
+        28,
+        45,
+        55,
+        15
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 174,
+      "name": "Igglybuff",
+      "base": [
+        90,
+        30,
+        15,
+        40,
+        20,
+        15
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 175,
+      "name": "Togepi",
+      "base": [
+        35,
+        20,
+        65,
+        40,
+        65,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 176,
+      "name": "Togetic",
+      "base": [
+        55,
+        40,
+        85,
+        80,
+        105,
+        40
+      ],
+      "evolvesFrom": 175
+    },
+    {
+      "dex": 177,
+      "name": "Natu",
+      "base": [
+        40,
+        50,
+        45,
+        70,
+        45,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 178,
+      "name": "Xatu",
+      "base": [
+        65,
+        75,
+        70,
+        95,
+        70,
+        95
+      ],
+      "evolvesFrom": 177
+    },
+    {
+      "dex": 179,
+      "name": "Mareep",
+      "base": [
+        55,
+        40,
+        40,
+        65,
+        45,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 180,
+      "name": "Flaaffy",
+      "base": [
+        70,
+        55,
+        55,
+        80,
+        60,
+        45
+      ],
+      "evolvesFrom": 179
+    },
+    {
+      "dex": 181,
+      "name": "Ampharos",
+      "base": [
+        90,
+        75,
+        75,
+        115,
+        90,
+        55
+      ],
+      "evolvesFrom": 180
+    },
+    {
+      "dex": 182,
+      "name": "Bellossom",
+      "base": [
+        75,
+        80,
+        85,
+        90,
+        100,
+        50
+      ],
+      "evolvesFrom": 44
+    },
+    {
+      "dex": 183,
+      "name": "Marill",
+      "base": [
+        70,
+        20,
+        50,
+        20,
+        50,
+        40
+      ],
+      "evolvesFrom": 298
+    },
+    {
+      "dex": 184,
+      "name": "Azumarill",
+      "base": [
+        100,
+        50,
+        80,
+        50,
+        80,
+        50
+      ],
+      "evolvesFrom": 183
+    },
+    {
+      "dex": 185,
+      "name": "Sudowoodo",
+      "base": [
+        70,
+        100,
+        115,
+        30,
+        65,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 186,
+      "name": "Politoed",
+      "base": [
+        90,
+        75,
+        75,
+        90,
+        100,
+        70
+      ],
+      "evolvesFrom": 61
+    },
+    {
+      "dex": 187,
+      "name": "Hoppip",
+      "base": [
+        35,
+        35,
+        40,
+        35,
+        55,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 188,
+      "name": "Skiploom",
+      "base": [
+        55,
+        45,
+        50,
+        45,
+        65,
+        80
+      ],
+      "evolvesFrom": 187
+    },
+    {
+      "dex": 189,
+      "name": "Jumpluff",
+      "base": [
+        75,
+        55,
+        70,
+        55,
+        85,
+        110
+      ],
+      "evolvesFrom": 188
+    },
+    {
+      "dex": 190,
+      "name": "Aipom",
+      "base": [
+        55,
+        70,
+        55,
+        40,
+        55,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 191,
+      "name": "Sunkern",
+      "base": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 192,
+      "name": "Sunflora",
+      "base": [
+        75,
+        75,
+        55,
+        105,
+        85,
+        30
+      ],
+      "evolvesFrom": 191
+    },
+    {
+      "dex": 193,
+      "name": "Yanma",
+      "base": [
+        65,
+        65,
+        45,
+        75,
+        45,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 194,
+      "name": "Wooper",
+      "base": [
+        55,
+        45,
+        45,
+        25,
+        25,
+        15
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 195,
+      "name": "Quagsire",
+      "base": [
+        95,
+        85,
+        85,
+        65,
+        65,
+        35
+      ],
+      "evolvesFrom": 194
+    },
+    {
+      "dex": 196,
+      "name": "Espeon",
+      "base": [
+        65,
+        65,
+        60,
+        130,
+        95,
+        110
+      ],
+      "evolvesFrom": 133
+    },
+    {
+      "dex": 197,
+      "name": "Umbreon",
+      "base": [
+        95,
+        65,
+        110,
+        60,
+        130,
+        65
+      ],
+      "evolvesFrom": 133
+    },
+    {
+      "dex": 198,
+      "name": "Murkrow",
+      "base": [
+        60,
+        85,
+        42,
+        85,
+        42,
+        91
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 199,
+      "name": "Slowking",
+      "base": [
+        95,
+        75,
+        80,
+        100,
+        110,
+        30
+      ],
+      "evolvesFrom": 79
+    },
+    {
+      "dex": 200,
+      "name": "Misdreavus",
+      "base": [
+        60,
+        60,
+        60,
+        85,
+        85,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 201,
+      "name": "Unown",
+      "base": [
+        48,
+        72,
+        48,
+        72,
+        48,
+        48
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 202,
+      "name": "Wobbuffet",
+      "base": [
+        190,
+        33,
+        58,
+        33,
+        58,
+        33
+      ],
+      "evolvesFrom": 360
+    },
+    {
+      "dex": 203,
+      "name": "Girafarig",
+      "base": [
+        70,
+        80,
+        65,
+        90,
+        65,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 204,
+      "name": "Pineco",
+      "base": [
+        50,
+        65,
+        90,
+        35,
+        35,
+        15
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 205,
+      "name": "Forretress",
+      "base": [
+        75,
+        90,
+        140,
+        60,
+        60,
+        40
+      ],
+      "evolvesFrom": 204
+    },
+    {
+      "dex": 206,
+      "name": "Dunsparce",
+      "base": [
+        100,
+        70,
+        70,
+        65,
+        65,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 207,
+      "name": "Gligar",
+      "base": [
+        65,
+        75,
+        105,
+        35,
+        65,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 208,
+      "name": "Steelix",
+      "base": [
+        75,
+        85,
+        200,
+        55,
+        65,
+        30
+      ],
+      "evolvesFrom": 95
+    },
+    {
+      "dex": 209,
+      "name": "Snubbull",
+      "base": [
+        60,
+        80,
+        50,
+        40,
+        40,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 210,
+      "name": "Granbull",
+      "base": [
+        90,
+        120,
+        75,
+        60,
+        60,
+        45
+      ],
+      "evolvesFrom": 209
+    },
+    {
+      "dex": 211,
+      "name": "Qwilfish",
+      "base": [
+        65,
+        95,
+        75,
+        55,
+        55,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 212,
+      "name": "Scizor",
+      "base": [
+        70,
+        130,
+        100,
+        55,
+        80,
+        65
+      ],
+      "evolvesFrom": 123
+    },
+    {
+      "dex": 213,
+      "name": "Shuckle",
+      "base": [
+        20,
+        10,
+        230,
+        10,
+        230,
+        5
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 214,
+      "name": "Heracross",
+      "base": [
+        80,
+        125,
+        75,
+        40,
+        95,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 215,
+      "name": "Sneasel",
+      "base": [
+        55,
+        95,
+        55,
+        35,
+        75,
+        115
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 216,
+      "name": "Teddiursa",
+      "base": [
+        60,
+        80,
+        50,
+        50,
+        50,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 217,
+      "name": "Ursaring",
+      "base": [
+        90,
+        130,
+        75,
+        75,
+        75,
+        55
+      ],
+      "evolvesFrom": 216
+    },
+    {
+      "dex": 218,
+      "name": "Slugma",
+      "base": [
+        40,
+        40,
+        40,
+        70,
+        40,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 219,
+      "name": "Magcargo",
+      "base": [
+        50,
+        50,
+        120,
+        80,
+        80,
+        30
+      ],
+      "evolvesFrom": 218
+    },
+    {
+      "dex": 220,
+      "name": "Swinub",
+      "base": [
+        50,
+        50,
+        40,
+        30,
+        30,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 221,
+      "name": "Piloswine",
+      "base": [
+        100,
+        100,
+        80,
+        60,
+        60,
+        50
+      ],
+      "evolvesFrom": 220
+    },
+    {
+      "dex": 222,
+      "name": "Corsola",
+      "base": [
+        55,
+        55,
+        85,
+        65,
+        85,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 223,
+      "name": "Remoraid",
+      "base": [
+        35,
+        65,
+        35,
+        65,
+        35,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 224,
+      "name": "Octillery",
+      "base": [
+        75,
+        105,
+        75,
+        105,
+        75,
+        45
+      ],
+      "evolvesFrom": 223
+    },
+    {
+      "dex": 225,
+      "name": "Delibird",
+      "base": [
+        45,
+        55,
+        45,
+        65,
+        45,
+        75
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 226,
+      "name": "Mantine",
+      "base": [
+        65,
+        40,
+        70,
+        80,
+        140,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 227,
+      "name": "Skarmory",
+      "base": [
+        65,
+        80,
+        140,
+        40,
+        70,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 228,
+      "name": "Houndour",
+      "base": [
+        45,
+        60,
+        30,
+        80,
+        50,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 229,
+      "name": "Houndoom",
+      "base": [
+        75,
+        90,
+        50,
+        110,
+        80,
+        95
+      ],
+      "evolvesFrom": 228
+    },
+    {
+      "dex": 230,
+      "name": "Kingdra",
+      "base": [
+        75,
+        95,
+        95,
+        95,
+        95,
+        85
+      ],
+      "evolvesFrom": 117
+    },
+    {
+      "dex": 231,
+      "name": "Phanpy",
+      "base": [
+        90,
+        60,
+        60,
+        40,
+        40,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 232,
+      "name": "Donphan",
+      "base": [
+        90,
+        120,
+        120,
+        60,
+        60,
+        50
+      ],
+      "evolvesFrom": 231
+    },
+    {
+      "dex": 233,
+      "name": "Porygon2",
+      "base": [
+        85,
+        80,
+        90,
+        105,
+        95,
+        60
+      ],
+      "evolvesFrom": 137
+    },
+    {
+      "dex": 234,
+      "name": "Stantler",
+      "base": [
+        73,
+        95,
+        62,
+        85,
+        65,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 235,
+      "name": "Smeargle",
+      "base": [
+        55,
+        20,
+        35,
+        20,
+        45,
+        75
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 236,
+      "name": "Tyrogue",
+      "base": [
+        35,
+        35,
+        35,
+        35,
+        35,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 237,
+      "name": "Hitmontop",
+      "base": [
+        50,
+        95,
+        95,
+        35,
+        110,
+        70
+      ],
+      "evolvesFrom": 236
+    },
+    {
+      "dex": 238,
+      "name": "Smoochum",
+      "base": [
+        45,
+        30,
+        15,
+        85,
+        65,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 239,
+      "name": "Elekid",
+      "base": [
+        45,
+        63,
+        37,
+        65,
+        55,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 240,
+      "name": "Magby",
+      "base": [
+        45,
+        75,
+        37,
+        70,
+        55,
+        83
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 241,
+      "name": "Miltank",
+      "base": [
+        95,
+        80,
+        105,
+        40,
+        70,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 242,
+      "name": "Blissey",
+      "base": [
+        255,
+        10,
+        10,
+        75,
+        135,
+        55
+      ],
+      "evolvesFrom": 113
+    },
+    {
+      "dex": 243,
+      "name": "Raikou",
+      "base": [
+        90,
+        85,
+        75,
+        115,
+        100,
+        115
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 244,
+      "name": "Entei",
+      "base": [
+        115,
+        115,
+        85,
+        90,
+        75,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 245,
+      "name": "Suicune",
+      "base": [
+        100,
+        75,
+        115,
+        90,
+        115,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 246,
+      "name": "Larvitar",
+      "base": [
+        50,
+        64,
+        50,
+        45,
+        50,
+        41
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 247,
+      "name": "Pupitar",
+      "base": [
+        70,
+        84,
+        70,
+        65,
+        70,
+        51
+      ],
+      "evolvesFrom": 246
+    },
+    {
+      "dex": 248,
+      "name": "Tyranitar",
+      "base": [
+        100,
+        134,
+        110,
+        95,
+        100,
+        61
+      ],
+      "evolvesFrom": 247
+    },
+    {
+      "dex": 249,
+      "name": "Lugia",
+      "base": [
+        106,
+        90,
+        130,
+        90,
+        154,
+        110
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 250,
+      "name": "Ho-Oh",
+      "base": [
+        106,
+        130,
+        90,
+        110,
+        154,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 251,
+      "name": "Celebi",
+      "base": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 252,
+      "name": "Treecko",
+      "base": [
+        40,
+        45,
+        35,
+        65,
+        55,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 253,
+      "name": "Grovyle",
+      "base": [
+        50,
+        65,
+        45,
+        85,
+        65,
+        95
+      ],
+      "evolvesFrom": 252
+    },
+    {
+      "dex": 254,
+      "name": "Sceptile",
+      "base": [
+        70,
+        85,
+        65,
+        105,
+        85,
+        120
+      ],
+      "evolvesFrom": 253
+    },
+    {
+      "dex": 255,
+      "name": "Torchic",
+      "base": [
+        45,
+        60,
+        40,
+        70,
+        50,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 256,
+      "name": "Combusken",
+      "base": [
+        60,
+        85,
+        60,
+        85,
+        60,
+        55
+      ],
+      "evolvesFrom": 255
+    },
+    {
+      "dex": 257,
+      "name": "Blaziken",
+      "base": [
+        80,
+        120,
+        70,
+        110,
+        70,
+        80
+      ],
+      "evolvesFrom": 256
+    },
+    {
+      "dex": 258,
+      "name": "Mudkip",
+      "base": [
+        50,
+        70,
+        50,
+        50,
+        50,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 259,
+      "name": "Marshtomp",
+      "base": [
+        70,
+        85,
+        70,
+        60,
+        70,
+        50
+      ],
+      "evolvesFrom": 258
+    },
+    {
+      "dex": 260,
+      "name": "Swampert",
+      "base": [
+        100,
+        110,
+        90,
+        85,
+        90,
+        60
+      ],
+      "evolvesFrom": 259
+    },
+    {
+      "dex": 261,
+      "name": "Poochyena",
+      "base": [
+        35,
+        55,
+        35,
+        30,
+        30,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 262,
+      "name": "Mightyena",
+      "base": [
+        70,
+        90,
+        70,
+        60,
+        60,
+        70
+      ],
+      "evolvesFrom": 261
+    },
+    {
+      "dex": 263,
+      "name": "Zigzagoon",
+      "base": [
+        38,
+        30,
+        41,
+        30,
+        41,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 264,
+      "name": "Linoone",
+      "base": [
+        78,
+        70,
+        61,
+        50,
+        61,
+        100
+      ],
+      "evolvesFrom": 263
+    },
+    {
+      "dex": 265,
+      "name": "Wurmple",
+      "base": [
+        45,
+        45,
+        35,
+        20,
+        30,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 266,
+      "name": "Silcoon",
+      "base": [
+        50,
+        35,
+        55,
+        25,
+        25,
+        15
+      ],
+      "evolvesFrom": 265
+    },
+    {
+      "dex": 267,
+      "name": "Beautifly",
+      "base": [
+        60,
+        70,
+        50,
+        90,
+        50,
+        65
+      ],
+      "evolvesFrom": 266
+    },
+    {
+      "dex": 268,
+      "name": "Cascoon",
+      "base": [
+        50,
+        35,
+        55,
+        25,
+        25,
+        15
+      ],
+      "evolvesFrom": 265
+    },
+    {
+      "dex": 269,
+      "name": "Dustox",
+      "base": [
+        60,
+        50,
+        70,
+        50,
+        90,
+        65
+      ],
+      "evolvesFrom": 268
+    },
+    {
+      "dex": 270,
+      "name": "Lotad",
+      "base": [
+        40,
+        30,
+        30,
+        40,
+        50,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 271,
+      "name": "Lombre",
+      "base": [
+        60,
+        50,
+        50,
+        60,
+        70,
+        50
+      ],
+      "evolvesFrom": 270
+    },
+    {
+      "dex": 272,
+      "name": "Ludicolo",
+      "base": [
+        80,
+        70,
+        70,
+        90,
+        100,
+        70
+      ],
+      "evolvesFrom": 271
+    },
+    {
+      "dex": 273,
+      "name": "Seedot",
+      "base": [
+        40,
+        40,
+        50,
+        30,
+        30,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 274,
+      "name": "Nuzleaf",
+      "base": [
+        70,
+        70,
+        40,
+        60,
+        40,
+        60
+      ],
+      "evolvesFrom": 273
+    },
+    {
+      "dex": 275,
+      "name": "Shiftry",
+      "base": [
+        90,
+        100,
+        60,
+        90,
+        60,
+        80
+      ],
+      "evolvesFrom": 274
+    },
+    {
+      "dex": 276,
+      "name": "Taillow",
+      "base": [
+        40,
+        55,
+        30,
+        30,
+        30,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 277,
+      "name": "Swellow",
+      "base": [
+        60,
+        85,
+        60,
+        50,
+        50,
+        125
+      ],
+      "evolvesFrom": 276
+    },
+    {
+      "dex": 278,
+      "name": "Wingull",
+      "base": [
+        40,
+        30,
+        30,
+        55,
+        30,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 279,
+      "name": "Pelipper",
+      "base": [
+        60,
+        50,
+        100,
+        85,
+        70,
+        65
+      ],
+      "evolvesFrom": 278
+    },
+    {
+      "dex": 280,
+      "name": "Ralts",
+      "base": [
+        28,
+        25,
+        25,
+        45,
+        35,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 281,
+      "name": "Kirlia",
+      "base": [
+        38,
+        35,
+        35,
+        65,
+        55,
+        50
+      ],
+      "evolvesFrom": 280
+    },
+    {
+      "dex": 282,
+      "name": "Gardevoir",
+      "base": [
+        68,
+        65,
+        65,
+        125,
+        115,
+        80
+      ],
+      "evolvesFrom": 281
+    },
+    {
+      "dex": 283,
+      "name": "Surskit",
+      "base": [
+        40,
+        30,
+        32,
+        50,
+        52,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 284,
+      "name": "Masquerain",
+      "base": [
+        70,
+        60,
+        62,
+        80,
+        82,
+        60
+      ],
+      "evolvesFrom": 283
+    },
+    {
+      "dex": 285,
+      "name": "Shroomish",
+      "base": [
+        60,
+        40,
+        60,
+        40,
+        60,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 286,
+      "name": "Breloom",
+      "base": [
+        60,
+        130,
+        80,
+        60,
+        60,
+        70
+      ],
+      "evolvesFrom": 285
+    },
+    {
+      "dex": 287,
+      "name": "Slakoth",
+      "base": [
+        60,
+        60,
+        60,
+        35,
+        35,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 288,
+      "name": "Vigoroth",
+      "base": [
+        80,
+        80,
+        80,
+        55,
+        55,
+        90
+      ],
+      "evolvesFrom": 287
+    },
+    {
+      "dex": 289,
+      "name": "Slaking",
+      "base": [
+        150,
+        160,
+        100,
+        95,
+        65,
+        100
+      ],
+      "evolvesFrom": 288
+    },
+    {
+      "dex": 290,
+      "name": "Nincada",
+      "base": [
+        31,
+        45,
+        90,
+        30,
+        30,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 291,
+      "name": "Ninjask",
+      "base": [
+        61,
+        90,
+        45,
+        50,
+        50,
+        160
+      ],
+      "evolvesFrom": 290
+    },
+    {
+      "dex": 292,
+      "name": "Shedinja",
+      "base": [
+        1,
+        90,
+        45,
+        30,
+        30,
+        40
+      ],
+      "evolvesFrom": 290
+    },
+    {
+      "dex": 293,
+      "name": "Whismur",
+      "base": [
+        64,
+        51,
+        23,
+        51,
+        23,
+        28
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 294,
+      "name": "Loudred",
+      "base": [
+        84,
+        71,
+        43,
+        71,
+        43,
+        48
+      ],
+      "evolvesFrom": 293
+    },
+    {
+      "dex": 295,
+      "name": "Exploud",
+      "base": [
+        104,
+        91,
+        63,
+        91,
+        63,
+        68
+      ],
+      "evolvesFrom": 294
+    },
+    {
+      "dex": 296,
+      "name": "Makuhita",
+      "base": [
+        72,
+        60,
+        30,
+        20,
+        30,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 297,
+      "name": "Hariyama",
+      "base": [
+        144,
+        120,
+        60,
+        40,
+        60,
+        50
+      ],
+      "evolvesFrom": 296
+    },
+    {
+      "dex": 298,
+      "name": "Azurill",
+      "base": [
+        50,
+        20,
+        40,
+        20,
+        40,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 299,
+      "name": "Nosepass",
+      "base": [
+        30,
+        45,
+        135,
+        45,
+        90,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 300,
+      "name": "Skitty",
+      "base": [
+        50,
+        45,
+        45,
+        35,
+        35,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 301,
+      "name": "Delcatty",
+      "base": [
+        70,
+        65,
+        65,
+        55,
+        55,
+        70
+      ],
+      "evolvesFrom": 300
+    },
+    {
+      "dex": 302,
+      "name": "Sableye",
+      "base": [
+        50,
+        75,
+        75,
+        65,
+        65,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 303,
+      "name": "Mawile",
+      "base": [
+        50,
+        85,
+        85,
+        55,
+        55,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 304,
+      "name": "Aron",
+      "base": [
+        50,
+        70,
+        100,
+        40,
+        40,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 305,
+      "name": "Lairon",
+      "base": [
+        60,
+        90,
+        140,
+        50,
+        50,
+        40
+      ],
+      "evolvesFrom": 304
+    },
+    {
+      "dex": 306,
+      "name": "Aggron",
+      "base": [
+        70,
+        110,
+        180,
+        60,
+        60,
+        50
+      ],
+      "evolvesFrom": 305
+    },
+    {
+      "dex": 307,
+      "name": "Meditite",
+      "base": [
+        30,
+        40,
+        55,
+        40,
+        55,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 308,
+      "name": "Medicham",
+      "base": [
+        60,
+        60,
+        75,
+        60,
+        75,
+        80
+      ],
+      "evolvesFrom": 307
+    },
+    {
+      "dex": 309,
+      "name": "Electrike",
+      "base": [
+        40,
+        45,
+        40,
+        65,
+        40,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 310,
+      "name": "Manectric",
+      "base": [
+        70,
+        75,
+        60,
+        105,
+        60,
+        105
+      ],
+      "evolvesFrom": 309
+    },
+    {
+      "dex": 311,
+      "name": "Plusle",
+      "base": [
+        60,
+        50,
+        40,
+        85,
+        75,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 312,
+      "name": "Minun",
+      "base": [
+        60,
+        40,
+        50,
+        75,
+        85,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 313,
+      "name": "Volbeat",
+      "base": [
+        65,
+        73,
+        55,
+        47,
+        75,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 314,
+      "name": "Illumise",
+      "base": [
+        65,
+        47,
+        55,
+        73,
+        75,
+        85
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 315,
+      "name": "Roselia",
+      "base": [
+        50,
+        60,
+        45,
+        100,
+        80,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 316,
+      "name": "Gulpin",
+      "base": [
+        70,
+        43,
+        53,
+        43,
+        53,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 317,
+      "name": "Swalot",
+      "base": [
+        100,
+        73,
+        83,
+        73,
+        83,
+        55
+      ],
+      "evolvesFrom": 316
+    },
+    {
+      "dex": 318,
+      "name": "Carvanha",
+      "base": [
+        45,
+        90,
+        20,
+        65,
+        20,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 319,
+      "name": "Sharpedo",
+      "base": [
+        70,
+        120,
+        40,
+        95,
+        40,
+        95
+      ],
+      "evolvesFrom": 318
+    },
+    {
+      "dex": 320,
+      "name": "Wailmer",
+      "base": [
+        130,
+        70,
+        35,
+        70,
+        35,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 321,
+      "name": "Wailord",
+      "base": [
+        170,
+        90,
+        45,
+        90,
+        45,
+        60
+      ],
+      "evolvesFrom": 320
+    },
+    {
+      "dex": 322,
+      "name": "Numel",
+      "base": [
+        60,
+        60,
+        40,
+        65,
+        45,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 323,
+      "name": "Camerupt",
+      "base": [
+        70,
+        100,
+        70,
+        105,
+        75,
+        40
+      ],
+      "evolvesFrom": 322
+    },
+    {
+      "dex": 324,
+      "name": "Torkoal",
+      "base": [
+        70,
+        85,
+        140,
+        85,
+        70,
+        20
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 325,
+      "name": "Spoink",
+      "base": [
+        60,
+        25,
+        35,
+        70,
+        80,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 326,
+      "name": "Grumpig",
+      "base": [
+        80,
+        45,
+        65,
+        90,
+        110,
+        80
+      ],
+      "evolvesFrom": 325
+    },
+    {
+      "dex": 327,
+      "name": "Spinda",
+      "base": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 328,
+      "name": "Trapinch",
+      "base": [
+        45,
+        100,
+        45,
+        45,
+        45,
+        10
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 329,
+      "name": "Vibrava",
+      "base": [
+        50,
+        70,
+        50,
+        50,
+        50,
+        70
+      ],
+      "evolvesFrom": 328
+    },
+    {
+      "dex": 330,
+      "name": "Flygon",
+      "base": [
+        80,
+        100,
+        80,
+        80,
+        80,
+        100
+      ],
+      "evolvesFrom": 329
+    },
+    {
+      "dex": 331,
+      "name": "Cacnea",
+      "base": [
+        50,
+        85,
+        40,
+        85,
+        40,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 332,
+      "name": "Cacturne",
+      "base": [
+        70,
+        115,
+        60,
+        115,
+        60,
+        55
+      ],
+      "evolvesFrom": 331
+    },
+    {
+      "dex": 333,
+      "name": "Swablu",
+      "base": [
+        45,
+        40,
+        60,
+        40,
+        75,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 334,
+      "name": "Altaria",
+      "base": [
+        75,
+        70,
+        90,
+        70,
+        105,
+        80
+      ],
+      "evolvesFrom": 333
+    },
+    {
+      "dex": 335,
+      "name": "Zangoose",
+      "base": [
+        73,
+        115,
+        60,
+        60,
+        60,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 336,
+      "name": "Seviper",
+      "base": [
+        73,
+        100,
+        60,
+        100,
+        60,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 337,
+      "name": "Lunatone",
+      "base": [
+        70,
+        55,
+        65,
+        95,
+        85,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 338,
+      "name": "Solrock",
+      "base": [
+        70,
+        95,
+        85,
+        55,
+        65,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 339,
+      "name": "Barboach",
+      "base": [
+        50,
+        48,
+        43,
+        46,
+        41,
+        60
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 340,
+      "name": "Whiscash",
+      "base": [
+        110,
+        78,
+        73,
+        76,
+        71,
+        60
+      ],
+      "evolvesFrom": 339
+    },
+    {
+      "dex": 341,
+      "name": "Corphish",
+      "base": [
+        43,
+        80,
+        65,
+        50,
+        35,
+        35
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 342,
+      "name": "Crawdaunt",
+      "base": [
+        63,
+        120,
+        85,
+        90,
+        55,
+        55
+      ],
+      "evolvesFrom": 341
+    },
+    {
+      "dex": 343,
+      "name": "Baltoy",
+      "base": [
+        40,
+        40,
+        55,
+        40,
+        70,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 344,
+      "name": "Claydol",
+      "base": [
+        60,
+        70,
+        105,
+        70,
+        120,
+        75
+      ],
+      "evolvesFrom": 343
+    },
+    {
+      "dex": 345,
+      "name": "Lileep",
+      "base": [
+        66,
+        41,
+        77,
+        61,
+        87,
+        23
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 346,
+      "name": "Cradily",
+      "base": [
+        86,
+        81,
+        97,
+        81,
+        107,
+        43
+      ],
+      "evolvesFrom": 345
+    },
+    {
+      "dex": 347,
+      "name": "Anorith",
+      "base": [
+        45,
+        95,
+        50,
+        40,
+        50,
+        75
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 348,
+      "name": "Armaldo",
+      "base": [
+        75,
+        125,
+        100,
+        70,
+        80,
+        45
+      ],
+      "evolvesFrom": 347
+    },
+    {
+      "dex": 349,
+      "name": "Feebas",
+      "base": [
+        20,
+        15,
+        20,
+        10,
+        55,
+        80
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 350,
+      "name": "Milotic",
+      "base": [
+        95,
+        60,
+        79,
+        100,
+        125,
+        81
+      ],
+      "evolvesFrom": 349
+    },
+    {
+      "dex": 351,
+      "name": "Castform",
+      "base": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 352,
+      "name": "Kecleon",
+      "base": [
+        60,
+        90,
+        70,
+        60,
+        120,
+        40
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 353,
+      "name": "Shuppet",
+      "base": [
+        44,
+        75,
+        35,
+        63,
+        33,
+        45
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 354,
+      "name": "Banette",
+      "base": [
+        64,
+        115,
+        65,
+        83,
+        63,
+        65
+      ],
+      "evolvesFrom": 353
+    },
+    {
+      "dex": 355,
+      "name": "Duskull",
+      "base": [
+        20,
+        40,
+        90,
+        30,
+        90,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 356,
+      "name": "Dusclops",
+      "base": [
+        40,
+        70,
+        130,
+        60,
+        130,
+        25
+      ],
+      "evolvesFrom": 355
+    },
+    {
+      "dex": 357,
+      "name": "Tropius",
+      "base": [
+        99,
+        68,
+        83,
+        72,
+        87,
+        51
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 358,
+      "name": "Chimecho",
+      "base": [
+        65,
+        50,
+        70,
+        95,
+        80,
+        65
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 359,
+      "name": "Absol",
+      "base": [
+        65,
+        130,
+        60,
+        75,
+        60,
+        75
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 360,
+      "name": "Wynaut",
+      "base": [
+        95,
+        23,
+        48,
+        23,
+        48,
+        23
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 361,
+      "name": "Snorunt",
+      "base": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 362,
+      "name": "Glalie",
+      "base": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "evolvesFrom": 361
+    },
+    {
+      "dex": 363,
+      "name": "Spheal",
+      "base": [
+        70,
+        40,
+        50,
+        55,
+        50,
+        25
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 364,
+      "name": "Sealeo",
+      "base": [
+        90,
+        60,
+        70,
+        75,
+        70,
+        45
+      ],
+      "evolvesFrom": 363
+    },
+    {
+      "dex": 365,
+      "name": "Walrein",
+      "base": [
+        110,
+        80,
+        90,
+        95,
+        90,
+        65
+      ],
+      "evolvesFrom": 364
+    },
+    {
+      "dex": 366,
+      "name": "Clamperl",
+      "base": [
+        35,
+        64,
+        85,
+        74,
+        55,
+        32
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 367,
+      "name": "Huntail",
+      "base": [
+        55,
+        104,
+        105,
+        94,
+        75,
+        52
+      ],
+      "evolvesFrom": 366
+    },
+    {
+      "dex": 368,
+      "name": "Gorebyss",
+      "base": [
+        55,
+        84,
+        105,
+        114,
+        75,
+        52
+      ],
+      "evolvesFrom": 366
+    },
+    {
+      "dex": 369,
+      "name": "Relicanth",
+      "base": [
+        100,
+        90,
+        130,
+        45,
+        65,
+        55
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 370,
+      "name": "Luvdisc",
+      "base": [
+        43,
+        30,
+        55,
+        40,
+        65,
+        97
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 371,
+      "name": "Bagon",
+      "base": [
+        45,
+        75,
+        60,
+        40,
+        30,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 372,
+      "name": "Shelgon",
+      "base": [
+        65,
+        95,
+        100,
+        60,
+        50,
+        50
+      ],
+      "evolvesFrom": 371
+    },
+    {
+      "dex": 373,
+      "name": "Salamence",
+      "base": [
+        95,
+        135,
+        80,
+        110,
+        80,
+        100
+      ],
+      "evolvesFrom": 372
+    },
+    {
+      "dex": 374,
+      "name": "Beldum",
+      "base": [
+        40,
+        55,
+        80,
+        35,
+        60,
+        30
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 375,
+      "name": "Metang",
+      "base": [
+        60,
+        75,
+        100,
+        55,
+        80,
+        50
+      ],
+      "evolvesFrom": 374
+    },
+    {
+      "dex": 376,
+      "name": "Metagross",
+      "base": [
+        80,
+        135,
+        130,
+        95,
+        90,
+        70
+      ],
+      "evolvesFrom": 375
+    },
+    {
+      "dex": 377,
+      "name": "Regirock",
+      "base": [
+        80,
+        100,
+        200,
+        50,
+        100,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 378,
+      "name": "Regice",
+      "base": [
+        80,
+        50,
+        100,
+        100,
+        200,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 379,
+      "name": "Registeel",
+      "base": [
+        80,
+        75,
+        150,
+        75,
+        150,
+        50
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 380,
+      "name": "Latias",
+      "base": [
+        80,
+        80,
+        90,
+        110,
+        130,
+        110
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 381,
+      "name": "Latios",
+      "base": [
+        80,
+        90,
+        80,
+        130,
+        110,
+        110
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 382,
+      "name": "Kyogre",
+      "base": [
+        100,
+        100,
+        90,
+        150,
+        140,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 383,
+      "name": "Groudon",
+      "base": [
+        100,
+        150,
+        140,
+        100,
+        90,
+        90
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 384,
+      "name": "Rayquaza",
+      "base": [
+        105,
+        150,
+        90,
+        150,
+        90,
+        95
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 385,
+      "name": "Jirachi",
+      "base": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "evolvesFrom": null
+    },
+    {
+      "dex": 386,
+      "name": "Deoxys",
+      "base": [
+        50,
+        150,
+        50,
+        150,
+        50,
+        150
+      ],
+      "evolvesFrom": null
+    }
+  ]
+}

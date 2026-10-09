@@ -1,0 +1,7 @@
+@page "/not-found"
+@inject NavigationManager Navigation
+
+@code {
+    // Deep links served by 404.html land here; there is a single screen, so go back to it.
+    protected override void OnInitialized() => Navigation.NavigateTo("", replace: true);
+}

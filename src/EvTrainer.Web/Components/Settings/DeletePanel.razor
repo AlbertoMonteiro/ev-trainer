@@ -1,0 +1,21 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is { } pokemon && Store.SelectedId is { } id)
+{
+    <details class="card delete-card">
+        <summary>@L["Delete.Title"]</summary>
+        <p class="hint">@L["Delete.Hint", pokemon.Name]</p>
+        <button type="button" class="danger" @onclick="() => Delete(id, pokemon.Name)">@L["Delete.Confirm", pokemon.Name]</button>
+    </details>
+}
+
+@code {
+    private void Delete(string id, string name)
+    {
+        if (Store.DeletePokemon(id) is { } undo)
+        {
+            Toasts.Show(L["Toast.PokemonDeleted", name], undo);
+        }
+    }
+}
