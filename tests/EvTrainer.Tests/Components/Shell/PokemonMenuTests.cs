@@ -110,6 +110,27 @@ public class PokemonMenuTests : AppTestContext
     }
 }
 
+public class PokemonMenuSpriteTests : AppTestContext
+{
+    [Fact]
+    public void Items_show_the_display_species_sprite_and_the_footer_credits()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.IvLog.Add(new EvTrainer.Web.Domain.Model.LevelEntry { Level = 16, Species = "Wartortle", Stats = [1, 1, 1, 1, 1, 1], Evs = new int[6] });
+        Seed(pokemon);
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        Assert.Equal("sprites/8.png", cut.Find(".menu-panel button.pokemon-item .sprite img").GetAttribute("src"));
+        var credits = cut.Find(".menu-panel .menu-credits");
+        Assert.Contains(T("Menu.Credits"), credits.TextContent);
+        var link = credits.QuerySelector("a")!;
+        Assert.Equal("https://github.com/PokeAPI/sprites", link.GetAttribute("href"));
+        Assert.Equal("_blank", link.GetAttribute("target"));
+        Assert.Contains("noopener", link.GetAttribute("rel"));
+    }
+}
+
 public class PokemonMenuLanguageTests : AppTestContext
 {
     public PokemonMenuLanguageTests()

@@ -77,4 +77,21 @@ public class SpeciesPickerTests : AppTestContext
 
         Assert.NotNull(cut.Find("input.species-search"));
     }
+
+    [Fact]
+    public void Options_and_line_show_48px_sprites()
+    {
+        var cut = RenderPicker();
+        cut.Find("input.species-search").Input("squir");
+
+        Assert.All(cut.FindAll("button.species-option"), o =>
+            Assert.Contains("--sprite-size: 48px", o.QuerySelector(".sprite")!.GetAttribute("style")));
+
+        cut.Find("button.species-option[data-name='Squirtle']").Click();
+        var line = RenderPicker(_picked!.Line);
+
+        Assert.Equal(
+            ["sprites/7.png", "sprites/8.png", "sprites/9.png"],
+            line.FindAll(".species-chip .sprite img").Select(i => i.GetAttribute("src")));
+    }
 }

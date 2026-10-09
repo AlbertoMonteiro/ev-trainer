@@ -1,0 +1,50 @@
+@inherits StoreAwareComponent
+@inject Pokedex Dex
+
+@{
+    var badge = SpriteBadge.For(Name, Store.Data, Dex);
+}
+<span class="sprite @(badge.Stats is [DefenseIndex] ? "badge-dark" : "")" aria-hidden="true"
+      style="--sprite-size: @(Size)px; --badge: @BadgeColor(badge)">
+    <span class="badge">@(badge.Dex is { } number ? L["Sprite.Dex", number].Value : badge.Initial)</span>
+    @if (badge.HasSprite && !_failed)
+    {
+        <img src="sprites/@(badge.Dex).png" alt="" width="@Size" height="@Size" loading="lazy" decoding="async"
+             class="@(_loaded ? "loaded" : "")" @onload="() => _loaded = true" @onerror="() => _failed = true" />
+    }
+</span>
+
+@code {
+    // DEF is yellow: the badge label needs dark text to stay readable.
+    private const int DefenseIndex = 2;
+
+    private bool _loaded;
+    private bool _failed;
+    private string? _shownName;
+
+    /// <summary>Opponent or species name (aliases accepted).</summary>
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>Box size in pixels: 40 in cards and the menu, 48 in the species picker.</summary>
+    [Parameter]
+    public int Size { get; set; } = 40;
+
+    protected override void OnParametersSet()
+    {
+        // A different Pokémon in the same slot gets a fresh attempt at its own image.
+        if (_shownName != Name)
+        {
+            _shownName = Name;
+            _loaded = false;
+            _failed = false;
+        }
+    }
+
+    private static string BadgeColor(SpriteBadge badge) => badge.Stats switch
+    {
+        [var only] => $"var(--stat-{only})",
+        [var first, var second] => $"linear-gradient(135deg, var(--stat-{first}), var(--stat-{second}))",
+        _ => "var(--accent)",
+    };
+}

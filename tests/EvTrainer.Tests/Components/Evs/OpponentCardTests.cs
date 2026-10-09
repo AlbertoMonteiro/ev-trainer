@@ -34,7 +34,10 @@ public class OpponentCardTests : AppTestContext
 
         var cut = Render<OpponentCard>(p => p.Add(c => c.Opponent, pikachu));
 
-        Assert.DoesNotContain("#25", cut.Markup);
+        // The dex number only exists inside the sprite's fallback badge (feature 002, FR-006),
+        // which is hidden under the image; the card's own text never shows it.
+        var cardText = cut.Find("button.opponent .info").TextContent;
+        Assert.DoesNotContain("#25", cardText);
         Assert.DoesNotContain("Viridian", cut.Markup);
         Assert.Empty(cut.FindAll(".trainers"));
     }
@@ -49,5 +52,32 @@ public class OpponentCardTests : AppTestContext
             .Add(c => c.TrainerLocations, ["Rota 4"]));
 
         Assert.Equal(T("Evs.Card.Trainers", "Rota 4"), cut.Find(".trainers").TextContent.Trim());
+    }
+
+    [Fact]
+    public void Shows_the_sprite_before_the_name_and_stays_one_button()
+    {
+        var picked = "";
+        var cut = Render<OpponentCard>(p => p
+            .Add(c => c.Opponent, Data.Lookup("Abra")!)
+            .Add(c => c.OnPick, name => picked = name));
+
+        var button = cut.Find("button.opponent");
+        Assert.Equal("sprites/63.png", button.QuerySelector(".sprite img")!.GetAttribute("src"));
+        Assert.True(button.QuerySelector(".sprite")!.CompareDocumentPosition(button.QuerySelector(".name")!)
+            .HasFlag(AngleSharp.Dom.DocumentPositions.Following));
+        Assert.Single(cut.FindAll("button"));
+
+        button.Click();
+        Assert.Equal("Abra", picked);
+    }
+
+    [Fact]
+    public void Vitamin_card_shows_only_the_badge()
+    {
+        var cut = Render<OpponentCard>(p => p.Add(c => c.Opponent, Data.Lookup("Calcium")!));
+
+        Assert.NotNull(cut.Find("button.opponent .sprite .badge"));
+        Assert.Empty(cut.FindAll("img"));
     }
 }

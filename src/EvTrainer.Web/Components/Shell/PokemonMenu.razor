@@ -13,7 +13,7 @@
             <li>
                 <button type="button" class="pokemon-item" role="menuitem" data-id="@id" aria-current="@(selected ? "true" : "false")"
                         @onclick="() => Choose(id)">
-                    <span><span class="mark">@(selected ? "●" : "")</span>@pokemon.Name</span>
+                    <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.DisplaySpecies" Size="40" />@pokemon.Name</span>
                     <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
                 </button>
             </li>
@@ -46,6 +46,11 @@
             }
         </div>
     }
+    <hr />
+    <p class="menu-credits">
+        @L["Menu.Credits"]
+        <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noopener noreferrer">@L["Menu.Credits.Link"]</a>
+    </p>
 </div>
 
 @code {

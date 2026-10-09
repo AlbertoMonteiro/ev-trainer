@@ -26,6 +26,14 @@ public sealed class TrainingPokemon
 
     public int Order { get; set; }
 
+    /// <summary>
+    /// Species to picture this Pokémon with: the one of the latest level note (when it is in the
+    /// evolution line), else the first species of the line, else the nickname.
+    /// </summary>
+    public string DisplaySpecies =>
+        IvLog.LastOrDefault()?.Species is { } latest && Species.Any(s => s.Name == latest) ? latest
+        : Species.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s.Name))?.Name ?? Name;
+
     public TrainingPokemon Clone() => new()
     {
         Name = Name,

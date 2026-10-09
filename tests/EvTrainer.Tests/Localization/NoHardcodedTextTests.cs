@@ -34,6 +34,8 @@ public partial class NoHardcodedTextTests : AppTestContext
             .. Data.Natures.Select(n => n.Name),
             .. Data.TrainersByLocation.Select(l => l.Name),
             .. Dex.Species.Select(s => s.Name),
+            // Sprite badges without a dex number show the initial of a data name (vitamins, unknown species).
+            .. Data.Opponents.Select(o => o.Name[..1].ToUpperInvariant()),
             // Each language is listed by its own name (endonym), taken from its resource file.
             .. Synthetic.Languages.Select(l => LocalizationCatalog.LoadEmbedded().Find(l, "Language.Name") ?? Synthetic.Find(l, "Language.Name")!),
         ];

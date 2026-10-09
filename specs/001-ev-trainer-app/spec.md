@@ -253,7 +253,8 @@ prévia e o resultado.
 - **FR-010**: O resumo DEVE mostrar total/510, soma das metas e, para cada um dos 6 stats,
   atual/meta com barra de progresso e destaque de concluído (= meta > 0) ou excedido (> meta).
 - **FR-011**: Cada card de adversário DEVE mostrar nome, EVs que ele dá e quantas vezes já foi
-  derrotado (`×N`); local selvagem e número da Pokédex NÃO aparecem no card.
+  derrotado (`×N`); local selvagem e número da Pokédex NÃO aparecem no card (exceção: o selo de
+  reserva do sprite mostra o número quando a imagem falha — feature 002, FR-006).
 - **FR-012**: O sistema DEVE mostrar o histórico dos últimos 12 registros (mais novo primeiro), com
   quantidade e multiplicador, permitindo remover um registro com desfazer.
 

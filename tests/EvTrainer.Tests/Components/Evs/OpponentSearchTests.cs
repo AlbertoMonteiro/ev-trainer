@@ -79,4 +79,19 @@ public class OpponentSearchTests : AppTestContext
         Assert.Equal(T("Evs.Search.Label"), cut.Find("input.search").GetAttribute("aria-label"));
         Assert.Equal(T("Evs.Search.Placeholder"), cut.Find("input.search").GetAttribute("placeholder"));
     }
+
+    [Fact]
+    public void Every_card_in_recents_list_and_results_has_a_sprite()
+    {
+        Seed(Pokemons.Squirtle().WithEvents(("Caterpie", 1, 1), ("Abra", 1, 1)));
+        var cut = Render<EvTab>();
+
+        Assert.All(cut.FindAll(".recent-list button.opponent, .main-list button.opponent"), b => Assert.NotNull(b.QuerySelector(".sprite")));
+
+        cut.Find("input.search").Input("rota 4");
+
+        var results = cut.FindAll(".main-list button.opponent");
+        Assert.NotEmpty(results);
+        Assert.All(results, b => Assert.NotNull(b.QuerySelector(".sprite")));
+    }
 }

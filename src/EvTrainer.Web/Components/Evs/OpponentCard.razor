@@ -1,6 +1,8 @@
 @inherits StoreAwareComponent
 
 <button type="button" class="opponent @BumpClass" data-opp="@Opponent.Name" @onclick="Pick">
+    <PokemonSprite Name="@Opponent.Name" Size="40" />
+    <span class="info">
     <span class="row1">
         <span class="name">@Opponent.Name</span>
         <span class="count">@L["Evs.Card.Count", Count]</span>
@@ -18,6 +20,7 @@
     {
         <span class="trainers">@L["Evs.Card.Trainers", string.Join(", ", TrainerLocations)]</span>
     }
+    </span>
 </button>
 
 @code {

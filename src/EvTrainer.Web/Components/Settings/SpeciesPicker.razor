@@ -11,7 +11,8 @@
             @foreach (var species in Dex.Search(_query))
             {
                 <button type="button" class="species-option" data-name="@species.Name" @onclick="() => Pick(species)">
-                    <span class="num muted">@L["Settings.Species.Dex", species.Dex]</span> @species.Name
+                    <PokemonSprite Name="@species.Name" Size="48" />
+                    <span><span class="num muted">@L["Settings.Species.Dex", species.Dex]</span> @species.Name</span>
                 </button>
             }
         </div>
@@ -26,8 +27,11 @@
             @foreach (var entry in Line)
             {
                 <li class="species-chip">
-                    <span class="name">@entry.Name</span>
-                    <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
+                    <PokemonSprite Name="@entry.Name" Size="48" />
+                    <span class="chip-text">
+                        <span class="name">@entry.Name</span>
+                        <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
+                    </span>
                 </li>
             }
         </ol>
