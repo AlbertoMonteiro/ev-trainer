@@ -4,13 +4,13 @@
 @if (Store.Selected is { } pokemon)
 {
     EnsureLoaded(pokemon);
-    <section class="card level-form">
-        <h2>@L["Ivs.Form.Title"]</h2>
+    <section class="card level-form @(_editing is null ? "" : "editing")">
+        <h2>@(_editing is { } editing ? L["Ivs.Form.EditTitle", editing.Level] : L["Ivs.Form.Title"])</h2>
         <div class="form-grid">
             <div class="two">
                 <div class="field">
                     <label for="level-number">@L["Ivs.Form.Level"]</label>
-                    <input id="level-number" inputmode="numeric" value="@_level"
+                    <input id="level-number" inputmode="numeric" value="@_level" @ref="_levelInput"
                            @oninput="e => _level = e.Value?.ToString() ?? string.Empty" />
                 </div>
                 <div class="field">
@@ -51,32 +51,91 @@
                     }
                 </div>
             </div>
-            <button type="button" class="primary save-level" disabled="@(!IsValid)" @onclick="Save">@L["Ivs.Form.Save"]</button>
+            <div class="row-actions">
+                <button type="button" class="primary save-level" disabled="@(!IsValid)" @onclick="Save">
+                    @(_editing is null ? L["Ivs.Form.Save"] : L["Ivs.Form.SaveChanges"])
+                </button>
+                @if (_editing is not null)
+                {
+                    <button type="button" class="cancel-edit" @onclick="CancelEdit">@L["Ivs.Form.CancelEdit"]</button>
+                }
+            </div>
         </div>
     </section>
 }
 
 @code {
     private string? _loadedId;
+    private int? _loadedEditIndex;
+    private LevelEntry? _editing;
+    private ElementReference _levelInput;
+    private bool _focusPending;
     private string _level = string.Empty;
     private string _species = string.Empty;
     private string[] _stats = new string[StatVector.Count];
     private string[] _evs = new string[StatVector.Count];
 
+    /// <summary>Index of the level note being edited; null for a new note.</summary>
+    [Parameter]
+    public int? EditIndex { get; set; }
+
+    /// <summary>Called when an edit is saved or cancelled.</summary>
+    [Parameter]
+    public EventCallback OnDone { get; set; }
+
     private void EnsureLoaded(TrainingPokemon pokemon)
     {
-        if (_loadedId == Store.SelectedId)
+        if (_loadedId == Store.SelectedId && _loadedEditIndex == EditIndex)
         {
             return;
         }
 
         _loadedId = Store.SelectedId;
-        Reset(pokemon);
+        _loadedEditIndex = EditIndex;
+        if (EditIndex is { } index && index >= 0 && index < pokemon.IvLog.Count)
+        {
+            Load(pokemon.IvLog[index]);
+            _focusPending = true;
+        }
+        else
+        {
+            Reset(pokemon);
+        }
+    }
+
+    /// <summary>Brings the form into view when an edit starts (it sits below the table on a phone).</summary>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!_focusPending)
+        {
+            return;
+        }
+
+        _focusPending = false;
+        try
+        {
+            await _levelInput.FocusAsync();
+        }
+        catch (JSException)
+        {
+            // Focus is a convenience; ignore when the element is gone.
+        }
+    }
+
+    /// <summary>Fills the form with an existing note (its own EVs, not the current ones).</summary>
+    private void Load(LevelEntry entry)
+    {
+        _editing = entry;
+        _level = entry.Level.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        _species = entry.Species;
+        _stats = [.. entry.Stats.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];
+        _evs = [.. entry.Evs.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];
     }
 
     /// <summary>Clears the form: species = last used (or first of the line), EVs = current totals.</summary>
     private void Reset(TrainingPokemon pokemon)
     {
+        _editing = null;
         _level = string.Empty;
         _species = pokemon.IvLog.LastOrDefault()?.Species is { } last && pokemon.Species.Any(s => s.Name == last)
             ? last
@@ -93,7 +152,7 @@
         && _stats.All(s => Parse(s, 1, 999) is not null)
         && _evs.All(e => Parse(e, 0, 255) is not null);
 
-    private void Save()
+    private async Task Save()
     {
         if (!IsValid || Store.Selected is not { } pokemon)
         {
@@ -101,14 +160,38 @@
         }
 
         var level = Parse(_level, 1, 100)!.Value;
-        Store.AddLevel(new LevelEntry
+        var entry = new LevelEntry
         {
             Level = level,
             Species = _species,
             Stats = [.. _stats.Select(s => Parse(s, 1, 999)!.Value)],
             Evs = [.. _evs.Select(e => Parse(e, 0, 255)!.Value)],
-        });
+        };
+
+        if (_editing is not null && pokemon.IvLog.IndexOf(_editing) is var index and >= 0)
+        {
+            if (Store.ReplaceLevel(index, entry) is { } undo)
+            {
+                Toasts.Show(L["Ivs.Updated", level], undo);
+            }
+
+            Reset(pokemon);
+            await OnDone.InvokeAsync();
+            return;
+        }
+
+        Store.AddLevel(entry);
         Toasts.Show(L["Ivs.Saved", level]);
         Reset(pokemon);
+    }
+
+    private async Task CancelEdit()
+    {
+        if (Store.Selected is { } pokemon)
+        {
+            Reset(pokemon);
+        }
+
+        await OnDone.InvokeAsync();
     }
 }

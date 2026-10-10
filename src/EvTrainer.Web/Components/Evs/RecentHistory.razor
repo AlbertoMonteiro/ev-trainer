@@ -17,15 +17,25 @@
                     var index = i;
                     var e = pokemon.Events[i];
                     <li>
-                        <span class="what">
-                            @L["History.Item", e.Opponent, e.Count]
-                            @if (e.Multiplier > 1)
-                            {
-                                <span class="meta">@(" " + L["History.Multiplier", e.Multiplier])</span>
-                            }
-                        </span>
-                        <button type="button" class="remove icon-button" aria-label="@L["History.Remove", e.Opponent]"
-                                @onclick="() => Remove(index, e.Opponent)">×</button>
+                        @if (e.SetTotals is { } set)
+                        {
+                            var name = L["History.AdjustmentName"].Value;
+                            <span class="what adjustment">@L["History.Adjustment", string.Join('/', set)]</span>
+                            <button type="button" class="remove icon-button" aria-label="@L["History.Remove", name]"
+                                    @onclick="() => Remove(index, null)">×</button>
+                        }
+                        else
+                        {
+                            <span class="what">
+                                @L["History.Item", e.Opponent, e.Count]
+                                @if (e.Multiplier > 1)
+                                {
+                                    <span class="meta">@(" " + L["History.Multiplier", e.Multiplier])</span>
+                                }
+                            </span>
+                            <button type="button" class="remove icon-button" aria-label="@L["History.Remove", e.Opponent]"
+                                    @onclick="() => Remove(index, e.Opponent)">×</button>
+                        }
                     </li>
                 }
             </ul>
@@ -36,11 +46,12 @@
 @code {
     private const int MaxItems = 12;
 
-    private void Remove(int index, string opponent)
+    /// <summary>Removes an event; a null <paramref name="opponent"/> means a manual adjustment.</summary>
+    private void Remove(int index, string? opponent)
     {
         if (Store.RemoveEvent(index) is { } undo)
         {
-            Toasts.Show(L["History.Removed", opponent], undo);
+            Toasts.Show(opponent is null ? L["History.AdjustmentRemoved"] : L["History.Removed", opponent], undo);
         }
     }
 }

@@ -26,6 +26,9 @@ public sealed class TrainingPokemon
 
     public int Order { get; set; }
 
+    /// <summary>IVs the user knows from another source (each null or 0–31); they win over the computed range.</summary>
+    public int?[] KnownIvs { get; set; } = new int?[StatVector.Count];
+
     /// <summary>
     /// Species to picture this Pokémon with: the one of the latest level note (when it is in the
     /// evolution line), else the first species of the line, else the nickname.
@@ -45,6 +48,7 @@ public sealed class TrainingPokemon
         Pokerus = Pokerus,
         MachoBrace = MachoBrace,
         Order = Order,
+        KnownIvs = [.. KnownIvs],
     };
 
     /// <summary>Inserts a level note keeping <see cref="IvLog"/> sorted by level (stable).</summary>
@@ -77,7 +81,21 @@ public sealed class BattleEvent
     /// <summary>1, 2 or 4 at the time of the battle. Ignored for vitamins.</summary>
     public int Multiplier { get; set; } = 1;
 
-    public BattleEvent Clone() => new() { Opponent = Opponent, Count = Count, Multiplier = Multiplier };
+    /// <summary>
+    /// Manual adjustment: when present, EV totals become exactly these values at this point of the log
+    /// (each 0–255, sum ≤ 510); later battles add on top of them.
+    /// </summary>
+    public int[]? SetTotals { get; set; }
+
+    public bool IsManualAdjustment => SetTotals is not null;
+
+    public BattleEvent Clone() => new()
+    {
+        Opponent = Opponent,
+        Count = Count,
+        Multiplier = Multiplier,
+        SetTotals = SetTotals is null ? null : [.. SetTotals],
+    };
 }
 
 public sealed class LevelEntry

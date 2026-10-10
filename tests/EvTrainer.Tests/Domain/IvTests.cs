@@ -22,6 +22,7 @@ public class IvTests
         FinalSingle(var value) => $"{value}",
         FinalConflict => "conferir",
         FinalNoData => "—",
+        FinalKnown(var value, var matches) => matches ? $"{value}*" : $"{value}!",
     };
 
     private static LevelEntry Level(int lv, string sp, int[] st, int[] ev) => new() { Level = lv, Species = sp, Stats = st, Evs = ev };

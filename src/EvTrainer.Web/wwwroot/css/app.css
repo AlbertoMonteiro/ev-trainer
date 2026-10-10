@@ -1046,3 +1046,115 @@ button.link, button.change-species {
 .menu-credits a {
     color: var(--accent);
 }
+
+/* Manual EV edit */
+.summary .edit-evs {
+    margin-top: 10px;
+    min-height: 44px;
+    width: 100%;
+}
+
+.ev-editor {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+}
+
+.ev-editor h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 15px;
+}
+
+.ev-editor .history-choice {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ev-editor .history-choice input[type=radio] {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    accent-color: var(--accent);
+}
+
+.ev-editor .history-choice label {
+    display: flex;
+    text-transform: none;
+    color: var(--fg);
+    font-family: inherit;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-size: 14px;
+}
+
+.ev-editor .row-actions button {
+    min-height: 44px;
+}
+
+.confirm-box {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--bad);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--bad) 8%, transparent);
+}
+
+.confirm-box .message {
+    margin: 0;
+    font-size: 14px;
+}
+
+.history .what.adjustment {
+    font-style: italic;
+}
+
+/* Known IVs */
+.known-ivs .row-actions {
+    margin-top: 10px;
+}
+
+.known-ivs .row-actions button {
+    min-height: 44px;
+}
+
+.iv-table td.known .value::after {
+    content: "*";
+    color: var(--accent);
+}
+
+.iv-table td.known.bad .value::after {
+    color: var(--bad);
+}
+
+/* Edit level note */
+.iv-table .edit {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    white-space: nowrap;
+    text-decoration: underline dotted var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.level-form.editing {
+    border-color: var(--accent);
+}
+
+.level-form .row-actions button {
+    min-height: 44px;
+}

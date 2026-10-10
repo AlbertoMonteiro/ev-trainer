@@ -74,6 +74,29 @@ public partial class NoHardcodedTextTests : AppTestContext
         AssertNoHardcodedText(cut.Nodes);
     }
 
+    [Fact]
+    public void Manual_edit_screens_have_no_hardcoded_text()
+    {
+        var pokemon = Pokemons.Squirtle().WithEvents(("Caterpie", 3, 1));
+        pokemon.Events.Add(new BattleEvent { Opponent = "", SetTotals = [12, 0, 2, 26, 0, 4] });
+        pokemon.IvLog.Add(new LevelEntry { Level = 5, Species = "Squirtle", Stats = [20, 9, 12, 11, 12, 11], Evs = new int[6] });
+        pokemon.KnownIvs[5] = 10;
+        Seed(pokemon);
+        var cut = Render<Home>();
+
+        cut.Find("button.edit-evs").Click();
+        cut.Find("input[type=radio][value=erase]").Change("erase");
+        cut.Find(".ev-editor button.save").Click();
+        Assert.NotEmpty(cut.FindAll("[role=alertdialog]"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.FindAll("[role=tab]")[1].Click();
+        cut.Find(".iv-table button.edit").Click();
+        Assert.NotEmpty(cut.FindAll(".level-form .cancel-edit"));
+        Assert.NotEmpty(cut.FindAll(".known-mismatch"));
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
     private void AssertNoHardcodedText(INodeList nodes)
     {
         var offenders = new List<string>();

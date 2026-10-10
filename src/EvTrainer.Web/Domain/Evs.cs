@@ -9,6 +9,7 @@ public static class Evs
     /// <summary>
     /// Recomputes EV totals from scratch, in event order: 255 per stat, 510 overall; vitamins add 10
     /// only while the stat is below 100, cap at 100 and ignore the multiplier. Unknown events add nothing.
+    /// A manual adjustment replaces the totals at that point; later events add on top of it.
     /// </summary>
     public static int[] Totals(IReadOnlyList<BattleEvent> events, ReferenceData data)
     {
@@ -16,6 +17,13 @@ public static class Evs
         var sum = 0;
         foreach (var e in events)
         {
+            if (e.SetTotals is { } set)
+            {
+                ev = [.. set.ToSix()];
+                sum = ev.Sum();
+                continue;
+            }
+
             if (data.Lookup(e.Opponent) is not { } opponent)
             {
                 continue;
@@ -73,7 +81,7 @@ public static class Evs
         List<Opponent> recent = [with(capacity: max)];
         for (var i = events.Count - 1; i >= 0 && recent.Count < max; i--)
         {
-            if (data.Lookup(events[i].Opponent) is { } opponent && seen.Add(opponent.Name))
+            if (!events[i].IsManualAdjustment && data.Lookup(events[i].Opponent) is { } opponent && seen.Add(opponent.Name))
             {
                 recent.Add(opponent);
             }
@@ -84,14 +92,14 @@ public static class Evs
 
     /// <summary>
     /// How many times each known opponent was defeated, in a single pass over the log (same values as
-    /// <see cref="CountFor"/>); unknown names are left out.
+    /// <see cref="CountFor"/>); unknown names and manual adjustments are left out.
     /// </summary>
     public static IReadOnlyDictionary<string, int> CountsByOpponent(IReadOnlyList<BattleEvent> events, ReferenceData data)
     {
         var counts = new Dictionary<string, int>(StringComparer.Ordinal);
         foreach (var e in events)
         {
-            if (data.Lookup(e.Opponent) is { } opponent)
+            if (!e.IsManualAdjustment && data.Lookup(e.Opponent) is { } opponent)
             {
                 counts[opponent.Name] = counts.GetValueOrDefault(opponent.Name) + Math.Max(1, e.Count);
             }
@@ -104,6 +112,6 @@ public static class Evs
     public static int CountFor(IReadOnlyList<BattleEvent> events, string opponent, ReferenceData data)
     {
         var canonical = data.Canon(opponent);
-        return events.Where(e => data.Canon(e.Opponent) == canonical).Sum(e => Math.Max(1, e.Count));
+        return events.Where(e => !e.IsManualAdjustment && data.Canon(e.Opponent) == canonical).Sum(e => Math.Max(1, e.Count));
     }
 }

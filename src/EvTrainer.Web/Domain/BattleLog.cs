@@ -14,7 +14,7 @@ public static class BattleLog
 {
     /// <summary>
     /// Adds one battle against <paramref name="opponent"/> with the current multiplier, grouping it into the
-    /// last event when it has the same canonical opponent and multiplier.
+    /// last event when it has the same canonical opponent and multiplier (never into a manual adjustment).
     /// </summary>
     public static RecordResult Record(TrainingPokemon pokemon, string opponent, ReferenceData data)
     {
@@ -23,7 +23,7 @@ public static class BattleLog
         var name = data.Canon(opponent);
 
         if (pokemon.Events.Count > 0
-            && pokemon.Events[^1] is var last
+            && pokemon.Events[^1] is { IsManualAdjustment: false } last
             && data.Canon(last.Opponent) == name
             && last.Multiplier == multiplier)
         {

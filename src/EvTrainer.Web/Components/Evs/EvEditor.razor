@@ -1,0 +1,129 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+@inject IBrowserApi Browser
+@inject TimeProvider Time
+
+@if (Store.Selected is { } pokemon)
+{
+    <div class="ev-editor">
+        <h3>@L["EvEdit.Title"]</h3>
+        <div class="field">
+            <div class="six">
+                @for (var i = 0; i < StatVector.Count; i++)
+                {
+                    var stat = i;
+                    <div class="cell">
+                        <label for="ev-edit-@stat">@StatShort(stat)</label>
+                        <input id="ev-edit-@stat" inputmode="numeric" value="@_values[stat]" disabled="@_confirming"
+                               aria-invalid="@(Parse(_values[stat]) is null ? "true" : "false")"
+                               @oninput="e => _values[stat] = e.Value?.ToString() ?? string.Empty" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="ev-sum hint num">@L["EvEdit.Sum", Sum]</div>
+        @if (!IsValid)
+        {
+            <div class="error">@L["EvEdit.Invalid"]</div>
+        }
+
+        <fieldset class="history-choice" disabled="@_confirming">
+            <label>
+                <input type="radio" name="ev-edit-history" value="keep" checked="@(!_erase)" @onchange="() => _erase = false" />
+                @L["EvEdit.KeepHistory"]
+            </label>
+            <label>
+                <input type="radio" name="ev-edit-history" value="erase" checked="@_erase" @onchange="() => _erase = true" />
+                @L["EvEdit.EraseHistory"]
+            </label>
+        </fieldset>
+
+        @if (_confirming)
+        {
+            var battles = BattleCount(pokemon);
+            <div class="confirm-box" role="alertdialog" aria-labelledby="ev-edit-confirm">
+                <p id="ev-edit-confirm" class="message">@L["EvEdit.Confirm.Message", battles]</p>
+                <div class="row-actions">
+                    <button type="button" class="backup" @onclick="ExportBackup">@L["EvEdit.Confirm.Backup"]</button>
+                    <button type="button" class="danger" @onclick="() => Erase(battles)">@L["EvEdit.Confirm.Erase", battles]</button>
+                    <button type="button" class="cancel" @onclick="() => _confirming = false">@L["EvEdit.Cancel"]</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row-actions">
+                <button type="button" class="save primary" disabled="@(!IsValid)" @onclick="Save">@L["EvEdit.Save"]</button>
+                <button type="button" class="cancel" @onclick="OnClose">@L["EvEdit.Cancel"]</button>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private string[] _values = [];
+    private bool _erase;
+    private bool _confirming;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _values = [.. Store.SelectedTotals.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];
+    }
+
+    private static int? Parse(string text) => SettingsFormModel.ParseInRange(text, 0, StatVector.MaxEvPerStat);
+
+    private int Sum => _values.Sum(v => Parse(v) ?? 0);
+
+    private bool IsValid => _values.All(v => Parse(v) is not null) && Sum <= StatVector.MaxEvTotal;
+
+    private int[] Parsed => [.. _values.Select(v => Parse(v) ?? 0)];
+
+    private static int BattleCount(TrainingPokemon pokemon) =>
+        pokemon.Events.Where(e => !e.IsManualAdjustment).Sum(e => Math.Max(1, e.Count));
+
+    private async Task Save()
+    {
+        if (!IsValid)
+        {
+            return;
+        }
+
+        if (_erase)
+        {
+            _confirming = true;
+            return;
+        }
+
+        if (Store.AdjustEvs(Parsed) is { } undo)
+        {
+            Toasts.Show(L["EvEdit.Adjusted"], undo);
+        }
+        else
+        {
+            Toasts.Show(L["EvEdit.NoChange"]);
+        }
+
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task Erase(int battles)
+    {
+        if (Store.ResetHistory(Parsed) is { } undo)
+        {
+            Toasts.Show(L["EvEdit.HistoryErased", battles], undo);
+        }
+
+        await OnClose.InvokeAsync();
+    }
+
+    private void ExportBackup()
+    {
+        var date = Time.GetLocalNow().ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        Browser.DownloadText($"evs-trainer-backup-{date}.json", Store.ExportBackup());
+        Toasts.Show(L["Backup.Exported"]);
+    }
+}

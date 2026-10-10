@@ -44,6 +44,25 @@ public class BackupFormatTests
     }
 
     [Fact]
+    public void Manual_adjustments_and_known_ivs_round_trip()
+    {
+        var a = Pokemons.Squirtle().WithEvents(("Caterpie", 3, 1));
+        a.Events.Add(new BattleEvent { Opponent = "", SetTotals = [12, 0, 2, 26, 0, 4] });
+        a.WithEvents(("Abra", 1, 2));
+        a.KnownIvs[5] = 30;
+        a.KnownIvs[0] = 0;
+        var all = new Dictionary<string, TrainingPokemon> { ["a"] = a };
+
+        var json = BackupFormat.Write(all, indented: true);
+        var back = Ok(BackupFormat.Read(json)).Items["a"];
+
+        Assert.Equal([12, 0, 2, 26, 0, 4], back.Events[1].SetTotals!);
+        Assert.Null(back.Events[0].SetTotals);
+        Assert.Equal([0, null, null, null, null, 30], back.KnownIvs);
+        Assert.Equal(json, BackupFormat.Write(new Dictionary<string, TrainingPokemon> { ["a"] = back }, indented: true));
+    }
+
+    [Fact]
     public void Write_keeps_alias_names_as_recorded()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Bulbasaur (rival)", 1, 1), ("Nidoran F", 1, 1));

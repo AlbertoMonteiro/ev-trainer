@@ -48,6 +48,11 @@ up and it narrows down your IVs.
   (`rota 4`, `brock`, `nidoran f`…).
 - **IV calculator** — note the 6 stats after each level up; the app shows the possible IV range per
   stat for each level and the intersection of all of them, using integer Gen 3 math and your nature.
+- **Fix it by hand when the game disagrees** — "Edit EVs" sets the exact values from the game, either
+  keeping the history (a "manual adjustment" entry; later battles add on top of it) or erasing it,
+  which always asks first and offers a backup. Known IVs (e.g. from the IV judge) override the
+  estimate, with a warning when they contradict your notes, and level notes can be edited in place.
+  Every change can be undone.
 - **No typing base stats** — pick the species from an embedded Gen III Pokédex (#1–386, base stats as
   of Gen III); the evolution line fills itself, branches (Eevee, Gloom, Poliwhirl…) are one tap.
 - **FireRed/LeafGreen sprites** everywhere, with a colored fallback badge (EV stat color + dex number)

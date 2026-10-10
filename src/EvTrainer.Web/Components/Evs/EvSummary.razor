@@ -22,5 +22,17 @@
                 </div>
             }
         </div>
+        @if (_editing)
+        {
+            <EvEditor OnClose="() => _editing = false" />
+        }
+        else
+        {
+            <button type="button" class="edit-evs" @onclick="() => _editing = true">@L["Evs.Edit"]</button>
+        }
     </section>
+}
+
+@code {
+    private bool _editing;
 }

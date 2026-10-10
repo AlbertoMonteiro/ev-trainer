@@ -1,0 +1,75 @@
+@inherits StoreAwareComponent
+@inject ToastService Toasts
+
+@if (Store.Selected is not null)
+{
+    <details class="card known-ivs">
+        <summary>@L["KnownIvs.Title"]</summary>
+        <p class="hint">@L["KnownIvs.Hint"]</p>
+        <div class="field">
+            <div class="six">
+                @for (var i = 0; i < StatVector.Count; i++)
+                {
+                    var stat = i;
+                    <div class="cell">
+                        <label for="known-iv-@stat">@StatShort(stat)</label>
+                        <input id="known-iv-@stat" inputmode="numeric" value="@_values[stat]"
+                               aria-invalid="@(IsValidField(_values[stat]) ? "false" : "true")"
+                               @oninput="e => _values[stat] = e.Value?.ToString() ?? string.Empty" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row-actions">
+            <button type="button" class="save primary" disabled="@(!IsValid)" @onclick="Save">@L["KnownIvs.Save"]</button>
+        </div>
+    </details>
+}
+
+@code {
+    private string[] _values = [.. Enumerable.Repeat(string.Empty, StatVector.Count)];
+    private TrainingPokemon? _loadedFrom;
+    private int?[]? _loadedValues;
+
+    protected override bool ShouldRender()
+    {
+        Refill();
+        return true;
+    }
+
+    protected override void OnParametersSet() => Refill();
+
+    /// <summary>Refills the fields when another Pokémon is selected or its known IVs change (e.g. undo).</summary>
+    private void Refill()
+    {
+        var pokemon = Store.Selected;
+        if (ReferenceEquals(pokemon, _loadedFrom) && ReferenceEquals(pokemon?.KnownIvs, _loadedValues))
+        {
+            return;
+        }
+
+        _loadedFrom = pokemon;
+        _loadedValues = pokemon?.KnownIvs;
+        _values = [.. (_loadedValues ?? new int?[StatVector.Count])
+            .Select(v => v?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? string.Empty)];
+    }
+
+    private static bool IsValidField(string text) =>
+        string.IsNullOrWhiteSpace(text) || SettingsFormModel.ParseInRange(text, 0, StatVector.MaxIv) is not null;
+
+    private bool IsValid => _values.All(IsValidField);
+
+    private void Save()
+    {
+        if (!IsValid)
+        {
+            return;
+        }
+
+        int?[] ivs = [.. _values.Select(v => string.IsNullOrWhiteSpace(v) ? null : SettingsFormModel.ParseInRange(v, 0, StatVector.MaxIv))];
+        if (Store.SetKnownIvs(ivs) is { } undo)
+        {
+            Toasts.Show(L["KnownIvs.Saved"], undo);
+        }
+    }
+}

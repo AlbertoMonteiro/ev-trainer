@@ -140,6 +140,59 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         };
     }
 
+    /// <summary>
+    /// Appends a manual adjustment that fixes the selected Pokémon's EV totals at <paramref name="targets"/>;
+    /// null when the values are invalid or already the current totals. The undo removes the adjustment.
+    /// </summary>
+    public Action? AdjustEvs(int[] targets)
+    {
+        if (SelectedId is not { } id || !IsValidEvSet(targets) || targets.SequenceEqual(SelectedTotals))
+        {
+            return null;
+        }
+
+        var adjustment = new BattleEvent { Opponent = "", SetTotals = [.. targets] };
+        _all[id].Events.Add(adjustment);
+        Commit();
+        return () =>
+        {
+            if (_all.TryGetValue(id, out var pokemon) && pokemon.Events.Remove(adjustment))
+            {
+                Commit();
+            }
+        };
+    }
+
+    /// <summary>
+    /// Replaces the selected Pokémon's battle log with a single adjustment at <paramref name="targets"/>
+    /// (level notes are kept); the undo restores the previous log.
+    /// </summary>
+    public Action? ResetHistory(int[] targets)
+    {
+        if (SelectedId is not { } id || !IsValidEvSet(targets))
+        {
+            return null;
+        }
+
+        var previous = _all[id].Events;
+        _all[id].Events = [new BattleEvent { Opponent = "", SetTotals = [.. targets] }];
+        Commit();
+        return () =>
+        {
+            if (_all.TryGetValue(id, out var pokemon))
+            {
+                pokemon.Events = previous;
+                Commit();
+            }
+        };
+    }
+
+    /// <summary>Six values, each 0–255, summing at most 510.</summary>
+    public static bool IsValidEvSet(int[] values) =>
+        values.Length == StatVector.Count
+        && values.All(v => v is >= 0 and <= StatVector.MaxEvPerStat)
+        && values.Sum() <= StatVector.MaxEvTotal;
+
     /// <summary>Deletes a Pokémon (selecting the first remaining one); the returned undo restores it.</summary>
     public Action? DeletePokemon(string id)
     {
@@ -196,6 +249,32 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
     }
 
+    /// <summary>
+    /// Replaces the level note at <paramref name="index"/> (re-sorting by level when it changes); the undo
+    /// puts the original note back at its original position.
+    /// </summary>
+    public Action? ReplaceLevel(int index, LevelEntry entry)
+    {
+        if (SelectedId is not { } id || index < 0 || index >= _all[id].IvLog.Count)
+        {
+            return null;
+        }
+
+        var original = _all[id].IvLog[index];
+        var replacement = entry.Clone();
+        _all[id].IvLog.RemoveAt(index);
+        _all[id].InsertLevel(replacement);
+        Commit();
+        return () =>
+        {
+            if (_all.TryGetValue(id, out var pokemon) && pokemon.IvLog.Remove(replacement))
+            {
+                pokemon.IvLog.Insert(Math.Min(index, pokemon.IvLog.Count), original);
+                Commit();
+            }
+        };
+    }
+
     /// <summary>Removes a level note and returns an undo action that puts it back at the same index.</summary>
     public Action? RemoveLevel(int index)
     {
@@ -212,6 +291,29 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             if (_all.TryGetValue(id, out var pokemon))
             {
                 pokemon.IvLog.Insert(Math.Min(index, pokemon.IvLog.Count), removed);
+                Commit();
+            }
+        };
+    }
+
+    /// <summary>Saves the IVs the player knows (null = unknown, otherwise 0–31); the undo restores the old ones.</summary>
+    public Action? SetKnownIvs(int?[] ivs)
+    {
+        if (SelectedId is not { } id
+            || ivs.Length != StatVector.Count
+            || ivs.Any(v => v is < 0 or > StatVector.MaxIv))
+        {
+            return null;
+        }
+
+        var previous = _all[id].KnownIvs;
+        _all[id].KnownIvs = [.. ivs];
+        Commit();
+        return () =>
+        {
+            if (_all.TryGetValue(id, out var pokemon))
+            {
+                pokemon.KnownIvs = previous;
                 Commit();
             }
         };

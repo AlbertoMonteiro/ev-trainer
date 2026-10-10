@@ -29,7 +29,17 @@
                         <th scope="row">@L["Ivs.Row.Final"]</th>
                         @foreach (var cell in final)
                         {
-                            <td class="iv">@Show(cell)</td>
+                            @if (cell is FinalKnown(var known, var matches))
+                            {
+                                <td class="iv known @(matches ? "" : "bad")">
+                                    <span class="value">@known</span>
+                                    <span class="known-mark visually-hidden">@L["Ivs.Final.Known"]</span>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="iv">@Show(cell)</td>
+                            }
                         }
                         <td></td>
                     </tr>
@@ -38,7 +48,18 @@
                         var index = r;
                         var (entry, cells) = rows[r];
                         <tr>
-                            <th scope="row" title="@entry.Species">@L["Ivs.Row.Level", entry.Level]</th>
+                            <th scope="row" title="@entry.Species">
+                                @if (OnEdit.HasDelegate)
+                                {
+                                    @* The level label is the edit button: no extra column on a 360 px screen. *@
+                                    <button type="button" class="edit" aria-label="@L["Ivs.EditLabel", entry.Level]"
+                                            @onclick="() => OnEdit.InvokeAsync(index)">@L["Ivs.Row.Level", entry.Level]</button>
+                                }
+                                else
+                                {
+                                    @L["Ivs.Row.Level", entry.Level]
+                                }
+                            </th>
                             @foreach (var cell in cells)
                             {
                                 <td class="iv @(cell is IvInconsistent ? "bad" : "")">@Show(cell)</td>
@@ -51,6 +72,18 @@
                 </tbody>
             </table>
         </div>
+        @if (OnEdit.HasDelegate && rows.Count > 0)
+        {
+            <p class="iv-note edit-hint hint">@L["Ivs.EditHint"]</p>
+        }
+        @if (final.Any(c => c is FinalKnown))
+        {
+            <p class="iv-note known-note hint">@L["Ivs.Final.KnownNote"]</p>
+        }
+        @if (MismatchedStats(final) is { Length: > 0 } mismatched)
+        {
+            <p class="iv-note known-mismatch warn">@L["Ivs.Final.KnownMismatch", mismatched]</p>
+        }
         @if (rows.Any(r => r.Cells.Any(c => c is IvInconsistent)))
         {
             <p class="iv-note hint">@L["Ivs.InconsistentNote"]</p>
@@ -59,6 +92,10 @@
 }
 
 @code {
+    /// <summary>Called with the row index when the player taps "Editar" on a level note.</summary>
+    [Parameter]
+    public EventCallback<int> OnEdit { get; set; }
+
     private string Show(IvCell cell) => cell switch
     {
         IvSpan(var min, var max) => min == max ? $"{min}" : $"{min}–{max}",
@@ -72,7 +109,12 @@
         FinalSingle(var value) => $"{value}",
         FinalConflict => L["Ivs.Final.Conflict"],
         FinalNoData => L["Ivs.Final.NoData"],
+        FinalKnown(var value, _) => $"{value}",
     };
+
+    /// <summary>Short names of the stats whose known IV contradicts the notes, comma separated.</summary>
+    private string MismatchedStats(FinalCell[] final) =>
+        string.Join(", ", final.Select((cell, i) => (cell, i)).Where(x => x.cell is FinalKnown { MatchesNotes: false }).Select(x => StatShort(x.i)));
 
     private void Remove(int index, int level)
     {

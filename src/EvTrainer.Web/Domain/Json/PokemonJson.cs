@@ -101,9 +101,12 @@ public static class PokemonJson
                 Opponent = e!.Opponent ?? "",
                 Count = e.Count is { } n && n >= 1 ? n : 1,
                 Multiplier = e.Multiplier is 1 or 2 or 4 ? e.Multiplier.Value : 1,
+                SetTotals = e.SetTotals is { } set ? [.. set.ToSix().Select(v => Math.Clamp(v, 0, StatVector.MaxEvPerStat))] : null,
             })],
             Pokerus = dto.Pokerus,
             MachoBrace = dto.Macho,
+            KnownIvs = [.. Enumerable.Range(0, StatVector.Count).Select(i =>
+                dto.KnownIvs is { } known && i < known.Length && known[i] is >= 0 and <= StatVector.MaxIv ? known[i] : null)],
         };
 
         foreach (var level in (dto.IvLog ?? []).Where(l => l is not null).OrderBy(l => l!.Level))
@@ -126,11 +129,18 @@ public static class PokemonJson
         Nature = p.Nature,
         Species = [.. p.Species.Select(s => new SpeciesDto { Name = s.Name, Base = [.. s.Base] })],
         Targets = [.. p.Targets],
-        Events = [.. p.Events.Select(e => new EventDto { Opponent = e.Opponent, Count = e.Count, Multiplier = e.Multiplier })],
+        Events = [.. p.Events.Select(e => new EventDto
+        {
+            Opponent = e.Opponent,
+            Count = e.Count,
+            Multiplier = e.Multiplier,
+            SetTotals = e.SetTotals is null ? null : [.. e.SetTotals],
+        })],
         IvLog = [.. p.IvLog.Select(l => new LevelDto { Level = l.Level, Species = l.Species, Stats = [.. l.Stats], Evs = [.. l.Evs] })],
         Pokerus = p.Pokerus,
         Macho = p.MachoBrace,
         Order = p.Order,
+        KnownIvs = [.. p.KnownIvs],
     };
 }
 
@@ -171,6 +181,9 @@ internal sealed class PokemonDto
 
     [JsonPropertyName("order")]
     public int? Order { get; set; }
+
+    [JsonPropertyName("knownIvs")]
+    public int?[]? KnownIvs { get; set; }
 }
 
 internal sealed class SpeciesDto
@@ -192,6 +205,10 @@ internal sealed class EventDto
 
     [JsonPropertyName("m")]
     public int? Multiplier { get; set; }
+
+    [JsonPropertyName("set")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int[]? SetTotals { get; set; }
 }
 
 internal sealed class LevelDto

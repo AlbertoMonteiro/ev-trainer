@@ -37,6 +37,9 @@ public sealed record FinalConflict : FinalCell;
 
 public sealed record FinalNoData : FinalCell;
 
+/// <summary>IV typed in by the player; <paramref name="MatchesNotes"/> is false when the notes say otherwise.</summary>
+public sealed record FinalKnown(int Value, bool MatchesNotes) : FinalCell;
+
 /// <summary>IV estimation (HANDOFF §4.7, §4.8).</summary>
 public static class Ivs
 {
@@ -76,6 +79,7 @@ public static class Ivs
         return cells;
     }
 
+    /// <summary>Intersection of every row per stat; a known IV (typed by the player) takes precedence.</summary>
     public static FinalCell[] Final(TrainingPokemon pokemon, ReferenceData data)
     {
         var rows = pokemon.IvLog.Select(entry => RangeFor(entry, pokemon, data)).ToList();
@@ -92,6 +96,20 @@ public static class Ivs
             var low = spans.Max(s => s.Min);
             var high = spans.Min(s => s.Max);
             final[i] = low > high ? new FinalConflict() : low == high ? new FinalSingle(low) : new FinalSpan(low, high);
+        }
+
+        for (var i = 0; i < StatVector.Count; i++)
+        {
+            if (pokemon.KnownIvs.ElementAtOrDefault(i) is { } known)
+            {
+                final[i] = new FinalKnown(known, final[i] switch
+                {
+                    FinalSpan(var low, var high) => known >= low && known <= high,
+                    FinalSingle(var value) => known == value,
+                    FinalConflict => false,
+                    FinalNoData or FinalKnown => true,
+                });
+            }
         }
 
         return final;

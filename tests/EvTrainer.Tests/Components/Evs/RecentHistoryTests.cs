@@ -2,6 +2,7 @@ using Bunit;
 
 using EvTrainer.Tests.Support;
 using EvTrainer.Web.Components.Evs;
+using EvTrainer.Web.Domain.Model;
 
 namespace EvTrainer.Tests.Components.Evs;
 
@@ -51,5 +52,26 @@ public class RecentHistoryTests : AppTestContext
         var cut = Render<RecentHistory>();
 
         Assert.Equal(T("History.Empty"), cut.Find(".history-empty").TextContent.Trim());
+    }
+
+    [Fact]
+    public void Manual_adjustment_is_listed_and_removable()
+    {
+        var pokemon = Pokemons.Squirtle().WithEvents(("Caterpie", 10, 1));
+        pokemon.Events.Add(new BattleEvent { Opponent = "", SetTotals = [12, 0, 2, 26, 0, 4] });
+        Seed(pokemon);
+        var cut = Render<RecentHistory>();
+
+        var first = cut.FindAll(".history li")[0];
+        Assert.Equal(T("History.Adjustment", "12/0/2/26/0/4"), first.QuerySelector(".what")!.TextContent.Trim());
+
+        first.QuerySelector("button.remove")!.Click();
+
+        Assert.Equal([10, 0, 0, 0, 0, 0], Store.SelectedTotals);
+        Assert.Equal(T("History.AdjustmentRemoved"), Toasts.Message);
+
+        cut.InvokeAsync(Toasts.RunUndo);
+
+        Assert.Equal([12, 0, 2, 26, 0, 4], Store.SelectedTotals);
     }
 }
