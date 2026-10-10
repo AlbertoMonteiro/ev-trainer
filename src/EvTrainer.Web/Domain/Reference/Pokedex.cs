@@ -4,8 +4,10 @@ using EvTrainer.Web.Domain.Model;
 
 namespace EvTrainer.Web.Domain.Reference;
 
-/// <summary>Species #1–386 with Generation III base stats [HP, Ataque, Defesa, SpAtk, SpDef, Speed].</summary>
-public sealed record PokedexSpecies(int Dex, string Name, int[] Base, int? EvolvesFrom)
+/// <summary>
+/// Species #1–386 with Generation III base stats and EV yield, both as [HP, Ataque, Defesa, SpAtk, SpDef, Speed].
+/// </summary>
+public sealed record PokedexSpecies(int Dex, string Name, int[] Base, int? EvolvesFrom, int[] EvYield)
 {
     public SpeciesEntry ToEntry() => new() { Name = Name, Base = [.. Base] };
 }
@@ -43,7 +45,8 @@ public sealed class Pokedex
                 s.GetProperty("dex").GetInt32(),
                 s.GetProperty("name").GetString()!,
                 [.. s.GetProperty("base").EnumerateArray().Select(v => v.GetInt32())],
-                s.GetProperty("evolvesFrom").ValueKind == JsonValueKind.Number ? s.GetProperty("evolvesFrom").GetInt32() : null)),
+                s.GetProperty("evolvesFrom").ValueKind == JsonValueKind.Number ? s.GetProperty("evolvesFrom").GetInt32() : null,
+                [.. s.GetProperty("evYield").EnumerateArray().Select(v => v.GetInt32())])),
         ]);
     }
 

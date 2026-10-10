@@ -65,10 +65,21 @@ public class PokemonSpriteTests : AppTestContext
     [Fact]
     public void No_ev_data_uses_the_accent()
     {
-        var cut = RenderSprite("Treecko", 48);
+        // Only names outside the game data (e.g. typed in the old app) have no EV yield since feature 003.
+        var cut = RenderSprite("Agumon", 48);
 
         Assert.Contains("--badge: var(--accent)", cut.Find("span.sprite").GetAttribute("style"));
         Assert.Contains("--sprite-size: 48px", cut.Find("span.sprite").GetAttribute("style"));
+        Assert.Empty(cut.FindAll("img"));
+        Assert.Equal("A", cut.Find(".badge").TextContent.Trim());
+    }
+
+    [Fact]
+    public void Species_beyond_kanto_have_sprite_and_ev_color()
+    {
+        var cut = RenderSprite("Treecko", 48);
+
+        Assert.Contains("--badge: var(--stat-5)", cut.Find("span.sprite").GetAttribute("style"));
         Assert.Equal("sprites/252.png", cut.Find("img").GetAttribute("src"));
     }
 

@@ -60,12 +60,16 @@ public sealed class ReferenceData
 
     public IReadOnlyList<Nature> Natures { get; }
 
+    /// <summary>
+    /// Curated Kanto data from reference-data.json plus every other Gen III species (#152–386) from the
+    /// embedded Pokédex, so any Pokémon met in FireRed can be counted. Vitamins stay at the end.
+    /// </summary>
     public static ReferenceData LoadEmbedded()
     {
         using var stream = typeof(ReferenceData).Assembly.GetManifestResourceStream(ResourceName)
             ?? throw new InvalidOperationException($"Embedded resource '{ResourceName}' not found.");
         using var document = JsonDocument.Parse(stream);
-        return Parse(document.RootElement);
+        return Parse(document.RootElement, Pokedex.LoadEmbedded());
     }
 
     /// <summary>Applies aliases (old spreadsheet names); unknown names are returned unchanged.</summary>
@@ -76,12 +80,12 @@ public sealed class ReferenceData
     /// <summary>Nature by name; "" or unknown returns null (neutral).</summary>
     public Nature? FindNature(string name) => _natures.GetValueOrDefault(name);
 
-    private static ReferenceData Parse(JsonElement root)
+    private static ReferenceData Parse(JsonElement root, Pokedex pokedex)
     {
         var statNames = root.GetProperty("stats").EnumerateArray().Select(s => s.GetString()!).ToList();
         var statsShort = root.GetProperty("statsShort").EnumerateArray().Select(s => s.GetString()!).ToList();
 
-        var opponents = root.GetProperty("opponents").EnumerateArray()
+        var curated = root.GetProperty("opponents").EnumerateArray()
             .Select(o => new Opponent(
                 o.GetProperty("dex").ValueKind == JsonValueKind.Number ? o.GetProperty("dex").GetInt32() : null,
                 o.GetProperty("name").GetString()!,
@@ -89,6 +93,15 @@ public sealed class ReferenceData
                 o.TryGetProperty("wildLocation", out var wild) ? wild.GetString() ?? "" : "",
                 o.GetProperty("isVitamin").GetBoolean()))
             .ToList();
+        var lastCurated = curated.Where(o => !o.IsVitamin).Max(o => o.Dex ?? 0);
+        List<Opponent> opponents =
+        [
+            .. curated.Where(o => !o.IsVitamin),
+            .. pokedex.Species
+                .Where(s => s.Dex > lastCurated)
+                .Select(s => new Opponent(s.Dex, s.Name, [.. s.EvYield], WildLocation: "", IsVitamin: false)),
+            .. curated.Where(o => o.IsVitamin),
+        ];
 
         var aliases = root.GetProperty("aliases").EnumerateObject()
             .ToDictionary(a => a.Name, a => a.Value.GetString()!, StringComparer.Ordinal);

@@ -65,4 +65,12 @@ public class EvTotalsTests
     {
         Assert.Equal([7, 0, 0, 0, 0, 0], Totals(("Caterpie", 1, 1), ("Caterpie", 1, 2), ("Caterpie", 1, 4)));
     }
+
+    [Fact]
+    public void Species_beyond_kanto_give_their_gen3_yield()
+    {
+        Assert.Equal([0, 0, 0, 0, 2, 0], Totals(("Milotic", 1, 1)));
+        Assert.Equal([0, 0, 0, 0, 8, 0], Totals(("Milotic", 1, 4)));
+        Assert.Equal([0, 0, 0, 0, 255, 0], Totals(("Milotic", 200, 1)));
+    }
 }

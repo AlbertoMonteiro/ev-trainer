@@ -41,12 +41,13 @@ public class SpriteBadgeTests
     }
 
     [Fact]
-    public void Species_without_ev_data_has_no_stats()
+    public void Species_beyond_kanto_use_their_own_ev_color()
     {
+        // Feature 003: every species #1–386 is an opponent with an EV yield.
         var badge = For("Treecko");
 
         Assert.Equal(252, badge.Dex);
-        Assert.Empty(badge.Stats);
+        Assert.Equal([5], badge.Stats);
         Assert.True(badge.HasSprite);
     }
 

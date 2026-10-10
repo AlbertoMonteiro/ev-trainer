@@ -7,14 +7,42 @@ public class ReferenceDataTests
     private static readonly ReferenceData Data = ReferenceData.LoadEmbedded();
 
     [Fact]
-    public void Loads_151_pokemon_and_6_vitamins()
+    public void Loads_386_species_and_6_vitamins()
     {
-        Assert.Equal(157, Data.Opponents.Count);
-        Assert.Equal(151, Data.Opponents.Count(o => o.Dex is >= 1 and <= 151 && !o.IsVitamin));
-        var vitamins = Data.Opponents.Where(o => o.IsVitamin).ToList();
-        Assert.All(vitamins, v => Assert.Null(v.Dex));
+        Assert.Equal(392, Data.Opponents.Count);
+        Assert.Equal(Enumerable.Range(1, 386), Data.Opponents.Take(386).Select(o => o.Dex ?? 0));
+        Assert.All(Data.Opponents.Take(386), o => Assert.False(o.IsVitamin));
+        var vitamins = Data.Opponents.Skip(386).ToList();
+        Assert.All(vitamins, v => Assert.True(v.IsVitamin && v.Dex is null));
         Assert.Equal(["HP Up", "Protein", "Iron", "Calcium", "Zinc", "Carbos"], vitamins.Select(v => v.Name));
         Assert.All(Data.Opponents, o => Assert.Equal(6, o.EvYield.Length));
+        Assert.All(Data.Opponents.Take(386), o => Assert.True(o.EvYield.Sum() >= 1, $"{o.Name} has no EV yield"));
+    }
+
+    [Fact]
+    public void Kanto_yields_match_between_the_curated_file_and_the_generated_pokedex()
+    {
+        var dex = Pokedex.LoadEmbedded();
+
+        var differences = Data.Opponents
+            .Where(o => o.Dex is >= 1 and <= 151)
+            .Where(o => !dex.Find(o.Name)!.EvYield.SequenceEqual(o.EvYield))
+            .Select(o => o.Name)
+            .ToList();
+
+        Assert.Empty(differences);
+    }
+
+    [Fact]
+    public void Species_beyond_kanto_are_opponents_without_locations()
+    {
+        var milotic = Data.Lookup("Milotic")!;
+
+        Assert.Equal(350, milotic.Dex);
+        Assert.Equal([0, 0, 0, 0, 2, 0], milotic.EvYield);
+        Assert.Equal("", milotic.WildLocation);
+        Assert.Equal("Rota 3, 4, 22", Data.Lookup("Mankey")!.WildLocation);
+        Assert.Equal(34, Data.TrainersByLocation.Count);
     }
 
     [Fact]

@@ -14,12 +14,13 @@
     }
     else
     {
-        var events = Store.Selected?.Events ?? [];
+        // One pass over the log per render instead of one per card (392 cards with all Gen III species).
+        var counts = Evs.CountsByOpponent(Store.Selected?.Events ?? [], Store.Data);
         foreach (var item in Items)
         {
             <OpponentCard @key="item.Opponent.Name"
                           Opponent="item.Opponent"
-                          Count="Evs.CountFor(events, item.Opponent.Name, Store.Data)"
+                          Count="counts.GetValueOrDefault(item.Opponent.Name)"
                           TrainerLocations="item.TrainerLocations"
                           OnPick="OnPick" />
         }

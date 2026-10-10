@@ -1,5 +1,5 @@
 {
-  "_fonte": "PokéAPI (pokeapi.co), stats base da Geração III (past_stats aplicados). Gerado por scripts/BuildPokedex.cs.",
+  "_fonte": "PokéAPI (pokeapi.co): stats base da Geração III (past_stats aplicados) e EV yield (effort atual). Gerado por scripts/BuildPokedex.cs.",
   "stats": [
     "HP",
     "Ataque",
@@ -20,7 +20,15 @@
         65,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 2,
@@ -33,7 +41,15 @@
         80,
         60
       ],
-      "evolvesFrom": 1
+      "evolvesFrom": 1,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
     },
     {
       "dex": 3,
@@ -46,7 +62,15 @@
         100,
         80
       ],
-      "evolvesFrom": 2
+      "evolvesFrom": 2,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        1,
+        0
+      ]
     },
     {
       "dex": 4,
@@ -59,7 +83,15 @@
         50,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 5,
@@ -72,7 +104,15 @@
         65,
         80
       ],
-      "evolvesFrom": 4
+      "evolvesFrom": 4,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
     },
     {
       "dex": 6,
@@ -85,7 +125,15 @@
         85,
         100
       ],
-      "evolvesFrom": 5
+      "evolvesFrom": 5,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 7,
@@ -98,7 +146,15 @@
         64,
         43
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 8,
@@ -111,7 +167,15 @@
         80,
         58
       ],
-      "evolvesFrom": 7
+      "evolvesFrom": 7,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 9,
@@ -124,7 +188,15 @@
         105,
         78
       ],
-      "evolvesFrom": 8
+      "evolvesFrom": 8,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 10,
@@ -137,7 +209,15 @@
         20,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 11,
@@ -150,7 +230,15 @@
         25,
         30
       ],
-      "evolvesFrom": 10
+      "evolvesFrom": 10,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 12,
@@ -163,7 +251,15 @@
         80,
         70
       ],
-      "evolvesFrom": 11
+      "evolvesFrom": 11,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        1,
+        0
+      ]
     },
     {
       "dex": 13,
@@ -176,7 +272,15 @@
         20,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 14,
@@ -189,7 +293,15 @@
         25,
         35
       ],
-      "evolvesFrom": 13
+      "evolvesFrom": 13,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 15,
@@ -202,7 +314,15 @@
         80,
         75
       ],
-      "evolvesFrom": 14
+      "evolvesFrom": 14,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 16,
@@ -215,7 +335,15 @@
         35,
         56
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 17,
@@ -228,7 +356,15 @@
         50,
         71
       ],
-      "evolvesFrom": 16
+      "evolvesFrom": 16,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 18,
@@ -241,7 +377,15 @@
         70,
         91
       ],
-      "evolvesFrom": 17
+      "evolvesFrom": 17,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
     },
     {
       "dex": 19,
@@ -254,7 +398,15 @@
         35,
         72
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 20,
@@ -267,7 +419,15 @@
         70,
         97
       ],
-      "evolvesFrom": 19
+      "evolvesFrom": 19,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 21,
@@ -280,7 +440,15 @@
         31,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 22,
@@ -293,7 +461,15 @@
         61,
         100
       ],
-      "evolvesFrom": 21
+      "evolvesFrom": 21,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 23,
@@ -306,7 +482,15 @@
         54,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 24,
@@ -319,7 +503,15 @@
         79,
         80
       ],
-      "evolvesFrom": 23
+      "evolvesFrom": 23,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 25,
@@ -332,7 +524,15 @@
         40,
         90
       ],
-      "evolvesFrom": 172
+      "evolvesFrom": 172,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 26,
@@ -345,7 +545,15 @@
         80,
         100
       ],
-      "evolvesFrom": 25
+      "evolvesFrom": 25,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
     },
     {
       "dex": 27,
@@ -358,7 +566,15 @@
         30,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 28,
@@ -371,7 +587,15 @@
         55,
         65
       ],
-      "evolvesFrom": 27
+      "evolvesFrom": 27,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 29,
@@ -384,7 +608,15 @@
         40,
         41
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 30,
@@ -397,7 +629,15 @@
         55,
         56
       ],
-      "evolvesFrom": 29
+      "evolvesFrom": 29,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 31,
@@ -410,7 +650,15 @@
         85,
         76
       ],
-      "evolvesFrom": 30
+      "evolvesFrom": 30,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 32,
@@ -423,7 +671,15 @@
         40,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 33,
@@ -436,7 +692,15 @@
         55,
         65
       ],
-      "evolvesFrom": 32
+      "evolvesFrom": 32,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 34,
@@ -449,7 +713,15 @@
         75,
         85
       ],
-      "evolvesFrom": 33
+      "evolvesFrom": 33,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 35,
@@ -462,7 +734,15 @@
         65,
         35
       ],
-      "evolvesFrom": 173
+      "evolvesFrom": 173,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 36,
@@ -475,7 +755,15 @@
         90,
         60
       ],
-      "evolvesFrom": 35
+      "evolvesFrom": 35,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 37,
@@ -488,7 +776,15 @@
         65,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 38,
@@ -501,7 +797,15 @@
         100,
         100
       ],
-      "evolvesFrom": 37
+      "evolvesFrom": 37,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
     },
     {
       "dex": 39,
@@ -514,7 +818,15 @@
         25,
         20
       ],
-      "evolvesFrom": 174
+      "evolvesFrom": 174,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 40,
@@ -527,7 +839,15 @@
         50,
         45
       ],
-      "evolvesFrom": 39
+      "evolvesFrom": 39,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 41,
@@ -540,7 +860,15 @@
         40,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 42,
@@ -553,7 +881,15 @@
         75,
         90
       ],
-      "evolvesFrom": 41
+      "evolvesFrom": 41,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 43,
@@ -566,7 +902,15 @@
         65,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 44,
@@ -579,7 +923,15 @@
         75,
         40
       ],
-      "evolvesFrom": 43
+      "evolvesFrom": 43,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 45,
@@ -592,7 +944,15 @@
         90,
         50
       ],
-      "evolvesFrom": 44
+      "evolvesFrom": 44,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 46,
@@ -605,7 +965,15 @@
         55,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 47,
@@ -618,7 +986,15 @@
         80,
         30
       ],
-      "evolvesFrom": 46
+      "evolvesFrom": 46,
+      "evYield": [
+        0,
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 48,
@@ -631,7 +1007,15 @@
         55,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 49,
@@ -644,7 +1028,15 @@
         75,
         90
       ],
-      "evolvesFrom": 48
+      "evolvesFrom": 48,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
     },
     {
       "dex": 50,
@@ -657,7 +1049,15 @@
         45,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 51,
@@ -670,7 +1070,15 @@
         70,
         120
       ],
-      "evolvesFrom": 50
+      "evolvesFrom": 50,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 52,
@@ -683,7 +1091,15 @@
         40,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 53,
@@ -696,7 +1112,15 @@
         65,
         115
       ],
-      "evolvesFrom": 52
+      "evolvesFrom": 52,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 54,
@@ -709,7 +1133,15 @@
         50,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 55,
@@ -722,7 +1154,15 @@
         80,
         85
       ],
-      "evolvesFrom": 54
+      "evolvesFrom": 54,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 56,
@@ -735,7 +1175,15 @@
         45,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 57,
@@ -748,7 +1196,15 @@
         70,
         95
       ],
-      "evolvesFrom": 56
+      "evolvesFrom": 56,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 58,
@@ -761,7 +1217,15 @@
         50,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 59,
@@ -774,7 +1238,15 @@
         80,
         95
       ],
-      "evolvesFrom": 58
+      "evolvesFrom": 58,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 60,
@@ -787,7 +1259,15 @@
         40,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 61,
@@ -800,7 +1280,15 @@
         50,
         90
       ],
-      "evolvesFrom": 60
+      "evolvesFrom": 60,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 62,
@@ -813,7 +1301,15 @@
         90,
         70
       ],
-      "evolvesFrom": 61
+      "evolvesFrom": 61,
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 63,
@@ -826,7 +1322,15 @@
         55,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 64,
@@ -839,7 +1343,15 @@
         70,
         105
       ],
-      "evolvesFrom": 63
+      "evolvesFrom": 63,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 65,
@@ -852,7 +1364,15 @@
         85,
         120
       ],
-      "evolvesFrom": 64
+      "evolvesFrom": 64,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 66,
@@ -865,7 +1385,15 @@
         35,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 67,
@@ -878,7 +1406,15 @@
         60,
         45
       ],
-      "evolvesFrom": 66
+      "evolvesFrom": 66,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 68,
@@ -891,7 +1427,15 @@
         85,
         55
       ],
-      "evolvesFrom": 67
+      "evolvesFrom": 67,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 69,
@@ -904,7 +1448,15 @@
         30,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 70,
@@ -917,7 +1469,15 @@
         45,
         55
       ],
-      "evolvesFrom": 69
+      "evolvesFrom": 69,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 71,
@@ -930,7 +1490,15 @@
         60,
         70
       ],
-      "evolvesFrom": 70
+      "evolvesFrom": 70,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 72,
@@ -943,7 +1511,15 @@
         100,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 73,
@@ -956,7 +1532,15 @@
         120,
         100
       ],
-      "evolvesFrom": 72
+      "evolvesFrom": 72,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 74,
@@ -969,7 +1553,15 @@
         30,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 75,
@@ -982,7 +1574,15 @@
         45,
         35
       ],
-      "evolvesFrom": 74
+      "evolvesFrom": 74,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 76,
@@ -995,7 +1595,15 @@
         65,
         45
       ],
-      "evolvesFrom": 75
+      "evolvesFrom": 75,
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 77,
@@ -1008,7 +1616,15 @@
         65,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 78,
@@ -1021,7 +1637,15 @@
         80,
         105
       ],
-      "evolvesFrom": 77
+      "evolvesFrom": 77,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 79,
@@ -1034,7 +1658,15 @@
         40,
         15
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 80,
@@ -1047,7 +1679,15 @@
         80,
         30
       ],
-      "evolvesFrom": 79
+      "evolvesFrom": 79,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 81,
@@ -1060,7 +1700,15 @@
         55,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 82,
@@ -1073,7 +1721,15 @@
         70,
         70
       ],
-      "evolvesFrom": 81
+      "evolvesFrom": 81,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 83,
@@ -1086,7 +1742,15 @@
         62,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 84,
@@ -1099,7 +1763,15 @@
         35,
         75
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 85,
@@ -1112,7 +1784,15 @@
         60,
         100
       ],
-      "evolvesFrom": 84
+      "evolvesFrom": 84,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 86,
@@ -1125,7 +1805,15 @@
         70,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 87,
@@ -1138,7 +1826,15 @@
         95,
         70
       ],
-      "evolvesFrom": 86
+      "evolvesFrom": 86,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 88,
@@ -1151,7 +1847,15 @@
         50,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 89,
@@ -1164,7 +1868,15 @@
         100,
         50
       ],
-      "evolvesFrom": 88
+      "evolvesFrom": 88,
+      "evYield": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 90,
@@ -1177,7 +1889,15 @@
         25,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 91,
@@ -1190,7 +1910,15 @@
         45,
         70
       ],
-      "evolvesFrom": 90
+      "evolvesFrom": 90,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 92,
@@ -1203,7 +1931,15 @@
         35,
         80
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 93,
@@ -1216,7 +1952,15 @@
         55,
         95
       ],
-      "evolvesFrom": 92
+      "evolvesFrom": 92,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 94,
@@ -1229,7 +1973,15 @@
         75,
         110
       ],
-      "evolvesFrom": 93
+      "evolvesFrom": 93,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 95,
@@ -1242,7 +1994,15 @@
         45,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 96,
@@ -1255,7 +2015,15 @@
         90,
         42
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 97,
@@ -1268,7 +2036,15 @@
         115,
         67
       ],
-      "evolvesFrom": 96
+      "evolvesFrom": 96,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 98,
@@ -1281,7 +2057,15 @@
         25,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 99,
@@ -1294,7 +2078,15 @@
         50,
         75
       ],
-      "evolvesFrom": 98
+      "evolvesFrom": 98,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 100,
@@ -1307,7 +2099,15 @@
         55,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 101,
@@ -1320,7 +2120,15 @@
         80,
         140
       ],
-      "evolvesFrom": 100
+      "evolvesFrom": 100,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 102,
@@ -1333,7 +2141,15 @@
         45,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 103,
@@ -1346,7 +2162,15 @@
         65,
         55
       ],
-      "evolvesFrom": 102
+      "evolvesFrom": 102,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 104,
@@ -1359,7 +2183,15 @@
         50,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 105,
@@ -1372,7 +2204,15 @@
         80,
         45
       ],
-      "evolvesFrom": 104
+      "evolvesFrom": 104,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 106,
@@ -1385,7 +2225,15 @@
         110,
         87
       ],
-      "evolvesFrom": 236
+      "evolvesFrom": 236,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 107,
@@ -1398,7 +2246,15 @@
         110,
         76
       ],
-      "evolvesFrom": 236
+      "evolvesFrom": 236,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 108,
@@ -1411,7 +2267,15 @@
         75,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 109,
@@ -1424,7 +2288,15 @@
         45,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 110,
@@ -1437,7 +2309,15 @@
         70,
         60
       ],
-      "evolvesFrom": 109
+      "evolvesFrom": 109,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 111,
@@ -1450,7 +2330,15 @@
         30,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 112,
@@ -1463,7 +2351,15 @@
         45,
         40
       ],
-      "evolvesFrom": 111
+      "evolvesFrom": 111,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 113,
@@ -1476,7 +2372,15 @@
         105,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 114,
@@ -1489,7 +2393,15 @@
         40,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 115,
@@ -1502,7 +2414,15 @@
         80,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 116,
@@ -1515,7 +2435,15 @@
         25,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 117,
@@ -1528,7 +2456,15 @@
         45,
         85
       ],
-      "evolvesFrom": 116
+      "evolvesFrom": 116,
+      "evYield": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 118,
@@ -1541,7 +2477,15 @@
         50,
         63
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 119,
@@ -1554,7 +2498,15 @@
         80,
         68
       ],
-      "evolvesFrom": 118
+      "evolvesFrom": 118,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 120,
@@ -1567,7 +2519,15 @@
         55,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 121,
@@ -1580,7 +2540,15 @@
         85,
         115
       ],
-      "evolvesFrom": 120
+      "evolvesFrom": 120,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 122,
@@ -1593,7 +2561,15 @@
         120,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 123,
@@ -1606,7 +2582,15 @@
         80,
         105
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 124,
@@ -1619,7 +2603,15 @@
         95,
         95
       ],
-      "evolvesFrom": 238
+      "evolvesFrom": 238,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 125,
@@ -1632,7 +2624,15 @@
         85,
         105
       ],
-      "evolvesFrom": 239
+      "evolvesFrom": 239,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 126,
@@ -1645,7 +2645,15 @@
         85,
         93
       ],
-      "evolvesFrom": 240
+      "evolvesFrom": 240,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 127,
@@ -1658,7 +2666,15 @@
         70,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 128,
@@ -1671,7 +2687,15 @@
         70,
         110
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 129,
@@ -1684,7 +2708,15 @@
         20,
         80
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 130,
@@ -1697,7 +2729,15 @@
         100,
         81
       ],
-      "evolvesFrom": 129
+      "evolvesFrom": 129,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 131,
@@ -1710,7 +2750,15 @@
         95,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 132,
@@ -1723,7 +2771,15 @@
         48,
         48
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 133,
@@ -1736,7 +2792,15 @@
         65,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 134,
@@ -1749,7 +2813,15 @@
         95,
         65
       ],
-      "evolvesFrom": 133
+      "evolvesFrom": 133,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 135,
@@ -1762,7 +2834,15 @@
         95,
         130
       ],
-      "evolvesFrom": 133
+      "evolvesFrom": 133,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 136,
@@ -1775,7 +2855,15 @@
         110,
         65
       ],
-      "evolvesFrom": 133
+      "evolvesFrom": 133,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 137,
@@ -1788,7 +2876,15 @@
         75,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 138,
@@ -1801,7 +2897,15 @@
         55,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 139,
@@ -1814,7 +2918,15 @@
         70,
         55
       ],
-      "evolvesFrom": 138
+      "evolvesFrom": 138,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 140,
@@ -1827,7 +2939,15 @@
         45,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 141,
@@ -1840,7 +2960,15 @@
         70,
         80
       ],
-      "evolvesFrom": 140
+      "evolvesFrom": 140,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 142,
@@ -1853,7 +2981,15 @@
         75,
         130
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 143,
@@ -1866,7 +3002,15 @@
         110,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 144,
@@ -1879,7 +3023,15 @@
         125,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 145,
@@ -1892,7 +3044,15 @@
         90,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 146,
@@ -1905,7 +3065,15 @@
         85,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 147,
@@ -1918,7 +3086,15 @@
         50,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 148,
@@ -1931,7 +3107,15 @@
         70,
         70
       ],
-      "evolvesFrom": 147
+      "evolvesFrom": 147,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 149,
@@ -1944,7 +3128,15 @@
         100,
         80
       ],
-      "evolvesFrom": 148
+      "evolvesFrom": 148,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 150,
@@ -1957,7 +3149,15 @@
         90,
         130
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 151,
@@ -1970,7 +3170,15 @@
         100,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 152,
@@ -1983,7 +3191,15 @@
         65,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 153,
@@ -1996,7 +3212,15 @@
         80,
         60
       ],
-      "evolvesFrom": 152
+      "evolvesFrom": 152,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 154,
@@ -2009,7 +3233,15 @@
         100,
         80
       ],
-      "evolvesFrom": 153
+      "evolvesFrom": 153,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 155,
@@ -2022,7 +3254,15 @@
         50,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 156,
@@ -2035,7 +3275,15 @@
         65,
         80
       ],
-      "evolvesFrom": 155
+      "evolvesFrom": 155,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
     },
     {
       "dex": 157,
@@ -2048,7 +3296,15 @@
         85,
         100
       ],
-      "evolvesFrom": 156
+      "evolvesFrom": 156,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 158,
@@ -2061,7 +3317,15 @@
         48,
         43
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 159,
@@ -2074,7 +3338,15 @@
         63,
         58
       ],
-      "evolvesFrom": 158
+      "evolvesFrom": 158,
+      "evYield": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 160,
@@ -2087,7 +3359,15 @@
         83,
         78
       ],
-      "evolvesFrom": 159
+      "evolvesFrom": 159,
+      "evYield": [
+        0,
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 161,
@@ -2100,7 +3380,15 @@
         45,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 162,
@@ -2113,7 +3401,15 @@
         55,
         90
       ],
-      "evolvesFrom": 161
+      "evolvesFrom": 161,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 163,
@@ -2126,7 +3422,15 @@
         56,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 164,
@@ -2139,7 +3443,15 @@
         96,
         70
       ],
-      "evolvesFrom": 163
+      "evolvesFrom": 163,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 165,
@@ -2152,7 +3464,15 @@
         80,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 166,
@@ -2165,7 +3485,15 @@
         110,
         85
       ],
-      "evolvesFrom": 165
+      "evolvesFrom": 165,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 167,
@@ -2178,7 +3506,15 @@
         40,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 168,
@@ -2191,7 +3527,15 @@
         60,
         40
       ],
-      "evolvesFrom": 167
+      "evolvesFrom": 167,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 169,
@@ -2204,7 +3548,15 @@
         80,
         130
       ],
-      "evolvesFrom": 42
+      "evolvesFrom": 42,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
     },
     {
       "dex": 170,
@@ -2217,7 +3569,15 @@
         56,
         67
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 171,
@@ -2230,7 +3590,15 @@
         76,
         67
       ],
-      "evolvesFrom": 170
+      "evolvesFrom": 170,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 172,
@@ -2243,7 +3611,15 @@
         35,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 173,
@@ -2256,7 +3632,15 @@
         55,
         15
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 174,
@@ -2269,7 +3653,15 @@
         20,
         15
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 175,
@@ -2282,7 +3674,15 @@
         65,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 176,
@@ -2295,7 +3695,15 @@
         105,
         40
       ],
-      "evolvesFrom": 175
+      "evolvesFrom": 175,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 177,
@@ -2308,7 +3716,15 @@
         45,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 178,
@@ -2321,7 +3737,15 @@
         70,
         95
       ],
-      "evolvesFrom": 177
+      "evolvesFrom": 177,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
     },
     {
       "dex": 179,
@@ -2334,7 +3758,15 @@
         45,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 180,
@@ -2347,7 +3779,15 @@
         60,
         45
       ],
-      "evolvesFrom": 179
+      "evolvesFrom": 179,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 181,
@@ -2360,7 +3800,15 @@
         90,
         55
       ],
-      "evolvesFrom": 180
+      "evolvesFrom": 180,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 182,
@@ -2373,7 +3821,15 @@
         100,
         50
       ],
-      "evolvesFrom": 44
+      "evolvesFrom": 44,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 183,
@@ -2386,7 +3842,15 @@
         50,
         40
       ],
-      "evolvesFrom": 298
+      "evolvesFrom": 298,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 184,
@@ -2399,7 +3863,15 @@
         80,
         50
       ],
-      "evolvesFrom": 183
+      "evolvesFrom": 183,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 185,
@@ -2412,7 +3884,15 @@
         65,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 186,
@@ -2425,7 +3905,15 @@
         100,
         70
       ],
-      "evolvesFrom": 61
+      "evolvesFrom": 61,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 187,
@@ -2438,7 +3926,15 @@
         55,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 188,
@@ -2451,7 +3947,15 @@
         65,
         80
       ],
-      "evolvesFrom": 187
+      "evolvesFrom": 187,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 189,
@@ -2464,7 +3968,15 @@
         85,
         110
       ],
-      "evolvesFrom": 188
+      "evolvesFrom": 188,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
     },
     {
       "dex": 190,
@@ -2477,7 +3989,15 @@
         55,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 191,
@@ -2490,7 +4010,15 @@
         30,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 192,
@@ -2503,7 +4031,15 @@
         85,
         30
       ],
-      "evolvesFrom": 191
+      "evolvesFrom": 191,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 193,
@@ -2516,7 +4052,15 @@
         45,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 194,
@@ -2529,7 +4073,15 @@
         25,
         15
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 195,
@@ -2542,7 +4094,15 @@
         65,
         35
       ],
-      "evolvesFrom": 194
+      "evolvesFrom": 194,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 196,
@@ -2555,7 +4115,15 @@
         95,
         110
       ],
-      "evolvesFrom": 133
+      "evolvesFrom": 133,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 197,
@@ -2568,7 +4136,15 @@
         130,
         65
       ],
-      "evolvesFrom": 133
+      "evolvesFrom": 133,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 198,
@@ -2581,7 +4157,15 @@
         42,
         91
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 199,
@@ -2594,7 +4178,15 @@
         110,
         30
       ],
-      "evolvesFrom": 79
+      "evolvesFrom": 79,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 200,
@@ -2607,7 +4199,15 @@
         85,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 201,
@@ -2620,7 +4220,15 @@
         48,
         48
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 202,
@@ -2633,7 +4241,15 @@
         58,
         33
       ],
-      "evolvesFrom": 360
+      "evolvesFrom": 360,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 203,
@@ -2646,7 +4262,15 @@
         65,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 204,
@@ -2659,7 +4283,15 @@
         35,
         15
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 205,
@@ -2672,7 +4304,15 @@
         60,
         40
       ],
-      "evolvesFrom": 204
+      "evolvesFrom": 204,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 206,
@@ -2685,7 +4325,15 @@
         65,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 207,
@@ -2698,7 +4346,15 @@
         65,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 208,
@@ -2711,7 +4367,15 @@
         65,
         30
       ],
-      "evolvesFrom": 95
+      "evolvesFrom": 95,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 209,
@@ -2724,7 +4388,15 @@
         40,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 210,
@@ -2737,7 +4409,15 @@
         60,
         45
       ],
-      "evolvesFrom": 209
+      "evolvesFrom": 209,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 211,
@@ -2750,7 +4430,15 @@
         55,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 212,
@@ -2763,7 +4451,15 @@
         80,
         65
       ],
-      "evolvesFrom": 123
+      "evolvesFrom": 123,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 213,
@@ -2776,7 +4472,15 @@
         230,
         5
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 214,
@@ -2789,7 +4493,15 @@
         95,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 215,
@@ -2802,7 +4514,15 @@
         75,
         115
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 216,
@@ -2815,7 +4535,15 @@
         50,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 217,
@@ -2828,7 +4556,15 @@
         75,
         55
       ],
-      "evolvesFrom": 216
+      "evolvesFrom": 216,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 218,
@@ -2841,7 +4577,15 @@
         40,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 219,
@@ -2854,7 +4598,15 @@
         80,
         30
       ],
-      "evolvesFrom": 218
+      "evolvesFrom": 218,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 220,
@@ -2867,7 +4619,15 @@
         30,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 221,
@@ -2880,7 +4640,15 @@
         60,
         50
       ],
-      "evolvesFrom": 220
+      "evolvesFrom": 220,
+      "evYield": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 222,
@@ -2893,7 +4661,15 @@
         85,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 223,
@@ -2906,7 +4682,15 @@
         35,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 224,
@@ -2919,7 +4703,15 @@
         75,
         45
       ],
-      "evolvesFrom": 223
+      "evolvesFrom": 223,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 225,
@@ -2932,7 +4724,15 @@
         45,
         75
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 226,
@@ -2945,7 +4745,15 @@
         140,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 227,
@@ -2958,7 +4766,15 @@
         70,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 228,
@@ -2971,7 +4787,15 @@
         50,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 229,
@@ -2984,7 +4808,15 @@
         80,
         95
       ],
-      "evolvesFrom": 228
+      "evolvesFrom": 228,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 230,
@@ -2997,7 +4829,15 @@
         95,
         85
       ],
-      "evolvesFrom": 117
+      "evolvesFrom": 117,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
     },
     {
       "dex": 231,
@@ -3010,7 +4850,15 @@
         40,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 232,
@@ -3023,7 +4871,15 @@
         60,
         50
       ],
-      "evolvesFrom": 231
+      "evolvesFrom": 231,
+      "evYield": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 233,
@@ -3036,7 +4892,15 @@
         95,
         60
       ],
-      "evolvesFrom": 137
+      "evolvesFrom": 137,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 234,
@@ -3049,7 +4913,15 @@
         65,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 235,
@@ -3062,7 +4934,15 @@
         45,
         75
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 236,
@@ -3075,7 +4955,15 @@
         35,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 237,
@@ -3088,7 +4976,15 @@
         110,
         70
       ],
-      "evolvesFrom": 236
+      "evolvesFrom": 236,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 238,
@@ -3101,7 +4997,15 @@
         65,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 239,
@@ -3114,7 +5018,15 @@
         55,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 240,
@@ -3127,7 +5039,15 @@
         55,
         83
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 241,
@@ -3140,7 +5060,15 @@
         70,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 242,
@@ -3153,7 +5081,15 @@
         135,
         55
       ],
-      "evolvesFrom": 113
+      "evolvesFrom": 113,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 243,
@@ -3166,7 +5102,15 @@
         100,
         115
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        2
+      ]
     },
     {
       "dex": 244,
@@ -3179,7 +5123,15 @@
         75,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 245,
@@ -3192,7 +5144,15 @@
         115,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 246,
@@ -3205,7 +5165,15 @@
         50,
         41
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 247,
@@ -3218,7 +5186,15 @@
         70,
         51
       ],
-      "evolvesFrom": 246
+      "evolvesFrom": 246,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 248,
@@ -3231,7 +5207,15 @@
         100,
         61
       ],
-      "evolvesFrom": 247
+      "evolvesFrom": 247,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 249,
@@ -3244,7 +5228,15 @@
         154,
         110
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 250,
@@ -3257,7 +5249,15 @@
         154,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 251,
@@ -3270,7 +5270,15 @@
         100,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 252,
@@ -3283,7 +5291,15 @@
         55,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 253,
@@ -3296,7 +5312,15 @@
         65,
         95
       ],
-      "evolvesFrom": 252
+      "evolvesFrom": 252,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 254,
@@ -3309,7 +5333,15 @@
         85,
         120
       ],
-      "evolvesFrom": 253
+      "evolvesFrom": 253,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
     },
     {
       "dex": 255,
@@ -3322,7 +5354,15 @@
         50,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 256,
@@ -3335,7 +5375,15 @@
         60,
         55
       ],
-      "evolvesFrom": 255
+      "evolvesFrom": 255,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 257,
@@ -3348,7 +5396,15 @@
         70,
         80
       ],
-      "evolvesFrom": 256
+      "evolvesFrom": 256,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 258,
@@ -3361,7 +5417,15 @@
         50,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 259,
@@ -3374,7 +5438,15 @@
         70,
         50
       ],
-      "evolvesFrom": 258
+      "evolvesFrom": 258,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 260,
@@ -3387,7 +5459,15 @@
         90,
         60
       ],
-      "evolvesFrom": 259
+      "evolvesFrom": 259,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 261,
@@ -3400,7 +5480,15 @@
         30,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 262,
@@ -3413,7 +5501,15 @@
         60,
         70
       ],
-      "evolvesFrom": 261
+      "evolvesFrom": 261,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 263,
@@ -3426,7 +5522,15 @@
         41,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 264,
@@ -3439,7 +5543,15 @@
         61,
         100
       ],
-      "evolvesFrom": 263
+      "evolvesFrom": 263,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 265,
@@ -3452,7 +5564,15 @@
         30,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 266,
@@ -3465,7 +5585,15 @@
         25,
         15
       ],
-      "evolvesFrom": 265
+      "evolvesFrom": 265,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 267,
@@ -3478,7 +5606,15 @@
         50,
         65
       ],
-      "evolvesFrom": 266
+      "evolvesFrom": 266,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 268,
@@ -3491,7 +5627,15 @@
         25,
         15
       ],
-      "evolvesFrom": 265
+      "evolvesFrom": 265,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 269,
@@ -3504,7 +5648,15 @@
         90,
         65
       ],
-      "evolvesFrom": 268
+      "evolvesFrom": 268,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 270,
@@ -3517,7 +5669,15 @@
         50,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 271,
@@ -3530,7 +5690,15 @@
         70,
         50
       ],
-      "evolvesFrom": 270
+      "evolvesFrom": 270,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 272,
@@ -3543,7 +5711,15 @@
         100,
         70
       ],
-      "evolvesFrom": 271
+      "evolvesFrom": 271,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 273,
@@ -3556,7 +5732,15 @@
         30,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 274,
@@ -3569,7 +5753,15 @@
         40,
         60
       ],
-      "evolvesFrom": 273
+      "evolvesFrom": 273,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 275,
@@ -3582,7 +5774,15 @@
         60,
         80
       ],
-      "evolvesFrom": 274
+      "evolvesFrom": 274,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 276,
@@ -3595,7 +5795,15 @@
         30,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 277,
@@ -3608,7 +5816,15 @@
         50,
         125
       ],
-      "evolvesFrom": 276
+      "evolvesFrom": 276,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 278,
@@ -3621,7 +5837,15 @@
         30,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 279,
@@ -3634,7 +5858,15 @@
         70,
         65
       ],
-      "evolvesFrom": 278
+      "evolvesFrom": 278,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 280,
@@ -3647,7 +5879,15 @@
         35,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 281,
@@ -3660,7 +5900,15 @@
         55,
         50
       ],
-      "evolvesFrom": 280
+      "evolvesFrom": 280,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 282,
@@ -3673,7 +5921,15 @@
         115,
         80
       ],
-      "evolvesFrom": 281
+      "evolvesFrom": 281,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 283,
@@ -3686,7 +5942,15 @@
         52,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 284,
@@ -3699,7 +5963,15 @@
         82,
         60
       ],
-      "evolvesFrom": 283
+      "evolvesFrom": 283,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
     },
     {
       "dex": 285,
@@ -3712,7 +5984,15 @@
         60,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 286,
@@ -3725,7 +6005,15 @@
         60,
         70
       ],
-      "evolvesFrom": 285
+      "evolvesFrom": 285,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 287,
@@ -3738,7 +6026,15 @@
         35,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 288,
@@ -3751,7 +6047,15 @@
         55,
         90
       ],
-      "evolvesFrom": 287
+      "evolvesFrom": 287,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 289,
@@ -3764,7 +6068,15 @@
         65,
         100
       ],
-      "evolvesFrom": 288
+      "evolvesFrom": 288,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 290,
@@ -3777,7 +6089,15 @@
         30,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 291,
@@ -3790,7 +6110,15 @@
         50,
         160
       ],
-      "evolvesFrom": 290
+      "evolvesFrom": 290,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 292,
@@ -3803,7 +6131,15 @@
         30,
         40
       ],
-      "evolvesFrom": 290
+      "evolvesFrom": 290,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 293,
@@ -3816,7 +6152,15 @@
         23,
         28
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 294,
@@ -3829,7 +6173,15 @@
         43,
         48
       ],
-      "evolvesFrom": 293
+      "evolvesFrom": 293,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 295,
@@ -3842,7 +6194,15 @@
         63,
         68
       ],
-      "evolvesFrom": 294
+      "evolvesFrom": 294,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 296,
@@ -3855,7 +6215,15 @@
         30,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 297,
@@ -3868,7 +6236,15 @@
         60,
         50
       ],
-      "evolvesFrom": 296
+      "evolvesFrom": 296,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 298,
@@ -3881,7 +6257,15 @@
         40,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 299,
@@ -3894,7 +6278,15 @@
         90,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 300,
@@ -3907,7 +6299,15 @@
         35,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 301,
@@ -3920,7 +6320,15 @@
         55,
         70
       ],
-      "evolvesFrom": 300
+      "evolvesFrom": 300,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 302,
@@ -3933,7 +6341,15 @@
         65,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 303,
@@ -3946,7 +6362,15 @@
         55,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 304,
@@ -3959,7 +6383,15 @@
         40,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 305,
@@ -3972,7 +6404,15 @@
         50,
         40
       ],
-      "evolvesFrom": 304
+      "evolvesFrom": 304,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 306,
@@ -3985,7 +6425,15 @@
         60,
         50
       ],
-      "evolvesFrom": 305
+      "evolvesFrom": 305,
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 307,
@@ -3998,7 +6446,15 @@
         55,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 308,
@@ -4011,7 +6467,15 @@
         75,
         80
       ],
-      "evolvesFrom": 307
+      "evolvesFrom": 307,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 309,
@@ -4024,7 +6488,15 @@
         40,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 310,
@@ -4037,7 +6509,15 @@
         60,
         105
       ],
-      "evolvesFrom": 309
+      "evolvesFrom": 309,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 311,
@@ -4050,7 +6530,15 @@
         75,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 312,
@@ -4063,7 +6551,15 @@
         85,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 313,
@@ -4076,7 +6572,15 @@
         75,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 314,
@@ -4089,7 +6593,15 @@
         75,
         85
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 315,
@@ -4102,7 +6614,15 @@
         80,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 316,
@@ -4115,7 +6635,15 @@
         53,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 317,
@@ -4128,7 +6656,15 @@
         83,
         55
       ],
-      "evolvesFrom": 316
+      "evolvesFrom": 316,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 318,
@@ -4141,7 +6677,15 @@
         20,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 319,
@@ -4154,7 +6698,15 @@
         40,
         95
       ],
-      "evolvesFrom": 318
+      "evolvesFrom": 318,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 320,
@@ -4167,7 +6719,15 @@
         35,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 321,
@@ -4180,7 +6740,15 @@
         45,
         60
       ],
-      "evolvesFrom": 320
+      "evolvesFrom": 320,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 322,
@@ -4193,7 +6761,15 @@
         45,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 323,
@@ -4206,7 +6782,15 @@
         75,
         40
       ],
-      "evolvesFrom": 322
+      "evolvesFrom": 322,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 324,
@@ -4219,7 +6803,15 @@
         70,
         20
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 325,
@@ -4232,7 +6824,15 @@
         80,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 326,
@@ -4245,7 +6845,15 @@
         110,
         80
       ],
-      "evolvesFrom": 325
+      "evolvesFrom": 325,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 327,
@@ -4258,7 +6866,15 @@
         60,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 328,
@@ -4271,7 +6887,15 @@
         45,
         10
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 329,
@@ -4284,7 +6908,15 @@
         50,
         70
       ],
-      "evolvesFrom": 328
+      "evolvesFrom": 328,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 330,
@@ -4297,7 +6929,15 @@
         80,
         100
       ],
-      "evolvesFrom": 329
+      "evolvesFrom": 329,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "dex": 331,
@@ -4310,7 +6950,15 @@
         40,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 332,
@@ -4323,7 +6971,15 @@
         60,
         55
       ],
-      "evolvesFrom": 331
+      "evolvesFrom": 331,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 333,
@@ -4336,7 +6992,15 @@
         75,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 334,
@@ -4349,7 +7013,15 @@
         105,
         80
       ],
-      "evolvesFrom": 333
+      "evolvesFrom": 333,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 335,
@@ -4362,7 +7034,15 @@
         60,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 336,
@@ -4375,7 +7055,15 @@
         60,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 337,
@@ -4388,7 +7076,15 @@
         85,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 338,
@@ -4401,7 +7097,15 @@
         65,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 339,
@@ -4414,7 +7118,15 @@
         41,
         60
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 340,
@@ -4427,7 +7139,15 @@
         71,
         60
       ],
-      "evolvesFrom": 339
+      "evolvesFrom": 339,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 341,
@@ -4440,7 +7160,15 @@
         35,
         35
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 342,
@@ -4453,7 +7181,15 @@
         55,
         55
       ],
-      "evolvesFrom": 341
+      "evolvesFrom": 341,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 343,
@@ -4466,7 +7202,15 @@
         70,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 344,
@@ -4479,7 +7223,15 @@
         120,
         75
       ],
-      "evolvesFrom": 343
+      "evolvesFrom": 343,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 345,
@@ -4492,7 +7244,15 @@
         87,
         23
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 346,
@@ -4505,7 +7265,15 @@
         107,
         43
       ],
-      "evolvesFrom": 345
+      "evolvesFrom": 345,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 347,
@@ -4518,7 +7286,15 @@
         50,
         75
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 348,
@@ -4531,7 +7307,15 @@
         80,
         45
       ],
-      "evolvesFrom": 347
+      "evolvesFrom": 347,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 349,
@@ -4544,7 +7328,15 @@
         55,
         80
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 350,
@@ -4557,7 +7349,15 @@
         125,
         81
       ],
-      "evolvesFrom": 349
+      "evolvesFrom": 349,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "dex": 351,
@@ -4570,7 +7370,15 @@
         70,
         70
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 352,
@@ -4583,7 +7391,15 @@
         120,
         40
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 353,
@@ -4596,7 +7412,15 @@
         33,
         45
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 354,
@@ -4609,7 +7433,15 @@
         63,
         65
       ],
-      "evolvesFrom": 353
+      "evolvesFrom": 353,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 355,
@@ -4622,7 +7454,15 @@
         90,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 356,
@@ -4635,7 +7475,15 @@
         130,
         25
       ],
-      "evolvesFrom": 355
+      "evolvesFrom": 355,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 357,
@@ -4648,7 +7496,15 @@
         87,
         51
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 358,
@@ -4661,7 +7517,15 @@
         80,
         65
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ]
     },
     {
       "dex": 359,
@@ -4674,7 +7538,15 @@
         60,
         75
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 360,
@@ -4687,7 +7559,15 @@
         48,
         23
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 361,
@@ -4700,7 +7580,15 @@
         50,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 362,
@@ -4713,7 +7601,15 @@
         80,
         80
       ],
-      "evolvesFrom": 361
+      "evolvesFrom": 361,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 363,
@@ -4726,7 +7622,15 @@
         50,
         25
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 364,
@@ -4739,7 +7643,15 @@
         70,
         45
       ],
-      "evolvesFrom": 363
+      "evolvesFrom": 363,
+      "evYield": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 365,
@@ -4752,7 +7664,15 @@
         90,
         65
       ],
-      "evolvesFrom": 364
+      "evolvesFrom": 364,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 366,
@@ -4765,7 +7685,15 @@
         55,
         32
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 367,
@@ -4778,7 +7706,15 @@
         75,
         52
       ],
-      "evolvesFrom": 366
+      "evolvesFrom": 366,
+      "evYield": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 368,
@@ -4791,7 +7727,15 @@
         75,
         52
       ],
-      "evolvesFrom": 366
+      "evolvesFrom": 366,
+      "evYield": [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ]
     },
     {
       "dex": 369,
@@ -4804,7 +7748,15 @@
         65,
         55
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 370,
@@ -4817,7 +7769,15 @@
         65,
         97
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
     },
     {
       "dex": 371,
@@ -4830,7 +7790,15 @@
         30,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 372,
@@ -4843,7 +7811,15 @@
         50,
         50
       ],
-      "evolvesFrom": 371
+      "evolvesFrom": 371,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 373,
@@ -4856,7 +7832,15 @@
         80,
         100
       ],
-      "evolvesFrom": 372
+      "evolvesFrom": 372,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 374,
@@ -4869,7 +7853,15 @@
         60,
         30
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 375,
@@ -4882,7 +7874,15 @@
         80,
         50
       ],
-      "evolvesFrom": 374
+      "evolvesFrom": 374,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 376,
@@ -4895,7 +7895,15 @@
         90,
         70
       ],
-      "evolvesFrom": 375
+      "evolvesFrom": 375,
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 377,
@@ -4908,7 +7916,15 @@
         100,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 378,
@@ -4921,7 +7937,15 @@
         200,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 379,
@@ -4934,7 +7958,15 @@
         150,
         50
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        2,
+        0,
+        1,
+        0
+      ]
     },
     {
       "dex": 380,
@@ -4947,7 +7979,15 @@
         130,
         110
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ]
     },
     {
       "dex": 381,
@@ -4960,7 +8000,15 @@
         110,
         110
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 382,
@@ -4973,7 +8021,15 @@
         140,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        0
+      ]
     },
     {
       "dex": 383,
@@ -4986,7 +8042,15 @@
         90,
         90
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 384,
@@ -4999,7 +8063,15 @@
         90,
         95
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        2,
+        0,
+        1,
+        0,
+        0
+      ]
     },
     {
       "dex": 385,
@@ -5012,7 +8084,15 @@
         100,
         100
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
     },
     {
       "dex": 386,
@@ -5025,7 +8105,15 @@
         50,
         150
       ],
-      "evolvesFrom": null
+      "evolvesFrom": null,
+      "evYield": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
     }
   ]
 }

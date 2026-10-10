@@ -28,4 +28,10 @@ public class UsefulFilterTests
         Assert.False(Evs.IsUseful(calcium, [0, 0, 0, 100, 0, 0], Targets));
         Assert.False(Evs.IsUseful(calcium, [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]));
     }
+
+    [Theory]
+    [InlineData("Zigzagoon", true)]
+    [InlineData("Milotic", false)]
+    public void Species_beyond_kanto_follow_the_same_rule(string opponent, bool expected) =>
+        Assert.Equal(expected, Evs.IsUseful(Data.Lookup(opponent)!, Totals, Targets));
 }

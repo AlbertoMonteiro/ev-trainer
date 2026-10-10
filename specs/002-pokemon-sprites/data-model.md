@@ -30,6 +30,10 @@ Exemplos (testes): Caterpie ⇒ `Dex 10, Stats [0]`; Ivysaur ⇒ `Dex 2, Stats [
 (2 SpA, 1 SpD) ⇒ `Stats [3, 4]`; Calcium ⇒ `Dex null, Stats [3], Initial "C"`; Treecko (#252) ⇒
 `Dex 252, Stats []`; "Agumon" ⇒ `Dex null, Stats [], Initial "A"`.
 
+> Atualizado pela feature 003: as espécies #152–386 passaram a ter EV yield, então Treecko agora é
+> `Dex 252, Stats [5]`; o caso "sem dado de EV ⇒ cor de destaque" vale só para nomes fora dos dados
+> do jogo (ex.: "Agumon").
+
 ## Espécie exibida de um Pokémon em treino (derivado)
 
 `TrainingPokemon.DisplaySpecies` = espécie da última entrada de `IvLog` (lista ordenada por nível)

@@ -56,4 +56,19 @@ public class SearchTests
 
     [Fact]
     public void Blank_query_returns_nothing() => Assert.Empty(Names("   "));
+
+    [Theory]
+    [InlineData("milo")]
+    [InlineData("350")]
+    [InlineData("#350")]
+    public void Finds_species_beyond_kanto(string query) => Assert.Contains("Milotic", Names(query));
+
+    [Fact]
+    public void Species_beyond_kanto_have_no_trainer_locations()
+    {
+        var hit = Assert.Single(Search.Find("zigza"));
+
+        Assert.Equal("Zigzagoon", hit.Opponent.Name);
+        Assert.Empty(hit.TrainerLocations);
+    }
 }

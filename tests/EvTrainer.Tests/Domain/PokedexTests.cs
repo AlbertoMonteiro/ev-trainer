@@ -59,4 +59,30 @@ public class PokedexTests
         Assert.Equal(["Oddish", "Gloom", "Bellossom"], Line("Bellossom"));
         Assert.Empty(Dex.EvolutionsOf(Dex.Find("Blastoise")!));
     }
+
+    [Fact]
+    public void Every_species_has_a_six_stat_ev_yield()
+    {
+        Assert.All(Dex.Species, s =>
+        {
+            Assert.Equal(6, s.EvYield.Length);
+            Assert.True(s.EvYield.Sum() >= 1, $"{s.Name} has no EV yield");
+        });
+    }
+
+    [Theory]
+    [InlineData("Milotic", new[] { 0, 0, 0, 0, 2, 0 })]
+    [InlineData("Zigzagoon", new[] { 0, 0, 0, 0, 0, 1 })]
+    [InlineData("Shedinja", new[] { 2, 0, 0, 0, 0, 0 })]
+    // PokéAPI keeps a different historic "effort" for these 8; the current value is used (research R1).
+    // Changing any of them must be a conscious decision.
+    [InlineData("Yanma", new[] { 0, 0, 0, 0, 0, 1 })]
+    [InlineData("Slowking", new[] { 0, 0, 0, 0, 2, 0 })]
+    [InlineData("Misdreavus", new[] { 0, 0, 0, 0, 1, 0 })]
+    [InlineData("Blissey", new[] { 3, 0, 0, 0, 0, 0 })] // confirmed: pokemondb.net/pokedex/blissey lists no EV change by generation
+    [InlineData("Delcatty", new[] { 1, 0, 0, 0, 0, 1 })]
+    [InlineData("Roselia", new[] { 0, 0, 0, 2, 0, 0 })]
+    [InlineData("Duskull", new[] { 0, 0, 0, 0, 1, 0 })]
+    [InlineData("Dusclops", new[] { 0, 0, 1, 0, 1, 0 })]
+    public void Ev_yields(string name, int[] expected) => Assert.Equal(expected, Dex.Find(name)!.EvYield);
 }

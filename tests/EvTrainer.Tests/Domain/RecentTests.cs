@@ -22,4 +22,12 @@ public class RecentTests
 
     [Fact]
     public void Empty_log_has_no_recents() => Assert.Empty(Evs.Recent(Pokemons.Squirtle().Events, Data));
+
+    [Fact]
+    public void Species_beyond_kanto_appear_in_recents()
+    {
+        var pokemon = Pokemons.Squirtle().WithEvents(("Milotic", 1, 1), ("Caterpie", 1, 1));
+
+        Assert.Equal(["Caterpie", "Milotic"], Evs.Recent(pokemon.Events, Data).Select(o => o.Name));
+    }
 }

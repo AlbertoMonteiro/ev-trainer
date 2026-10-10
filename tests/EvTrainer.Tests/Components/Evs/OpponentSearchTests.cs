@@ -94,4 +94,38 @@ public class OpponentSearchTests : AppTestContext
         Assert.NotEmpty(results);
         Assert.All(results, b => Assert.NotNull(b.QuerySelector(".sprite")));
     }
+
+    [Fact]
+    public void Searching_milo_finds_and_records_milotic()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<EvTab>();
+
+        cut.Find("input.search").Input("milo");
+        var card = cut.Find(".main-list button.opponent[data-opp='Milotic']");
+
+        Assert.Equal(T("Evs.Card.Yield", 2, T("Stat.Short.4")), card.QuerySelector(".ev-tag")!.TextContent.Trim());
+        Assert.Equal("sprites/350.png", card.QuerySelector(".sprite img")!.GetAttribute("src"));
+
+        card.Click();
+
+        Assert.Equal(T("Toast.EvGain", "Milotic", T("Evs.Gain.Part", 2, T("Stat.Long.4"))), Toasts.Message);
+        Assert.Equal(["Milotic"], Repository.Stored["p1"].Events.Select(e => e.Opponent));
+    }
+
+    [Fact]
+    public void All_lists_the_386_species_in_dex_order_then_the_vitamins()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<EvTab>();
+
+        cut.Find(".segmented button.all").Click();
+        var names = Names(cut, ".main-list");
+
+        Assert.Equal(392, names.Count);
+        Assert.Equal(Data.Opponents.Select(o => o.Name), names);
+        Assert.Equal("Bulbasaur", names[0]);
+        Assert.Equal("Deoxys", names[385]);
+        Assert.Equal("Carbos", names[^1]);
+    }
 }

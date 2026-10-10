@@ -38,6 +38,9 @@ up and it narrows down your IVs.
 
 - **One-tap EV counting** — the whole opponent card is the button; consecutive taps are grouped and
   every battle can be undone.
+- **Every Pokémon you can meet in FireRed** — all 386 Gen III species are opponents (Sevii Islands,
+  trades and events included): Kanto EV yields come from a hand-curated table, the others from
+  [PokeAPI](https://pokeapi.co/), checked against that table.
 - **Real Gen 3 rules** — 255 per stat, 510 total, vitamins only below 100 (and not doubled),
   Pokérus and Macho Brace (×2 each, ×4 together) recorded per battle, totals always recomputed in order.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),

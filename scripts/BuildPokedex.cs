@@ -4,6 +4,8 @@
 // Base stats changed in later generations (e.g. Butterfree SpAtk 80 → 90 in Gen VI). PokéAPI keeps
 // the old values in "past_stats": an entry for generation G holds the value used up to G, so the
 // Gen III value is the past entry with the smallest G >= 3, or the current value when there is none.
+// EV yields use the CURRENT "effort": it matches the curated Kanto yields in reference-data.json for all
+// 151 species, while the "effort" copied inside past_stats is unreliable (Raichu, Alakazam, Electrode).
 #:property TreatWarningsAsErrors=false
 #:property PublishAot=false
 
@@ -42,12 +44,15 @@ var species = JsonNode.Parse(await graph.Content.ReadAsStringAsync())!["data"]![
 var output = new JsonArray();
 using var throttle = new SemaphoreSlim(8);
 var stats = new int[LastSpecies + 1][];
+var evYields = new int[LastSpecies + 1][];
 await Task.WhenAll(Enumerable.Range(1, LastSpecies).Select(async id =>
 {
     await throttle.WaitAsync();
     try
     {
         var pokemon = JsonNode.Parse(await http.GetStringAsync($"pokemon/{id}"))!;
+        evYields[id] = [.. statOrder.Select(name => (int)pokemon["stats"]!.AsArray()
+            .First(s => (string)s!["stat"]!["name"]! == name)!["effort"]!)];
         var current = pokemon["stats"]!.AsArray()
             .ToDictionary(s => (string)s!["stat"]!["name"]!, s => (int)s!["base_stat"]!);
         foreach (var past in pokemon["past_stats"]!.AsArray()
@@ -80,12 +85,13 @@ foreach (var s in species)
         ["base"] = new JsonArray([.. stats[id].Select(v => (JsonNode)v)]),
         // Pre-evolutions added after Gen III (e.g. Mime Jr. → Mr. Mime) don't exist in FireRed.
         ["evolvesFrom"] = s["evolves_from_species_id"]?.GetValue<int>() is int from && from <= LastSpecies ? from : null,
+        ["evYield"] = new JsonArray([.. evYields[id].Select(v => (JsonNode)v)]),
     });
 }
 
 var document = new JsonObject
 {
-    ["_fonte"] = "PokéAPI (pokeapi.co), stats base da Geração III (past_stats aplicados). Gerado por scripts/BuildPokedex.cs.",
+    ["_fonte"] = "PokéAPI (pokeapi.co): stats base da Geração III (past_stats aplicados) e EV yield (effort atual). Gerado por scripts/BuildPokedex.cs.",
     ["stats"] = new JsonArray("HP", "Ataque", "Defesa", "SpAtk", "SpDef", "Speed"),
     ["species"] = output,
 };

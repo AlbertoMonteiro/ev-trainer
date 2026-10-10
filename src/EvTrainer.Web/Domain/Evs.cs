@@ -82,6 +82,24 @@ public static class Evs
         return recent;
     }
 
+    /// <summary>
+    /// How many times each known opponent was defeated, in a single pass over the log (same values as
+    /// <see cref="CountFor"/>); unknown names are left out.
+    /// </summary>
+    public static IReadOnlyDictionary<string, int> CountsByOpponent(IReadOnlyList<BattleEvent> events, ReferenceData data)
+    {
+        var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var e in events)
+        {
+            if (data.Lookup(e.Opponent) is { } opponent)
+            {
+                counts[opponent.Name] = counts.GetValueOrDefault(opponent.Name) + Math.Max(1, e.Count);
+            }
+        }
+
+        return counts;
+    }
+
     /// <summary>How many times an opponent was defeated (sum of counts by canonical name).</summary>
     public static int CountFor(IReadOnlyList<BattleEvent> events, string opponent, ReferenceData data)
     {
