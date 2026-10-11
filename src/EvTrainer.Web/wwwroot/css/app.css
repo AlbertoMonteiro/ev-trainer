@@ -1190,3 +1190,140 @@ button.species-current[aria-pressed="true"] {
 .level-form .row-actions button {
     min-height: 44px;
 }
+
+/* Capture evaluation */
+.capture-view {
+    display: grid;
+    gap: 12px;
+}
+
+.capture-view .card-head .close-capture,
+.capture-view .row-actions button,
+.capture-species .change-species,
+.capture-table .count {
+    min-height: 44px;
+}
+
+.capture-species {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.capture-species .name {
+    flex: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.capture-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.capture-table th, .capture-table td {
+    padding: 4px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+.capture-table thead th {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.capture-table .range {
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+
+.capture-table .grade-great, .capture-table .grade-good {
+    color: var(--ok);
+    font-weight: 600;
+}
+
+.capture-table .grade-fair {
+    color: var(--warn);
+}
+
+.capture-table .grade-poor, .capture-table .bad {
+    color: var(--bad);
+}
+
+.capture-table tr.not-counted th,
+.capture-table tr.not-counted td.range,
+.capture-table tr.not-counted td.grade {
+    opacity: 0.45;
+}
+
+.capture-table .count {
+    min-width: 72px;
+    padding: 0 8px;
+    font-size: 13px;
+}
+
+.capture-table .count[aria-pressed="true"] {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.capture-verdict {
+    display: grid;
+    gap: 4px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.capture-verdict p {
+    margin: 0;
+}
+
+.capture-verdict .label {
+    font-family: var(--font-display);
+    color: var(--muted);
+}
+
+.capture-verdict .verdict {
+    font-size: 17px;
+}
+
+.empty .actions .capture {
+    min-height: 44px;
+}
+
+.best-capture {
+    display: grid;
+    gap: 6px;
+    padding: 10px 12px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+}
+
+.best-capture h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.best-capture p {
+    margin: 0;
+}
+
+.best-capture .compare {
+    font-weight: 700;
+}
+
+.best-capture .compare-better {
+    color: var(--ok);
+}
+
+.best-capture .compare-worse {
+    color: var(--bad);
+}

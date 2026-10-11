@@ -1,0 +1,40 @@
+@inherits StoreAwareComponent
+@inject CaptureStore Capture
+
+@{
+    var counted = Capture.CountedFor(Input.Species);
+    var result = Capture.Evaluate(Input);
+}
+<CaptureStatsTable Result="result" Counted="counted" OnToggle="Toggle" />
+@if (result.Cells.Any(c => c is IvInconsistent))
+{
+    <p class="inconsistent warn">@L["Capture.Inconsistent"]</p>
+}
+@if (result.Cells.Any(c => c is IvUnknowable))
+{
+    <p class="unknowable hint">@L["Ivs.Cell.UnknowableHint"]</p>
+}
+<div class="capture-verdict">
+    <p><span class="label">@L["Capture.Verdict.Title"]</span> <strong class="verdict">@CaptureText.Verdict(L, result.Verdict)</strong></p>
+    <p class="nature-effect">@L[$"Capture.Nature.{result.NatureEffect}"]</p>
+    @if (result.Verdict is VerdictUncertain)
+    {
+        <p class="low-level-hint hint">@L["Capture.LowLevelHint"]</p>
+    }
+</div>
+<div class="row-actions">
+    <button type="button" class="reset-counted" @onclick="() => Capture.ResetCounted(Input.Species)">@L["Capture.Counted.Reset"]</button>
+</div>
+
+@code {
+    /// <summary>A valid capture (see <see cref="CaptureInput.IsValid"/>).</summary>
+    [Parameter, EditorRequired]
+    public CaptureInput Input { get; set; } = default!;
+
+    private void Toggle(int stat)
+    {
+        var counted = Capture.CountedFor(Input.Species);
+        counted[stat] = !counted[stat];
+        Capture.SetCounted(Input.Species, counted);
+    }
+}

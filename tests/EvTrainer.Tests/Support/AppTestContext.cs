@@ -23,6 +23,7 @@ public abstract class AppTestContext : BunitContext
         Catalog = catalog ?? LocalizationCatalog.LoadEmbedded();
         Language = new LanguageState(Catalog);
         Store = new TrainerStore(Repository, Data);
+        Capture = new CaptureStore(Repository, Dex, Data);
         Toasts = new ToastService(Time);
 
         Services.AddSingleton(Data);
@@ -31,6 +32,7 @@ public abstract class AppTestContext : BunitContext
         Services.AddSingleton<IPokemonRepository>(Repository);
         Services.AddSingleton<IBrowserApi>(Browser);
         Services.AddSingleton(Store);
+        Services.AddSingleton(Capture);
         Services.AddSingleton(Toasts);
         Services.AddSingleton<TimeProvider>(Time);
         Services.AddSingleton(Catalog);
@@ -50,6 +52,8 @@ public abstract class AppTestContext : BunitContext
     public LanguageState Language { get; }
 
     public TrainerStore Store { get; }
+
+    public CaptureStore Capture { get; }
 
     public ToastService Toasts { get; }
 

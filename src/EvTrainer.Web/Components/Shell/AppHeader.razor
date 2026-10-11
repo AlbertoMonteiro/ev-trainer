@@ -22,7 +22,7 @@
 
 @if (_menuOpen)
 {
-    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" />
+    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" OnCapture="OnCapture" />
 }
 
 @code {
@@ -30,4 +30,7 @@
 
     [Parameter]
     public EventCallback<Tab> OnNavigate { get; set; }
+
+    [Parameter]
+    public EventCallback OnCapture { get; set; }
 }

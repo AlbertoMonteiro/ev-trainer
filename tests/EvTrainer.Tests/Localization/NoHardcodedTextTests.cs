@@ -97,6 +97,50 @@ public partial class NoHardcodedTextTests : AppTestContext
         AssertNoHardcodedText(cut.Nodes);
     }
 
+    [Fact]
+    public void Capture_screen_has_no_hardcoded_text()
+    {
+        Store.Load();
+        Capture.Conclude(new EvTrainer.Web.Domain.CaptureInput("Squirtle", 5, "Timid", [20, 9, 13, 11, 12, 11]));
+        var cut = Render<Home>();
+
+        cut.Find(".empty button.capture").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".capture-view input.species-search").Input("Squirtle");
+        AssertNoHardcodedText(cut.Nodes);
+        cut.Find(".capture-view button.species-option[data-name='Squirtle']").Click();
+        cut.Find("#capture-level").Input("5");
+        cut.Find("select#capture-nature").Change("Timid");
+        int[] stats = [99, 8, 11, 10, 11, 9];
+        for (var i = 0; i < stats.Length; i++)
+        {
+            cut.Find($"#capture-stat-{i}").Input(stats[i].ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        Assert.NotEmpty(cut.FindAll(".capture-view .inconsistent"));
+        Assert.NotEmpty(cut.FindAll(".best-capture .compare, .best-capture .summary"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find("#capture-stat-0").Input("19");
+        Assert.NotEmpty(cut.FindAll(".best-capture .compare"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".capture-view button.change-species").Click();
+        cut.Find(".capture-view input.species-search").Input("Shedinja");
+        cut.Find(".capture-view button.species-option[data-name='Shedinja']").Click();
+        cut.Find("select#capture-nature").Change("Hardy");
+        cut.Find("#capture-level").Input("25");
+        int[] shedinja = [1, 54, 33, 26, 26, 30];
+        for (var i = 0; i < shedinja.Length; i++)
+        {
+            cut.Find($"#capture-stat-{i}").Input(shedinja[i].ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        Assert.NotEmpty(cut.FindAll(".capture-view .unknowable"));
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
     private void AssertNoHardcodedText(INodeList nodes)
     {
         var offenders = new List<string>();

@@ -1,4 +1,5 @@
 using EvTrainer.Tests.Support;
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Model;
 using EvTrainer.Web.Domain.Reference;
 using EvTrainer.Web.State;
@@ -291,5 +292,75 @@ public class TrainerStoreTests
         Assert.Equal(
             [("Caterpie", 10, 1), ("Abra", 2, 2)],
             repository.Stored["a"].Events.Select(e => (e.Opponent, e.Count, e.Multiplier)));
+    }
+
+    private static readonly Pokedex Dex = Pokedex.LoadEmbedded();
+
+    [Fact]
+    public void AddFromCapture_creates_the_line_and_the_first_level_note()
+    {
+        var repository = new InMemoryRepository(("old", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+
+        var (id, _) = store.AddFromCapture(new CaptureInput("Squirtle", 5, "Timid", [20, 9, 12, 11, 12, 11]), Dex);
+
+        Assert.Equal(id, store.SelectedId);
+        var created = repository.Stored[id];
+        Assert.Equal("Squirtle", created.CurrentSpecies);
+        Assert.Equal(["Squirtle", "Wartortle", "Blastoise"], created.Species.Select(s => s.Name));
+        Assert.Equal([44, 48, 65, 50, 64, 43], created.Species[0].Base);
+        Assert.Equal("Timid", created.Nature);
+        Assert.Equal(new int[6], created.Targets);
+        Assert.Empty(created.Events);
+        var note = Assert.Single(created.IvLog);
+        Assert.Equal((5, "Squirtle"), (note.Level, note.Species));
+        Assert.Equal([20, 9, 12, 11, 12, 11], note.Stats);
+        Assert.Equal(new int[6], note.Evs);
+        Assert.True(created.Order > repository.Stored["old"].Order);
+    }
+
+    [Fact]
+    public void AddFromCapture_of_a_branching_species_stops_at_it()
+    {
+        var store = CreateStore(new InMemoryRepository());
+
+        var (id, _) = store.AddFromCapture(new CaptureInput("Gloom", 21, "Modest", [60, 40, 45, 50, 45, 30]), Dex);
+
+        Assert.Equal(["Oddish", "Gloom"], store.All[id].Species.Select(s => s.Name));
+    }
+
+    [Fact]
+    public void AddFromCapture_twice_creates_two_pokemon_and_undo_restores_the_selection()
+    {
+        var repository = new InMemoryRepository(("old", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+        var input = new CaptureInput("Squirtle", 5, "Timid", [20, 9, 12, 11, 12, 11]);
+
+        var (first, _) = store.AddFromCapture(input, Dex);
+        var (second, undo) = store.AddFromCapture(input, Dex);
+
+        Assert.NotEqual(first, second);
+        Assert.Equal(3, repository.Stored.Count);
+
+        undo();
+
+        Assert.False(repository.Stored.ContainsKey(second));
+        Assert.Equal(first, store.SelectedId);
+    }
+
+    [Fact]
+    public void Backup_never_contains_the_capture_notes()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var capture = new CaptureStore(repository, Dex, Data);
+        capture.SetCounted("Abra", [true, true, true, true, true, true]);
+        capture.Conclude(new CaptureInput("Squirtle", 5, "Timid", [20, 9, 13, 11, 12, 11]));
+        var store = CreateStore(repository);
+
+        var backup = store.ExportBackup();
+
+        Assert.DoesNotContain("\"counted\"", backup, StringComparison.Ordinal);
+        Assert.DoesNotContain("\"best\"", backup, StringComparison.Ordinal);
+        Assert.NotEmpty(repository.CaptureNotes.Best);
     }
 }

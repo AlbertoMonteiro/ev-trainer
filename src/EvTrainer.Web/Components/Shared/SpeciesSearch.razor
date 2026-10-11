@@ -1,0 +1,29 @@
+@inherits StoreAwareComponent
+@inject Pokedex Dex
+
+@* Pokédex search (name with accents/case ignored, or number) shared by the settings and the capture screen. *@
+<input class="species-search" type="search" autocomplete="off" value="@_query"
+       aria-label="@L["Settings.Species.SearchLabel"]" placeholder="@L["Settings.Species.SearchPlaceholder"]"
+       @oninput="e => _query = e.Value?.ToString() ?? string.Empty" />
+<div class="species-options">
+    @foreach (var species in Dex.Search(_query))
+    {
+        <button type="button" class="species-option" data-name="@species.Name" @onclick="() => Pick(species)">
+            <PokemonSprite Name="@species.Name" Size="48" />
+            <span><span class="num muted">@L["Settings.Species.Dex", species.Dex]</span> @species.Name</span>
+        </button>
+    }
+</div>
+
+@code {
+    private string _query = string.Empty;
+
+    [Parameter]
+    public EventCallback<PokedexSpecies> OnPick { get; set; }
+
+    private Task Pick(PokedexSpecies species)
+    {
+        _query = string.Empty;
+        return OnPick.InvokeAsync(species);
+    }
+}

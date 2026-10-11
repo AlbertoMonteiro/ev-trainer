@@ -69,13 +69,6 @@
         }
     }
 
-    private string NatureLabel(Nature nature) => L[
-        "Settings.Nature.Option",
-        nature.Name,
-        nature is { Increases: { } up, Decreases: { } down }
-            ? L["Settings.Nature.Effect", StatShort(up), StatShort(down)].Value
-            : L["Settings.Nature.Neutral"].Value];
-
     private void PickSpecies(SpeciesPick pick)
     {
         if (_form is null)

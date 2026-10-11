@@ -3,12 +3,16 @@
 
 <PageTitle>@L["App.Title"]</PageTitle>
 
-<AppHeader OnNavigate="tab => _tab = tab" />
+<AppHeader OnNavigate="Navigate" OnCapture="() => _capturing = true" />
 
 <main class="page">
-    @if (Store.Selected is null)
+    @if (_capturing)
     {
-        <EmptyState OnAdd="AddPokemon">
+        <CaptureView OnClose="() => _capturing = false" OnAdded="() => Navigate(Tab.Ivs)" />
+    }
+    else if (Store.Selected is null)
+    {
+        <EmptyState OnAdd="AddPokemon" OnCapture="() => _capturing = true">
             <BackupPanel ImportOnly />
         </EmptyState>
     }
@@ -39,6 +43,13 @@
 
 @code {
     private Tab _tab = Tab.Evs;
+    private bool _capturing;
+
+    private void Navigate(Tab tab)
+    {
+        _capturing = false;
+        _tab = tab;
+    }
 
     private void AddPokemon()
     {

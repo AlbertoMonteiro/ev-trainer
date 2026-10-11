@@ -25,6 +25,9 @@ public sealed record IvInconsistent : IvCell;
 /// <summary>The stat was not filled in.</summary>
 public sealed record IvNoData : IvCell;
 
+/// <summary>HP of a species with base HP 1 (Shedinja): always 1, so no IV can be told.</summary>
+public sealed record IvUnknowable : IvCell;
+
 /// <summary>Intersection of every valid row for one stat.</summary>
 public closed record FinalCell;
 
@@ -43,14 +46,24 @@ public sealed record FinalKnown(int Value, bool MatchesNotes) : FinalCell;
 /// <summary>IV estimation (HANDOFF §4.7, §4.8).</summary>
 public static class Ivs
 {
-    public static IvCell[] RangeFor(LevelEntry entry, TrainingPokemon pokemon, ReferenceData data)
+    public static IvCell[] RangeFor(LevelEntry entry, TrainingPokemon pokemon, ReferenceData data) =>
+        RangeFor(
+            pokemon.Species.FirstOrDefault(s => s.Name == entry.Species),
+            data.FindNature(pokemon.Nature),
+            entry.Level,
+            entry.Stats,
+            entry.Evs);
+
+    /// <summary>
+    /// IV range of each stat for a species at a level with the given stats and EVs; null species makes every
+    /// filled stat inconsistent and a null nature is neutral.
+    /// </summary>
+    public static IvCell[] RangeFor(SpeciesEntry? species, Nature? nature, int level, int[] stats, int[] evs)
     {
-        var species = pokemon.Species.FirstOrDefault(s => s.Name == entry.Species);
-        var nature = data.FindNature(pokemon.Nature);
         var cells = new IvCell[StatVector.Count];
         for (var i = 0; i < StatVector.Count; i++)
         {
-            if (entry.Stats[i] <= 0)
+            if (stats[i] <= 0)
             {
                 cells[i] = new IvNoData();
                 continue;
@@ -62,11 +75,17 @@ public static class Ivs
                 continue;
             }
 
+            if (i == StatVector.Hp && species.Base[i] == 1)
+            {
+                cells[i] = new IvUnknowable();
+                continue;
+            }
+
             int? min = null, max = null;
             for (var iv = 0; iv <= StatVector.MaxIv; iv++)
             {
-                var value = StatFormula.Value(species.Base[i], iv, entry.Evs[i], entry.Level, nature?.Multiplier(i) ?? 10, i == StatVector.Hp);
-                if (value == entry.Stats[i])
+                var value = StatFormula.Value(species.Base[i], iv, evs[i], level, nature?.Multiplier(i) ?? 10, i == StatVector.Hp);
+                if (value == stats[i])
                 {
                     min ??= iv;
                     max = iv;

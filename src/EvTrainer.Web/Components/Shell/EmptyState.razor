@@ -4,6 +4,7 @@
     <p>@L["Empty.NoPokemon"]</p>
     <div class="actions">
         <button type="button" class="primary" @onclick="OnAdd">@L["Empty.AddPokemon"]</button>
+        <button type="button" class="capture" @onclick="OnCapture">@L["Empty.Capture"]</button>
         @ChildContent
     </div>
 </div>
@@ -11,6 +12,9 @@
 @code {
     [Parameter]
     public EventCallback OnAdd { get; set; }
+
+    [Parameter]
+    public EventCallback OnCapture { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

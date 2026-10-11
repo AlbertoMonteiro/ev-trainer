@@ -65,6 +65,48 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         return id;
     }
 
+    /// <summary>
+    /// Creates a Pokémon from an evaluated capture (research R9): current form = the captured species, evolution line from the
+    /// Pokédex, the nature, targets zero and the evaluated level as its first IV note (EVs zero). Selects it;
+    /// the undo removes it and restores the previous selection.
+    /// </summary>
+    public (string Id, Action Undo) AddFromCapture(CaptureInput input, Pokedex dex)
+    {
+        var previous = Preferences.SelectedId;
+        var id = Guid.CreateVersion7().ToString("N");
+        var species = dex.Find(input.Species);
+        var name = species?.Name ?? input.Species;
+        List<SpeciesEntry> line = species is null ? [new SpeciesEntry { Name = name }] : [.. dex.LineFor(species).Select(s => s.ToEntry())];
+        _all[id] = new TrainingPokemon
+        {
+            CurrentSpecies = name,
+            Nature = input.Nature,
+            Species = line,
+            Order = (_all.Count == 0 ? 0 : _all.Values.Max(p => p.Order)) + 1,
+            IvLog =
+            [
+                new LevelEntry
+                {
+                    Level = input.Level,
+                    Species = name,
+                    Stats = [.. input.Stats],
+                    Evs = new int[StatVector.Count],
+                },
+            ],
+        };
+        UpdatePreferences(Preferences with { SelectedId = id });
+        Commit();
+        return (id, () =>
+        {
+            if (_all.Remove(id))
+            {
+                UpdatePreferences(Preferences with { SelectedId = previous is not null && _all.ContainsKey(previous) ? previous : Ordered.FirstOrDefault().Id });
+                Commit();
+            }
+        }
+        );
+    }
+
     /// <summary>Records a battle for the selected Pokémon; null when nothing is selected.</summary>
     public RecordResult? RecordBattle(string opponent)
     {

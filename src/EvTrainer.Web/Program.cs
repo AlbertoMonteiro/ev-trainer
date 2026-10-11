@@ -18,6 +18,7 @@ builder.Services.AddSingleton(_ => Pokedex.LoadEmbedded());
 builder.Services.AddSingleton<IPokemonRepository, LocalStorageRepository>();
 builder.Services.AddSingleton<IBrowserApi, BrowserApi>();
 builder.Services.AddSingleton<TrainerStore>();
+builder.Services.AddSingleton<CaptureStore>();
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<ToastService>();
 builder.Services.AddSingleton(_ => LocalizationCatalog.LoadEmbedded());

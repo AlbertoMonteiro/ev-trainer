@@ -4,18 +4,7 @@
 <div class="species-picker">
     @if (Line.Count == 0 || _searching)
     {
-        <input class="species-search" type="search" autocomplete="off" value="@_query"
-               aria-label="@L["Settings.Species.SearchLabel"]" placeholder="@L["Settings.Species.SearchPlaceholder"]"
-               @oninput="e => _query = e.Value?.ToString() ?? string.Empty" />
-        <div class="species-options">
-            @foreach (var species in Dex.Search(_query))
-            {
-                <button type="button" class="species-option" data-name="@species.Name" @onclick="() => Pick(species)">
-                    <PokemonSprite Name="@species.Name" Size="48" />
-                    <span><span class="num muted">@L["Settings.Species.Dex", species.Dex]</span> @species.Name</span>
-                </button>
-            }
-        </div>
+        <SpeciesSearch OnPick="Pick" />
         @if (Line.Count > 0)
         {
             <button type="button" class="link" @onclick="() => _searching = false">@L["Settings.Species.CancelChange"]</button>
@@ -55,7 +44,6 @@
 </div>
 
 @code {
-    private string _query = string.Empty;
     private bool _searching;
 
     /// <summary>Current evolution line (empty for a new Pokémon).</summary>
@@ -75,14 +63,12 @@
 
     private void StartChange()
     {
-        _query = string.Empty;
         _searching = true;
     }
 
     private Task Pick(PokedexSpecies species)
     {
         _searching = false;
-        _query = string.Empty;
         return OnPick.InvokeAsync(new SpeciesPick([.. Dex.LineFor(species).Select(s => s.ToEntry())], species.Name));
     }
 

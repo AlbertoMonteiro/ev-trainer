@@ -1,15 +1,18 @@
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Json;
 using EvTrainer.Web.Domain.Model;
+using EvTrainer.Web.Domain.Reference;
 
 using Microsoft.JSInterop;
 
 namespace EvTrainer.Web.State;
 
 /// <summary>Stores everything in <c>localStorage</c>, in the same format as the backup file.</summary>
-public sealed class LocalStorageRepository(IJSRuntime js) : IPokemonRepository
+public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, ReferenceData data) : IPokemonRepository
 {
     public const string DataKey = "evtrainer:v1:data";
     public const string PreferencesKey = "evtrainer:v1:prefs";
+    public const string CaptureKey = "evtrainer:v1:capture";
 
     private IJSInProcessRuntime Js => (IJSInProcessRuntime)js;
 
@@ -22,6 +25,10 @@ public sealed class LocalStorageRepository(IJSRuntime js) : IPokemonRepository
     public UiPreferences LoadPreferences() => PokemonJson.DeserializePreferences(Get(PreferencesKey));
 
     public void SavePreferences(UiPreferences preferences) => Set(PreferencesKey, PokemonJson.SerializePreferences(preferences));
+
+    public CaptureNotes LoadCaptureNotes() => CaptureNotesJson.Deserialize(Get(CaptureKey), dex, data);
+
+    public void SaveCaptureNotes(CaptureNotes notes) => Set(CaptureKey, CaptureNotesJson.Serialize(notes));
 
     private string? Get(string key)
     {

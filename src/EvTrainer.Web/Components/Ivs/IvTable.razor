@@ -62,7 +62,7 @@
                             </th>
                             @foreach (var cell in cells)
                             {
-                                <td class="iv @(cell is IvInconsistent ? "bad" : "")">@Show(cell)</td>
+                                <td class="iv @(cell is IvInconsistent ? "bad" : "")" title="@(cell is IvUnknowable ? L["Ivs.Cell.UnknowableHint"].Value : null)">@Show(cell)</td>
                             }
                             <td>
                                 <button type="button" class="remove" aria-label="@L["Ivs.Remove", entry.Level]" @onclick="() => Remove(index, entry.Level)">×</button>
@@ -101,6 +101,7 @@
         IvSpan(var min, var max) => min == max ? $"{min}" : $"{min}–{max}",
         IvInconsistent => L["Ivs.Cell.Inconsistent"],
         IvNoData => L["Ivs.Cell.NoData"],
+        IvUnknowable => L["Ivs.Cell.Unknowable"],
     };
 
     private string Show(FinalCell cell) => cell switch

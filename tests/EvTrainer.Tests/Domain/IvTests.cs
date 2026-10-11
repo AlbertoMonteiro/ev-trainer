@@ -14,6 +14,7 @@ public class IvTests
         IvSpan(var min, var max) => min == max ? $"{min}" : $"{min}-{max}",
         IvInconsistent => "?",
         IvNoData => "·",
+        IvUnknowable => "n/a",
     };
 
     internal static string Show(FinalCell cell) => cell switch
@@ -100,5 +101,52 @@ public class IvTests
         var hardy = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Hardy"), Data);
 
         Assert.Equal(hardy.Select(Show), neutral.Select(Show));
+    }
+
+    [Fact]
+    public void Pure_overload_matches_the_level_entry_version()
+    {
+        var pokemon = Pokemons.Squirtle("Timid");
+        LevelEntry[] levels =
+        [
+            Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], [0, 0, 0, 0, 0, 0]),
+            Level(13, "Squirtle", [37, 18, 24, 21, 25, 22], [8, 0, 2, 1, 0, 3]),
+            Level(16, "Wartortle", [49, 25, 33, 30, 35, 30], [21, 0, 2, 5, 0, 3]),
+            Level(18, "Wartortle", [54, 27, 37, 33, 39, 34], [26, 0, 2, 13, 0, 3]),
+            Level(20, "Wartortle", [60, 30, 40, 37, 42, 37], [36, 0, 2, 21, 0, 4]),
+            Level(21, "Wartortle", [62, 31, 42, 39, 44, 38], [38, 0, 2, 27, 0, 4]),
+        ];
+
+        foreach (var level in levels)
+        {
+            var species = pokemon.Species.First(s => s.Name == level.Species);
+            Assert.Equal(
+                Ivs.RangeFor(level, pokemon, Data).Select(Show),
+                Ivs.RangeFor(species, Data.FindNature("Timid"), level.Level, level.Stats, level.Evs).Select(Show));
+        }
+    }
+
+    [Fact]
+    public void Pure_overload_without_species_is_inconsistent()
+    {
+        var cells = Ivs.RangeFor(null, Data.FindNature("Timid"), 5, [20, 9, 12, 11, 12, 0], new int[6]);
+
+        Assert.All(cells[..5], c => Assert.IsType<IvInconsistent>(c));
+        Assert.IsType<IvNoData>(cells[5]);
+    }
+
+    [Fact]
+    public void Shedinja_hp_cannot_be_known_and_is_left_out_of_the_final_row()
+    {
+        var shedinja = new SpeciesEntry { Name = "Shedinja", Base = [1, 90, 45, 30, 30, 40] };
+
+        var cells = Ivs.RangeFor(shedinja, Data.FindNature("Hardy"), 25, [1, 54, 33, 26, 26, 30], new int[6]);
+
+        Assert.IsType<IvUnknowable>(cells[0]);
+        Assert.IsType<IvSpan>(cells[1]);
+
+        var pokemon = new TrainingPokemon { Nature = "Hardy", Species = [shedinja] };
+        pokemon.IvLog.Add(Level(25, "Shedinja", [1, 54, 33, 26, 26, 30], new int[6]));
+        Assert.IsType<FinalNoData>(Ivs.Final(pokemon, Data)[0]);
     }
 }

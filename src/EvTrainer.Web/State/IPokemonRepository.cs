@@ -1,3 +1,4 @@
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Model;
 
 namespace EvTrainer.Web.State;
@@ -18,6 +19,11 @@ public interface IPokemonRepository
     UiPreferences LoadPreferences();
 
     void SavePreferences(UiPreferences preferences);
+
+    /// <summary>Capture conveniences (counted stats, best so far); empty when missing or invalid.</summary>
+    CaptureNotes LoadCaptureNotes();
+
+    void SaveCaptureNotes(CaptureNotes notes);
 }
 
 /// <summary>Browser features the UI needs besides storage (contracts/ui-shell.md, interop.js).</summary>

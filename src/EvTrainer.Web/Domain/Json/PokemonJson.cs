@@ -230,6 +230,7 @@ internal sealed class LevelDto
 [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
 [JsonSerializable(typeof(BackupDto))]
 [JsonSerializable(typeof(UiPreferences))]
+[JsonSerializable(typeof(CaptureNotesDto))]
 internal sealed partial class EvTrainerJsonContext : JsonSerializerContext
 {
     public static EvTrainerJsonContext Indented { get; } = new(new JsonSerializerOptions

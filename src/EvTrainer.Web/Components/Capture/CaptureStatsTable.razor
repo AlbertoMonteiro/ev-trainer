@@ -1,0 +1,66 @@
+@inherits StoreAwareComponent
+
+@* One row per stat: IV range, grade and whether the stat counts for the verdict. *@
+<table class="capture-table">
+    <thead>
+        <tr>
+            <th scope="col"><span class="visually-hidden">@L["Capture.Stats"]</span></th>
+            <th scope="col">@L["Capture.Column.Range"]</th>
+            <th scope="col">@L["Capture.Column.Grade"]</th>
+            <th scope="col">@L["Capture.Column.Counts"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < StatVector.Count; i++)
+        {
+            var stat = i;
+            var cell = Result.Cells[stat];
+            var counts = Counted[stat] && cell is not IvUnknowable;
+            <tr data-stat="@stat" class="@(counts ? "" : "not-counted")">
+                <th scope="row">@StatShort(stat)</th>
+                <td class="range num @(cell is IvInconsistent ? "bad" : "")">@Range(cell)</td>
+                <td class="grade @GradeClass(Result.Grades[stat])">@Grade(Result.Grades[stat])</td>
+                <td>
+                    @if (cell is not IvUnknowable)
+                    {
+                        <button type="button" class="count" aria-pressed="@(counts ? "true" : "false")"
+                                aria-label="@L["Capture.Counted.Toggle", L[$"Stat.Long.{stat}"].Value]"
+                                @onclick="() => OnToggle.InvokeAsync(stat)">@(counts ? L["Capture.Counted.Yes"] : L["Capture.Counted.No"])</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter, EditorRequired]
+    public CaptureResult Result { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public bool[] Counted { get; set; } = [];
+
+    [Parameter]
+    public EventCallback<int> OnToggle { get; set; }
+
+    private string Range(IvCell cell) => cell switch
+    {
+        IvSpan(var min, var max) => min == max ? $"{min}" : $"{min}–{max}",
+        IvInconsistent => L["Ivs.Cell.Inconsistent"],
+        IvNoData => L["Ivs.Cell.NoData"],
+        IvUnknowable => L["Capture.Unknowable"],
+    };
+
+    private string Grade(GradeSpan? grade) => grade switch
+    {
+        null => L["Ivs.Final.NoData"],
+        GradeSpan(var low, var high) when low == high => GradeLabel(low),
+        GradeSpan(var low, var high) => L["Capture.GradeSpan", GradeLabel(low), GradeLabel(high)],
+    };
+
+    private string GradeLabel(IvGrade grade) => L[$"Capture.Grade.{grade}"];
+
+    /// <summary>Color only a definite grade; a range across grades stays neutral (it is uncertain, not bad).</summary>
+    private static string GradeClass(GradeSpan? grade) =>
+        grade is { } span && span.Low == span.High ? $"grade-{span.Low.ToString().ToLowerInvariant()}" : "";
+}

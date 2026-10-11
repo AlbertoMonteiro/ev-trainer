@@ -1,0 +1,76 @@
+@inherits StoreAwareComponent
+@inject CaptureStore Capture
+@inject Pokedex Dex
+@inject ToastService Toasts
+
+@{
+    var best = Capture.BestFor(Species);
+    var comparison = Current is { } current ? Capture.CompareWithBest(current) : null;
+}
+<section class="best-capture">
+    <h3>@L["Capture.Best.Title"]</h3>
+    @if (best is null)
+    {
+        <p class="none hint">@L["Capture.Best.None", Species]</p>
+    }
+    else
+    {
+        <p class="summary">@L["Capture.Best.Summary", best.Level, best.Nature, CaptureText.Verdict(L, Capture.Evaluate(best).Verdict)]</p>
+        @if (comparison is { } result)
+        {
+            <p class="compare compare-@result.ToString().ToLowerInvariant()">@L[$"Capture.Compare.{result}"]</p>
+        }
+        <div class="row-actions">
+            <button type="button" class="add-best" @onclick="() => AddBest(best)">@L["Capture.Best.Add"]</button>
+            <button type="button" class="forget" @onclick="Forget">@L["Capture.Best.Forget"]</button>
+        </div>
+    }
+    @if (WillSave(best, comparison))
+    {
+        <p class="will-save hint">@L["Capture.Best.WillSave"]</p>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Species { get; set; } = string.Empty;
+
+    /// <summary>The capture being typed, when every field is valid.</summary>
+    [Parameter]
+    public CaptureInput? Current { get; set; }
+
+    /// <summary>Called after the best capture was added to the list.</summary>
+    [Parameter]
+    public EventCallback OnAdded { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Capture.Changed += OnCaptureChanged;
+    }
+
+    protected override void OnDispose() => Capture.Changed -= OnCaptureChanged;
+
+    private void OnCaptureChanged() => InvokeAsync(StateHasChanged);
+
+    /// <summary>Concluding the current capture would make it the best so far.</summary>
+    private bool WillSave(CaptureInput? best, CaptureComparison? comparison) =>
+        Current is { } current
+        && Capture.Evaluate(current).Score is not null
+        && (best is null || comparison is null or CaptureComparison.Better);
+
+    private async Task AddBest(CaptureInput best)
+    {
+        var (_, undo) = Store.AddFromCapture(best, Dex);
+        Toasts.Show(L["Capture.Added", best.Species], undo);
+        await OnAdded.InvokeAsync();
+    }
+
+    private void Forget()
+    {
+        if (Capture.Forget(Species) is { } undo)
+        {
+            Toasts.Show(L["Capture.Best.Forgotten", Species], undo);
+        }
+    }
+}

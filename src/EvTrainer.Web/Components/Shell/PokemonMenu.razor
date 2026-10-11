@@ -24,6 +24,7 @@
     </ul>
     <hr />
     <button type="button" class="add" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: true)">@L["Menu.AddPokemon"]</button>
+    <button type="button" class="capture" role="menuitem" @onclick="Capture">@L["Menu.Capture"]</button>
     @if (Store.Ordered.Count > 0)
     {
         <button type="button" class="export" role="menuitem" @onclick="Export">@L["Menu.ExportBackup"]</button>
@@ -92,6 +93,15 @@
     private async Task Choose(string id)
     {
         Store.Select(id);
+        await OnClose.InvokeAsync();
+    }
+
+    [Parameter]
+    public EventCallback OnCapture { get; set; }
+
+    private async Task Capture()
+    {
+        await OnCapture.InvokeAsync();
         await OnClose.InvokeAsync();
     }
 

@@ -7,6 +7,10 @@ public static class StatVector
 
     public const int Hp = 0;
 
+    public const int Attack = 1;
+
+    public const int SpAttack = 3;
+
     public const int MaxEvPerStat = 255;
 
     public const int MaxEvTotal = 510;

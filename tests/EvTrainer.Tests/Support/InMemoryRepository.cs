@@ -1,3 +1,4 @@
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Model;
 using EvTrainer.Web.State;
 
@@ -9,6 +10,8 @@ public sealed class InMemoryRepository : IPokemonRepository
     public UiPreferences Preferences { get; private set; } = new();
     public int SaveCount { get; private set; }
     public bool FailSaves { get; set; }
+    public CaptureNotes CaptureNotes { get; private set; } = new();
+    public int CaptureSaveCount { get; private set; }
 
     public InMemoryRepository(params (string Id, TrainingPokemon Pokemon)[] seed)
     {
@@ -36,4 +39,12 @@ public sealed class InMemoryRepository : IPokemonRepository
     public UiPreferences LoadPreferences() => Preferences with { };
 
     public void SavePreferences(UiPreferences preferences) => Preferences = preferences with { };
+
+    public CaptureNotes LoadCaptureNotes() => CaptureNotes.Clone();
+
+    public void SaveCaptureNotes(CaptureNotes notes)
+    {
+        CaptureSaveCount++;
+        CaptureNotes = notes.Clone();
+    }
 }

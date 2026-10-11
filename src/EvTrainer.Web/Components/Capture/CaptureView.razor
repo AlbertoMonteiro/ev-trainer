@@ -1,0 +1,161 @@
+@inherits StoreAwareComponent
+@inject CaptureStore Capture
+@inject Pokedex Dex
+@inject ToastService Toasts
+
+<section class="card capture-view">
+    <div class="card-head">
+        <h2>@L["Capture.Title"]</h2>
+        <button type="button" class="close-capture" @onclick="Close">@L["Capture.Close"]</button>
+    </div>
+    <p class="hint">@L["Capture.Hint"]</p>
+
+    <div class="form-grid">
+        <div class="field">
+            <span class="label">@L["Capture.Species"]</span>
+            @if (_species is { } species)
+            {
+                <div class="capture-species" data-name="@species">
+                    <PokemonSprite Name="@species" Size="48" />
+                    <span class="name">@species</span>
+                    <button type="button" class="change-species" @onclick="() => _species = null">@L["Capture.ChangeSpecies"]</button>
+                </div>
+            }
+            else
+            {
+                <SpeciesSearch OnPick="species => _species = species.Name" />
+            }
+        </div>
+
+        <div class="two">
+            <div class="field">
+                <label for="capture-level">@L["Capture.Level"]</label>
+                <input id="capture-level" inputmode="numeric" value="@_level" aria-invalid="@Invalid(_level, ParseLevel(_level) is not null)"
+                       @oninput="e => _level = e.Value?.ToString() ?? string.Empty" />
+            </div>
+            <div class="field">
+                <label for="capture-nature">@L["Capture.Nature"]</label>
+                <select id="capture-nature" value="@_nature" @onchange="e => _nature = e.Value?.ToString() ?? string.Empty">
+                    <option value="">@L["Capture.Nature.Choose"]</option>
+                    @foreach (var nature in Store.Data.Natures)
+                    {
+                        <option value="@nature.Name">@NatureLabel(nature)</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="field capture-stats">
+            <span class="label">@L["Capture.Stats"]</span>
+            <div class="six">
+                @for (var i = 0; i < StatVector.Count; i++)
+                {
+                    var stat = i;
+                    <div class="cell">
+                        <label for="capture-stat-@stat">@StatShort(stat)</label>
+                        <input id="capture-stat-@stat" inputmode="numeric" value="@_stats[stat]" aria-invalid="@Invalid(_stats[stat], ParseStat(_stats[stat]) is not null)"
+                               @oninput="e => _stats[stat] = e.Value?.ToString() ?? string.Empty" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (Input is { } input)
+    {
+        <CaptureResultPanel Input="input" />
+    }
+
+    @if (_species is { } chosen)
+    {
+        <BestCaptureCard Species="@chosen" Current="Input" OnAdded="OnAdded" />
+    }
+
+    <div class="row-actions capture-actions">
+        <button type="button" class="primary add-capture" disabled="@(Input is null)" @onclick="Add">@L["Capture.Add"]</button>
+        <button type="button" class="new-capture" @onclick="NewCapture">@L["Capture.New"]</button>
+    </div>
+</section>
+
+@code {
+    private string? _species;
+    private string _level = string.Empty;
+    private string _nature = string.Empty;
+    private string[] _stats = [.. Enumerable.Repeat(string.Empty, StatVector.Count)];
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    /// <summary>Called after the capture was added to the list (the new Pokémon is selected).</summary>
+    [Parameter]
+    public EventCallback OnAdded { get; set; }
+
+    private static int? ParseLevel(string text) => SettingsFormModel.ParseInRange(text, 1, 100);
+
+    private static int? ParseStat(string text) => SettingsFormModel.ParseInRange(text, 1, CaptureInput.MaxStat);
+
+    /// <summary>"true" only for a filled-in field that does not parse (an empty field is just incomplete).</summary>
+    private static string Invalid(string text, bool parses) =>
+        !string.IsNullOrWhiteSpace(text) && !parses ? "true" : "false";
+
+    /// <summary>The typed capture when every field is valid; null otherwise.</summary>
+    private CaptureInput? Input
+    {
+        get
+        {
+            if (_species is not { } species || ParseLevel(_level) is not { } level)
+            {
+                return null;
+            }
+
+            var stats = new int[StatVector.Count];
+            for (var i = 0; i < stats.Length; i++)
+            {
+                if (ParseStat(_stats[i]) is not { } value)
+                {
+                    return null;
+                }
+
+                stats[i] = value;
+            }
+
+            var input = new CaptureInput(species, level, _nature, stats);
+            return input.IsValid(Dex, Store.Data) ? input : null;
+        }
+    }
+
+    private void NewCapture()
+    {
+        Conclude();
+        _stats = [.. Enumerable.Repeat(string.Empty, StatVector.Count)];
+    }
+
+    private Task Close()
+    {
+        Conclude();
+        return OnClose.InvokeAsync();
+    }
+
+    /// <summary>The player is done with this capture: it may become the best so far (research R6).</summary>
+    private void Conclude()
+    {
+        if (Input is { } input && Capture.Conclude(input) is { } undo)
+        {
+            Toasts.Show(L["Capture.Best.Saved", input.Species], undo);
+        }
+    }
+
+    private async Task Add()
+    {
+        if (Input is not { } input)
+        {
+            return;
+        }
+
+        // Keeping it also concludes the evaluation; the toast offers undoing the addition.
+        Capture.Conclude(input);
+        var (_, undo) = Store.AddFromCapture(input, Dex);
+        Toasts.Show(L["Capture.Added", input.Species], undo);
+        await OnAdded.InvokeAsync();
+    }
+}
