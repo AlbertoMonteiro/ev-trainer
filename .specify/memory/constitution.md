@@ -13,8 +13,10 @@ e é publicada no **GitHub Pages**.
   - `<base href>` ajustado para o subcaminho do repositório no GitHub Pages;
   - `404.html` como fallback de rotas da SPA (deep links e refresh funcionam);
   - arquivo `.nojekyll` para que o Pages sirva `_framework/` sem processamento.
-- Após o primeiro carregamento, o app DEVE continuar funcional sem conexão para as funções que
-  não dependem de rede (todas, dado o Princípio V).
+- Após o primeiro carregamento, o app DEVE continuar funcional sem conexão; a única função que
+  depende de rede é a sincronização opcional com armazenamento externo (Princípio V).
+- Integrações com armazenamento externo DEVEM falar direto do browser com a API pública do
+  provedor; o app NÃO DEVE ter proxy, servidor ou função em nuvem próprios para isso.
 
 **Racional:** GitHub Pages só hospeda conteúdo estático; qualquer dependência de servidor quebra
 o deploy e o uso offline à beira do jogo.
@@ -75,35 +77,66 @@ O app DEVE reproduzir as regras de Pokémon FireRed (Gen 3) descritas no HANDOFF
 **Racional:** um erro de arredondamento ou de ordem invalida o planejamento de EVs, que no jogo
 não pode ser desfeito.
 
-### V. Dados Locais e do Usuário
+### V. Dados do Usuário: Locais Primeiro, Externos por Opção
 
-- A persistência DEVE ser exclusivamente local ao aparelho (localStorage ou IndexedDB), acessada
-  por uma interface `IPokemonRepository`; o domínio não conhece o mecanismo de armazenamento.
-- A UI DEVE atualizar de imediato (escrita otimista) e a gravação NÃO DEVE bloquear a interação.
+- A fonte da verdade é o aparelho: a persistência local (localStorage ou IndexedDB) fica atrás de
+  `IPokemonRepository`, e o domínio não conhece o mecanismo de armazenamento. O app DEVE funcionar
+  por completo sem nenhum armazenamento externo configurado.
+- A UI DEVE atualizar de imediato (escrita otimista) e nenhuma gravação, local ou externa, DEVE
+  bloquear a interação.
 - O app DEVE oferecer **exportar** e **importar** os dados em JSON, no formato do HANDOFF §3.1,
-  aceitando `user-data-export.json` sem conversão manual. Export/import é o único meio de levar
-  dados entre dispositivos.
-- O app NÃO DEVE ter login, conta, sincronização em nuvem, telemetria, analytics ou envio de
-  dados do usuário a terceiros.
-- O indicador de status DEVE refletir o estado real (salvo neste aparelho, salvando, erro).
+  aceitando `user-data-export.json` sem conversão manual, sem exigir conta.
+- **Armazenamento externo** é opcional e DEVE ser:
+  - desligado por padrão e ativado explicitamente pelo usuário;
+  - guardado em um espaço **do próprio usuário** num provedor que ele escolhe (primeira versão:
+    **Gist privado** na conta GitHub dele; prevista: **Google Drive**, na pasta do app), nunca em
+    conta, banco ou servidor do app;
+  - acessado atrás de uma interface de provedor, de modo que adicionar um provedor não altere o
+    domínio nem os provedores existentes;
+  - gravado no mesmo formato do backup (HANDOFF §3.1).
+- **Credenciais** (tokens, sessões) DEVEM ficar só no aparelho: nunca no backup/export, em URL ou
+  em logs; o app DEVE pedir o menor escopo possível (ex.: só gists; só a pasta do app) e permitir
+  desconectar, apagando a credencial, a qualquer momento.
+- **Sincronização** DEVE ser segura: nunca sobrescrever em silêncio dados mais novos; conflitos
+  seguem uma regra documentada na feature e o usuário vê o resultado; falha de rede ou do provedor
+  NÃO DEVE perder nem corromper os dados locais.
+- O app NÃO DEVE ter conta própria, telemetria, analytics nem enviar dados do usuário a terceiros
+  além do provedor que o próprio usuário configurou.
+- O indicador de status DEVE refletir o estado real: salvo neste aparelho, salvando, erro e, com
+  armazenamento externo ativo, o estado da sincronização.
 - Exclusões destrutivas (batalha, nível, Pokémon) DEVEM oferecer desfazer.
 
-**Racional:** sem backend no GitHub Pages, o aparelho é a fonte da verdade; export/import
-preserva a portabilidade sem introduzir servidor ou credenciais.
+**Racional:** sem backend no GitHub Pages, o aparelho continua sendo a fonte da verdade; usar o
+celular e o PC com os mesmos dados exige guardá-los fora, e fazer isso no espaço do próprio usuário,
+por escolha dele e sem servidor do app, preserva a privacidade e o deploy estático.
 
-### VI. Mobile-First e Acessível
+### VI. Mobile-First, Bom no Desktop e Acessível
 
-- Layout de coluna única, largura máxima 560 px e margem lateral de 16 px; sem rolagem
-  horizontal em 360 px de largura.
-- A ação principal (registrar batalha) DEVE exigir um único toque.
-- Tema claro e escuro DEVEM usar os tokens do HANDOFF §5.7, seguindo o sistema.
+O app é desenhado primeiro para o celular, mas DEVE ter boa experiência também no desktop; o layout
+se adapta pela **largura da janela**, nunca por detecção de dispositivo.
+
+- **Celular e janelas estreitas (abaixo de 1024 px)**: coluna única, largura máxima 560 px e margem
+  lateral de 16 px; sem rolagem horizontal em 360 px de largura; alvos de toque de pelo menos 44 px.
+- **Desktop (a partir de 1024 px)**: o layout NÃO DEVE ficar preso à coluna do celular. Ele DEVE
+  aproveitar a largura — mais colunas, blocos relacionados lado a lado, navegação persistente quando
+  ela poupar cliques — até uma largura máxima de conteúdo confortável para leitura, centralizada
+  acima disso.
+- Em nenhuma largura entre 360 px e 2560 px DEVE haver rolagem horizontal da página ou elementos
+  sobrepostos; redimensionar a janela NÃO DEVE perder dados digitados, aba ou seleção.
+- No desktop, elementos interativos DEVEM ter estados de hover e de foco de teclado visíveis, e as
+  ações DEVEM ser alcançáveis pelo teclado.
+- A ação principal (registrar batalha) DEVE exigir um único toque ou clique.
+- Tema claro e escuro DEVEM usar os tokens do HANDOFF §5.7, seguindo o sistema, em todas as
+  larguras.
 - Animações DEVEM respeitar `prefers-reduced-motion`.
 - Campos numéricos DEVEM usar `inputmode="numeric"`; controles só com ícone DEVEM ter
   `aria-label`.
 - O app DEVERIA ser um PWA instalável com service worker offline, em substituição à Fullscreen
   API no celular.
 
-**Racional:** o uso real é no celular, com o jogo aberto ao lado, tocando rápido após cada batalha.
+**Racional:** o uso mais comum é no celular, com o jogo aberto ao lado, tocando rápido após cada
+batalha; mas quem joga no emulador do PC usa o app numa janela ao lado do jogo, e uma coluna de
+celular no meio de um monitor desperdiça a tela e obriga a rolar sem necessidade.
 
 ### VII. Pronto para Outros Idiomas
 
@@ -135,6 +168,10 @@ regras desde o início custa pouco.
 - Testes: xUnit + bUnit, apenas no projeto `EvTrainer.Tests`.
 - JavaScript somente via interop pontual e justificado (armazenamento local, download/upload de
   arquivo, recursos do browser sem API .NET). Frameworks JS/CSS de terceiros NÃO DEVEM ser usados.
+- Exceção: o script oficial de autenticação de um provedor de armazenamento externo (ex.: Google
+  Identity Services) PODE ser carregado, sob demanda e só quando o usuário ativa aquele provedor,
+  justificado no plano da feature. Quando a API do provedor puder ser chamada direto do .NET
+  (ex.: REST do GitHub com `HttpClient`), isso DEVE ser preferido.
 - CSS próprio com os design tokens do HANDOFF §5.7; fontes Chakra Petch, IBM Plex Sans e
   IBM Plex Mono.
 - Trimming do publish DEVE permanecer habilitado; serialização JSON DEVE ser compatível com
@@ -192,4 +229,4 @@ comando exato de cada passo de scaffolding.
 - `HANDOFF.md` é a especificação de referência do produto; esta constituição governa como ele é
   construído.
 
-**Version**: 1.1.0 | **Ratified**: 2026-10-09 | **Last Amended**: 2026-10-09
+**Version**: 1.3.0 | **Ratified**: 2026-10-09 | **Last Amended**: 2026-10-11
