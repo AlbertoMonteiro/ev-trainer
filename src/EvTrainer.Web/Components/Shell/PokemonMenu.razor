@@ -13,7 +13,10 @@
             <li>
                 <button type="button" class="pokemon-item" role="menuitem" data-id="@id" aria-current="@(selected ? "true" : "false")"
                         @onclick="() => Choose(id)">
-                    <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.DisplaySpecies" Size="40" />@pokemon.Name</span>
+                    <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />@PokemonLabel(pokemon)@if (!string.IsNullOrEmpty(pokemon.Nature))
+                    {
+                        <span class="nature muted">@pokemon.Nature</span>
+                    }</span>
                     <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
                 </button>
             </li>

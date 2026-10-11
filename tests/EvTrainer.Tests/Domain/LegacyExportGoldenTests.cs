@@ -27,6 +27,19 @@ public partial class LegacyExportGoldenTests
     }
 
     [Fact]
+    public void Every_pokemon_gets_a_current_species_of_its_line()
+    {
+        Assert.SkipUnless(File.Exists(FixturePath), "user-data-export.json is personal data and not in the repository.");
+        var items = BackupFormat.Read(File.ReadAllText(FixturePath)) switch
+        {
+            BackupDocuments documents => documents.Items,
+            BackupError error => throw new Xunit.Sdk.XunitException(error.Kind.ToString()),
+        };
+
+        Assert.All(items.Values, p => Assert.Contains(p.CurrentSpecies, p.Species.Select(s => s.Name)));
+    }
+
+    [Fact]
     public void Ev_totals_match_the_current_app()
     {
         var totals = Evs.Totals(Squirtle().Events, Data);

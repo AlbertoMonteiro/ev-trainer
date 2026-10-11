@@ -63,6 +63,58 @@ public class BackupFormatTests
     }
 
     [Fact]
+    public void Old_backup_with_a_nickname_gets_the_current_species_and_keeps_everything_else()
+    {
+        const string json = """
+            {
+              "collection": "pokemon",
+              "documents": {
+                "g": {
+                  "name": "Gardi",
+                  "nature": "Modest",
+                  "species": [
+                    { "name": "Ralts", "base": [28, 25, 25, 45, 35, 40] },
+                    { "name": "Kirlia", "base": [38, 35, 35, 65, 55, 50] },
+                    { "name": "Gardevoir", "base": [68, 65, 65, 125, 115, 80] }
+                  ],
+                  "targets": [0, 0, 0, 252, 0, 252],
+                  "events": [ { "o": "Abra", "n": 4, "m": 1 } ],
+                  "ivLog": [
+                    { "lv": 5, "sp": "Ralts", "st": [20, 9, 9, 13, 11, 12], "ev": [0, 0, 0, 0, 0, 0] },
+                    { "lv": 20, "sp": "Kirlia", "st": [50, 25, 25, 41, 35, 32], "ev": [0, 0, 0, 4, 0, 0] }
+                  ],
+                  "pokerus": true,
+                  "macho": false,
+                  "order": 1
+                }
+              }
+            }
+            """;
+
+        var back = Ok(BackupFormat.Read(json)).Items["g"];
+
+        Assert.Equal("Kirlia", back.CurrentSpecies);
+        Assert.Equal("Modest", back.Nature);
+        Assert.Equal(["Ralts", "Kirlia", "Gardevoir"], back.Species.Select(s => s.Name));
+        Assert.Equal([0, 0, 0, 252, 0, 252], back.Targets);
+        Assert.Equal("Abra", Assert.Single(back.Events).Opponent);
+        Assert.Equal([5, 20], back.IvLog.Select(l => l.Level));
+        Assert.True(back.Pokerus);
+
+        var written = BackupFormat.Write(new Dictionary<string, TrainingPokemon> { ["g"] = back }, indented: true);
+        Assert.Contains("\"name\": \"Kirlia\"", written, StringComparison.Ordinal);
+        Assert.Equal(written, BackupFormat.Write(Ok(BackupFormat.Read(written)).Items, indented: true));
+    }
+
+    [Fact]
+    public void Missing_name_is_accepted()
+    {
+        const string json = """{ "collection": "pokemon", "documents": { "s": { "species": [ { "name": "Squirtle", "base": [44, 48, 65, 50, 64, 43] } ] } } }""";
+
+        Assert.Equal("Squirtle", Ok(BackupFormat.Read(json)).Items["s"].CurrentSpecies);
+    }
+
+    [Fact]
     public void Write_keeps_alias_names_as_recorded()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Bulbasaur (rival)", 1, 1), ("Nidoran F", 1, 1));

@@ -189,6 +189,64 @@ public class TrainerStoreTests
     }
 
     [Fact]
+    public void SaveSettings_records_the_current_species()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+
+        store.SaveSettings("Wartortle", "Timid", [252, 0, 2, 252, 0, 4], store.Selected!.Species);
+
+        Assert.Equal("Wartortle", repository.Stored["a"].CurrentSpecies);
+    }
+
+    [Fact]
+    public void SaveSettings_with_a_current_species_outside_the_line_is_ignored()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+
+        store.SaveSettings("Pidgey", "Modest", [1, 1, 1, 1, 1, 1], store.Selected!.Species);
+
+        Assert.Equal("Squirtle", repository.Stored["a"].CurrentSpecies);
+        Assert.Equal("Timid", repository.Stored["a"].Nature);
+        Assert.Equal(0, repository.SaveCount);
+    }
+
+    [Fact]
+    public void AddLevel_with_a_later_species_advances_and_RemoveLevel_does_not_devolve()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+
+        store.AddLevel(Note(16, 49));
+
+        Assert.Equal("Wartortle", repository.Stored["a"].CurrentSpecies);
+
+        store.RemoveLevel(0);
+
+        Assert.Equal("Wartortle", repository.Stored["a"].CurrentSpecies);
+    }
+
+    [Fact]
+    public void ReplaceLevel_to_a_later_species_advances_and_undo_restores_the_current_species()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.CurrentSpecies = "Wartortle";
+        pokemon.IvLog.AddRange([Note(16, 49), Note(21, 62)]);
+        var repository = new InMemoryRepository(("a", pokemon));
+        var store = CreateStore(repository);
+
+        var undo = store.ReplaceLevel(1, new LevelEntry { Level = 36, Species = "Blastoise", Stats = [1, 1, 1, 1, 1, 1], Evs = new int[6] });
+
+        Assert.Equal("Blastoise", repository.Stored["a"].CurrentSpecies);
+
+        undo!();
+
+        Assert.Equal("Wartortle", repository.Stored["a"].CurrentSpecies);
+        Assert.Equal([16, 21], repository.Stored["a"].IvLog.Select(l => l.Level));
+    }
+
+    [Fact]
     public void ReplaceLevel_with_an_invalid_index_does_nothing()
     {
         var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));

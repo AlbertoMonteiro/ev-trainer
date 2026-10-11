@@ -8,19 +8,51 @@ namespace EvTrainer.Tests.Components.Evs;
 public class EvSummaryTests : AppTestContext
 {
     [Fact]
-    public void Shows_title_totals_and_six_mini_cards()
+    public void Shows_the_sprite_as_title_with_totals_and_six_mini_cards()
     {
         Seed(Pokemons.Squirtle(targets: [252, 0, 2, 252, 0, 4]).WithEvents(("Caterpie", 10, 1), ("Geodude", 2, 1)));
 
         var cut = Render<EvSummary>();
 
-        Assert.Equal(T("Evs.Summary.Title", "Squirtle"), cut.Find(".card-head h2").TextContent.Trim());
+        var title = cut.Find(".card-head h2.summary-who");
+        var image = title.QuerySelector("span[role=img]")!;
+        Assert.Equal(T("Evs.Summary.Label", "Squirtle"), image.GetAttribute("aria-label"));
+        Assert.Contains("--sprite-size: 64px", image.QuerySelector(".sprite")!.GetAttribute("style"));
+        Assert.Equal("sprites/7.png", image.QuerySelector(".sprite img")!.GetAttribute("src"));
+        Assert.DoesNotContain("Squirtle", title.TextContent);
         Assert.Equal(T("Evs.Summary.Totals", 12, 510), cut.Find(".card-head .totals").TextContent.Trim());
         var minis = cut.FindAll(".mini");
         Assert.Equal(6, minis.Count);
         Assert.Equal(T("Stat.Short.0"), minis[0].QuerySelector(".label")!.TextContent.Trim());
         Assert.Equal("10/252", minis[0].QuerySelector(".value")!.TextContent.Trim());
         Assert.Equal("2/2", minis[2].QuerySelector(".value")!.TextContent.Trim());
+    }
+
+    [Fact]
+    public void The_sprite_follows_the_current_species()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<EvSummary>();
+
+        Store.SaveSettings("Wartortle", "Timid", [252, 0, 2, 252, 0, 4], Store.Selected!.Species);
+
+        cut.WaitForAssertion(() =>
+            Assert.Equal("sprites/8.png", cut.Find(".summary-who .sprite img").GetAttribute("src")));
+        Assert.Equal(T("Evs.Summary.Label", "Wartortle"), cut.Find(".summary-who span[role=img]").GetAttribute("aria-label"));
+    }
+
+    [Fact]
+    public void Without_species_the_badge_shows_a_question_mark_and_the_label_a_placeholder()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.CurrentSpecies = "";
+        pokemon.Species = [new()];
+        Seed(pokemon);
+
+        var cut = Render<EvSummary>();
+
+        Assert.Equal(T("Evs.Summary.Label", T("Pokemon.NoSpecies")), cut.Find(".summary-who span[role=img]").GetAttribute("aria-label"));
+        Assert.Equal("?", cut.Find(".summary-who .sprite .badge").TextContent.Trim());
     }
 
     [Fact]

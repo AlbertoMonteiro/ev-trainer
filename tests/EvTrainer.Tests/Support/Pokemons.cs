@@ -11,7 +11,7 @@ public static class Pokemons
 
     public static TrainingPokemon Squirtle(string nature = "Timid", int[]? targets = null) => new()
     {
-        Name = "Squirtle",
+        CurrentSpecies = "Squirtle",
         Nature = nature,
         Species =
         [
@@ -20,6 +20,19 @@ public static class Pokemons
             new SpeciesEntry { Name = "Blastoise", Base = [.. BlastoiseBase] },
         ],
         Targets = targets ?? [252, 0, 2, 252, 0, 4],
+        Order = 1,
+    };
+
+    public static TrainingPokemon Pidgey(string nature = "Jolly") => new()
+    {
+        CurrentSpecies = "Pidgey",
+        Nature = nature,
+        Species =
+        [
+            new SpeciesEntry { Name = "Pidgey", Base = [40, 45, 40, 35, 35, 56] },
+            new SpeciesEntry { Name = "Pidgeotto", Base = [63, 60, 55, 50, 50, 71] },
+            new SpeciesEntry { Name = "Pidgeot", Base = [83, 80, 75, 70, 70, 91] },
+        ],
         Order = 1,
     };
 

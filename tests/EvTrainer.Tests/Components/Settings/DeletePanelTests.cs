@@ -12,8 +12,7 @@ public class DeletePanelTests : AppTestContext
     {
         var first = Pokemons.Squirtle();
         first.Order = 1;
-        var second = Pokemons.Squirtle();
-        second.Name = "Pidgey";
+        var second = Pokemons.Pidgey();
         second.Order = 2;
         Repository.Stored["a"] = first;
         Repository.Stored["b"] = second;

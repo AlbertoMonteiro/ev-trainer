@@ -26,15 +26,20 @@
         <ol class="line">
             @foreach (var entry in Line)
             {
+                var name = entry.Name;
                 <li class="species-chip">
-                    <PokemonSprite Name="@entry.Name" Size="48" />
-                    <span class="chip-text">
-                        <span class="name">@entry.Name</span>
-                        <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
-                    </span>
+                    <button type="button" class="species-current" aria-pressed="@(name == Current ? "true" : "false")"
+                            aria-label="@L["Settings.Species.SetCurrent", name]" @onclick="() => OnCurrent.InvokeAsync(name)">
+                        <PokemonSprite Name="@name" Size="48" />
+                        <span class="chip-text">
+                            <span class="name">@name</span>
+                            <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
+                        </span>
+                    </button>
                 </li>
             }
         </ol>
+        <p class="hint">@L["Settings.Species.CurrentHint"]</p>
         @if (Line.Count < 3 && Dex.Find(Line[^1].Name) is { } last && Dex.EvolutionsOf(last) is { Count: > 0 } evolutions)
         {
             <div class="evolutions">
@@ -57,8 +62,16 @@
     [Parameter]
     public IReadOnlyList<SpeciesEntry> Line { get; set; } = [];
 
+    /// <summary>Species of the line the Pokémon is in right now.</summary>
+    [Parameter]
+    public string Current { get; set; } = string.Empty;
+
     [Parameter]
     public EventCallback<SpeciesPick> OnPick { get; set; }
+
+    /// <summary>Raised with the name of the species of the line the user marked as current.</summary>
+    [Parameter]
+    public EventCallback<string> OnCurrent { get; set; }
 
     private void StartChange()
     {

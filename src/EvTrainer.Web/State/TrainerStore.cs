@@ -105,14 +105,14 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
     }
 
-    public void SaveSettings(string name, string nature, int[] targets, IReadOnlyList<SpeciesEntry> species)
+    public void SaveSettings(string current, string nature, int[] targets, IReadOnlyList<SpeciesEntry> species)
     {
-        if (Selected is not { } pokemon)
+        if (Selected is not { } pokemon || !species.Any(s => s.Name == current))
         {
             return;
         }
 
-        pokemon.Name = name.Trim();
+        pokemon.CurrentSpecies = current;
         pokemon.Nature = nature;
         pokemon.Targets = targets.ToSix();
         pokemon.Species = [.. species.Select(s => s.Clone())];
@@ -261,6 +261,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
 
         var original = _all[id].IvLog[index];
+        var originalSpecies = _all[id].CurrentSpecies;
         var replacement = entry.Clone();
         _all[id].IvLog.RemoveAt(index);
         _all[id].InsertLevel(replacement);
@@ -270,6 +271,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             if (_all.TryGetValue(id, out var pokemon) && pokemon.IvLog.Remove(replacement))
             {
                 pokemon.IvLog.Insert(Math.Min(index, pokemon.IvLog.Count), original);
+                pokemon.CurrentSpecies = originalSpecies;
                 Commit();
             }
         };

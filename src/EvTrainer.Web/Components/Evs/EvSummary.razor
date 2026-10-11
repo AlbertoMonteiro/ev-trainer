@@ -5,7 +5,9 @@
     var totals = Store.SelectedTotals;
     <section class="card summary">
         <div class="card-head">
-            <h2>@L["Evs.Summary.Title", pokemon.Name]</h2>
+            <h2 class="summary-who">
+                <span role="img" aria-label="@L["Evs.Summary.Label", PokemonLabel(pokemon)]"><PokemonSprite Name="@pokemon.CurrentSpecies" Size="64" /></span>
+            </h2>
             <span class="totals num muted">@L["Evs.Summary.Totals", totals.Sum(), pokemon.Targets.Sum()]</span>
         </div>
         <div class="summary-grid">
