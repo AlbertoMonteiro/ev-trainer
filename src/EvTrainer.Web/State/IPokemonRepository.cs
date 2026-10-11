@@ -14,7 +14,10 @@ public interface IPokemonRepository
 {
     IReadOnlyDictionary<string, TrainingPokemon> LoadAll();
 
-    SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all);
+    /// <summary>Deletion records saved with the data (spec 008).</summary>
+    IReadOnlyDictionary<string, DateTimeOffset> LoadDeleted();
+
+    SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all, IReadOnlyDictionary<string, DateTimeOffset> deleted);
 
     UiPreferences LoadPreferences();
 
@@ -24,6 +27,13 @@ public interface IPokemonRepository
     CaptureNotes LoadCaptureNotes();
 
     void SaveCaptureNotes(CaptureNotes notes);
+
+    /// <summary>The device's link to external storage, or null when sync is off (spec 008).</summary>
+    SyncConnection? LoadSyncConnection();
+
+    void SaveSyncConnection(SyncConnection connection);
+
+    void ClearSyncConnection();
 }
 
 /// <summary>Browser features the UI needs besides storage (contracts/ui-shell.md, interop.js).</summary>

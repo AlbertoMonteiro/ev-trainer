@@ -1581,3 +1581,43 @@ button.species-current[aria-pressed="true"] {
         background: var(--surface-2);
     }
 }
+
+/* Sync screen (spec 008) */
+.sync-view {
+    display: grid;
+    gap: 12px;
+    max-width: 720px;
+}
+
+.sync-view p {
+    margin: 0;
+}
+
+.sync-view .steps {
+    margin: 0;
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+}
+
+.sync-view .steps a, .sync-view .gist-link {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.sync-view .connected {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.sync-view .row-actions button, .sync-view .close-sync {
+    min-height: 44px;
+}
+
+.status-button {
+    min-width: 44px;
+    padding: 0;
+    background: transparent;
+    border-color: transparent;
+}

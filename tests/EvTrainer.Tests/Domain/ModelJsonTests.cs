@@ -190,4 +190,58 @@ public class ModelJsonTests
         Assert.Equal(20, doc["knownIvs"]![1]!.GetValue<int>());
         Assert.Equal(json, PokemonJson.Serialize(PokemonJson.Deserialize(json)!, indented: false));
     }
+
+    [Fact]
+    public void Updated_at_is_written_in_utc_iso_8601_and_read_back()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.UpdatedAt = new DateTimeOffset(2026, 10, 11, 18, 30, 15, TimeSpan.FromHours(-3)).AddTicks(1234);
+
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = pokemon }, indented: false);
+        var text = JsonNode.Parse(json)!["documents"]!["sq"]!["updatedAt"]!.GetValue<string>();
+
+        Assert.Equal("2026-10-11T21:30:15.0001234Z", text);
+        Assert.Equal(pokemon.UpdatedAt, PokemonJson.Deserialize(json)!["sq"].UpdatedAt);
+    }
+
+    [Theory]
+    [InlineData("""{ "collection": "pokemon", "documents": { "x": { "name": "X" } } }""")]
+    [InlineData("""{ "collection": "pokemon", "documents": { "x": { "name": "X", "updatedAt": "ontem" } } }""")]
+    [InlineData("""{ "collection": "pokemon", "documents": { "x": { "name": "X", "updatedAt": 5 } } }""")]
+    public void Missing_or_invalid_updated_at_is_null(string json) =>
+        Assert.Null(PokemonJson.Deserialize(json)!["x"].UpdatedAt);
+
+    [Fact]
+    public void Updated_at_is_not_written_when_unknown()
+    {
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = Pokemons.Squirtle() }, indented: false);
+
+        Assert.Null(JsonNode.Parse(json)!["documents"]!["sq"]!["updatedAt"]);
+        Assert.Null(JsonNode.Parse(json)!["deleted"]);
+    }
+
+    [Fact]
+    public void Deletions_are_read_and_written_with_the_documents()
+    {
+        var deleted = new Dictionary<string, DateTimeOffset> { ["gone"] = new(2026, 10, 10, 18, 2, 11, TimeSpan.Zero) };
+
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = Pokemons.Squirtle() }, indented: false, deleted);
+        var snapshot = PokemonJson.DeserializeSnapshot(json)!;
+
+        Assert.Equal("2026-10-10T18:02:11.0000000Z", JsonNode.Parse(json)!["deleted"]!["gone"]!.GetValue<string>());
+        Assert.Equal(["sq"], snapshot.Documents.Keys);
+        Assert.Equal(deleted, snapshot.Deleted);
+    }
+
+    [Fact]
+    public void Invalid_deletions_are_ignored()
+    {
+        const string json = """
+            { "collection": "pokemon", "documents": {}, "deleted": { "a": "2026-10-10T18:02:11Z", "b": "nunca", "c": 3 } }
+            """;
+
+        var snapshot = PokemonJson.DeserializeSnapshot(json)!;
+
+        Assert.Equal(["a"], snapshot.Deleted.Keys);
+    }
 }

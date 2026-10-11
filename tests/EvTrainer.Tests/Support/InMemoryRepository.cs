@@ -12,6 +12,8 @@ public sealed class InMemoryRepository : IPokemonRepository
     public bool FailSaves { get; set; }
     public CaptureNotes CaptureNotes { get; private set; } = new();
     public int CaptureSaveCount { get; private set; }
+    public Dictionary<string, DateTimeOffset> Deleted { get; private set; } = [];
+    public SyncConnection? SyncConnection { get; private set; }
 
     public InMemoryRepository(params (string Id, TrainingPokemon Pokemon)[] seed)
     {
@@ -24,7 +26,9 @@ public sealed class InMemoryRepository : IPokemonRepository
     public IReadOnlyDictionary<string, TrainingPokemon> LoadAll() =>
         Stored.ToDictionary(kv => kv.Key, kv => kv.Value.Clone());
 
-    public SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all)
+    public IReadOnlyDictionary<string, DateTimeOffset> LoadDeleted() => new Dictionary<string, DateTimeOffset>(Deleted);
+
+    public SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all, IReadOnlyDictionary<string, DateTimeOffset> deleted)
     {
         SaveCount++;
         if (FailSaves)
@@ -33,6 +37,7 @@ public sealed class InMemoryRepository : IPokemonRepository
         }
 
         Stored = all.ToDictionary(kv => kv.Key, kv => kv.Value.Clone());
+        Deleted = new Dictionary<string, DateTimeOffset>(deleted);
         return SaveResult.Saved;
     }
 
@@ -41,6 +46,12 @@ public sealed class InMemoryRepository : IPokemonRepository
     public void SavePreferences(UiPreferences preferences) => Preferences = preferences with { };
 
     public CaptureNotes LoadCaptureNotes() => CaptureNotes.Clone();
+
+    public SyncConnection? LoadSyncConnection() => SyncConnection;
+
+    public void SaveSyncConnection(SyncConnection connection) => SyncConnection = connection;
+
+    public void ClearSyncConnection() => SyncConnection = null;
 
     public void SaveCaptureNotes(CaptureNotes notes)
     {

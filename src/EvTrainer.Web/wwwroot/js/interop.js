@@ -17,6 +17,14 @@ window.evt = {
         }
     },
 
+    storageRemove(key) {
+        try {
+            window.localStorage.removeItem(key);
+        } catch {
+            // Storage blocked: nothing to remove.
+        }
+    },
+
     downloadText(fileName, text) {
         const blob = new Blob([text], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -35,6 +43,15 @@ window.evt = {
         } else {
             document.documentElement.removeAttribute('data-theme');
         }
+    },
+
+    // Sync (spec 008): tell .NET when the page is visible again, so coming back to the app syncs.
+    onVisible(ref) {
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                ref.invokeMethodAsync('OnVisibleAsync').catch(() => { });
+            }
+        });
     },
 
     setLanguage(language) {

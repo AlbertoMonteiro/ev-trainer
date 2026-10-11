@@ -13,14 +13,20 @@ public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, Reference
     public const string DataKey = "evtrainer:v1:data";
     public const string PreferencesKey = "evtrainer:v1:prefs";
     public const string CaptureKey = "evtrainer:v1:capture";
+    public const string SyncKey = "evtrainer:v1:sync";
 
     private IJSInProcessRuntime Js => (IJSInProcessRuntime)js;
 
     public IReadOnlyDictionary<string, TrainingPokemon> LoadAll() =>
         Get(DataKey) is { } json ? PokemonJson.Deserialize(json) ?? [] : new Dictionary<string, TrainingPokemon>();
 
-    public SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all) =>
-        Set(DataKey, PokemonJson.Serialize(all, indented: false)) ? SaveResult.Saved : SaveResult.Failed;
+    public IReadOnlyDictionary<string, DateTimeOffset> LoadDeleted() =>
+        Get(DataKey) is { } json && PokemonJson.DeserializeSnapshot(json) is { } snapshot
+            ? snapshot.Deleted
+            : new Dictionary<string, DateTimeOffset>();
+
+    public SaveResult SaveAll(IReadOnlyDictionary<string, TrainingPokemon> all, IReadOnlyDictionary<string, DateTimeOffset> deleted) =>
+        Set(DataKey, PokemonJson.Serialize(all, indented: false, deleted)) ? SaveResult.Saved : SaveResult.Failed;
 
     public UiPreferences LoadPreferences() => PokemonJson.DeserializePreferences(Get(PreferencesKey));
 
@@ -29,6 +35,12 @@ public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, Reference
     public CaptureNotes LoadCaptureNotes() => CaptureNotesJson.Deserialize(Get(CaptureKey), dex, data);
 
     public void SaveCaptureNotes(CaptureNotes notes) => Set(CaptureKey, CaptureNotesJson.Serialize(notes));
+
+    public SyncConnection? LoadSyncConnection() => SyncConnectionJson.Deserialize(Get(SyncKey));
+
+    public void SaveSyncConnection(SyncConnection connection) => Set(SyncKey, SyncConnectionJson.Serialize(connection));
+
+    public void ClearSyncConnection() => Call("evt.storageRemove", SyncKey);
 
     private string? Get(string key)
     {
@@ -39,6 +51,18 @@ public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, Reference
         catch (JSException)
         {
             return null;
+        }
+    }
+
+    private void Call(string identifier, params object?[] args)
+    {
+        try
+        {
+            Js.InvokeVoid(identifier, args);
+        }
+        catch (JSException)
+        {
+            // Nothing else to do: the next load treats a broken value as "not connected".
         }
     }
 

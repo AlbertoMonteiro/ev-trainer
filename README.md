@@ -65,6 +65,8 @@ up and it narrows down your IVs.
   of Gen III); the evolution line fills itself, branches (Eevee, Gloom, Poliwhirl…) are one tap.
 - **FireRed/LeafGreen sprites** everywhere, with a colored fallback badge (EV stat color + dex number)
   when an image can't be shown.
+- **Phone and PC in sync (optional)** — keep a copy in a secret Gist of your own GitHub account and the
+  app syncs it automatically between devices ([how](#optional-sync-your-phone-and-your-pc-with-a-secret-gist)).
 - **Phone first, great on desktop** — on a wide window the EV summary stays in view next to a wide
   opponent grid, IVs / settings / capture evaluation sit side by side, and a side panel lists your
   Pokémon so switching is one click; the phone layout is unchanged.
@@ -72,9 +74,27 @@ up and it narrows down your IVs.
 
 ## Your data stays on your device
 
-There is no account and no server. Everything is saved in the browser of the device you use, after
-every tap. To move to another phone or browser (or just to be safe), use **Exportar backup** /
-**Importar backup** in the menu — a plain JSON file. The app makes no requests to third parties.
+There is no app account and no app server. Everything is saved in the browser of the device you use,
+after every tap. To move to another phone or browser (or just to be safe), use **Exportar backup** /
+**Importar backup** in the menu — a plain JSON file. Without sync turned on, the app makes no requests
+to third parties.
+
+### Optional: sync your phone and your PC with a secret Gist
+
+Turn it on in the menu → **Sincronização**. The app keeps a copy of your data in a **secret Gist of
+your own GitHub account** and syncs it by itself: when the app opens, when you come back to it and a
+few seconds after each change. Edits on both devices are merged per Pokémon (the most recent change
+wins, deletions included), and nothing is lost while you are offline.
+
+1. Create a [fine-grained personal access token](https://github.com/settings/personal-access-tokens/new)
+   with only **Account permissions → Gists: Read and write** (no repository access), or a classic token
+   with only the `gist` scope.
+2. Paste it in **Sincronização** and tap **Conectar**. Do the same on your other device.
+
+Good to know: the token stays only on that device (never in backups or in the Gist) and
+**Desconectar** removes it. A secret Gist is unlisted, not private — anyone with its link can read it;
+it only holds your Pokémon training data. The app talks to the GitHub API straight from your browser;
+there is still no app server.
 
 ## Install it on your phone
 

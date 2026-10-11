@@ -22,8 +22,9 @@ public abstract class AppTestContext : BunitContext
         JSInterop.Mode = JSRuntimeMode.Strict;
         Catalog = catalog ?? LocalizationCatalog.LoadEmbedded();
         Language = new LanguageState(Catalog);
-        Store = new TrainerStore(Repository, Data);
+        Store = new TrainerStore(Repository, Data, Time);
         Capture = new CaptureStore(Repository, Dex, Data);
+        Sync = new SyncService(Store, Repository, SyncProvider, Time);
         Toasts = new ToastService(Time);
 
         Services.AddSingleton(Data);
@@ -33,6 +34,8 @@ public abstract class AppTestContext : BunitContext
         Services.AddSingleton<IBrowserApi>(Browser);
         Services.AddSingleton(Store);
         Services.AddSingleton(Capture);
+        Services.AddSingleton<ISyncProvider>(SyncProvider);
+        Services.AddSingleton(Sync);
         Services.AddSingleton(Toasts);
         Services.AddSingleton<TimeProvider>(Time);
         Services.AddSingleton(Catalog);
@@ -54,6 +57,10 @@ public abstract class AppTestContext : BunitContext
     public TrainerStore Store { get; }
 
     public CaptureStore Capture { get; }
+
+    public FakeSyncProvider SyncProvider { get; } = new();
+
+    public SyncService Sync { get; }
 
     public ToastService Toasts { get; }
 

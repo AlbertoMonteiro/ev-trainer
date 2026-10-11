@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -13,12 +14,17 @@ public static class PokemonJson
 {
     public const string Collection = "pokemon";
 
-    public static string Serialize(IReadOnlyDictionary<string, TrainingPokemon> all, bool indented)
+    /// <param name="deleted">Deletion records (sync, spec 008); written only when there are any.</param>
+    public static string Serialize(
+        IReadOnlyDictionary<string, TrainingPokemon> all,
+        bool indented,
+        IReadOnlyDictionary<string, DateTimeOffset>? deleted = null)
     {
         var dto = new BackupDto
         {
             Collection = Collection,
             Documents = all.ToDictionary(kv => kv.Key, kv => (PokemonDto?)ToDto(kv.Value)),
+            Deleted = deleted is { Count: > 0 } ? deleted.ToDictionary(kv => kv.Key, kv => ToElement(kv.Value)) : null,
         };
         var context = indented ? EvTrainerJsonContext.Indented : EvTrainerJsonContext.Default;
         return JsonSerializer.Serialize(dto, context.BackupDto);
@@ -28,6 +34,39 @@ public static class PokemonJson
     public static Dictionary<string, TrainingPokemon>? Deserialize(string json) =>
         TryParse(json, out var dto) && dto.Collection == Collection && dto.Documents is not null
             ? FromDocuments(dto.Documents)
+            : null;
+
+    /// <summary>Documents and deletion records of a data document; null when it is not a pokemon collection.</summary>
+    public static SyncSnapshot? DeserializeSnapshot(string json)
+    {
+        if (!TryParse(json, out var dto) || dto.Collection != Collection || dto.Documents is null)
+        {
+            return null;
+        }
+
+        var deleted = new Dictionary<string, DateTimeOffset>(StringComparer.Ordinal);
+        foreach (var (id, value) in dto.Deleted ?? [])
+        {
+            if (ParseTimestamp(value) is { } at)
+            {
+                deleted[id] = at;
+            }
+        }
+
+        return new SyncSnapshot(FromDocuments(dto.Documents), deleted);
+    }
+
+    /// <summary>ISO 8601 in UTC with full precision, so a value read back is identical to the one written.</summary>
+    internal static string FormatTimestamp(DateTimeOffset value) =>
+        value.UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'", CultureInfo.InvariantCulture);
+
+    private static JsonElement ToElement(DateTimeOffset value) =>
+        JsonSerializer.SerializeToElement(FormatTimestamp(value), EvTrainerJsonContext.Default.String);
+
+    private static DateTimeOffset? ParseTimestamp(JsonElement? value) =>
+        value is { ValueKind: JsonValueKind.String } text
+        && DateTimeOffset.TryParse(text.GetString(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var at)
+            ? at
             : null;
 
     internal static bool TryParse(string json, out BackupDto dto)
@@ -121,6 +160,7 @@ public static class PokemonJson
 
         // "name" was a free nickname before; it now holds the current species.
         pokemon.CurrentSpecies = CurrentForm.Resolve(dto.Name, pokemon.Species, pokemon.IvLog);
+        pokemon.UpdatedAt = ParseTimestamp(dto.UpdatedAt);
         return pokemon;
     }
 
@@ -142,6 +182,7 @@ public static class PokemonJson
         Macho = p.MachoBrace,
         Order = p.Order,
         KnownIvs = [.. p.KnownIvs],
+        UpdatedAt = p.UpdatedAt is { } at ? ToElement(at) : null,
     };
 }
 
@@ -152,6 +193,11 @@ internal sealed class BackupDto
 
     [JsonPropertyName("documents")]
     public Dictionary<string, PokemonDto?>? Documents { get; set; }
+
+    /// <summary>Deletion records (id → ISO date), read tolerantly.</summary>
+    [JsonPropertyName("deleted")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public Dictionary<string, JsonElement>? Deleted { get; set; }
 }
 
 internal sealed class PokemonDto
@@ -185,6 +231,11 @@ internal sealed class PokemonDto
 
     [JsonPropertyName("knownIvs")]
     public int?[]? KnownIvs { get; set; }
+
+    /// <summary>ISO date, read tolerantly (anything else becomes null).</summary>
+    [JsonPropertyName("updatedAt")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public JsonElement? UpdatedAt { get; set; }
 }
 
 internal sealed class SpeciesDto
@@ -231,6 +282,7 @@ internal sealed class LevelDto
 [JsonSerializable(typeof(BackupDto))]
 [JsonSerializable(typeof(UiPreferences))]
 [JsonSerializable(typeof(CaptureNotesDto))]
+[JsonSerializable(typeof(string))]
 internal sealed partial class EvTrainerJsonContext : JsonSerializerContext
 {
     public static EvTrainerJsonContext Indented { get; } = new(new JsonSerializerOptions

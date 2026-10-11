@@ -3,18 +3,22 @@
 
 <PageTitle>@L["App.Title"]</PageTitle>
 
-<AppHeader OnNavigate="Navigate" OnCapture="() => _capturing = true" />
+<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" />
 
 <div class="app-body">
     <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" />
     <main class="page">
-        @if (_capturing)
+        @if (_syncing)
+        {
+            <SyncView OnClose="() => _syncing = false" />
+        }
+        else if (_capturing)
         {
             <CaptureView OnClose="() => _capturing = false" OnAdded="() => Navigate(Tab.Ivs)" />
         }
         else if (Store.Selected is null)
         {
-            <EmptyState OnAdd="AddPokemon" OnCapture="() => _capturing = true">
+            <EmptyState OnAdd="AddPokemon" OnCapture="OpenCapture">
                 <BackupPanel ImportOnly />
             </EmptyState>
         }
@@ -49,23 +53,39 @@
 @code {
     private Tab _tab = Tab.Evs;
     private bool _capturing;
+    private bool _syncing;
+
+    private void OpenCapture()
+    {
+        _syncing = false;
+        _capturing = true;
+    }
+
+    private void OpenSync()
+    {
+        _capturing = false;
+        _syncing = true;
+    }
 
     /// <summary>Picking a Pokémon in the side panel keeps the tab and leaves the capture screen.</summary>
     private void Choose(string id)
     {
         _capturing = false;
+        _syncing = false;
         Store.Select(id);
     }
 
     private void Navigate(Tab tab)
     {
         _capturing = false;
+        _syncing = false;
         _tab = tab;
     }
 
     private void AddPokemon()
     {
         _capturing = false;
+        _syncing = false;
         Store.AddPokemon();
         _tab = Tab.Settings;
     }

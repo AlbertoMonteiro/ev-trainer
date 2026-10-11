@@ -133,4 +133,19 @@ public class BackupFormatTests
 
         Assert.Equal(new BackupMergePreview(New: 1, Replaced: 1), BackupFormat.Preview(current, incoming));
     }
+
+    [Fact]
+    public void Updated_at_round_trips_and_old_files_stay_valid()
+    {
+        var a = Pokemons.Squirtle();
+        a.UpdatedAt = new DateTimeOffset(2026, 10, 11, 21, 30, 0, TimeSpan.Zero);
+        var all = new Dictionary<string, TrainingPokemon> { ["a"] = a, ["b"] = Pokemons.Squirtle() };
+
+        var json = BackupFormat.Write(all, indented: true);
+        var back = Ok(BackupFormat.Read(json)).Items;
+
+        Assert.Equal(a.UpdatedAt, back["a"].UpdatedAt);
+        Assert.Null(back["b"].UpdatedAt);
+        Assert.Equal(json, BackupFormat.Write(back, indented: true));
+    }
 }

@@ -1,4 +1,6 @@
 @inherits StoreAwareComponent
+@inject SyncService Sync
+@inject ToastService Toasts
 
 <header class="app-header">
     <div class="left">
@@ -7,7 +9,7 @@
         <h1 class="title"><span class="accent">@L["App.TitleAccent"]</span> @L["App.TitleRest"]</h1>
     </div>
     <div class="right">
-        <StatusIndicator Status="Store.Status" />
+        <StatusIndicator Status="Store.Status" OnOpen="OnSync" />
         @if (Store.Selected is { } pokemon)
         {
             <button type="button" class="toggle" aria-pressed="@(pokemon.Pokerus ? "true" : "false")"
@@ -22,7 +24,7 @@
 
 @if (_menuOpen)
 {
-    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" OnCapture="OnCapture" />
+    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" OnCapture="OnCapture" OnSync="OnSync" />
 }
 
 @code {
@@ -33,4 +35,19 @@
 
     [Parameter]
     public EventCallback OnCapture { get; set; }
+
+    [Parameter]
+    public EventCallback OnSync { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Sync.Merged += OnMerged;
+    }
+
+    protected override void OnDispose() => Sync.Merged -= OnMerged;
+
+    /// <summary>Tells the player what came from the other device.</summary>
+    private void OnMerged(MergeResult result) =>
+        InvokeAsync(() => Toasts.Show(L["Sync.Merged", result.Updated, result.Added, result.Removed]));
 }

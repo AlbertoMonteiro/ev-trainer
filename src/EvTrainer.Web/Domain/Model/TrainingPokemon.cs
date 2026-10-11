@@ -30,6 +30,9 @@ public sealed class TrainingPokemon
     /// <summary>IVs the user knows from another source (each null or 0–31); they win over the computed range.</summary>
     public int?[] KnownIvs { get; set; } = new int?[StatVector.Count];
 
+    /// <summary>When this Pokémon was last changed on any device (UTC); null = never stamped (older data).</summary>
+    public DateTimeOffset? UpdatedAt { get; set; }
+
     public TrainingPokemon Clone() => new()
     {
         CurrentSpecies = CurrentSpecies,
@@ -42,6 +45,7 @@ public sealed class TrainingPokemon
         MachoBrace = MachoBrace,
         Order = Order,
         KnownIvs = [.. KnownIvs],
+        UpdatedAt = UpdatedAt,
     };
 
     /// <summary>

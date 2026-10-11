@@ -13,13 +13,20 @@ public enum SaveStatus
 
 /// <summary>
 /// In-memory state of every trained Pokémon. Applies domain commands, saves immediately through
-/// <see cref="IPokemonRepository"/> and raises <see cref="Changed"/>. Holds no UI text.
+/// <see cref="IPokemonRepository"/> and raises <see cref="Changed"/>. Every command that changes a Pokémon
+/// stamps it (<see cref="TrainingPokemon.UpdatedAt"/>) and every removal is recorded, for the sync (spec 008).
+/// Holds no UI text.
 /// </summary>
-public sealed partial class TrainerStore(IPokemonRepository repository, ReferenceData data)
+public sealed partial class TrainerStore(IPokemonRepository repository, ReferenceData data, TimeProvider? time = null)
 {
     private readonly Dictionary<string, TrainingPokemon> _all = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, DateTimeOffset> _deleted = new(StringComparer.Ordinal);
+    private readonly TimeProvider _time = time ?? TimeProvider.System;
 
     public event Action? Changed;
+
+    /// <summary>Raised after a local edit is saved (not after preferences or applying a sync).</summary>
+    public event Action? LocalDataChanged;
 
     public ReferenceData Data => data;
 
@@ -44,6 +51,12 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             _all[id] = pokemon;
         }
 
+        _deleted.Clear();
+        foreach (var (id, at) in repository.LoadDeleted())
+        {
+            _deleted[id] = at;
+        }
+
         Preferences = repository.LoadPreferences();
         if (SelectedId is null && Ordered.Count > 0)
         {
@@ -61,7 +74,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             Order = (_all.Count == 0 ? 0 : _all.Values.Max(p => p.Order)) + 1,
         };
         UpdatePreferences(Preferences with { SelectedId = id });
-        Commit();
+        Commit(id);
         return id;
     }
 
@@ -95,10 +108,10 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             ],
         };
         UpdatePreferences(Preferences with { SelectedId = id });
-        Commit();
+        Commit(id);
         return (id, () =>
         {
-            if (_all.Remove(id))
+            if (Forget(id))
             {
                 UpdatePreferences(Preferences with { SelectedId = previous is not null && _all.ContainsKey(previous) ? previous : Ordered.FirstOrDefault().Id });
                 Commit();
@@ -116,7 +129,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
 
         var result = BattleLog.Record(pokemon, opponent, data);
-        Commit();
+        Commit(SelectedId!);
         return result;
     }
 
@@ -125,7 +138,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         if (_all.TryGetValue(id, out var pokemon))
         {
             BattleLog.UndoLast(pokemon);
-            Commit();
+            Commit(id);
         }
     }
 
@@ -134,7 +147,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         if (Selected is { } pokemon)
         {
             pokemon.Pokerus = !pokemon.Pokerus;
-            Commit();
+            Commit(SelectedId!);
         }
     }
 
@@ -143,7 +156,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         if (Selected is { } pokemon)
         {
             pokemon.MachoBrace = !pokemon.MachoBrace;
-            Commit();
+            Commit(SelectedId!);
         }
     }
 
@@ -158,7 +171,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         pokemon.Nature = nature;
         pokemon.Targets = targets.ToSix();
         pokemon.Species = [.. species.Select(s => s.Clone())];
-        Commit();
+        Commit(SelectedId!);
     }
 
     /// <summary>Removes one event of the selected Pokémon; the returned undo puts it back at the same index.</summary>
@@ -171,13 +184,13 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         var removed = _all[id].Events[index];
         _all[id].Events.RemoveAt(index);
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon))
             {
                 pokemon.Events.Insert(Math.Min(index, pokemon.Events.Count), removed);
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -195,12 +208,12 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         var adjustment = new BattleEvent { Opponent = "", SetTotals = [.. targets] };
         _all[id].Events.Add(adjustment);
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon) && pokemon.Events.Remove(adjustment))
             {
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -218,13 +231,13 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         var previous = _all[id].Events;
         _all[id].Events = [new BattleEvent { Opponent = "", SetTotals = [.. targets] }];
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon))
             {
                 pokemon.Events = previous;
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -238,10 +251,12 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
     /// <summary>Deletes a Pokémon (selecting the first remaining one); the returned undo restores it.</summary>
     public Action? DeletePokemon(string id)
     {
-        if (!_all.Remove(id, out var removed))
+        if (!_all.TryGetValue(id, out var removed))
         {
             return null;
         }
+
+        Forget(id);
 
         if (Preferences.SelectedId == id)
         {
@@ -251,9 +266,10 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         Commit();
         return () =>
         {
+            _deleted.Remove(id);
             _all[id] = removed;
             UpdatePreferences(Preferences with { SelectedId = id });
-            Commit();
+            Commit(id);
         };
     }
 
@@ -263,7 +279,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         if (Selected is { } pokemon)
         {
             pokemon.Events.AddRange(events.Select(e => e.Clone()));
-            Commit();
+            Commit(SelectedId!);
         }
     }
 
@@ -277,7 +293,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
                 pokemon.InsertLevel(level.Clone());
             }
 
-            Commit();
+            Commit(SelectedId!);
         }
     }
 
@@ -287,7 +303,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         if (Selected is { } pokemon)
         {
             pokemon.InsertLevel(entry.Clone());
-            Commit();
+            Commit(SelectedId!);
         }
     }
 
@@ -307,14 +323,14 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         var replacement = entry.Clone();
         _all[id].IvLog.RemoveAt(index);
         _all[id].InsertLevel(replacement);
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon) && pokemon.IvLog.Remove(replacement))
             {
                 pokemon.IvLog.Insert(Math.Min(index, pokemon.IvLog.Count), original);
                 pokemon.CurrentSpecies = originalSpecies;
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -329,13 +345,13 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         var removed = _all[id].IvLog[index];
         _all[id].IvLog.RemoveAt(index);
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon))
             {
                 pokemon.IvLog.Insert(Math.Min(index, pokemon.IvLog.Count), removed);
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -352,13 +368,13 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         var previous = _all[id].KnownIvs;
         _all[id].KnownIvs = [.. ivs];
-        Commit();
+        Commit(id);
         return () =>
         {
             if (_all.TryGetValue(id, out var pokemon))
             {
                 pokemon.KnownIvs = previous;
-                Commit();
+                Commit(id);
             }
         };
     }
@@ -372,6 +388,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         foreach (var (id, pokemon) in backup.Items)
         {
             _all[id] = pokemon.Clone();
+            _deleted.Remove(id);
         }
 
         if (SelectedId is null && Ordered.Count > 0)
@@ -379,7 +396,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             UpdatePreferences(Preferences with { SelectedId = backup.Items.Keys.FirstOrDefault() ?? Ordered[0].Id });
         }
 
-        Commit();
+        Commit([.. backup.Items.Keys]);
         return preview;
     }
 
@@ -413,12 +430,71 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         NotifyChanged();
     }
 
-    /// <summary>Saves everything right away and notifies listeners.</summary>
-    private void Commit()
+    /// <summary>Copy of everything the sync exchanges: the Pokémon and the deletion records.</summary>
+    public SyncSnapshot Snapshot() => new(
+        _all.ToDictionary(kv => kv.Key, kv => kv.Value.Clone(), StringComparer.Ordinal),
+        new Dictionary<string, DateTimeOffset>(_deleted, StringComparer.Ordinal));
+
+    /// <summary>
+    /// Replaces the data with the result of a sync merge, without stamping (the stamps come with the merge) and
+    /// without raising <see cref="LocalDataChanged"/>. Keeps the selection when the Pokémon still exists.
+    /// </summary>
+    public void ApplySync(MergeResult result)
+    {
+        _all.Clear();
+        foreach (var (id, pokemon) in result.Documents)
+        {
+            _all[id] = pokemon.Clone();
+        }
+
+        _deleted.Clear();
+        foreach (var (id, at) in result.Deleted)
+        {
+            _deleted[id] = at;
+        }
+
+        if (SelectedId is null)
+        {
+            UpdatePreferences(Preferences with { SelectedId = Ordered.FirstOrDefault().Id });
+        }
+
+        Save();
+        NotifyChanged();
+    }
+
+    /// <summary>Removes a Pokémon and records when, so the removal reaches the other devices.</summary>
+    private bool Forget(string id)
+    {
+        if (!_all.Remove(id))
+        {
+            return false;
+        }
+
+        _deleted[id] = _time.GetUtcNow();
+        return true;
+    }
+
+    /// <summary>Stamps the changed Pokémon, saves everything right away and notifies listeners.</summary>
+    private void Commit(params string[] changed)
+    {
+        var now = _time.GetUtcNow();
+        foreach (var id in changed)
+        {
+            if (_all.TryGetValue(id, out var pokemon))
+            {
+                pokemon.UpdatedAt = now;
+            }
+        }
+
+        Save();
+        NotifyChanged();
+        LocalDataChanged?.Invoke();
+    }
+
+    private void Save()
     {
         Status = SaveStatus.Saving;
-        Status = repository.SaveAll(_all) == SaveResult.Saved ? SaveStatus.Saved : SaveStatus.Failed;
-        NotifyChanged();
+        Status = repository.SaveAll(_all, _deleted) == SaveResult.Saved ? SaveStatus.Saved : SaveStatus.Failed;
     }
 
     private void UpdatePreferences(UiPreferences preferences)

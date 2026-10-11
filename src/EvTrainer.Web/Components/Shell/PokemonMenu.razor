@@ -10,6 +10,7 @@
     <hr />
     <button type="button" class="add" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: true)">@L["Menu.AddPokemon"]</button>
     <button type="button" class="capture" role="menuitem" @onclick="Capture">@L["Menu.Capture"]</button>
+    <button type="button" class="sync" role="menuitem" @onclick="OpenSync">@L["Menu.Sync"]</button>
     @if (Store.Ordered.Count > 0)
     {
         <button type="button" class="export" role="menuitem" @onclick="Export">@L["Menu.ExportBackup"]</button>
@@ -83,6 +84,15 @@
 
     [Parameter]
     public EventCallback OnCapture { get; set; }
+
+    [Parameter]
+    public EventCallback OnSync { get; set; }
+
+    private async Task OpenSync()
+    {
+        await OnSync.InvokeAsync();
+        await OnClose.InvokeAsync();
+    }
 
     private async Task Capture()
     {

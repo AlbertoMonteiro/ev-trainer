@@ -100,6 +100,35 @@ public partial class NoHardcodedTextTests : AppTestContext
     }
 
     [Fact]
+    public async Task Sync_screen_and_status_have_no_hardcoded_text()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+        cut.Find(".menu-panel button.sync").Click();
+
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".sync-view input#sync-token").Input("token");
+        SyncProvider.FailNext(EvTrainer.Web.State.SyncErrorKind.MissingGistPermission);
+        cut.Find(".sync-view button.connect").Click();
+        cut.WaitForAssertion(() => cut.Find(".sync-view .error"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".sync-view button.connect").Click();
+        cut.WaitForAssertion(() => cut.Find(".sync-view .connected"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        SyncProvider.FailNext(EvTrainer.Web.State.SyncErrorKind.InvalidToken);
+        await cut.InvokeAsync(Sync.SyncNowAsync);
+        Assert.NotEmpty(cut.FindAll(".sync-view button.reconnect"));
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".sync-view button.disconnect").Click();
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
     public void Capture_screen_has_no_hardcoded_text()
     {
         Store.Load();
@@ -186,6 +215,6 @@ public partial class NoHardcodedTextTests : AppTestContext
     [GeneratedRegex(@"^(«[A-Za-z0-9_.]+»\s*)+$")]
     private static partial Regex Localized();
 
-    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️]*$")]
+    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️☁⏳]*$")]
     private static partial Regex NumbersAndSymbols();
 }

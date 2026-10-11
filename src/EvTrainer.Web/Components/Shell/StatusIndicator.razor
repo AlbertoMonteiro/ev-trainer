@@ -1,22 +1,41 @@
 @inherits StoreAwareComponent
+@inject SyncService Sync
+@inject TimeProvider Time
 
-<span class="status" role="status" aria-label="@Text" title="@Text">@Emoji</span>
+@* Saved on this device and, with sync on, the sync state; tapping opens the sync screen. *@
+<button type="button" class="status-button icon-button" aria-label="@Text" title="@Text" @onclick="OnOpen">
+    <span class="status" role="status" aria-label="@Text" title="@Text">@Emoji</span>
+</button>
 
 @code {
     [Parameter]
     public SaveStatus Status { get; set; }
 
-    private string Emoji => Status switch
+    [Parameter]
+    public EventCallback OnOpen { get; set; }
+
+    protected override void OnInitialized()
     {
-        SaveStatus.Saving => "🔄",
-        SaveStatus.Failed => "⚠️",
-        _ => "📱",
+        base.OnInitialized();
+        Sync.Changed += OnSyncChanged;
+    }
+
+    protected override void OnDispose() => Sync.Changed -= OnSyncChanged;
+
+    private void OnSyncChanged() => InvokeAsync(StateHasChanged);
+
+    /// <summary>A local save problem comes first; then, when connected, the sync state.</summary>
+    private (string Emoji, string Text) State => (Status, Sync.IsConnected ? Sync.Phase : SyncPhase.Off) switch
+    {
+        (SaveStatus.Failed, _) => ("⚠️", L["Status.Failed"]),
+        (SaveStatus.Saving, _) or (_, SyncPhase.Syncing) => ("🔄", Status is SaveStatus.Saving ? L["Status.Saving"] : L["Sync.Status.Syncing"]),
+        (_, SyncPhase.Pending) => ("⏳", L["Sync.Status.Pending"]),
+        (_, SyncPhase.Error) => ("⚠️", L[$"Sync.Status.Error.{Sync.Error ?? SyncErrorKind.Unknown}"]),
+        (_, SyncPhase.Synced) when Sync.LastSyncedAt is { } at => ("☁️", L["Sync.Status.Synced", TimeZoneInfo.ConvertTime(at, Time.LocalTimeZone)]),
+        _ => ("📱", L["Status.Saved"]),
     };
 
-    private string Text => Status switch
-    {
-        SaveStatus.Saving => L["Status.Saving"],
-        SaveStatus.Failed => L["Status.Failed"],
-        _ => L["Status.Saved"],
-    };
+    private string Emoji => State.Emoji;
+
+    private string Text => State.Text;
 }

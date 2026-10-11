@@ -1,0 +1,123 @@
+@inherits StoreAwareComponent
+@inject SyncService Sync
+@inject TimeProvider Time
+
+<section class="card sync-view">
+    <div class="card-head">
+        <h2>@L["Sync.Title"]</h2>
+        <button type="button" class="close-sync" @onclick="OnClose">@L["Sync.Close"]</button>
+    </div>
+
+    @if (!Sync.IsConnected)
+    {
+        <p class="intro">@L["Sync.Intro"]</p>
+        <p class="secret-warning warn">@L["Sync.SecretWarning"]</p>
+        <ol class="steps">
+            <li>
+                @L["Sync.Steps.1"]
+                <a class="token-link" href="@FineGrainedTokenUrl" target="_blank" rel="noopener noreferrer">@L["Sync.Steps.Link"]</a>
+            </li>
+            <li>@L["Sync.Steps.2"]</li>
+            <li>@L["Sync.Steps.3"]</li>
+            <li>
+                @L["Sync.Steps.4"]
+                <a class="classic-link" href="@ClassicTokenUrl" target="_blank" rel="noopener noreferrer">@L["Sync.Steps.Classic"]</a>
+            </li>
+        </ol>
+        <div class="field">
+            <label for="sync-token">@L["Sync.Token"]</label>
+            <input id="sync-token" type="password" autocomplete="off" spellcheck="false" value="@_token"
+                   @oninput="e => _token = e.Value?.ToString() ?? string.Empty" />
+        </div>
+        @if (_error is { } error)
+        {
+            <p class="error">@L[$"Sync.Error.{error}"]</p>
+        }
+        <div class="row-actions">
+            <button type="button" class="primary connect" disabled="@(_busy || string.IsNullOrWhiteSpace(_token))" @onclick="Connect">
+                @(_busy ? L["Sync.Connecting"] : L["Sync.Connect"])
+            </button>
+        </div>
+    }
+    else
+    {
+        <p class="connected">@L["Sync.ConnectedAs", Sync.Login ?? ""]</p>
+        <p class="last-sync hint">
+            @(Sync.LastSyncedAt is { } at ? L["Sync.LastSynced", TimeZoneInfo.ConvertTime(at, Time.LocalTimeZone)] : L["Sync.NeverSynced"])
+        </p>
+        @if (Sync.Error is { } failure)
+        {
+            <p class="error">@L[$"Sync.Error.{failure}"]</p>
+            @if (failure is SyncErrorKind.InvalidToken or SyncErrorKind.MissingGistPermission)
+            {
+                <div class="row-actions">
+                    <button type="button" class="primary reconnect" @onclick="Sync.Disconnect">@L["Sync.Reconnect"]</button>
+                </div>
+            }
+        }
+        <a class="gist-link" href="@GistUrl" target="_blank" rel="noopener noreferrer">@L["Sync.OpenGist"]</a>
+        @if (_confirmingDisconnect)
+        {
+            <div class="confirm-box" role="alertdialog" aria-labelledby="sync-disconnect-message">
+                <p id="sync-disconnect-message" class="message">@L["Sync.Disconnect.Confirm"]</p>
+                <div class="row-actions">
+                    <button type="button" class="danger" @onclick="Disconnect">@L["Sync.Disconnect"]</button>
+                    <button type="button" class="cancel" @onclick="() => _confirmingDisconnect = false">@L["Sync.Cancel"]</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row-actions">
+                <button type="button" class="primary sync-now" disabled="@(Sync.Phase is SyncPhase.Syncing)" @onclick="SyncNow">@L["Sync.Now"]</button>
+                <button type="button" class="disconnect" @onclick="() => _confirmingDisconnect = true">@L["Sync.Disconnect"]</button>
+            </div>
+        }
+    }
+</section>
+
+@code {
+    private const string FineGrainedTokenUrl = "https://github.com/settings/personal-access-tokens/new";
+    private const string ClassicTokenUrl = "https://github.com/settings/tokens/new?scopes=gist&description=EVs%20Trainer";
+
+    private string _token = string.Empty;
+    private SyncErrorKind? _error;
+    private bool _busy;
+    private bool _confirmingDisconnect;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private string GistUrl => $"https://gist.github.com/{Sync.Login}/{Sync.Location}";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Sync.Changed += OnSyncChanged;
+    }
+
+    protected override void OnDispose() => Sync.Changed -= OnSyncChanged;
+
+    private void OnSyncChanged() => InvokeAsync(StateHasChanged);
+
+    private async Task Connect()
+    {
+        _busy = true;
+        _error = null;
+        _error = await Sync.ConnectAsync(_token);
+        _busy = false;
+        if (_error is null)
+        {
+            // The token is only kept by the sync service, on this device; never on screen.
+            _token = string.Empty;
+        }
+    }
+
+    private Task SyncNow() => Sync.SyncNowAsync();
+
+    private void Disconnect()
+    {
+        _confirmingDisconnect = false;
+        Sync.Disconnect();
+    }
+}
