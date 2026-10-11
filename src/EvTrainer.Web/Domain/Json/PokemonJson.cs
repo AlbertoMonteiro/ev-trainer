@@ -92,7 +92,6 @@ public static class PokemonJson
 
         var pokemon = new TrainingPokemon
         {
-            Name = dto.Name ?? "",
             Nature = dto.Nature ?? "",
             Species = species,
             Targets = (dto.Targets ?? []).ToSix(),
@@ -120,12 +119,14 @@ public static class PokemonJson
             });
         }
 
+        // "name" was a free nickname before; it now holds the current species.
+        pokemon.CurrentSpecies = CurrentForm.Resolve(dto.Name, pokemon.Species, pokemon.IvLog);
         return pokemon;
     }
 
     private static PokemonDto ToDto(TrainingPokemon p) => new()
     {
-        Name = p.Name,
+        Name = p.CurrentSpecies,
         Nature = p.Nature,
         Species = [.. p.Species.Select(s => new SpeciesDto { Name = s.Name, Base = [.. s.Base] })],
         Targets = [.. p.Targets],

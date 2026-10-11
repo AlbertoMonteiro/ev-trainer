@@ -7,7 +7,8 @@ namespace EvTrainer.Web.Components.Settings;
 /// <summary>Editable copy of the settings of a Pokémon, with the validation rules of data-model.md.</summary>
 public sealed class SettingsFormModel
 {
-    public string Name { get; set; } = "";
+    /// <summary>Species of the line the Pokémon is in right now.</summary>
+    public string Current { get; set; } = "";
 
     public string Nature { get; set; } = "";
 
@@ -18,7 +19,7 @@ public sealed class SettingsFormModel
 
     public static SettingsFormModel From(TrainingPokemon pokemon) => new()
     {
-        Name = pokemon.Name,
+        Current = pokemon.CurrentSpecies,
         Nature = pokemon.Nature,
         Targets = [.. pokemon.Targets.Select(t => t.ToString(CultureInfo.InvariantCulture))],
         Species = [.. pokemon.Species.Where(s => !string.IsNullOrWhiteSpace(s.Name)).Select(s => s.Clone())],
@@ -28,9 +29,9 @@ public sealed class SettingsFormModel
     public int TargetSum => Targets.Sum(t => ParseInRange(t, 0, 255) ?? 0);
 
     public bool IsValid =>
-        !string.IsNullOrWhiteSpace(Name)
-        && Targets.All(t => ParseInRange(t, 0, 255) is not null)
-        && Species.Count is >= 1 and <= 3;
+        Targets.All(t => ParseInRange(t, 0, 255) is not null)
+        && Species.Count is >= 1 and <= 3
+        && Species.Any(s => s.Name == Current);
 
     public int[] ParsedTargets => [.. Targets.Select(t => ParseInRange(t, 0, 255) ?? 0)];
 

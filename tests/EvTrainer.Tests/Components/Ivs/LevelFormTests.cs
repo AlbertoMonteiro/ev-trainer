@@ -9,10 +9,11 @@ namespace EvTrainer.Tests.Components.Ivs;
 public class LevelFormTests : AppTestContext
 {
     [Fact]
-    public void Prefills_current_evs_and_last_used_species_with_numeric_inputs()
+    public void Prefills_current_evs_and_the_current_species_with_numeric_inputs()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Caterpie", 3, 1), ("Abra", 2, 1));
-        pokemon.IvLog.Add(new LevelEntry { Level = 16, Species = "Wartortle", Stats = [49, 25, 33, 30, 35, 30], Evs = new int[6] });
+        pokemon.CurrentSpecies = "Wartortle";
+        pokemon.IvLog.Add(new LevelEntry { Level = 12, Species = "Squirtle", Stats = [35, 18, 24, 21, 25, 20], Evs = new int[6] });
         Seed(pokemon);
 
         var cut = Render<LevelForm>();

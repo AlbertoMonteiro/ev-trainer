@@ -14,8 +14,7 @@ public class PokemonMenuTests : AppTestContext
     {
         var first = Pokemons.Squirtle().WithEvents(("Caterpie", 82, 1));
         first.Order = 1;
-        var second = Pokemons.Squirtle();
-        second.Name = "Pidgey";
+        var second = Pokemons.Pidgey();
         second.Order = 2;
         Repository.Stored["a"] = first;
         Repository.Stored["b"] = second;
@@ -113,10 +112,43 @@ public class PokemonMenuTests : AppTestContext
 public class PokemonMenuSpriteTests : AppTestContext
 {
     [Fact]
-    public void Items_show_the_display_species_sprite_and_the_footer_credits()
+    public void Items_show_the_species_and_the_nature_to_tell_twins_apart()
+    {
+        var first = Pokemons.Squirtle(nature: "Timid");
+        var second = Pokemons.Squirtle(nature: "Modest");
+        second.Order = 2;
+        Repository.Stored["a"] = first;
+        Repository.Stored["b"] = second;
+        Store.Load();
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        var items = cut.FindAll(".menu-panel button.pokemon-item");
+        Assert.All(items, i => Assert.Contains("Squirtle", i.TextContent));
+        Assert.Equal(["Timid", "Modest"], items.Select(i => i.QuerySelector(".nature")!.TextContent.Trim()));
+    }
+
+    [Fact]
+    public void Item_without_species_shows_a_placeholder_and_no_nature_when_none()
+    {
+        var pokemon = Pokemons.Squirtle(nature: "");
+        pokemon.CurrentSpecies = "";
+        pokemon.Species = [new()];
+        Seed(pokemon);
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        var item = cut.Find(".menu-panel button.pokemon-item");
+        Assert.Contains(T("Pokemon.NoSpecies"), item.TextContent);
+        Assert.Equal("?", item.QuerySelector(".sprite .badge")!.TextContent.Trim());
+        Assert.Null(item.QuerySelector(".nature"));
+    }
+
+    [Fact]
+    public void Items_show_the_current_species_sprite_and_the_footer_credits()
     {
         var pokemon = Pokemons.Squirtle();
-        pokemon.IvLog.Add(new EvTrainer.Web.Domain.Model.LevelEntry { Level = 16, Species = "Wartortle", Stats = [1, 1, 1, 1, 1, 1], Evs = new int[6] });
+        pokemon.CurrentSpecies = "Wartortle";
         Seed(pokemon);
         var cut = Render<Home>();
         cut.Find("header button.menu").Click();

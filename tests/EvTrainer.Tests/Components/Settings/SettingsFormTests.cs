@@ -14,7 +14,7 @@ public class SettingsFormTests : AppTestContext
 
         var cut = Render<SettingsForm>();
 
-        Assert.Equal("Squirtle", cut.Find("input#settings-name").GetAttribute("value"));
+        Assert.Empty(cut.FindAll("#settings-name"));
         Assert.Equal(26, cut.FindAll("select#settings-nature option").Count);
         Assert.Equal(6, cut.FindAll(".targets input").Count);
         Assert.All(cut.FindAll(".targets input"), i => Assert.Equal("numeric", i.GetAttribute("inputmode")));
@@ -50,18 +50,19 @@ public class SettingsFormTests : AppTestContext
     }
 
     [Fact]
-    public void Blank_name_disables_save()
+    public void Saves_without_typing_any_name()
     {
         Seed(Pokemons.Squirtle());
         var cut = Render<SettingsForm>();
 
-        cut.Find("input#settings-name").Input("  ");
+        Assert.False(cut.Find("button.save").HasAttribute("disabled"));
+        cut.Find("button.save").Click();
 
-        Assert.True(cut.Find("button.save").HasAttribute("disabled"));
+        Assert.Equal("Squirtle", Repository.Stored["p1"].CurrentSpecies);
     }
 
     [Fact]
-    public void New_pokemon_needs_a_species_and_gets_its_name()
+    public void New_pokemon_needs_a_species_and_its_current_form_is_the_one_picked()
     {
         Store.Load();
         Store.AddPokemon();
@@ -73,7 +74,7 @@ public class SettingsFormTests : AppTestContext
         cut.Find("button.save").Click();
 
         var saved = Store.Selected!;
-        Assert.Equal("Charmeleon", saved.Name);
+        Assert.Equal("Charmeleon", saved.CurrentSpecies);
         Assert.Equal(["Charmander", "Charmeleon", "Charizard"], saved.Species.Select(s => s.Name));
         Assert.Equal([39, 52, 43, 60, 50, 65], saved.Species[0].Base);
     }
@@ -84,13 +85,12 @@ public class SettingsFormTests : AppTestContext
         Seed(Pokemons.Squirtle());
         var cut = Render<SettingsForm>();
 
-        cut.Find("input#settings-name").Input("Wartortle");
         cut.Find("select#settings-nature").Change("Modest");
         cut.FindAll(".targets input")[5].Input("8");
         cut.Find("button.save").Click();
 
         var saved = Repository.Stored["p1"];
-        Assert.Equal("Wartortle", saved.Name);
+        Assert.Equal("Squirtle", saved.CurrentSpecies);
         Assert.Equal("Modest", saved.Nature);
         Assert.Equal([252, 0, 2, 252, 0, 8], saved.Targets);
         Assert.Equal(["Squirtle", "Wartortle", "Blastoise"], saved.Species.Select(s => s.Name));
@@ -98,16 +98,47 @@ public class SettingsFormTests : AppTestContext
     }
 
     [Fact]
-    public void Custom_name_is_kept_when_changing_species()
+    public void Tapping_a_species_of_the_line_makes_it_the_current_form()
     {
         Seed(Pokemons.Squirtle());
         var cut = Render<SettingsForm>();
-        cut.Find("input#settings-name").Input("Shelly");
+
+        cut.Find("li.species-chip:nth-child(2) button.species-current").Click();
+        cut.Find("button.save").Click();
+
+        Assert.Equal("Wartortle", Repository.Stored["p1"].CurrentSpecies);
+    }
+
+    [Fact]
+    public void Tapping_an_evolution_makes_it_the_current_form()
+    {
+        var eevee = Pokemons.Squirtle();
+        eevee.CurrentSpecies = "Eevee";
+        eevee.Species = [new() { Name = "Eevee", Base = [55, 55, 50, 45, 65, 55] }];
+        Seed(eevee);
+        var cut = Render<SettingsForm>();
+
+        cut.Find("button.evolution-option[data-name='Vaporeon']").Click();
+        cut.Find("button.save").Click();
+
+        var saved = Repository.Stored["p1"];
+        Assert.Equal("Vaporeon", saved.CurrentSpecies);
+        Assert.Equal(["Eevee", "Vaporeon"], saved.Species.Select(s => s.Name));
+    }
+
+    [Fact]
+    public void Changing_to_a_species_outside_the_line_makes_it_the_current_form()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<SettingsForm>();
 
         cut.Find("button.change-species").Click();
         cut.Find("input.species-search").Input("bulba");
         cut.Find("button.species-option[data-name='Bulbasaur']").Click();
+        cut.Find("button.save").Click();
 
-        Assert.Equal("Shelly", cut.Find("input#settings-name").GetAttribute("value"));
+        var saved = Repository.Stored["p1"];
+        Assert.Equal("Bulbasaur", saved.CurrentSpecies);
+        Assert.Equal(["Bulbasaur", "Ivysaur", "Venusaur"], saved.Species.Select(s => s.Name));
     }
 }

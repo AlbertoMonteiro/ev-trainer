@@ -34,6 +34,18 @@ public class ModelJsonTests
     }
 
     [Fact]
+    public void Name_holds_the_current_species()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.CurrentSpecies = "Wartortle";
+
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = pokemon }, indented: false);
+
+        Assert.Equal("Wartortle", JsonNode.Parse(json)!["documents"]!["sq"]!["name"]!.GetValue<string>());
+        Assert.Equal("Wartortle", PokemonJson.Deserialize(json)!["sq"].CurrentSpecies);
+    }
+
+    [Fact]
     public void Round_trips_without_changes()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Bulbasaur (rival)", 1, 1), ("Caterpie", 3, 2));

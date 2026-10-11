@@ -132,13 +132,13 @@
         _evs = [.. entry.Evs.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];
     }
 
-    /// <summary>Clears the form: species = last used (or first of the line), EVs = current totals.</summary>
+    /// <summary>Clears the form: species = the current one (or first of the line), EVs = current totals.</summary>
     private void Reset(TrainingPokemon pokemon)
     {
         _editing = null;
         _level = string.Empty;
-        _species = pokemon.IvLog.LastOrDefault()?.Species is { } last && pokemon.Species.Any(s => s.Name == last)
-            ? last
+        _species = pokemon.Species.Any(s => s.Name == pokemon.CurrentSpecies)
+            ? pokemon.CurrentSpecies
             : pokemon.Species.FirstOrDefault()?.Name ?? string.Empty;
         _stats = [.. Enumerable.Repeat(string.Empty, StatVector.Count)];
         _evs = [.. Store.SelectedTotals.Select(v => v.ToString(System.Globalization.CultureInfo.InvariantCulture))];

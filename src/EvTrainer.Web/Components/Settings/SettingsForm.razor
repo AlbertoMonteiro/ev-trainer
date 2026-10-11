@@ -6,23 +6,15 @@
     <section class="card settings">
         <h2>@L["Settings.Title"]</h2>
         <div class="form-grid">
-            <div class="two">
-                <div class="field">
-                    <label for="settings-name">@L["Settings.Name"]</label>
-                    <input id="settings-name" value="@_form.Name" maxlength="20"
-                           aria-invalid="@(string.IsNullOrWhiteSpace(_form.Name) ? "true" : "false")"
-                           @oninput="e => _form.Name = e.Value?.ToString() ?? string.Empty" />
-                </div>
-                <div class="field">
-                    <label for="settings-nature">@L["Settings.Nature"]</label>
-                    <select id="settings-nature" value="@_form.Nature" @onchange="e => _form.Nature = e.Value?.ToString() ?? string.Empty">
-                        <option value="">@L["Settings.Nature.None"]</option>
-                        @foreach (var nature in Store.Data.Natures)
-                        {
-                            <option value="@nature.Name">@NatureLabel(nature)</option>
-                        }
-                    </select>
-                </div>
+            <div class="field">
+                <label for="settings-nature">@L["Settings.Nature"]</label>
+                <select id="settings-nature" value="@_form.Nature" @onchange="e => _form.Nature = e.Value?.ToString() ?? string.Empty">
+                    <option value="">@L["Settings.Nature.None"]</option>
+                    @foreach (var nature in Store.Data.Natures)
+                    {
+                        <option value="@nature.Name">@NatureLabel(nature)</option>
+                    }
+                </select>
             </div>
 
             <div class="field targets">
@@ -48,7 +40,7 @@
 
             <div class="field species">
                 <span class="label">@L["Settings.Species"]</span>
-                <SpeciesPicker Line="_form.Species" OnPick="PickSpecies" />
+                <SpeciesPicker Line="_form.Species" Current="@_form.Current" OnPick="PickSpecies" OnCurrent="SetCurrent" />
             </div>
 
             <button type="button" class="primary save" disabled="@(!_form.IsValid)" @onclick="Save">@L["Settings.Save"]</button>
@@ -91,13 +83,16 @@
             return;
         }
 
-        // Keep a nickname; replace the name only when it is empty or was just a species name.
-        if (string.IsNullOrWhiteSpace(_form.Name) || _form.Species.Any(s => s.Name == _form.Name.Trim()))
-        {
-            _form.Name = pick.Picked;
-        }
-
         _form.Species = [.. pick.Line];
+        _form.Current = pick.Picked;
+    }
+
+    private void SetCurrent(string species)
+    {
+        if (_form is not null)
+        {
+            _form.Current = species;
+        }
     }
 
     private void Save()
@@ -107,7 +102,7 @@
             return;
         }
 
-        Store.SaveSettings(_form.Name, _form.Nature, _form.ParsedTargets, _form.Species);
+        Store.SaveSettings(_form.Current, _form.Nature, _form.ParsedTargets, _form.Species);
         Toasts.Show(L["Settings.Saved"]);
     }
 }

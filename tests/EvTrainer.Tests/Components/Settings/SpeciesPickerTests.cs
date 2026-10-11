@@ -9,11 +9,41 @@ namespace EvTrainer.Tests.Components.Settings;
 public class SpeciesPickerTests : AppTestContext
 {
     private SpeciesPick? _picked;
+    private string? _current;
 
-    private IRenderedComponent<SpeciesPicker> RenderPicker(IReadOnlyList<SpeciesEntry>? line = null) =>
+    private IRenderedComponent<SpeciesPicker> RenderPicker(IReadOnlyList<SpeciesEntry>? line = null, string current = "") =>
         Render<SpeciesPicker>(p => p
             .Add(c => c.Line, line ?? [])
-            .Add(c => c.OnPick, pick => _picked = pick));
+            .Add(c => c.Current, current)
+            .Add(c => c.OnPick, pick => _picked = pick)
+            .Add(c => c.OnCurrent, name => _current = name));
+
+    private static List<SpeciesEntry> SquirtleLine()
+    {
+        var dex = Web.Domain.Reference.Pokedex.LoadEmbedded();
+        return [.. dex.LineFor(dex.Find("Squirtle")!).Select(s => new SpeciesEntry { Name = s.Name, Base = [.. s.Base] })];
+    }
+
+    [Fact]
+    public void Each_species_of_the_line_is_a_toggle_and_only_the_current_one_is_pressed()
+    {
+        var cut = RenderPicker(SquirtleLine(), current: "Wartortle");
+
+        var toggles = cut.FindAll("li.species-chip button.species-current");
+        Assert.Equal(["false", "true", "false"], toggles.Select(t => t.GetAttribute("aria-pressed")));
+        Assert.Equal(T("Settings.Species.SetCurrent", "Squirtle"), toggles[0].GetAttribute("aria-label"));
+        Assert.Equal(T("Settings.Species.CurrentHint"), cut.Find(".species-picker p.hint").TextContent.Trim());
+    }
+
+    [Fact]
+    public void Tapping_a_species_of_the_line_reports_it_as_current()
+    {
+        var cut = RenderPicker(SquirtleLine(), current: "Squirtle");
+
+        cut.FindAll("li.species-chip button.species-current")[2].Click();
+
+        Assert.Equal("Blastoise", _current);
+    }
 
     [Fact]
     public void Searching_lists_matching_species()

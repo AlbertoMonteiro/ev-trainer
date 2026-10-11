@@ -3,10 +3,11 @@
 
 @if (Store.Selected is { } pokemon && Store.SelectedId is { } id)
 {
+    var label = PokemonLabel(pokemon);
     <details class="card delete-card">
         <summary>@L["Delete.Title"]</summary>
-        <p class="hint">@L["Delete.Hint", pokemon.Name]</p>
-        <button type="button" class="danger" @onclick="() => Delete(id, pokemon.Name)">@L["Delete.Confirm", pokemon.Name]</button>
+        <p class="hint">@L["Delete.Hint", label]</p>
+        <button type="button" class="danger" @onclick="() => Delete(id, label)">@L["Delete.Confirm", label]</button>
     </details>
 }
 

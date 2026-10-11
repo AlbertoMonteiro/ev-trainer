@@ -1,3 +1,4 @@
+using EvTrainer.Web.Domain.Model;
 using EvTrainer.Web.Localization;
 using EvTrainer.Web.State;
 
@@ -26,6 +27,10 @@ public abstract class StoreAwareComponent : ComponentBase, IDisposable
 
     /// <summary>Short stat label (HP, ATK, …) in the active language.</summary>
     protected string StatShort(int index) => L[$"Stat.Short.{index}"];
+
+    /// <summary>How a Pokémon is named on screen: its current species, or a placeholder when it has none.</summary>
+    protected string PokemonLabel(TrainingPokemon pokemon) =>
+        string.IsNullOrWhiteSpace(pokemon.CurrentSpecies) ? L["Pokemon.NoSpecies"] : pokemon.CurrentSpecies;
 
     private void OnChanged() => InvokeAsync(StateHasChanged);
 

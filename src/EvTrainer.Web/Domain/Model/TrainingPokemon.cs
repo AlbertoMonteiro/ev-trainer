@@ -3,7 +3,8 @@ namespace EvTrainer.Web.Domain.Model;
 /// <summary>A Pokémon being trained. Stat vectors are always [HP, Ataque, Defesa, SpAtk, SpDef, Speed].</summary>
 public sealed class TrainingPokemon
 {
-    public string Name { get; set; } = "";
+    /// <summary>Species the Pokémon is in right now: "" or the name of one of <see cref="Species"/>.</summary>
+    public string CurrentSpecies { get; set; } = "";
 
     /// <summary>Nature name, or "" when not chosen (treated as neutral).</summary>
     public string Nature { get; set; } = "";
@@ -29,17 +30,9 @@ public sealed class TrainingPokemon
     /// <summary>IVs the user knows from another source (each null or 0–31); they win over the computed range.</summary>
     public int?[] KnownIvs { get; set; } = new int?[StatVector.Count];
 
-    /// <summary>
-    /// Species to picture this Pokémon with: the one of the latest level note (when it is in the
-    /// evolution line), else the first species of the line, else the nickname.
-    /// </summary>
-    public string DisplaySpecies =>
-        IvLog.LastOrDefault()?.Species is { } latest && Species.Any(s => s.Name == latest) ? latest
-        : Species.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s.Name))?.Name ?? Name;
-
     public TrainingPokemon Clone() => new()
     {
-        Name = Name,
+        CurrentSpecies = CurrentSpecies,
         Nature = Nature,
         Species = [.. Species.Select(s => s.Clone())],
         Targets = [.. Targets],
@@ -51,12 +44,29 @@ public sealed class TrainingPokemon
         KnownIvs = [.. KnownIvs],
     };
 
-    /// <summary>Inserts a level note keeping <see cref="IvLog"/> sorted by level (stable).</summary>
+    /// <summary>
+    /// Inserts a level note keeping <see cref="IvLog"/> sorted by level (stable), and advances the current
+    /// species to the one of the note when it is later in the line.
+    /// </summary>
     public int InsertLevel(LevelEntry entry)
     {
         var index = IvLog.FindLastIndex(l => l.Level <= entry.Level) + 1;
         IvLog.Insert(index, entry);
+        AdvanceTo(entry.Species);
         return index;
+    }
+
+    /// <summary>
+    /// Makes <paramref name="species"/> the current species when it is in the line and later than the
+    /// current one (or nothing is current yet); a Pokémon never goes back to an earlier form.
+    /// </summary>
+    public void AdvanceTo(string species)
+    {
+        var target = Species.FindIndex(s => s.Name == species && !string.IsNullOrWhiteSpace(s.Name));
+        if (target >= 0 && target > Species.FindIndex(s => s.Name == CurrentSpecies))
+        {
+            CurrentSpecies = species;
+        }
     }
 }
 
