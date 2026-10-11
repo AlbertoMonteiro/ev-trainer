@@ -105,3 +105,27 @@ as duas dúvidas de escopo foram respondidas na spec (Q1 = D, Q2 = C).
   remove e restaura a seleção anterior. A tela de avaliação fecha e abre a aba IVs do novo Pokémon.
 - **Rationale**: reaproveita o mesmo formato de anotação de nível; a aba IVs mostra imediatamente as
   faixas da avaliação (SC-002).
+
+## R10. Emenda: importância em 3 níveis (2026-10-11)
+
+- **Problema**: com peso igual, o Machop Docile Nv 16 (`50/31/25/21/19/20`, ATK 3–8) somou 187 e o Hasty
+  Nv 17 (`52/37/21/19/16/22`, ATK 29–31) somou 152; o app apontou o Docile como melhor, embora o ataque
+  dele seja inaceitável para um atacante físico.
+- **Decision**: `enum StatImportance { Ignored = 0, Counts = 1, Main = 3 }`, com o valor do enum sendo
+  o próprio peso. Padrão `Capture.DefaultImportance(base)`: o maior entre Ataque (1) e SpAtk (3) base é
+  `Main`, o menor é `Ignored`, os demais `Counts`; empate ⇒ ambos `Counts`. Toque alterna
+  `Ignored → Counts → Main → Ignored`. Substitui R5 (`bool[]`).
+  - Veredito (R4): média **ponderada** dos mínimos e dos máximos (`Σ peso × Min / Σ peso`, divisão
+    inteira) sobre os stats com peso > 0.
+  - Pontuação (R6): `Σ peso × (Min + Max)`; margem de empate e desempate pela nature inalterados.
+  - Efeito da nature: "conta" = peso > 0 (regra de R4 inalterada).
+  - Caso Machop: Docile 209 × Hasty 272 ⇒ Hasty **Melhor**.
+- **Rationale**: peso 3 faz um ataque claramente melhor vencer diferenças moderadas nos outros stats;
+  peso 2 venceria por pouco (212 × 198), frágil a variações. Um nível explícito "principal" deixa o
+  motivo visível na tela e permite a Pokémon de suporte rebaixar o ataque com um toque.
+- **Alternatives considered**: peso numérico livre por stat — flexível, mas exige explicar números ao
+  jogador; regra "ataque é eliminatório" — rígida demais (descartaria um exemplar com ataque Bom por um
+  com Ótimo e o resto péssimo).
+- **Compatibilidade**: o documento `evtrainer:v1:capture` passa a gravar `importance` (`"main"`,
+  `"counts"`, `"ignored"`); a leitura aceita o antigo `counted` (`false` ⇒ ignora; `true` ⇒ o padrão da
+  espécie, ou `counts` quando o padrão for `ignored`).

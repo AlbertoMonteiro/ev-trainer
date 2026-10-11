@@ -4,7 +4,7 @@ using EvTrainer.Web.Domain.Reference;
 namespace EvTrainer.Web.State;
 
 /// <summary>
-/// Capture conveniences per species — which stats count and the best capture so far — saved right away
+/// Capture conveniences per species — how much each stat weighs and the best capture so far — saved right away
 /// through <see cref="IPokemonRepository"/>, outside the backup (research R5–R7). Holds no UI text.
 /// </summary>
 public sealed class CaptureStore
@@ -32,20 +32,20 @@ public sealed class CaptureStore
     }
 
     /// <summary>The player's choice for the species, or the default rule (a copy).</summary>
-    public bool[] CountedFor(string species) =>
-        _notes.Counted.TryGetValue(species, out var counted) ? [.. counted]
-        : _dex.Find(species) is { } known ? Capture.DefaultCounted(known.Base)
-        : [.. Enumerable.Repeat(true, Domain.Model.StatVector.Count)];
+    public StatImportance[] ImportanceFor(string species) =>
+        _notes.Importance.TryGetValue(species, out var importance) ? [.. importance]
+        : _dex.Find(species) is { } known ? Capture.DefaultImportance(known.Base)
+        : [.. Enumerable.Repeat(StatImportance.Counts, Domain.Model.StatVector.Count)];
 
-    public void SetCounted(string species, bool[] counted)
+    public void SetImportance(string species, StatImportance[] importance)
     {
-        _notes.Counted[species] = [.. counted];
+        _notes.Importance[species] = [.. importance];
         Commit();
     }
 
-    public void ResetCounted(string species)
+    public void ResetImportance(string species)
     {
-        if (_notes.Counted.Remove(species))
+        if (_notes.Importance.Remove(species))
         {
             Commit();
         }
@@ -56,7 +56,7 @@ public sealed class CaptureStore
         _notes.Best.TryGetValue(species, out var best) ? best with { Stats = [.. best.Stats] } : null;
 
     /// <summary>
-    /// How a valid capture compares with the species' best so far, using the current counted stats for both;
+    /// How a valid capture compares with the species' best so far, using the current importance for both;
     /// null without a best or when either side has no score.
     /// </summary>
     public CaptureComparison? CompareWithBest(CaptureInput input)
@@ -120,8 +120,8 @@ public sealed class CaptureStore
         Commit();
     }
 
-    /// <summary>Evaluates a capture with the species' current counted stats.</summary>
-    public CaptureResult Evaluate(CaptureInput input) => Capture.Evaluate(input, CountedFor(input.Species), _dex, _data);
+    /// <summary>Evaluates a capture with the species' current importance.</summary>
+    public CaptureResult Evaluate(CaptureInput input) => Capture.Evaluate(input, ImportanceFor(input.Species), _dex, _data);
 
     private void Commit()
     {

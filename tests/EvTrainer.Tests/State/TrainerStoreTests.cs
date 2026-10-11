@@ -353,13 +353,13 @@ public class TrainerStoreTests
     {
         var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
         var capture = new CaptureStore(repository, Dex, Data);
-        capture.SetCounted("Abra", [true, true, true, true, true, true]);
+        capture.SetImportance("Abra", [StatImportance.Main, StatImportance.Main, StatImportance.Main, StatImportance.Main, StatImportance.Main, StatImportance.Main]);
         capture.Conclude(new CaptureInput("Squirtle", 5, "Timid", [20, 9, 13, 11, 12, 11]));
         var store = CreateStore(repository);
 
         var backup = store.ExportBackup();
 
-        Assert.DoesNotContain("\"counted\"", backup, StringComparison.Ordinal);
+        Assert.DoesNotContain("\"importance\"", backup, StringComparison.Ordinal);
         Assert.DoesNotContain("\"best\"", backup, StringComparison.Ordinal);
         Assert.NotEmpty(repository.CaptureNotes.Best);
     }

@@ -50,8 +50,9 @@ up and it narrows down your IVs.
   stat for each level and the intersection of all of them, using integer Gen 3 math and your nature.
 - **Is this catch worth keeping?** — right after catching, type the species, level, nature and the 6
   stats from the summary screen: each stat gets its IV range and a grade (Ótimo/Bom/Médio/Ruim), plus an
-  overall verdict over the stats that matter (picked from the species' base stats, adjustable and
-  remembered). The app keeps the best catch so far per species and tells you whether the new one is
+  overall verdict weighted by how much each stat matters: the main attack stat (physical or special,
+  from the species' base stats) weighs 3×, the others 1×, the useless one is ignored — one tap changes
+  it, and the choice is remembered per species. The app keeps the best catch so far per species and tells you whether the new one is
   better or worse; "Add to my list" starts training it with the first IV note already filled in.
 - **Fix it by hand when the game disagrees** — "Edit EVs" sets the exact values from the game, either
   keeping the history (a "manual adjustment" entry; later battles add on top of it) or erasing it,

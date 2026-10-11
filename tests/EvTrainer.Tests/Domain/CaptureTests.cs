@@ -13,8 +13,12 @@ public class CaptureTests
 
     private static string Show(IvCell cell) => IvTests.Show(cell);
 
-    private static CaptureResult Evaluate(CaptureInput input, bool[]? counted = null) =>
-        Capture.Evaluate(input, counted ?? Capture.DefaultCounted(Dex.Find(input.Species)!.Base), Dex, Data);
+    private const StatImportance I = StatImportance.Ignored;
+    private const StatImportance C = StatImportance.Counts;
+    private const StatImportance M = StatImportance.Main;
+
+    private static CaptureResult Evaluate(CaptureInput input, StatImportance[]? importance = null) =>
+        Capture.Evaluate(input, importance ?? Capture.DefaultImportance(Dex.Find(input.Species)!.Base), Dex, Data);
 
     [Theory]
     [InlineData(0, IvGrade.Poor)]
@@ -28,11 +32,20 @@ public class CaptureTests
     public void Grade_boundaries(int iv, IvGrade expected) => Assert.Equal(expected, Capture.Grade(iv));
 
     [Fact]
-    public void Default_counted_ignores_the_weaker_attack_stat()
+    public void Default_importance_makes_the_stronger_attack_stat_main_and_ignores_the_weaker()
     {
-        Assert.Equal([true, false, true, true, true, true], Capture.DefaultCounted([25, 20, 15, 105, 55, 90]));
-        Assert.Equal([true, true, true, false, true, true], Capture.DefaultCounted([70, 80, 50, 35, 35, 35]));
-        Assert.Equal([true, true, true, true, true, true], Capture.DefaultCounted([50, 60, 50, 60, 50, 50]));
+        Assert.Equal([C, I, C, M, C, C], Capture.DefaultImportance([25, 20, 15, 105, 55, 90]));
+        Assert.Equal([C, M, C, I, C, C], Capture.DefaultImportance([70, 80, 50, 35, 35, 35]));
+        Assert.Equal([C, C, C, C, C, C], Capture.DefaultImportance([50, 60, 50, 60, 50, 50]));
+    }
+
+    [Fact]
+    public void Importance_is_the_weight_and_cycles_ignored_counts_main()
+    {
+        Assert.Equal([0, 1, 3], new[] { I, C, M }.Select(i => (int)i));
+        Assert.Equal(C, Capture.Next(I));
+        Assert.Equal(M, Capture.Next(C));
+        Assert.Equal(I, Capture.Next(M));
     }
 
     [Fact]
@@ -58,8 +71,8 @@ public class CaptureTests
         Assert.Equal(new GradeSpan(IvGrade.Good, IvGrade.Great), result.Grades[3]);
         Assert.Equal(new VerdictUncertain(VerdictGrade.Fair, VerdictGrade.Excellent), result.Verdict);
         Assert.Equal(NatureEffect.Helps, result.NatureEffect);
-        // HP, DEF, SPA, SPD, SPE count: (12+31)+(10+29)+(20+31)+(12+31)+(14+31).
-        Assert.Equal(221, result.Score);
+        // SPA is main (×3), ATK ignored: (12+31)+(10+29)+3×(20+31)+(12+31)+(14+31).
+        Assert.Equal(323, result.Score);
     }
 
     [Fact]
@@ -95,7 +108,7 @@ public class CaptureTests
     [Fact]
     public void Nothing_counted_makes_the_verdict_unavailable()
     {
-        var result = Evaluate(Squirtle, new bool[6]);
+        var result = Evaluate(Squirtle, [I, I, I, I, I, I]);
 
         Assert.Equal(new VerdictUnavailable(VerdictProblem.NothingCounted), result.Verdict);
         Assert.Null(result.Score);
@@ -104,7 +117,7 @@ public class CaptureTests
     [Fact]
     public void Shedinja_hp_never_counts()
     {
-        var result = Evaluate(new CaptureInput("Shedinja", 25, "Hardy", [1, 54, 33, 26, 26, 30]), [true, true, true, true, true, true]);
+        var result = Evaluate(new CaptureInput("Shedinja", 25, "Hardy", [1, 54, 33, 26, 26, 30]), [M, C, C, C, C, C]);
 
         Assert.IsType<IvUnknowable>(result.Cells[0]);
         Assert.Null(result.Grades[0]);
@@ -118,16 +131,17 @@ public class CaptureTests
     [InlineData("Adamant", NatureEffect.Harms)]
     [InlineData("Lonely", NatureEffect.Harms)]
     public void Nature_effect_for_a_special_attacker(string nature, NatureEffect expected) =>
-        Assert.Equal(expected, Capture.EffectOf(Data.FindNature(nature)!, [true, false, true, true, true, true]));
+        Assert.Equal(expected, Capture.EffectOf(Data.FindNature(nature)!, [C, I, C, M, C, C]));
 
     [Fact]
     public void Nature_that_harms_a_physical_attacker()
     {
-        var counted = new[] { true, true, true, false, true, true };
+        StatImportance[] physical = [C, M, C, I, C, C];
 
-        Assert.Equal(NatureEffect.Harms, Capture.EffectOf(Data.FindNature("Modest")!, counted));
-        Assert.Equal(NatureEffect.Neutral, Capture.EffectOf(Data.FindNature("Hardy")!, counted));
-        Assert.Equal(NatureEffect.Neutral, Capture.EffectOf(Data.FindNature("Modest")!, [true, false, true, false, true, true]));
+        Assert.Equal(NatureEffect.Harms, Capture.EffectOf(Data.FindNature("Modest")!, physical));
+        Assert.Equal(NatureEffect.Neutral, Capture.EffectOf(Data.FindNature("Hardy")!, physical));
+        Assert.Equal(NatureEffect.Helps, Capture.EffectOf(Data.FindNature("Adamant")!, physical));
+        Assert.Equal(NatureEffect.Neutral, Capture.EffectOf(Data.FindNature("Modest")!, [C, I, C, I, C, C]));
     }
 
     private static CaptureResult Scored(int score, NatureEffect nature) =>
@@ -150,5 +164,29 @@ public class CaptureTests
         Assert.Equal(CaptureComparison.Equivalent, Capture.Compare(Scored(101, NatureEffect.Helps), Scored(100, NatureEffect.Helps)));
         // Beyond the margin the score wins over the nature.
         Assert.Equal(CaptureComparison.Worse, Capture.Compare(Scored(100, NatureEffect.Helps), Scored(105, NatureEffect.Harms)));
+    }
+
+    [Fact]
+    public void Main_attack_outweighs_moderately_better_other_stats()
+    {
+        // Real case behind the amendment: Machop Docile with a terrible ATK vs Hasty with a great one.
+        var docile = Evaluate(new CaptureInput("Machop", 16, "Docile", [50, 31, 25, 21, 19, 20]));
+        var hasty = Evaluate(new CaptureInput("Machop", 17, "Hasty", [52, 37, 21, 19, 16, 22]));
+
+        Assert.Equal(["10-16", "3-8", "25-31", "30-31", "18-23", "24-29"], docile.Cells.Select(Show));
+        Assert.Equal(["8-12", "29-31", "12-17", "13-18", "0", "19-24"], hasty.Cells.Select(Show));
+        Assert.Equal(209, docile.Score);
+        Assert.Equal(272, hasty.Score);
+        Assert.Equal(CaptureComparison.Better, Capture.Compare(hasty, docile));
+        Assert.Equal(CaptureComparison.Worse, Capture.Compare(docile, hasty));
+    }
+
+    [Fact]
+    public void Verdict_is_a_weighted_average()
+    {
+        // Docile: lows (10 + 3×3 + 25 + 18 + 24) / 7 = 12, highs (16 + 3×8 + 31 + 23 + 29) / 7 = 17 ⇒ Médio.
+        var docile = Evaluate(new CaptureInput("Machop", 16, "Docile", [50, 31, 25, 21, 19, 20]));
+
+        Assert.Equal(new VerdictKnown(VerdictGrade.Fair), docile.Verdict);
     }
 }

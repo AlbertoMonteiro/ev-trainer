@@ -1,13 +1,13 @@
 @inherits StoreAwareComponent
 
-@* One row per stat: IV range, grade and whether the stat counts for the verdict. *@
+@* One row per stat: IV range, grade and how much the stat weighs in the verdict (tap to change). *@
 <table class="capture-table">
     <thead>
         <tr>
             <th scope="col"><span class="visually-hidden">@L["Capture.Stats"]</span></th>
             <th scope="col">@L["Capture.Column.Range"]</th>
             <th scope="col">@L["Capture.Column.Grade"]</th>
-            <th scope="col">@L["Capture.Column.Counts"]</th>
+            <th scope="col">@L["Capture.Column.Importance"]</th>
         </tr>
     </thead>
     <tbody>
@@ -15,17 +15,18 @@
         {
             var stat = i;
             var cell = Result.Cells[stat];
-            var counts = Counted[stat] && cell is not IvUnknowable;
-            <tr data-stat="@stat" class="@(counts ? "" : "not-counted")">
+            var importance = cell is IvUnknowable ? StatImportance.Ignored : Importance[stat];
+            var label = L[$"Capture.Importance.{importance}"].Value;
+            <tr data-stat="@stat" class="importance-@importance.ToString().ToLowerInvariant()">
                 <th scope="row">@StatShort(stat)</th>
                 <td class="range num @(cell is IvInconsistent ? "bad" : "")">@Range(cell)</td>
                 <td class="grade @GradeClass(Result.Grades[stat])">@Grade(Result.Grades[stat])</td>
                 <td>
                     @if (cell is not IvUnknowable)
                     {
-                        <button type="button" class="count" aria-pressed="@(counts ? "true" : "false")"
-                                aria-label="@L["Capture.Counted.Toggle", L[$"Stat.Long.{stat}"].Value]"
-                                @onclick="() => OnToggle.InvokeAsync(stat)">@(counts ? L["Capture.Counted.Yes"] : L["Capture.Counted.No"])</button>
+                        <button type="button" class="importance"
+                                aria-label="@L["Capture.Importance.Toggle", L[$"Stat.Long.{stat}"].Value, label]"
+                                @onclick="() => OnToggle.InvokeAsync(stat)">@label</button>
                     }
                 </td>
             </tr>
@@ -38,7 +39,7 @@
     public CaptureResult Result { get; set; } = default!;
 
     [Parameter, EditorRequired]
-    public bool[] Counted { get; set; } = [];
+    public StatImportance[] Importance { get; set; } = [];
 
     [Parameter]
     public EventCallback<int> OnToggle { get; set; }

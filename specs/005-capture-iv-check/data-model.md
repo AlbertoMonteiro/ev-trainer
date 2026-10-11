@@ -19,9 +19,9 @@ Válido quando todos os campos respeitam as regras. Os EVs são sempre zero (ass
 |---|---|---|
 | `Cells` | `IvCell[6]` | `Ivs.RangeFor(species, nature, level, stats, evs: 0)` (R2) |
 | `Grades` | `GradeSpan?[6]` | por stat com `IvSpan`; `null` para `IvInconsistent`/`IvUnknowable` |
-| `Verdict` | `Verdict` | sobre os stats que contam (R4) |
+| `Verdict` | `Verdict` | média ponderada pela importância (R4, R10) |
 | `NatureEffect` | `NatureEffect` | Favorece / Neutra / Prejudica (R4) |
-| `Score` | `int?` | soma de `Min + Max` dos stats que contam; `null` se indisponível (R6) |
+| `Score` | `int?` | `Σ peso × (Min + Max)`; `null` se indisponível (R6, R10) |
 
 ### Tipos auxiliares
 
@@ -35,11 +35,12 @@ Válido quando todos os campos respeitam as regras. Os EVs são sempre zero (ass
 - `enum CaptureComparison { Better, Equivalent, Worse }` (não `Comparison`, que colide com `System.Comparison<T>`).
 - `IvUnknowable : IvCell` — novo caso (R3): HP de espécie com base de HP 1.
 
-### CountedStats
+### StatImportance (emenda R10)
 
-`bool[6]` por espécie. Padrão `CountedStats.Default(int[] base)`: `true` em todos, exceto o índice do
-menor entre `base[1]` (Ataque) e `base[3]` (SpAtk) quando diferentes. Stats com `IvUnknowable` são
-tratados como não contando, qualquer que seja a marcação.
+`enum StatImportance { Ignored = 0, Counts = 1, Main = 3 }` — o valor é o peso. Seis por espécie. Padrão
+`Capture.DefaultImportance(int[] base)`: o maior entre `base[1]` (Ataque) e `base[3]` (SpAtk) é `Main`,
+o menor é `Ignored`, os demais `Counts`; empate ⇒ ambos `Counts`. Stats com `IvUnknowable` são tratados
+como `Ignored`, qualquer que seja a escolha.
 
 ## Persistência (`localStorage`, fora do backup)
 
@@ -47,7 +48,7 @@ tratados como não contando, qualquer que seja a marcação.
 
 ```json
 {
-  "counted": { "Abra": [true, false, true, true, true, true] },
+  "importance": { "Abra": ["counts", "ignored", "counts", "main", "counts", "counts"] },
   "best": {
     "Abra": { "lv": 8, "nature": "Timid", "st": [21, 9, 10, 20, 15, 21] }
   }
@@ -56,7 +57,8 @@ tratados como não contando, qualquer que seja a marcação.
 
 | Campo | Regras de leitura (tolerante) |
 |---|---|
-| `counted[species]` | exatamente 6 booleanos, senão ignorado (volta ao padrão) |
+| `importance[species]` | exatamente 6 valores entre `main`, `counts`, `ignored`, senão ignorado (volta ao padrão) |
+| `counted[species]` (legado) | 6 booleanos, lidos só sem `importance` para a espécie: `false` ⇒ `ignored`; `true` ⇒ padrão da espécie, ou `counts` se o padrão for `ignored`; nunca mais gravado |
 | `best[species]` | `lv` 1–100, `nature` conhecida, `st` com 6 valores 1–999, espécie existente no Pokédex; senão a entrada é descartada |
 | documento ausente ou inválido | `CaptureNotes` vazio |
 

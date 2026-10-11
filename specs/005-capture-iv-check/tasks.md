@@ -181,3 +181,21 @@ Task: "T006 Teste tests/EvTrainer.Tests/Domain/CaptureNotesJsonTests.cs (ida e v
 1. + US2 → capturar e ir direto para o treino.
 2. + US3 → caça repetida com melhor até agora.
 3. Polish → texto fixo, backup, 360 px, README.
+
+---
+
+## Phase 7: Emenda — importância em 3 níveis (2026-10-11)
+
+**Goal**: o stat de ataque principal pesa 3, os demais 1 e o ignorado 0, no veredito e na comparação
+(spec: emenda, FR-006, FR-013, FR-014, SC-008; research R10).
+
+**Independent Test**: Machop Docile Nv 16 `50/31/25/21/19/20` guardado × Hasty Nv 17
+`52/37/21/19/16/22` ⇒ Hasty **Melhor** (scores 209 × 272).
+
+- [X] T037 [P] Atualizar `tests/EvTrainer.Tests/Domain/CaptureTests.cs`: `DefaultImportance` (Abra, Machop, empate), `Next` cíclico, `Evaluate` com pesos (Squirtle: `Score` 323 e `VerdictUncertain(Fair, Excellent)`; nada com peso ⇒ `NothingCounted`; Shedinja HP ignorado mesmo `Main`), `EffectOf` com importância e o caso Machop Docile × Hasty ⇒ `Better`
+- [X] T038 [P] Atualizar `tests/EvTrainer.Tests/Domain/CaptureNotesJsonTests.cs`: ida e volta com `importance` (`"main"`, `"counts"`, `"ignored"`); valores inválidos ou tamanho ≠ 6 ignorados; legado `counted` convertido (`false` ⇒ ignored; `true` ⇒ padrão, ou counts quando o padrão é ignored) e não regravado
+- [X] T039 [P] Atualizar `tests/EvTrainer.Tests/State/CaptureStoreTests.cs`, `tests/EvTrainer.Tests/State/TrainerStoreTests.cs`, `tests/EvTrainer.Tests/Components/Capture/CaptureViewTests.cs` e `tests/EvTrainer.Tests/Localization/NoHardcodedTextTests.cs` para `ImportanceFor`/`SetImportance`/`ResetImportance`; na tela: botão `button.importance` com o texto `Capture.Importance.Main|Counts|Ignored`, `aria-label` `Capture.Importance.Toggle`, linhas `importance-main`/`importance-ignored`, três toques voltam ao início, **Restaurar importância** (`Capture.Importance.Reset`); caso Machop pela tela ⇒ `Capture.Compare.Better`
+- [X] T040 Em `src/EvTrainer.Web/Domain/Capture.cs`: `StatImportance`, `DefaultImportance`, `Next`, `EffectOf`/`Evaluate` ponderados; `CaptureNotes.Importance` — faz T037 passar
+- [X] T041 Em `src/EvTrainer.Web/Domain/Json/CaptureNotesJson.cs`: `importance` com leitura do legado `counted` — faz T038 passar
+- [X] T042 Em `src/EvTrainer.Web/State/CaptureStore.cs` e nos componentes `src/EvTrainer.Web/Components/Capture/CaptureStatsTable.razor`/`CaptureResultPanel.razor`: importância no lugar de "conta"; chaves `Capture.Column.Importance`, `Capture.Importance.*` (removendo `Capture.Counted.*` e `Capture.Column.Counts`); estilos `importance-main`/`importance-ignored` em `app.css` — faz T039 passar
+- [X] T043 Rodar `dotnet format`, `dotnet build --no-incremental` (sem AD0001) e `dotnet test`; validar [quickstart.md](./quickstart.md) passos 1, 2 e 9 em 360 px; atualizar `README.md`

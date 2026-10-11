@@ -2,10 +2,10 @@
 @inject CaptureStore Capture
 
 @{
-    var counted = Capture.CountedFor(Input.Species);
+    var importance = Capture.ImportanceFor(Input.Species);
     var result = Capture.Evaluate(Input);
 }
-<CaptureStatsTable Result="result" Counted="counted" OnToggle="Toggle" />
+<CaptureStatsTable Result="result" Importance="importance" OnToggle="Toggle" />
 @if (result.Cells.Any(c => c is IvInconsistent))
 {
     <p class="inconsistent warn">@L["Capture.Inconsistent"]</p>
@@ -23,7 +23,7 @@
     }
 </div>
 <div class="row-actions">
-    <button type="button" class="reset-counted" @onclick="() => Capture.ResetCounted(Input.Species)">@L["Capture.Counted.Reset"]</button>
+    <button type="button" class="reset-importance" @onclick="() => Capture.ResetImportance(Input.Species)">@L["Capture.Importance.Reset"]</button>
 </div>
 
 @code {
@@ -33,8 +33,8 @@
 
     private void Toggle(int stat)
     {
-        var counted = Capture.CountedFor(Input.Species);
-        counted[stat] = !counted[stat];
-        Capture.SetCounted(Input.Species, counted);
+        var importance = Capture.ImportanceFor(Input.Species);
+        importance[stat] = Domain.Capture.Next(importance[stat]);
+        Capture.SetImportance(Input.Species, importance);
     }
 }

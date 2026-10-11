@@ -12,41 +12,45 @@ public class CaptureStoreTests
 
     private static CaptureStore CreateStore(InMemoryRepository repository) => new(repository, Dex, Data);
 
+    private const StatImportance I = StatImportance.Ignored;
+    private const StatImportance C = StatImportance.Counts;
+    private const StatImportance M = StatImportance.Main;
+
     [Fact]
-    public void Counted_defaults_to_the_species_rule()
+    public void Importance_defaults_to_the_species_rule()
     {
         var store = CreateStore(new InMemoryRepository());
 
-        Assert.Equal([true, false, true, true, true, true], store.CountedFor("Abra"));
-        Assert.Equal([true, true, true, false, true, true], store.CountedFor("Machop"));
+        Assert.Equal([C, I, C, M, C, C], store.ImportanceFor("Abra"));
+        Assert.Equal([C, M, C, I, C, C], store.ImportanceFor("Machop"));
     }
 
     [Fact]
-    public void SetCounted_saves_notifies_and_survives_a_reload()
+    public void SetImportance_saves_notifies_and_survives_a_reload()
     {
         var repository = new InMemoryRepository();
         var store = CreateStore(repository);
         var changes = 0;
         store.Changed += () => changes++;
 
-        store.SetCounted("Abra", [true, true, true, true, true, true]);
+        store.SetImportance("Abra", [C, C, C, M, C, M]);
 
         Assert.Equal(1, changes);
         Assert.Equal(1, repository.CaptureSaveCount);
-        Assert.Equal([true, true, true, true, true, true], CreateStore(repository).CountedFor("Abra"));
+        Assert.Equal([C, C, C, M, C, M], CreateStore(repository).ImportanceFor("Abra"));
     }
 
     [Fact]
-    public void ResetCounted_goes_back_to_the_default()
+    public void ResetImportance_goes_back_to_the_default()
     {
         var repository = new InMemoryRepository();
         var store = CreateStore(repository);
-        store.SetCounted("Abra", [true, true, true, true, true, true]);
+        store.SetImportance("Abra", [C, C, C, C, C, C]);
 
-        store.ResetCounted("Abra");
+        store.ResetImportance("Abra");
 
-        Assert.Equal([true, false, true, true, true, true], store.CountedFor("Abra"));
-        Assert.Empty(repository.CaptureNotes.Counted);
+        Assert.Equal([C, I, C, M, C, C], store.ImportanceFor("Abra"));
+        Assert.Empty(repository.CaptureNotes.Importance);
     }
 
     [Fact]
@@ -54,9 +58,9 @@ public class CaptureStoreTests
     {
         var store = CreateStore(new InMemoryRepository());
 
-        store.CountedFor("Abra")[1] = true;
+        store.ImportanceFor("Abra")[1] = M;
 
-        Assert.False(store.CountedFor("Abra")[1]);
+        Assert.Equal(I, store.ImportanceFor("Abra")[1]);
     }
 
     // Squirtle Nv 5 Timid with every IV 0 and with every IV 31.
@@ -127,14 +131,14 @@ public class CaptureStoreTests
     }
 
     [Fact]
-    public void Comparison_uses_the_current_counted_stats_for_both_sides()
+    public void Comparison_uses_the_current_importance_for_both_sides()
     {
         var store = CreateStore(new InMemoryRepository());
         store.Conclude(Strong);
 
         Assert.Equal(CaptureComparison.Equivalent, store.CompareWithBest(WeakAttack));
 
-        store.SetCounted("Squirtle", [true, true, true, true, true, true]);
+        store.SetImportance("Squirtle", [C, C, C, M, C, C]);
 
         Assert.Equal(CaptureComparison.Worse, store.CompareWithBest(WeakAttack));
     }
@@ -159,5 +163,18 @@ public class CaptureStoreTests
         var store = CreateStore(new InMemoryRepository());
 
         Assert.Null(store.CompareWithBest(Weak));
+    }
+
+    [Fact]
+    public void Main_attack_decides_the_machop_case()
+    {
+        var store = CreateStore(new InMemoryRepository());
+        store.Conclude(new CaptureInput("Machop", 16, "Docile", [50, 31, 25, 21, 19, 20]));
+
+        var hasty = new CaptureInput("Machop", 17, "Hasty", [52, 37, 21, 19, 16, 22]);
+
+        Assert.Equal(CaptureComparison.Better, store.CompareWithBest(hasty));
+        Assert.NotNull(store.Conclude(hasty));
+        Assert.Equal("Hasty", store.BestFor("Machop")!.Nature);
     }
 }

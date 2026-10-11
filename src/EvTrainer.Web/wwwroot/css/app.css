@@ -1199,8 +1199,7 @@ button.species-current[aria-pressed="true"] {
 
 .capture-view .card-head .close-capture,
 .capture-view .row-actions button,
-.capture-species .change-species,
-.capture-table .count {
+.capture-species .change-species {
     min-height: 44px;
 }
 
@@ -1253,22 +1252,33 @@ button.species-current[aria-pressed="true"] {
     color: var(--bad);
 }
 
-.capture-table tr.not-counted th,
-.capture-table tr.not-counted td.range,
-.capture-table tr.not-counted td.grade {
+.capture-table tr.importance-ignored th,
+.capture-table tr.importance-ignored td.range,
+.capture-table tr.importance-ignored td.grade {
     opacity: 0.45;
 }
 
-.capture-table .count {
-    min-width: 72px;
+.capture-table tr.importance-main th {
+    color: var(--accent);
+}
+
+.capture-table .importance {
+    min-height: 44px;
+    min-width: 84px;
     padding: 0 8px;
     font-size: 13px;
 }
 
-.capture-table .count[aria-pressed="true"] {
+.capture-table tr.importance-counts .importance {
     border-color: var(--accent);
     color: var(--accent);
-    font-weight: 600;
+}
+
+.capture-table tr.importance-main .importance {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 700;
 }
 
 .capture-verdict {

@@ -53,6 +53,14 @@ public sealed record VerdictKnown(VerdictGrade Grade) : Verdict;
 /// <summary>The ranges are too wide: the average of the lows and of the highs fall in different grades.</summary>
 public sealed record VerdictUncertain(VerdictGrade Low, VerdictGrade High) : Verdict;
 
+/// <summary>How much a stat weighs in the verdict and the comparison; the value is the weight (amendment R10).</summary>
+public enum StatImportance
+{
+    Ignored = 0,
+    Counts = 1,
+    Main = 3,
+}
+
 /// <summary>Effect of the nature on the stats that count; ordered from worst to best.</summary>
 public enum NatureEffect
 {
@@ -68,7 +76,7 @@ public enum CaptureComparison
     Worse,
 }
 
-/// <param name="Score">Sum of Min + Max of the counted ranges; null when the verdict is unavailable.</param>
+/// <param name="Score">Sum of weight × (Min + Max) of the weighted ranges; null when the verdict is unavailable.</param>
 public sealed record CaptureResult(IvCell[] Cells, GradeSpan?[] Grades, Verdict Verdict, NatureEffect NatureEffect, int? Score);
 
 /// <summary>Judges a freshly caught Pokémon (spec 005, research R4–R6).</summary>
@@ -82,27 +90,37 @@ public static class Capture
         _ => IvGrade.Great,
     };
 
-    /// <summary>Every stat counts except the weaker of Ataque and SpAtk (both count on a tie).</summary>
-    public static bool[] DefaultCounted(int[] baseStats)
+    /// <summary>
+    /// The stronger of Ataque and SpAtk is the main stat, the weaker is ignored, the others count (on a tie
+    /// both attack stats count).
+    /// </summary>
+    public static StatImportance[] DefaultImportance(int[] baseStats)
     {
-        var counted = Enumerable.Repeat(true, StatVector.Count).ToArray();
-        if (baseStats[StatVector.Attack] < baseStats[StatVector.SpAttack])
+        var importance = Enumerable.Repeat(StatImportance.Counts, StatVector.Count).ToArray();
+        var (attack, spAttack) = (baseStats[StatVector.Attack], baseStats[StatVector.SpAttack]);
+        if (attack != spAttack)
         {
-            counted[StatVector.Attack] = false;
-        }
-        else if (baseStats[StatVector.SpAttack] < baseStats[StatVector.Attack])
-        {
-            counted[StatVector.SpAttack] = false;
+            var (main, weaker) = attack > spAttack ? (StatVector.Attack, StatVector.SpAttack) : (StatVector.SpAttack, StatVector.Attack);
+            importance[main] = StatImportance.Main;
+            importance[weaker] = StatImportance.Ignored;
         }
 
-        return counted;
+        return importance;
     }
 
-    /// <summary>Harms when it lowers a stat that counts, helps when it raises one, neutral otherwise.</summary>
-    public static NatureEffect EffectOf(Nature? nature, bool[] counted) => nature switch
+    /// <summary>One tap: ignored → counts → main → ignored.</summary>
+    public static StatImportance Next(StatImportance importance) => importance switch
     {
-        { Decreases: { } down } when counted[down] => NatureEffect.Harms,
-        { Increases: { } up } when counted[up] => NatureEffect.Helps,
+        StatImportance.Ignored => StatImportance.Counts,
+        StatImportance.Counts => StatImportance.Main,
+        _ => StatImportance.Ignored,
+    };
+
+    /// <summary>Harms when it lowers a stat that counts, helps when it raises one, neutral otherwise.</summary>
+    public static NatureEffect EffectOf(Nature? nature, StatImportance[] importance) => nature switch
+    {
+        { Decreases: { } down } when importance[down] != StatImportance.Ignored => NatureEffect.Harms,
+        { Increases: { } up } when importance[up] != StatImportance.Ignored => NatureEffect.Helps,
         _ => NatureEffect.Neutral,
     };
 
@@ -125,35 +143,37 @@ public static class Capture
         };
     }
 
-    public static CaptureResult Evaluate(CaptureInput input, bool[] counted, Pokedex dex, ReferenceData data)
+    public static CaptureResult Evaluate(CaptureInput input, StatImportance[] importance, Pokedex dex, ReferenceData data)
     {
         var nature = data.FindNature(input.Nature);
         var cells = Ivs.RangeFor(dex.Find(input.Species)?.ToEntry(), nature, input.Level, input.Stats, new int[StatVector.Count]);
         GradeSpan?[] grades = [.. cells.Select(c => c is IvSpan(var min, var max) ? new GradeSpan(Grade(min), Grade(max)) : null)];
-        var effective = cells.Select((cell, i) => counted[i] && cell is not IvUnknowable).ToArray();
+        var weights = cells.Select((cell, i) => cell is IvUnknowable ? 0 : (int)importance[i]).ToArray();
 
-        var verdict = Judge(cells, effective, out var score);
-        return new CaptureResult(cells, grades, verdict, EffectOf(nature, counted), score);
+        var verdict = Judge(cells, weights, out var score);
+        return new CaptureResult(cells, grades, verdict, EffectOf(nature, importance), score);
     }
 
-    private static Verdict Judge(IvCell[] cells, bool[] counted, out int? score)
+    /// <summary>Weighted averages of the lows and of the highs of the weighted stats (research R4, R10).</summary>
+    private static Verdict Judge(IvCell[] cells, int[] weights, out int? score)
     {
         score = null;
-        var relevant = cells.Where((_, i) => counted[i]).ToList();
+        var relevant = cells.Select((cell, i) => (Cell: cell, Weight: weights[i])).Where(x => x.Weight > 0).ToList();
         if (relevant.Count == 0)
         {
             return new VerdictUnavailable(VerdictProblem.NothingCounted);
         }
 
-        if (relevant.Any(c => c is not IvSpan))
+        if (relevant.Any(x => x.Cell is not IvSpan))
         {
             return new VerdictUnavailable(VerdictProblem.Inconsistent);
         }
 
-        var spans = relevant.Cast<IvSpan>().ToList();
-        score = spans.Sum(s => s.Min + s.Max);
-        var low = VerdictOf(spans.Sum(s => s.Min) / spans.Count);
-        var high = VerdictOf(spans.Sum(s => s.Max) / spans.Count);
+        var spans = relevant.Select(x => (Span: (IvSpan)x.Cell, x.Weight)).ToList();
+        var total = spans.Sum(x => x.Weight);
+        score = spans.Sum(x => x.Weight * (x.Span.Min + x.Span.Max));
+        var low = VerdictOf(spans.Sum(x => x.Weight * x.Span.Min) / total);
+        var high = VerdictOf(spans.Sum(x => x.Weight * x.Span.Max) / total);
         return low == high ? new VerdictKnown(low) : new VerdictUncertain(low, high);
     }
 
@@ -166,16 +186,16 @@ public static class Capture
     };
 }
 
-/// <summary>Per-species capture conveniences kept on the device (outside the backup): counted stats and the best so far.</summary>
+/// <summary>Per-species capture conveniences kept on the device (outside the backup): stat importance and the best so far.</summary>
 public sealed class CaptureNotes
 {
-    public Dictionary<string, bool[]> Counted { get; init; } = new(StringComparer.Ordinal);
+    public Dictionary<string, StatImportance[]> Importance { get; init; } = new(StringComparer.Ordinal);
 
     public Dictionary<string, CaptureInput> Best { get; init; } = new(StringComparer.Ordinal);
 
     public CaptureNotes Clone() => new()
     {
-        Counted = Counted.ToDictionary(kv => kv.Key, kv => (bool[])[.. kv.Value], StringComparer.Ordinal),
+        Importance = Importance.ToDictionary(kv => kv.Key, kv => (StatImportance[])[.. kv.Value], StringComparer.Ordinal),
         Best = Best.ToDictionary(kv => kv.Key, kv => kv.Value with { Stats = [.. kv.Value.Stats] }, StringComparer.Ordinal),
     };
 }

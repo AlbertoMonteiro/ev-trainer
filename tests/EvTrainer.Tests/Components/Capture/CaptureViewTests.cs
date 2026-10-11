@@ -94,10 +94,15 @@ public class CaptureViewTests : AppTestContext
         Assert.Equal(T("Capture.GradeSpan", T("Capture.Grade.Good"), T("Capture.Grade.Great")), grades[3]);
 
         var rows = cut.FindAll(".capture-table tbody tr");
-        Assert.Contains("not-counted", rows[1].ClassList);
-        Assert.Equal("false", rows[1].QuerySelector("button.count")!.GetAttribute("aria-pressed"));
-        Assert.Equal("true", rows[0].QuerySelector("button.count")!.GetAttribute("aria-pressed"));
-        Assert.Equal(T("Capture.Counted.Toggle", T("Stat.Long.1")), rows[1].QuerySelector("button.count")!.GetAttribute("aria-label"));
+        Assert.Equal(T("Capture.Column.Importance"), cut.FindAll(".capture-table thead th")[3].TextContent.Trim());
+        Assert.Contains("importance-ignored", rows[1].ClassList);
+        Assert.Contains("importance-main", rows[3].ClassList);
+        Assert.Equal(T("Capture.Importance.Ignored"), rows[1].QuerySelector("button.importance")!.TextContent.Trim());
+        Assert.Equal(T("Capture.Importance.Main"), rows[3].QuerySelector("button.importance")!.TextContent.Trim());
+        Assert.Equal(T("Capture.Importance.Counts"), rows[0].QuerySelector("button.importance")!.TextContent.Trim());
+        Assert.Equal(
+            T("Capture.Importance.Toggle", T("Stat.Long.1"), T("Capture.Importance.Ignored")),
+            rows[1].QuerySelector("button.importance")!.GetAttribute("aria-label"));
 
         Assert.Equal(
             T("Capture.Verdict.Uncertain", T("Capture.Verdict.Fair"), T("Capture.Verdict.Excellent")),
@@ -108,21 +113,41 @@ public class CaptureViewTests : AppTestContext
     }
 
     [Fact]
-    public void Toggling_a_stat_is_remembered_and_reset_restores_the_default()
+    public void Tapping_cycles_the_importance_is_remembered_and_reset_restores_the_default()
     {
         var cut = OpenFromMenu();
         Fill(cut, "Squirtle", 5, "Timid", SquirtleStats);
+        AngleSharp.Dom.IElement Atk() => cut.FindAll(".capture-table tbody tr")[1];
 
-        cut.FindAll(".capture-table tbody tr")[1].QuerySelector("button.count")!.Click();
+        Atk().QuerySelector("button.importance")!.Click();
 
-        Assert.Equal("true", cut.FindAll(".capture-table tbody tr")[1].QuerySelector("button.count")!.GetAttribute("aria-pressed"));
-        Assert.True(Capture.CountedFor("Squirtle")[1]);
+        Assert.Equal(T("Capture.Importance.Counts"), Atk().QuerySelector("button.importance")!.TextContent.Trim());
+        Assert.Equal(EvTrainer.Web.Domain.StatImportance.Counts, Capture.ImportanceFor("Squirtle")[1]);
         Assert.Equal(T("Capture.Nature.Harms"), cut.Find(".capture-verdict .nature-effect").TextContent.Trim());
 
-        cut.Find(".capture-view button.reset-counted").Click();
+        Atk().QuerySelector("button.importance")!.Click();
+        Assert.Contains("importance-main", Atk().ClassList);
 
-        Assert.False(Capture.CountedFor("Squirtle")[1]);
-        Assert.Contains("not-counted", cut.FindAll(".capture-table tbody tr")[1].ClassList);
+        Atk().QuerySelector("button.importance")!.Click();
+        Assert.Contains("importance-ignored", Atk().ClassList);
+
+        Atk().QuerySelector("button.importance")!.Click();
+        Assert.Equal(T("Capture.Importance.Reset"), cut.Find(".capture-view button.reset-importance").TextContent.Trim());
+        cut.Find(".capture-view button.reset-importance").Click();
+
+        Assert.Equal(EvTrainer.Web.Domain.StatImportance.Ignored, Capture.ImportanceFor("Squirtle")[1]);
+        Assert.Contains("importance-ignored", Atk().ClassList);
+    }
+
+    [Fact]
+    public void Main_attack_decides_the_machop_case_on_screen()
+    {
+        Capture.Conclude(new EvTrainer.Web.Domain.CaptureInput("Machop", 16, "Docile", [50, 31, 25, 21, 19, 20]));
+        var cut = OpenFromMenu();
+
+        Fill(cut, "Machop", 17, "Hasty", [52, 37, 21, 19, 16, 22]);
+
+        Assert.Equal(T("Capture.Compare.Better"), cut.Find(".best-capture .compare").TextContent.Trim());
     }
 
     [Fact]
@@ -163,7 +188,7 @@ public class CaptureViewTests : AppTestContext
         Fill(cut, "Shedinja", 25, "Hardy", [1, 54, 33, 26, 26, 30]);
 
         Assert.Equal(T("Capture.Unknowable"), Column(cut, "range")[0]);
-        Assert.Contains("not-counted", cut.FindAll(".capture-table tbody tr")[0].ClassList);
+        Assert.Contains("importance-ignored", cut.FindAll(".capture-table tbody tr")[0].ClassList);
     }
 
     [Fact]

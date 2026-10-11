@@ -16,6 +16,12 @@ nível. Antes de investir horas de treino, o jogador quer saber se o exemplar qu
 vale a pena ou se é melhor soltar e capturar outro. Um Pokémon selvagem recém-capturado tem EVs zerados
 na Gen 3, então nível + nature + os 6 stats da tela de resumo bastam para estimar os IVs.
 
+**Emenda 2026-10-11 (pesos)**: no uso real, um Machop Docile Nv 16 com ATK 3–8 foi apontado como melhor
+que um Hasty Nv 17 com ATK 29–31, porque todos os stats que contam pesavam igual e DEF/SPD/SPE altos
+compensaram o ataque péssimo. Para um atacante, o stat de ataque principal precisa pesar muito mais. A
+marcação "conta / não conta" vira **importância em 3 níveis** — **principal** (peso 3), **conta** (peso
+1) e **ignora** (peso 0) — usada no veredito e na comparação.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Avaliar um Pokémon recém-capturado (Priority: P1)
@@ -46,14 +52,16 @@ largas, classificação "incerta" com a dica de que níveis mais altos dão resu
    duas pontas ("Médio a Bom") em vez de inventar um valor.
 4. **Given** um stat que nenhum IV de 0 a 31 reproduz, **Then** o app marca o stat com "?" e explica
    as causas prováveis (espécie, nível ou nature errados, ou o Pokémon já ganhou EVs em batalha).
-5. **Given** uma espécie escolhida, **Then** os **stats que contam** para o julgamento já vêm marcados
-   automaticamente pela espécie: todos, exceto o menor entre Ataque e SpAtk base (ex.: Alakazam
-   desconsidera Ataque; Machamp desconsidera SpAtk; empate ⇒ os dois contam). O jogador pode marcar e
-   desmarcar qualquer stat com um toque, e a escolha fica lembrada para as próximas avaliações daquela
-   espécie.
-6. **Given** os resultados, **Then** o app mostra um veredito geral do exemplar (FR-006) considerando só
-   os stats que contam, e se a nature favorece (sobe um stat que conta e desce um que não conta),
-   prejudica (desce um stat que conta) ou é neutra para eles; stats que não contam aparecem esmaecidos.
+5. **Given** uma espécie escolhida, **Then** a **importância** de cada stat já vem definida
+   automaticamente pela espécie: o maior entre Ataque e SpAtk base é **principal** (peso 3), o menor é
+   **ignorado** (peso 0) e os demais **contam** (peso 1) — ex.: Alakazam tem SpAtk principal e ignora
+   Ataque; Machop tem Ataque principal e ignora SpAtk; empate ⇒ os dois contam. O jogador muda a
+   importância de qualquer stat com um toque (ignora → conta → principal → ignora), e a escolha fica
+   lembrada para as próximas avaliações daquela espécie (ex.: um Pokémon de suporte pode deixar o
+   ataque como "conta" ou "ignora").
+6. **Given** os resultados, **Then** o app mostra um veredito geral do exemplar (FR-006) ponderado pela
+   importância, e se a nature favorece (sobe um stat que conta e desce um ignorado), prejudica (desce
+   um stat que conta) ou é neutra; stats ignorados aparecem esmaecidos e o principal aparece destacado.
 7. **Given** uma avaliação feita, **When** o jogador toca **Nova avaliação**, **Then** os stats são
    limpos mantendo espécie e nível, para avaliar a próxima captura da mesma espécie rapidamente.
 
@@ -134,7 +142,10 @@ IVs menores é indicado como "Pior".
 - **Espécie sem estar na linha da lista**: não se aplica — a espécie vem sempre do Pokédex embutido.
 - **Avaliação abandonada**: fechar a tela sem adicionar não grava nada na lista de Pokémon (o melhor
   até agora da espécie continua guardado).
-- **Stats que contam mudados depois**: a comparação com o melhor até agora usa sempre a marcação atual
+- **Ataque principal decide**: Machop guardado Docile Nv 16 `50/31/25/21/19/20` (ATK 3–8) × nova
+  captura Hasty Nv 17 `52/37/21/19/16/22` (ATK 29–31) ⇒ a nova é **Melhor**, apesar de DEF, SPD e SPE
+  menores (caso real que motivou a emenda).
+- **Importância mudada depois**: a comparação com o melhor até agora usa sempre a importância atual
   da espécie, para os dois lados.
 - **Avaliação com "?"**: nunca vira melhor até agora nem é comparada; o app pede para conferir os dados.
 - **Nenhum stat marcado como importante**: o veredito e a comparação ficam indisponíveis, com aviso
@@ -157,17 +168,20 @@ IVs menores é indicado como "Pior".
   (20–25), **Médio** (11–19), **Ruim** (0–10); faixas que atravessam classes mostram as duas pontas;
   stats impossíveis mostram "?" com explicação.
 - **FR-006**: O app DEVE mostrar um veredito geral do exemplar (ex.: "Excelente", "Bom", "Fraco",
-  "Incerto") derivado das classificações dos stats que contam, e DEVE indicar "Incerto" quando as
-  faixas forem largas demais para decidir.
+  "Incerto") derivado das faixas dos stats com peso, em **média ponderada pela importância** (principal
+  3, conta 1, ignora 0), e DEVE indicar "Incerto" quando as faixas forem largas demais para decidir.
 - **FR-007**: O app DEVE mostrar o efeito da nature (stat que sobe e que desce) e se ela favorece,
   prejudica ou é neutra para os stats que contam.
-- **FR-013**: Os stats que contam DEVEM vir marcados automaticamente pela espécie (todos, exceto o
-  menor entre Ataque e SpAtk base; empate ⇒ ambos contam), podem ser alterados pelo jogador com um
-  toque por stat, e a marcação DEVE ser lembrada por espécie no aparelho.
+- **FR-013**: Cada stat DEVE ter uma **importância** — principal (peso 3), conta (peso 1) ou ignora
+  (peso 0). O padrão vem da espécie: o maior entre Ataque e SpAtk base é principal, o menor é ignorado,
+  os demais contam (empate ⇒ Ataque e SpAtk contam). O jogador alterna a importância com um toque por
+  stat (ignora → conta → principal → ignora), e a escolha DEVE ser lembrada por espécie no aparelho;
+  escolhas antigas no formato "conta / não conta" são aceitas ("não conta" ⇒ ignora; "conta" ⇒ o
+  padrão da espécie, ou "conta" quando o padrão for ignora).
 - **FR-014**: O app DEVE guardar no aparelho, por espécie, o **melhor até agora** (espécie, nível,
   nature, stats) e comparar cada nova avaliação válida com ele: vence quem tem a maior soma dos pontos
-  médios das faixas de IV dos stats que contam; diferença de até 2 pontos é "Equivalente", e no
-  empate a nature favorável vence a neutra, que vence a prejudicial.
+  médios das faixas de IV **multiplicados pelo peso** de cada stat; diferença de até 2 pontos é
+  "Equivalente", e no empate a nature favorável vence a neutra, que vence a prejudicial.
 - **FR-015**: Uma avaliação válida, ao ser **concluída** (Nova avaliação, Adicionar à minha lista ou
   Fechar), DEVE virar o melhor até agora quando não houver um guardado ou quando for melhor que ele —
   nunca a cada tecla digitada; a substituição e o **Esquecer** oferecem Desfazer.
@@ -189,7 +203,8 @@ IVs menores é indicado como "Pior".
   de IV e classificação por stat, veredito geral, efeito da nature. Temporária.
 - **Melhor até agora**: uma avaliação guardada por espécie (espécie, nível, nature, 6 stats); os
   resultados são recalculados ao exibir.
-- **Stats que contam**: por espécie, 6 marcações (conta / não conta); padrão automático pela espécie.
+- **Importância dos stats**: por espécie, 6 níveis (principal / conta / ignora); padrão automático pela
+  espécie.
 - **Pokémon de treino** (existente): ganha uma forma nova de criação a partir de uma avaliação, com a
   primeira anotação de nível já preenchida.
 
@@ -208,8 +223,10 @@ IVs menores é indicado como "Pior".
   teste de texto fixo).
 - **SC-006**: Ao avaliar uma nova captura de uma espécie com melhor guardado, o jogador sabe se ela é
   melhor, pior ou equivalente sem nenhum toque extra.
-- **SC-007**: A marcação automática dos stats que contam acerta o atacante principal (físico ou
+- **SC-007**: A importância automática marca como principal o stat de ataque correto (físico ou
   especial) de todas as espécies cujos Ataque e SpAtk base diferem.
+- **SC-008**: Um exemplar com o stat principal claramente melhor (faixas sem sobreposição) e os demais
+  stats moderadamente piores é apontado como **Melhor** — o caso Machop Docile × Hasty da emenda.
 
 ## Assumptions
 
@@ -220,8 +237,10 @@ IVs menores é indicado como "Pior".
   e podem ser ajustadas no plano sem mudar a experiência.
 - O Pokémon adicionado é identificado pela forma atual = espécie capturada (feature 006 removeu o
   apelido).
-- O critério de comparação (soma dos pontos médios das faixas, margem de 2 pontos, nature como
-  desempate) é um padrão simples e transparente; o plano pode refiná-lo sem mudar a experiência.
+- O critério de comparação (soma dos pontos médios das faixas ponderada pela importância, margem de 2
+  pontos, nature como desempate) é um padrão simples e transparente. O peso 3 do principal foi
+  escolhido para que um ataque claramente melhor vença diferenças moderadas nos outros stats (no caso
+  Machop: 272 × 209); peso 2 venceria por pouco (212 × 198).
 - O melhor até agora e a marcação de stats são conveniências do aparelho (como tema e filtro) e não
   entram no backup.
 - O sprite da espécie aparece na avaliação como no resto do app (com o selo de fallback offline).

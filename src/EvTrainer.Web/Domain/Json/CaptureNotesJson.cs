@@ -8,14 +8,22 @@ namespace EvTrainer.Web.Domain.Json;
 
 /// <summary>
 /// Reads and writes the capture notes document (<c>evtrainer:v1:capture</c>, data-model.md). Reading is
-/// tolerant: invalid entries are dropped and species names become the Pokédex's canonical names.
+/// tolerant: invalid entries are dropped and species names become the Pokédex's canonical names. The legacy
+/// <c>counted</c> booleans are converted to importance (research R10) and never written again.
 /// </summary>
 public static class CaptureNotesJson
 {
+    private static readonly Dictionary<string, StatImportance> Names = new(StringComparer.Ordinal)
+    {
+        ["main"] = StatImportance.Main,
+        ["counts"] = StatImportance.Counts,
+        ["ignored"] = StatImportance.Ignored,
+    };
+
     public static string Serialize(CaptureNotes notes) => JsonSerializer.Serialize(
         new CaptureNotesDto
         {
-            Counted = notes.Counted.ToDictionary(kv => kv.Key, kv => (bool[]?)[.. kv.Value]),
+            Importance = notes.Importance.ToDictionary(kv => kv.Key, kv => (string?[]?)[.. kv.Value.Select(NameOf)]),
             Best = notes.Best.ToDictionary(kv => kv.Key, kv => (BestCaptureDto?)new BestCaptureDto
             {
                 Level = kv.Value.Level,
@@ -33,11 +41,27 @@ public static class CaptureNotesJson
             return notes;
         }
 
+        foreach (var (name, values) in dto.Importance ?? [])
+        {
+            if (dex.Find(name) is { } species
+                && values is { Length: StatVector.Count }
+                && values.All(v => v is not null && Names.ContainsKey(v)))
+            {
+                notes.Importance[species.Name] = [.. values.Select(v => Names[v!])];
+            }
+        }
+
         foreach (var (name, counted) in dto.Counted ?? [])
         {
-            if (dex.Find(name) is { } species && counted is { Length: StatVector.Count })
+            if (dex.Find(name) is { } species && counted is { Length: StatVector.Count } && !notes.Importance.ContainsKey(species.Name))
             {
-                notes.Counted[species.Name] = [.. counted];
+                var defaults = Capture.DefaultImportance(species.Base);
+                notes.Importance[species.Name] =
+                [
+                    .. counted.Select((counts, i) => !counts ? StatImportance.Ignored
+                        : defaults[i] == StatImportance.Ignored ? StatImportance.Counts
+                        : defaults[i]),
+                ];
             }
         }
 
@@ -55,6 +79,8 @@ public static class CaptureNotesJson
         return notes;
     }
 
+    private static string NameOf(StatImportance importance) => Names.First(kv => kv.Value == importance).Key;
+
     private static CaptureNotesDto? Parse(string json)
     {
         try
@@ -70,7 +96,12 @@ public static class CaptureNotesJson
 
 internal sealed class CaptureNotesDto
 {
+    [JsonPropertyName("importance")]
+    public Dictionary<string, string?[]?>? Importance { get; set; }
+
+    /// <summary>Legacy (before amendment R10): read only.</summary>
     [JsonPropertyName("counted")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, bool[]?>? Counted { get; set; }
 
     [JsonPropertyName("best")]
