@@ -6,22 +6,7 @@
 
 <button type="button" class="menu-backdrop" tabindex="-1" aria-hidden="true" @onclick="OnClose"></button>
 <div class="menu-panel" role="menu" tabindex="-1" @ref="_panel" @onkeydown="KeyDown">
-    <ul>
-        @foreach (var (id, pokemon) in Store.Ordered)
-        {
-            var selected = id == Store.SelectedId;
-            <li>
-                <button type="button" class="pokemon-item" role="menuitem" data-id="@id" aria-current="@(selected ? "true" : "false")"
-                        @onclick="() => Choose(id)">
-                    <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />@PokemonLabel(pokemon)@if (!string.IsNullOrEmpty(pokemon.Nature))
-                    {
-                        <span class="nature muted">@pokemon.Nature</span>
-                    }</span>
-                    <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
-                </button>
-            </li>
-        }
-    </ul>
+    <PokemonList InMenu OnChoose="Choose" />
     <hr />
     <button type="button" class="add" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: true)">@L["Menu.AddPokemon"]</button>
     <button type="button" class="capture" role="menuitem" @onclick="Capture">@L["Menu.Capture"]</button>

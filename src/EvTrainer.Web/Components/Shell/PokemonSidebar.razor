@@ -1,0 +1,16 @@
+@inherits StoreAwareComponent
+
+@* Desktop side panel (≥ 1280 px, hidden by CSS below that): switch Pokémon with one click. *@
+<aside class="pokemon-sidebar" aria-label="@L["Sidebar.Title"]">
+    <h2>@L["Sidebar.Title"]</h2>
+    <PokemonList OnChoose="OnChoose" />
+    <button type="button" class="add" @onclick="OnAdd">@L["Menu.AddPokemon"]</button>
+</aside>
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnChoose { get; set; }
+
+    [Parameter]
+    public EventCallback OnAdd { get; set; }
+}

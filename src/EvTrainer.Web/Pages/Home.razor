@@ -5,45 +5,57 @@
 
 <AppHeader OnNavigate="Navigate" OnCapture="() => _capturing = true" />
 
-<main class="page">
-    @if (_capturing)
-    {
-        <CaptureView OnClose="() => _capturing = false" OnAdded="() => Navigate(Tab.Ivs)" />
-    }
-    else if (Store.Selected is null)
-    {
-        <EmptyState OnAdd="AddPokemon" OnCapture="() => _capturing = true">
-            <BackupPanel ImportOnly />
-        </EmptyState>
-    }
-    else
-    {
-        <Tabs Active="_tab" ActiveChanged="tab => _tab = tab" />
-        <section class="tab-panel" role="tabpanel">
-            @switch (_tab)
-            {
-                case Tab.Evs:
-                    <EvTab />
-                    break;
-                case Tab.Ivs:
-                    <IvTab />
-                    break;
-                case Tab.Settings:
-                    <SettingsForm />
-                    <BackupPanel />
-                    <SpreadsheetImportPanel />
-                    <DeletePanel />
-                    break;
-            }
-        </section>
-    }
-</main>
+<div class="app-body">
+    <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" />
+    <main class="page">
+        @if (_capturing)
+        {
+            <CaptureView OnClose="() => _capturing = false" OnAdded="() => Navigate(Tab.Ivs)" />
+        }
+        else if (Store.Selected is null)
+        {
+            <EmptyState OnAdd="AddPokemon" OnCapture="() => _capturing = true">
+                <BackupPanel ImportOnly />
+            </EmptyState>
+        }
+        else
+        {
+            <Tabs Active="_tab" ActiveChanged="tab => _tab = tab" />
+            <section class="tab-panel" role="tabpanel">
+                @switch (_tab)
+                {
+                    case Tab.Evs:
+                        <EvTab />
+                        break;
+                    case Tab.Ivs:
+                        <IvTab />
+                        break;
+                    case Tab.Settings:
+                        <div class="settings-layout">
+                            <SettingsForm />
+                            <BackupPanel />
+                            <SpreadsheetImportPanel />
+                            <DeletePanel />
+                        </div>
+                        break;
+                }
+            </section>
+        }
+    </main>
+</div>
 
 <Toast />
 
 @code {
     private Tab _tab = Tab.Evs;
     private bool _capturing;
+
+    /// <summary>Picking a Pokémon in the side panel keeps the tab and leaves the capture screen.</summary>
+    private void Choose(string id)
+    {
+        _capturing = false;
+        Store.Select(id);
+    }
 
     private void Navigate(Tab tab)
     {
@@ -53,6 +65,7 @@
 
     private void AddPokemon()
     {
+        _capturing = false;
         Store.AddPokemon();
         _tab = Tab.Settings;
     }

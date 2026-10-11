@@ -1337,3 +1337,247 @@ button.species-current[aria-pressed="true"] {
 .best-capture .compare-worse {
     color: var(--bad);
 }
+
+/* Desktop layout (feature 007). Below 1024 px nothing here applies: the phone layout stays as is. */
+@media (hover: hover) {
+    .opponent:hover {
+        border-color: var(--accent);
+        background: var(--surface-2);
+    }
+
+    button:not(:disabled):hover {
+        filter: brightness(0.97);
+    }
+}
+
+@media (min-width: 1024px) {
+    #app {
+        max-width: 1440px;
+    }
+
+    .page {
+        padding: 16px 24px 96px;
+    }
+
+    .opponent:focus-visible {
+        outline-width: 3px;
+    }
+
+    .toast {
+        left: auto;
+        right: 24px;
+        transform: none;
+        width: 420px;
+    }
+}
+
+/* Layout regions: neutral columns on the phone (same gaps as the tab panel). */
+.ev-layout, .ev-summary-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (min-width: 1024px) {
+    .ev-layout {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        column-gap: 20px;
+        row-gap: 12px;
+        align-items: start;
+    }
+
+    .ev-layout > * {
+        grid-column: 2;
+    }
+
+    /* The summary stays in view while the opponent list scrolls (below the sticky header). */
+    .ev-layout > .ev-summary-area {
+        grid-column: 1;
+        grid-row: 1 / span 20;
+        position: sticky;
+        top: 72px;
+    }
+
+    .opponent-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+.iv-layout, .settings-layout, .capture-columns, .capture-inputs, .capture-output {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (min-width: 1024px) {
+    .iv-layout, .settings-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        column-gap: 20px;
+        row-gap: 12px;
+        align-items: start;
+    }
+
+    /* IVs: table and known IVs on the left, the level form on the right. */
+    .iv-layout > .level-form {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        position: sticky;
+        top: 72px;
+    }
+
+    /* Settings: the Pokémon form on the left, backup / import / delete on the right. */
+    .settings-layout > :first-child {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+    }
+
+    .settings-layout > :not(:first-child) {
+        grid-column: 2;
+    }
+
+    /* Capture: fields and actions on the left, result and best so far on the right. */
+    .capture-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        column-gap: 24px;
+        row-gap: 12px;
+        align-items: start;
+    }
+
+    .capture-columns > .capture-inputs {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .capture-columns > .capture-actions {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .capture-columns > .capture-output {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+}
+
+/* Desktop with a mouse: the capture result can be denser than the 44 px touch targets of the phone. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    .capture-table th, .capture-table td {
+        padding: 2px 6px;
+    }
+
+    .capture-table .importance,
+    .capture-output .row-actions button,
+    .best-capture .row-actions button {
+        min-height: 34px;
+    }
+}
+
+/* Side panel with the Pokémon in training: only from 1280 px (spec 007, US3). */
+.pokemon-sidebar {
+    display: none;
+}
+
+.pokemon-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 1280px) {
+    #app {
+        max-width: 1700px;
+    }
+
+    .app-body {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        align-items: start;
+        column-gap: 8px;
+        padding-left: 16px;
+    }
+
+    .pokemon-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        position: sticky;
+        top: 72px;
+        max-height: calc(100dvh - 88px);
+        overflow-y: auto;
+        margin-top: 16px;
+        padding: 10px 6px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .pokemon-sidebar h2 {
+        margin: 0 8px 4px;
+        font-family: var(--font-display);
+        font-size: 13px;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .pokemon-sidebar button.pokemon-item {
+        width: 100%;
+        min-height: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border-color: transparent;
+        text-align: left;
+    }
+
+    .pokemon-sidebar button.pokemon-item[aria-current="true"] {
+        background: var(--surface-2);
+        border-color: var(--accent);
+    }
+
+    .pokemon-sidebar .who {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .pokemon-sidebar .mark {
+        color: var(--accent);
+    }
+
+    /* 240 px is too narrow for sprite, name, nature and total: the panel shows the total, the menu the nature. */
+    .pokemon-sidebar .nature {
+        display: none;
+    }
+
+    .pokemon-sidebar .who {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .pokemon-sidebar .pokemon-item .num {
+        flex: none;
+    }
+
+    .pokemon-sidebar .add {
+        margin-top: 4px;
+    }
+
+    /* The side panel already lists the Pokémon: the menu keeps only its other actions. */
+    .menu-panel .pokemon-list,
+    .menu-panel .pokemon-list + hr {
+        display: none;
+    }
+}
+
+@media (min-width: 1280px) and (hover: hover) {
+    .pokemon-sidebar button.pokemon-item:hover {
+        background: var(--surface-2);
+    }
+}

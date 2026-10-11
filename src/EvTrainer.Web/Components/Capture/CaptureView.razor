@@ -10,70 +10,76 @@
     </div>
     <p class="hint">@L["Capture.Hint"]</p>
 
-    <div class="form-grid">
-        <div class="field">
-            <span class="label">@L["Capture.Species"]</span>
-            @if (_species is { } species)
-            {
-                <div class="capture-species" data-name="@species">
-                    <PokemonSprite Name="@species" Size="48" />
-                    <span class="name">@species</span>
-                    <button type="button" class="change-species" @onclick="() => _species = null">@L["Capture.ChangeSpecies"]</button>
-                </div>
-            }
-            else
-            {
-                <SpeciesSearch OnPick="species => _species = species.Name" />
-            }
-        </div>
-
-        <div class="two">
-            <div class="field">
-                <label for="capture-level">@L["Capture.Level"]</label>
-                <input id="capture-level" inputmode="numeric" value="@_level" aria-invalid="@Invalid(_level, ParseLevel(_level) is not null)"
-                       @oninput="e => _level = e.Value?.ToString() ?? string.Empty" />
-            </div>
-            <div class="field">
-                <label for="capture-nature">@L["Capture.Nature"]</label>
-                <select id="capture-nature" value="@_nature" @onchange="e => _nature = e.Value?.ToString() ?? string.Empty">
-                    <option value="">@L["Capture.Nature.Choose"]</option>
-                    @foreach (var nature in Store.Data.Natures)
+    <div class="capture-columns">
+        <div class="capture-inputs">
+            <div class="form-grid">
+                <div class="field">
+                    <span class="label">@L["Capture.Species"]</span>
+                    @if (_species is { } species)
                     {
-                        <option value="@nature.Name">@NatureLabel(nature)</option>
+                        <div class="capture-species" data-name="@species">
+                            <PokemonSprite Name="@species" Size="48" />
+                            <span class="name">@species</span>
+                            <button type="button" class="change-species" @onclick="() => _species = null">@L["Capture.ChangeSpecies"]</button>
+                        </div>
                     }
-                </select>
-            </div>
-        </div>
+                    else
+                    {
+                        <SpeciesSearch OnPick="species => _species = species.Name" />
+                    }
+                </div>
 
-        <div class="field capture-stats">
-            <span class="label">@L["Capture.Stats"]</span>
-            <div class="six">
-                @for (var i = 0; i < StatVector.Count; i++)
-                {
-                    var stat = i;
-                    <div class="cell">
-                        <label for="capture-stat-@stat">@StatShort(stat)</label>
-                        <input id="capture-stat-@stat" inputmode="numeric" value="@_stats[stat]" aria-invalid="@Invalid(_stats[stat], ParseStat(_stats[stat]) is not null)"
-                               @oninput="e => _stats[stat] = e.Value?.ToString() ?? string.Empty" />
+                <div class="two">
+                    <div class="field">
+                        <label for="capture-level">@L["Capture.Level"]</label>
+                        <input id="capture-level" inputmode="numeric" value="@_level" aria-invalid="@Invalid(_level, ParseLevel(_level) is not null)"
+                               @oninput="e => _level = e.Value?.ToString() ?? string.Empty" />
                     </div>
-                }
+                    <div class="field">
+                        <label for="capture-nature">@L["Capture.Nature"]</label>
+                        <select id="capture-nature" value="@_nature" @onchange="e => _nature = e.Value?.ToString() ?? string.Empty">
+                            <option value="">@L["Capture.Nature.Choose"]</option>
+                            @foreach (var nature in Store.Data.Natures)
+                            {
+                                <option value="@nature.Name">@NatureLabel(nature)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field capture-stats">
+                    <span class="label">@L["Capture.Stats"]</span>
+                    <div class="six">
+                        @for (var i = 0; i < StatVector.Count; i++)
+                        {
+                            var stat = i;
+                            <div class="cell">
+                                <label for="capture-stat-@stat">@StatShort(stat)</label>
+                                <input id="capture-stat-@stat" inputmode="numeric" value="@_stats[stat]" aria-invalid="@Invalid(_stats[stat], ParseStat(_stats[stat]) is not null)"
+                                       @oninput="e => _stats[stat] = e.Value?.ToString() ?? string.Empty" />
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    @if (Input is { } input)
-    {
-        <CaptureResultPanel Input="input" />
-    }
+        <div class="capture-output">
+            @if (Input is { } input)
+            {
+                <CaptureResultPanel Input="input" />
+            }
 
-    @if (_species is { } chosen)
-    {
-        <BestCaptureCard Species="@chosen" Current="Input" OnAdded="OnAdded" />
-    }
+            @if (_species is { } chosen)
+            {
+                <BestCaptureCard Species="@chosen" Current="Input" OnAdded="OnAdded" />
+            }
+        </div>
 
-    <div class="row-actions capture-actions">
-        <button type="button" class="primary add-capture" disabled="@(Input is null)" @onclick="Add">@L["Capture.Add"]</button>
-        <button type="button" class="new-capture" @onclick="NewCapture">@L["Capture.New"]</button>
+        <div class="row-actions capture-actions">
+            <button type="button" class="primary add-capture" disabled="@(Input is null)" @onclick="Add">@L["Capture.Add"]</button>
+            <button type="button" class="new-capture" @onclick="NewCapture">@L["Capture.New"]</button>
+        </div>
     </div>
 </section>
 

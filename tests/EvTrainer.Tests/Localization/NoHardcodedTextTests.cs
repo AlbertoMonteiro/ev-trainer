@@ -49,6 +49,7 @@ public partial class NoHardcodedTextTests : AppTestContext
 
         var cut = Render<Home>();
 
+        Assert.NotNull(cut.Find("aside.pokemon-sidebar"));
         AssertNoHardcodedText(cut.Nodes);
     }
 
@@ -59,6 +60,7 @@ public partial class NoHardcodedTextTests : AppTestContext
         pokemon.IvLog.Add(new LevelEntry { Level = 5, Species = "Squirtle", Stats = [99, 9, 12, 11, 12, 11], Evs = new int[6] });
         Seed(pokemon);
         var cut = Render<Home>();
+        Assert.NotEmpty(cut.FindAll("aside.pokemon-sidebar button.pokemon-item"));
 
         for (var tab = 0; tab < 3; tab++)
         {

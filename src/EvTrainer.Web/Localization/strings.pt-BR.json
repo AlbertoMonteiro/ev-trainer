@@ -10,6 +10,7 @@
   "Menu.Open": "Menu",
   "Menu.AddPokemon": "+ Adicionar Pokémon",
   "Menu.Capture": "Avaliar captura",
+  "Sidebar.Title": "Seus Pokémon",
   "Menu.ImportBackup": "Importar backup",
   "Menu.ExportBackup": "Exportar backup",
   "Menu.Total": "{0}/510",

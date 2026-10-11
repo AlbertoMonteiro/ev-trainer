@@ -1,0 +1,28 @@
+@inherits StoreAwareComponent
+
+@* The Pokémon in training (sprite, current form, nature, EV total), shared by the menu and the desktop side panel. *@
+<ul class="pokemon-list">
+    @foreach (var (id, pokemon) in Store.Ordered)
+    {
+        var selected = id == Store.SelectedId;
+        <li>
+            <button type="button" class="pokemon-item" role="@(InMenu ? "menuitem" : null)" data-id="@id" aria-current="@(selected ? "true" : "false")"
+                    @onclick="() => OnChoose.InvokeAsync(id)">
+                <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />@PokemonLabel(pokemon)@if (!string.IsNullOrEmpty(pokemon.Nature))
+                {
+                    <span class="nature muted">@pokemon.Nature</span>
+                }</span>
+                <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
+            </button>
+        </li>
+    }
+</ul>
+
+@code {
+    /// <summary>Inside the ☰ menu the items are menu items; in the side panel they are plain buttons.</summary>
+    [Parameter]
+    public bool InMenu { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnChoose { get; set; }
+}

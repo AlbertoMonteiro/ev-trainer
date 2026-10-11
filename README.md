@@ -31,6 +31,8 @@ up and it narrows down your IVs.
 |:---:|:---:|:---:|:---:|
 | <img src="docs/screenshots/evs-dark.png" width="200" alt="EV counter, dark theme"> | <img src="docs/screenshots/evs-light.png" width="200" alt="EV counter, light theme"> | <img src="docs/screenshots/ivs-dark.png" width="200" alt="IV ranges per level"> | <img src="docs/screenshots/species-light.png" width="200" alt="Species picker with sprites"> |
 
+<img src="docs/screenshots/desktop-light.png" width="820" alt="Desktop layout: Pokémon side panel, sticky EV summary and a wide opponent grid">
+
 > The interface is in **Brazilian Portuguese** for now. Every string lives in a resource file, so an
 > English version can be added without touching the screens.
 
@@ -63,6 +65,9 @@ up and it narrows down your IVs.
   of Gen III); the evolution line fills itself, branches (Eevee, Gloom, Poliwhirl…) are one tap.
 - **FireRed/LeafGreen sprites** everywhere, with a colored fallback badge (EV stat color + dex number)
   when an image can't be shown.
+- **Phone first, great on desktop** — on a wide window the EV summary stays in view next to a wide
+  opponent grid, IVs / settings / capture evaluation sit side by side, and a side panel lists your
+  Pokémon so switching is one click; the phone layout is unchanged.
 - **Several Pokémon**, history, light/dark theme, spreadsheet paste import.
 
 ## Your data stays on your device

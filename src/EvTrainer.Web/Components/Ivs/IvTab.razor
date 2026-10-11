@@ -1,8 +1,10 @@
 @* IVs tab: table, known IVs and the level form, which can edit a row of the table in place. *@
 
-<IvTable OnEdit="index => _editIndex = index" />
-<KnownIvsPanel />
-<LevelForm EditIndex="_editIndex" OnDone="() => _editIndex = null" />
+<div class="iv-layout">
+    <IvTable OnEdit="index => _editIndex = index" />
+    <KnownIvsPanel />
+    <LevelForm EditIndex="_editIndex" OnDone="() => _editIndex = null" />
+</div>
 
 @code {
     private int? _editIndex;

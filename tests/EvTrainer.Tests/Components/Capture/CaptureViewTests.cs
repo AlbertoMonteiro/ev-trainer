@@ -353,4 +353,26 @@ public class CaptureViewTests : AppTestContext
 
         Assert.Equal(WeakStats, Capture.BestFor("Squirtle")!.Stats);
     }
+
+    [Fact]
+    public void Inputs_and_output_are_separate_columns()
+    {
+        var cut = OpenFromMenu();
+        Fill(cut, "Squirtle", 5, "Timid", SquirtleStats);
+
+        var columns = cut.Find(".capture-view .capture-columns");
+        // Phone order: fields, result, actions; the desktop grid puts the actions under the fields.
+        Assert.Equal(["capture-inputs", "capture-output", "row-actions capture-actions"], columns.Children.Select(c => c.ClassName));
+        var inputs = columns.Children[0];
+        Assert.NotNull(inputs.QuerySelector("#capture-level"));
+        Assert.NotNull(inputs.QuerySelector("select#capture-nature"));
+        Assert.Equal(6, inputs.QuerySelectorAll(".capture-stats input").Length);
+        Assert.NotNull(columns.Children[2].QuerySelector("button.add-capture"));
+        Assert.NotNull(columns.Children[2].QuerySelector("button.new-capture"));
+        var output = columns.Children[1];
+        Assert.NotNull(output.QuerySelector(".capture-table"));
+        Assert.NotNull(output.QuerySelector(".capture-verdict"));
+        Assert.NotNull(output.QuerySelector(".best-capture"));
+        Assert.Null(columns.QuerySelector("h2"));
+    }
 }

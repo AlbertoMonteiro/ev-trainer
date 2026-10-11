@@ -2,33 +2,37 @@
 @inject ToastService Toasts
 @inject OpponentSearch Search
 
-<EvSummary />
-
-<OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
-
-@if (Store.Selected is { } pokemon)
-{
-    var searching = !string.IsNullOrWhiteSpace(_query);
-    var recent = searching ? [] : Evs.Recent(pokemon.Events, Store.Data);
-    var recentNames = recent.Select(o => o.Name).ToHashSet(StringComparer.Ordinal);
-    var useful = Store.Preferences.Filter != "all";
-
-    @if (recent.Count > 0)
-    {
-        <div class="recent-list">
-            <OpponentGrid Title="@L["Evs.List.Recent"]" Items="@([.. recent.Select(o => new SearchHit(o))])" OnPick="Record" />
-        </div>
-    }
-
-    <div class="main-list">
-        <OpponentGrid Title="@ListTitle(searching, useful)"
-                      Items="@MainItems(pokemon, searching, useful, recentNames)"
-                      EmptyText="@(searching || !useful ? L["Empty.NoResults"] : L["Empty.NoUseful"])"
-                      OnPick="Record" />
+<div class="ev-layout">
+    <div class="ev-summary-area">
+        <EvSummary />
     </div>
 
-    <RecentHistory />
-}
+    <OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
+
+    @if (Store.Selected is { } pokemon)
+    {
+        var searching = !string.IsNullOrWhiteSpace(_query);
+        var recent = searching ? [] : Evs.Recent(pokemon.Events, Store.Data);
+        var recentNames = recent.Select(o => o.Name).ToHashSet(StringComparer.Ordinal);
+        var useful = Store.Preferences.Filter != "all";
+
+        @if (recent.Count > 0)
+        {
+            <div class="recent-list">
+                <OpponentGrid Title="@L["Evs.List.Recent"]" Items="@([.. recent.Select(o => new SearchHit(o))])" OnPick="Record" />
+            </div>
+        }
+
+        <div class="main-list">
+            <OpponentGrid Title="@ListTitle(searching, useful)"
+                          Items="@MainItems(pokemon, searching, useful, recentNames)"
+                          EmptyText="@(searching || !useful ? L["Empty.NoResults"] : L["Empty.NoUseful"])"
+                          OnPick="Record" />
+        </div>
+
+        <RecentHistory />
+    }
+</div>
 
 @code {
     private string _query = string.Empty;
