@@ -25,6 +25,9 @@ public sealed class TrainingPokemon
 
     public bool MachoBrace { get; set; }
 
+    /// <summary>Holds the Exp. Share (spec 012); at most one Pokémon in the set.</summary>
+    public bool ExpShare { get; set; }
+
     public int Order { get; set; }
 
     /// <summary>IVs the user knows from another source (each null or 0–31); they win over the computed range.</summary>
@@ -43,6 +46,7 @@ public sealed class TrainingPokemon
         IvLog = [.. IvLog.Select(l => l.Clone())],
         Pokerus = Pokerus,
         MachoBrace = MachoBrace,
+        ExpShare = ExpShare,
         Order = Order,
         KnownIvs = [.. KnownIvs],
         UpdatedAt = UpdatedAt,
@@ -103,11 +107,15 @@ public sealed class BattleEvent
 
     public bool IsManualAdjustment => SetTotals is not null;
 
+    /// <summary>Battle received through the Exp. Share (spec 012).</summary>
+    public bool Shared { get; set; }
+
     public BattleEvent Clone() => new()
     {
         Opponent = Opponent,
         Count = Count,
         Multiplier = Multiplier,
+        Shared = Shared,
         SetTotals = SetTotals is null ? null : [.. SetTotals],
     };
 }

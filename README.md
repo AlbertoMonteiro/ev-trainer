@@ -46,6 +46,9 @@ up and it narrows down your IVs.
   [PokeAPI](https://pokeapi.co/), checked against that table.
 - **Real Gen 3 rules** — 255 per stat, 510 total, vitamins only below 100 (and not doubled),
   Pokérus and Macho Brace (×2 each, ×4 together) recorded per battle, totals always recomputed in order.
+- **Exp. Share** — pick which Pokémon holds it and every battle also counts for it, the Gen 3 way: the whole EV
+  yield (not split like experience), doubled only by its own Pokérus — Macho Brace never counts for the holder.
+  The toast shows both gains and one Undo reverts both.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),
   recents, and search by name, Pokédex number, route, gym leader or trainer location
   (`route 4` / `rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your

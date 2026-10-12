@@ -28,6 +28,24 @@
                 </div>
             }
         </div>
+        @if (Store.Ordered.Count > 1)
+        {
+            var holderId = Store.ExpShareHolderId;
+            <div class="exp-share-field">
+                <label for="exp-share">@L["ExpShare.Label"]</label>
+                <select id="exp-share" class="exp-share" @onchange="ChangeExpShare">
+                    <option value="" selected="@(holderId is null)">@L["ExpShare.None"]</option>
+                    @foreach (var (id, other) in Store.Ordered.Where(o => o.Id != Store.SelectedId || o.Id == holderId))
+                    {
+                        <option value="@id" selected="@(id == holderId)">@PokemonLabel(other)</option>
+                    }
+                </select>
+            </div>
+            @if (holderId is not null && holderId == Store.SelectedId)
+            {
+                <p class="exp-share-self hint">@L["ExpShare.Self"]</p>
+            }
+        }
         @if (_editing)
         {
             <EvEditor OnClose="() => _editing = false" />
@@ -37,4 +55,7 @@
 
 @code {
     private bool _editing;
+
+    private void ChangeExpShare(ChangeEventArgs e) =>
+        Store.SetExpShare(e.Value?.ToString() is { Length: > 0 } id ? id : null);
 }

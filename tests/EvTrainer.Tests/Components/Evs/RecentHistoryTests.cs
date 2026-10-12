@@ -9,6 +9,24 @@ namespace EvTrainer.Tests.Components.Evs;
 public class RecentHistoryTests : AppTestContext
 {
     [Fact]
+    public void Shared_battles_are_marked_and_removing_one_leaves_the_rest()
+    {
+        var holder = Pokemons.Squirtle().WithEvents(("Abra", 1, 1));
+        holder.Events.Add(new BattleEvent { Opponent = "Caterpie", Count = 2, Multiplier = 1, Shared = true });
+        Seed(holder);
+        var cut = Render<RecentHistory>();
+
+        var rows = cut.FindAll(".history li");
+        Assert.Equal(T("History.Shared"), rows[0].QuerySelector(".meta.shared")!.TextContent.Trim(' ', '·'));
+        Assert.Null(rows[1].QuerySelector(".meta.shared"));
+
+        rows[0].QuerySelector("button.remove")!.Click();
+
+        var left = Assert.Single(Store.Selected!.Events);
+        Assert.Equal("Abra", left.Opponent);
+    }
+
+    [Fact]
     public void Shows_the_last_12_events_newest_first_with_count_and_multiplier()
     {
         var pokemon = Pokemons.Squirtle();

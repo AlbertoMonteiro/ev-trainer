@@ -94,6 +94,26 @@ public partial class NoHardcodedTextTests : AppTestContext
     }
 
     [Fact]
+    public void Exp_share_choice_and_shared_toast_have_no_hardcoded_text()
+    {
+        Seed(Pokemons.Squirtle(), "main");
+        var pidgey = Pokemons.Pidgey();
+        pidgey.Order = 2;
+        Seed(pidgey, "pidgey");
+        Store.Select("main");
+        Store.SetExpShare("pidgey");
+        var cut = Render<Home>();
+
+        Assert.NotEmpty(cut.FindAll("select#exp-share"));
+        cut.Find(".segmented button.all").Click();
+        cut.Find("button.opponent[data-opp='Caterpie']").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        Store.Select("pidgey");
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
     public void Manual_edit_screens_have_no_hardcoded_text()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Caterpie", 3, 1));

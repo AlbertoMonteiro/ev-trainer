@@ -63,6 +63,32 @@ public class BackupFormatTests
     }
 
     [Fact]
+    public void Exp_share_holder_and_shared_battles_round_trip_and_are_written_only_when_true()
+    {
+        var holder = Pokemons.Squirtle().WithEvents(("Caterpie", 2, 1));
+        holder.ExpShare = true;
+        holder.Events.Add(new BattleEvent { Opponent = "Caterpie", Count = 3, Multiplier = 2, Shared = true });
+        var other = Pokemons.Squirtle().WithEvents(("Abra", 1, 1));
+        var all = new Dictionary<string, TrainingPokemon> { ["h"] = holder, ["o"] = other };
+
+        var json = BackupFormat.Write(all, indented: false);
+        var back = Ok(BackupFormat.Read(json)).Items;
+
+        Assert.True(back["h"].ExpShare);
+        Assert.False(back["o"].ExpShare);
+        Assert.Equal([false, true], back["h"].Events.Select(e => e.Shared));
+        Assert.Equal(1, json.Split("\"expShare\":true").Length - 1);
+        Assert.DoesNotContain("\"expShare\":false", json);
+        Assert.Equal(1, json.Split("\"x\":true").Length - 1);
+        Assert.DoesNotContain("\"x\":false", json);
+        Assert.Equal(json, BackupFormat.Write(back, indented: false));
+
+        var clone = holder.Clone();
+        Assert.True(clone.ExpShare);
+        Assert.True(clone.Events[1].Shared);
+    }
+
+    [Fact]
     public void Old_backup_with_a_nickname_gets_the_current_species_and_keeps_everything_else()
     {
         const string json = """

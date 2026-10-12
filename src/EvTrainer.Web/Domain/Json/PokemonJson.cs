@@ -140,9 +140,11 @@ public static class PokemonJson
                 Count = e.Count is { } n && n >= 1 ? n : 1,
                 Multiplier = e.Multiplier is 1 or 2 or 4 ? e.Multiplier.Value : 1,
                 SetTotals = e.SetTotals is { } set ? [.. set.ToSix().Select(v => Math.Clamp(v, 0, StatVector.MaxEvPerStat))] : null,
+                Shared = e.Shared == true,
             })],
             Pokerus = dto.Pokerus,
             MachoBrace = dto.Macho,
+            ExpShare = dto.ExpShare == true,
             KnownIvs = [.. Enumerable.Range(0, StatVector.Count).Select(i =>
                 dto.KnownIvs is { } known && i < known.Length && known[i] is >= 0 and <= StatVector.MaxIv ? known[i] : null)],
         };
@@ -176,10 +178,12 @@ public static class PokemonJson
             Count = e.Count,
             Multiplier = e.Multiplier,
             SetTotals = e.SetTotals is null ? null : [.. e.SetTotals],
+            Shared = e.Shared ? true : null,
         })],
         IvLog = [.. p.IvLog.Select(l => new LevelDto { Level = l.Level, Species = l.Species, Stats = [.. l.Stats], Evs = [.. l.Evs] })],
         Pokerus = p.Pokerus,
         Macho = p.MachoBrace,
+        ExpShare = p.ExpShare ? true : null,
         Order = p.Order,
         KnownIvs = [.. p.KnownIvs],
         UpdatedAt = p.UpdatedAt is { } at ? ToElement(at) : null,
@@ -226,6 +230,11 @@ internal sealed class PokemonDto
     [JsonPropertyName("macho")]
     public bool Macho { get; set; }
 
+    /// <summary>Exp. Share holder (spec 012); written only when true.</summary>
+    [JsonPropertyName("expShare")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? ExpShare { get; set; }
+
     [JsonPropertyName("order")]
     public int? Order { get; set; }
 
@@ -261,6 +270,11 @@ internal sealed class EventDto
     [JsonPropertyName("set")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int[]? SetTotals { get; set; }
+
+    /// <summary>Received through the Exp. Share (spec 012); written only when true.</summary>
+    [JsonPropertyName("x")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? Shared { get; set; }
 }
 
 internal sealed class LevelDto

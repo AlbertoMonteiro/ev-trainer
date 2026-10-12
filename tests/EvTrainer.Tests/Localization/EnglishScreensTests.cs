@@ -45,6 +45,25 @@ public class EnglishScreensTests : AppTestContext
     }
 
     [Fact]
+    public void Exp_share_choice_and_shared_toast_show_no_portuguese()
+    {
+        Seed(Pokemons.Squirtle(), "main");
+        var pidgey = Pokemons.Pidgey();
+        pidgey.Order = 2;
+        Seed(pidgey, "pidgey");
+        Store.Select("main");
+        Store.SetExpShare("pidgey");
+        var cut = Render<Home>();
+
+        cut.Find(".segmented button.all").Click();
+        cut.Find("button.opponent[data-opp='Caterpie']").Click();
+        AssertNoPortuguese(cut.Nodes);
+
+        Store.Select("pidgey");
+        AssertNoPortuguese(cut.Nodes);
+    }
+
+    [Fact]
     public void Capture_and_sync_show_no_portuguese()
     {
         Store.Load();

@@ -77,18 +77,29 @@
 
     private void Record(string opponent)
     {
-        if (Store.SelectedId is not { } id || Store.RecordBattle(opponent) is not { } result)
+        if (Store.RecordBattle(opponent) is not { } record)
         {
             return;
         }
 
-        var message = result.GainedAny
-            ? L["Toast.EvGain", opponent, string.Join(", ", result.Gain
-                .Select((gain, i) => (gain, i))
-                .Where(x => x.gain > 0)
-                .Select(x => L["Evs.Gain.Part", x.gain, L[$"Stat.Long.{x.i}"].Value].Value))]
-            : L["Toast.NoEvGain", opponent];
+        var message = record.Main.GainedAny
+            ? L["Toast.EvGain", opponent, Gains(record.Main)].Value
+            : L["Toast.NoEvGain", opponent].Value;
 
-        Toasts.Show(message, () => Store.UndoLastBattle(id));
+        // Exp. Share (spec 012): the holder's gain goes on the same line.
+        if (record.HolderId is { } holderId && Store.All.TryGetValue(holderId, out var holder))
+        {
+            var name = PokemonLabel(holder);
+            message += " · " + (record.Holder!.GainedAny
+                ? L["Toast.ExpShareGain", name, Gains(record.Holder)].Value
+                : L["Toast.ExpShareNoGain", name].Value);
+        }
+
+        Toasts.Show(message, () => Store.UndoBattle(record));
     }
+
+    private string Gains(RecordResult result) => string.Join(", ", result.Gain
+        .Select((gain, i) => (gain, i))
+        .Where(x => x.gain > 0)
+        .Select(x => L["Evs.Gain.Part", x.gain, L[$"Stat.Long.{x.i}"].Value].Value));
 }

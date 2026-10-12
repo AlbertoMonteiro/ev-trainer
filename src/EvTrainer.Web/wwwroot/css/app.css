@@ -1097,6 +1097,24 @@ button.species-current[aria-pressed="true"] {
     white-space: nowrap;
 }
 
+/* Exp. Share holder (spec 012) */
+.exp-share-field {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.exp-share-field select {
+    min-height: 44px;
+    min-width: 0;
+}
+
+.exp-share-self {
+    margin: 6px 0 0;
+}
+
 .ev-editor {
     display: grid;
     gap: 10px;

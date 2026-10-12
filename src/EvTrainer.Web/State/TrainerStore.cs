@@ -57,6 +57,11 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             _deleted[id] = at;
         }
 
+        if (KeepOneExpShareHolder(preferred: null) is { Length: > 0 })
+        {
+            Save();
+        }
+
         Preferences = repository.LoadPreferences();
         if (SelectedId is null && Ordered.Count > 0)
         {
@@ -120,26 +125,65 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         );
     }
 
-    /// <summary>Records a battle for the selected Pokémon; null when nothing is selected.</summary>
-    public RecordResult? RecordBattle(string opponent)
+    /// <summary>The Pokémon holding the Exp. Share (spec 012), if any.</summary>
+    public string? ExpShareHolderId => _all.FirstOrDefault(kv => kv.Value.ExpShare).Key;
+
+    /// <summary>Gives the Exp. Share to <paramref name="id"/> (taking it from anyone else); null takes it away.</summary>
+    public void SetExpShare(string? id)
     {
-        if (Selected is not { } pokemon)
+        List<string> changed = [];
+        foreach (var (key, pokemon) in _all)
+        {
+            var holds = key == id;
+            if (pokemon.ExpShare != holds)
+            {
+                pokemon.ExpShare = holds;
+                changed.Add(key);
+            }
+        }
+
+        Commit([.. changed]);
+    }
+
+    /// <summary>
+    /// Records a battle for the selected Pokémon and, when another Pokémon holds the Exp. Share and the opponent
+    /// is not a vitamin, for the holder too (spec 012); null when nothing is selected.
+    /// </summary>
+    public SharedRecord? RecordBattle(string opponent)
+    {
+        if (SelectedId is not { } id || Selected is not { } pokemon)
         {
             return null;
         }
 
-        var result = BattleLog.Record(pokemon, opponent, data);
-        Commit(SelectedId!);
-        return result;
+        var main = BattleLog.Record(pokemon, opponent, data);
+        if (ExpShareHolderId is { } holderId && holderId != id && data.Lookup(opponent) is not { IsVitamin: true })
+        {
+            var holder = BattleLog.RecordShared(_all[holderId], opponent, data);
+            Commit(id, holderId);
+            return new SharedRecord(id, opponent, main, holderId, holder);
+        }
+
+        Commit(id);
+        return new SharedRecord(id, opponent, main, null, null);
     }
 
-    public void UndoLastBattle(string id)
+    /// <summary>Undoes a recorded battle on the selected Pokémon and, if it was shared, on the Exp. Share holder.</summary>
+    public void UndoBattle(SharedRecord record)
     {
-        if (_all.TryGetValue(id, out var pokemon))
+        if (_all.TryGetValue(record.MainId, out var main))
         {
-            BattleLog.UndoLast(pokemon);
-            Commit(id);
+            BattleLog.UndoLast(main);
         }
+
+        if (record.HolderId is { } holderId && _all.TryGetValue(holderId, out var holder))
+        {
+            BattleLog.UndoLastShared(holder, record.Opponent, data);
+            Commit(record.MainId, holderId);
+            return;
+        }
+
+        Commit(record.MainId);
     }
 
     public void TogglePokerus()
@@ -391,12 +435,15 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             _deleted.Remove(id);
         }
 
+        // The holder in the imported file is an explicit choice, so it wins over the local one.
+        var unmarked = KeepOneExpShareHolder(preferred: backup.Items.FirstOrDefault(kv => kv.Value.ExpShare).Key);
+
         if (SelectedId is null && Ordered.Count > 0)
         {
             UpdatePreferences(Preferences with { SelectedId = backup.Items.Keys.FirstOrDefault() ?? Ordered[0].Id });
         }
 
-        Commit([.. backup.Items.Keys]);
+        Commit([.. backup.Items.Keys, .. unmarked]);
         return preview;
     }
 
@@ -453,6 +500,8 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             _deleted[id] = at;
         }
 
+        KeepOneExpShareHolder(preferred: null);
+
         if (SelectedId is null)
         {
             UpdatePreferences(Preferences with { SelectedId = Ordered.FirstOrDefault().Id });
@@ -460,6 +509,30 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         Save();
         NotifyChanged();
+    }
+
+    /// <summary>
+    /// With more than one Exp. Share holder (a sync or an import), keeps <paramref name="preferred"/> or else the
+    /// most recently changed one (tie: lowest order); returns the ids that lost it.
+    /// </summary>
+    private string[] KeepOneExpShareHolder(string? preferred)
+    {
+        var holders = _all.Where(kv => kv.Value.ExpShare).ToList();
+        if (holders.Count <= 1)
+        {
+            return [];
+        }
+
+        var keep = preferred is not null && holders.Any(h => h.Key == preferred)
+            ? preferred
+            : holders.OrderByDescending(h => h.Value.UpdatedAt ?? DateTimeOffset.MinValue).ThenBy(h => h.Value.Order).First().Key;
+        string[] losers = [.. holders.Where(h => h.Key != keep).Select(h => h.Key)];
+        foreach (var id in losers)
+        {
+            _all[id].ExpShare = false;
+        }
+
+        return losers;
     }
 
     /// <summary>Removes a Pokémon and records when, so the removal reaches the other devices.</summary>

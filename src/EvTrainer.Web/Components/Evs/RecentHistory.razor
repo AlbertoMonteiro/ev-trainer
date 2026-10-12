@@ -32,6 +32,10 @@
                                 {
                                     <span class="meta">@(" " + L["History.Multiplier", e.Multiplier])</span>
                                 }
+                                @if (e.Shared)
+                                {
+                                    <span class="meta shared">@(" · " + L["History.Shared"])</span>
+                                }
                             </span>
                             <button type="button" class="remove icon-button" aria-label="@L["History.Remove", e.Opponent]"
                                     @onclick="() => Remove(index, e.Opponent)">×</button>

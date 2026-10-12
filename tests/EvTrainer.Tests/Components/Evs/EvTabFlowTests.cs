@@ -94,3 +94,47 @@ public class EvTabFlowTests : AppTestContext
         Assert.Equal(T("Toast.NoEvGain", "Caterpie"), cut.Find(".toast .msg").TextContent);
     }
 }
+public class EvTabExpShareFlowTests : AppTestContext
+{
+    private IRenderedComponent<Home> RenderWithHolder(EvTrainer.Web.Domain.Model.TrainingPokemon holder)
+    {
+        Seed(Pokemons.Squirtle(), "main");
+        holder.Order = 2;
+        Seed(holder, "pidgey");
+        Store.Select("main");
+        Store.SetExpShare("pidgey");
+        var cut = Render<Home>();
+        cut.FindAll(".segmented button").LastOrDefault()?.Click();
+        return cut;
+    }
+
+    [Fact]
+    public void The_toast_shows_both_gains_and_undo_reverts_both()
+    {
+        var cut = RenderWithHolder(Pokemons.Pidgey());
+
+        cut.Find(".opponent-grid button.opponent[data-opp='Caterpie']").Click();
+
+        var hp = T("Evs.Gain.Part", 1, T("Stat.Long.0"));
+        Assert.Equal(
+            T("Toast.EvGain", "Caterpie", hp) + " · " + T("Toast.ExpShareGain", "Pidgey", hp),
+            cut.Find(".toast .msg").TextContent);
+
+        cut.Find(".toast button").Click();
+
+        Assert.Empty(Store.All["main"].Events);
+        Assert.Empty(Store.All["pidgey"].Events);
+    }
+
+    [Fact]
+    public void A_full_holder_is_reported_in_the_toast()
+    {
+        var full = Pokemons.Pidgey();
+        full.Events.Add(new EvTrainer.Web.Domain.Model.BattleEvent { Opponent = "", SetTotals = [255, 255, 0, 0, 0, 0] });
+        var cut = RenderWithHolder(full);
+
+        cut.Find(".opponent-grid button.opponent[data-opp='Caterpie']").Click();
+
+        Assert.EndsWith(" · " + T("Toast.ExpShareNoGain", "Pidgey"), cut.Find(".toast .msg").TextContent);
+    }
+}

@@ -102,3 +102,56 @@ public class EvSummaryTests : AppTestContext
         Assert.Single(cut.FindAll(".card-head button.edit-evs"));
     }
 }
+public class EvSummaryExpShareTests : AppTestContext
+{
+    private void SeedTwo()
+    {
+        Seed(Pokemons.Squirtle(), "main");
+        var pidgey = Pokemons.Pidgey();
+        pidgey.Order = 2;
+        Seed(pidgey, "pidgey");
+        Store.Select("main");
+    }
+
+    [Fact]
+    public void With_a_single_pokemon_there_is_no_exp_share_choice()
+    {
+        Seed(Pokemons.Squirtle());
+
+        var cut = Render<EvSummary>();
+
+        Assert.Empty(cut.FindAll("select#exp-share"));
+    }
+
+    [Fact]
+    public void Lists_nobody_and_the_other_pokemon_and_gives_it_the_exp_share()
+    {
+        SeedTwo();
+        var cut = Render<EvSummary>();
+
+        Assert.Equal(T("ExpShare.Label"), cut.Find("label[for=exp-share]").TextContent.Trim());
+        var options = cut.FindAll("select#exp-share option");
+        Assert.Equal(["", "pidgey"], options.Select(o => o.GetAttribute("value")));
+        Assert.Equal([T("ExpShare.None"), "Pidgey"], options.Select(o => o.TextContent.Trim()));
+
+        cut.Find("select#exp-share").Change("pidgey");
+
+        Assert.Equal("pidgey", Store.ExpShareHolderId);
+        Assert.Equal("pidgey", cut.Find("select#exp-share option[selected]").GetAttribute("value"));
+
+        cut.Find("select#exp-share").Change("");
+        Assert.Null(Store.ExpShareHolderId);
+    }
+
+    [Fact]
+    public void When_the_selected_pokemon_holds_it_a_note_says_its_battles_are_not_shared()
+    {
+        SeedTwo();
+        Store.SetExpShare("main");
+
+        var cut = Render<EvSummary>();
+
+        Assert.Equal("main", cut.Find("select#exp-share option[selected]").GetAttribute("value"));
+        Assert.Equal(T("ExpShare.Self"), cut.Find(".exp-share-self").TextContent.Trim());
+    }
+}

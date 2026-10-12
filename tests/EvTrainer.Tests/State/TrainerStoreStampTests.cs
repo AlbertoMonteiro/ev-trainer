@@ -34,7 +34,7 @@ public class TrainerStoreStampTests
 
     public static TheoryData<string> Commands =>
     [
-        "RecordBattle", "UndoLastBattle", "TogglePokerus", "ToggleMacho", "SaveSettings", "RemoveEvent", "RemoveEventUndo",
+        "RecordBattle", "UndoBattle", "TogglePokerus", "ToggleMacho", "SaveSettings", "RemoveEvent", "RemoveEventUndo",
         "AdjustEvs", "ResetHistory", "SetKnownIvs", "AddLevel", "RemoveLevel", "ReplaceLevel", "ImportBattles", "ImportLevels",
     ];
 
@@ -45,7 +45,7 @@ public class TrainerStoreStampTests
         switch (command)
         {
             case "RecordBattle": _store.RecordBattle("Caterpie"); break;
-            case "UndoLastBattle": _store.UndoLastBattle("a"); break;
+            case "UndoBattle": _store.UndoBattle(new EvTrainer.Web.Domain.SharedRecord("a", "Caterpie", new([0, 0, 0, 0, 0, 0]), null, null)); break;
             case "TogglePokerus": _store.TogglePokerus(); break;
             case "ToggleMacho": _store.ToggleMacho(); break;
             case "SaveSettings": _store.SaveSettings("Squirtle", "Bold", [0, 0, 0, 0, 0, 0], [new SpeciesEntry { Name = "Squirtle", Base = [44, 48, 65, 50, 64, 43] }]); break;
