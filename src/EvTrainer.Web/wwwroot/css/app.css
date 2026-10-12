@@ -527,6 +527,11 @@ input[aria-invalid="true"] {
     color: #fff;
 }
 
+.segmented button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
 /* Opponent grid */
 .opponent-grid {
     display: grid;

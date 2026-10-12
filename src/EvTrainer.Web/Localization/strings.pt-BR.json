@@ -91,6 +91,8 @@
   "Evs.List.Useful": "Úteis para as metas",
   "Evs.List.All": "Todos",
   "Evs.List.Results": "Resultados",
+  "Evs.List.OtherResults": "Outros resultados",
+  "Evs.List.Others": "Outros adversários",
   "Empty.NoUseful": "Nenhum outro adversário útil. Toque em Todos para ver a Pokédex inteira.",
   "Empty.NoResults": "Nada encontrado. Locais depois da Rota 19 ainda não têm treinadores cadastrados: busque pelo nome do Pokémon.",
   "Settings.Title": "Ajustes",

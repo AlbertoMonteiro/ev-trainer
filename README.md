@@ -47,7 +47,8 @@ up and it narrows down your IVs.
   Pokérus and Macho Brace (×2 each, ×4 together) recorded per battle, totals always recomputed in order.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),
   recents, and search by name, Pokédex number, route, gym leader or trainer location
-  (`rota 4`, `brock`, `nidoran f`…).
+  (`rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
+  current targets first.
 - **IV calculator** — note the 6 stats after each level up; the app shows the possible IV range per
   stat for each level and the intersection of all of them, using integer Gen 3 math and your nature.
 - **Is this catch worth keeping?** — right after catching, type the species, level, nature and the 6

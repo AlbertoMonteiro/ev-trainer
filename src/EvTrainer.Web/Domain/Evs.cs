@@ -74,6 +74,22 @@ public static class Evs
             || (totals[i] < targets[i] && (!opponent.IsVitamin || totals[i] < StatVector.VitaminCap)))
         .All(ok => ok);
 
+    /// <summary>
+    /// Splits a list into the opponents useful for the targets and the others (spec 009), each group in the
+    /// original order.
+    /// </summary>
+    public static (IReadOnlyList<SearchHit> Useful, IReadOnlyList<SearchHit> Others) UsefulFirst(
+        IEnumerable<SearchHit> hits, int[] totals, int[] targets)
+    {
+        List<SearchHit> useful = [], others = [];
+        foreach (var hit in hits)
+        {
+            (IsUseful(hit.Opponent, totals, targets) ? useful : others).Add(hit);
+        }
+
+        return (useful, others);
+    }
+
     /// <summary>Last distinct known opponents (canonical names), newest first.</summary>
     public static IReadOnlyList<Opponent> Recent(IReadOnlyList<BattleEvent> events, ReferenceData data, int max = 6)
     {

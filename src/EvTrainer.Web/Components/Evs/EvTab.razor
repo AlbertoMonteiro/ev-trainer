@@ -7,11 +7,11 @@
         <EvSummary />
     </div>
 
-    <OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
+    <OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Searching="@Searching" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
 
     @if (Store.Selected is { } pokemon)
     {
-        var searching = !string.IsNullOrWhiteSpace(_query);
+        var searching = Searching;
         var recent = searching ? [] : Evs.Recent(pokemon.Events, Store.Data);
         var recentNames = recent.Select(o => o.Name).ToHashSet(StringComparer.Ordinal);
         var useful = Store.Preferences.Filter != "all";
@@ -24,10 +24,12 @@
         }
 
         <div class="main-list">
-            <OpponentGrid Title="@ListTitle(searching, useful)"
-                          Items="@MainItems(pokemon, searching, useful, recentNames)"
-                          EmptyText="@(searching || !useful ? L["Empty.NoResults"] : L["Empty.NoUseful"])"
-                          OnPick="Record" />
+            @foreach (var group in MainGroups(pokemon, searching, useful, recentNames))
+            {
+                <OpponentGrid @key="group.Title" Title="@group.Title" Items="@group.Items"
+                              EmptyText="@(searching || !useful ? L["Empty.NoResults"] : L["Empty.NoUseful"])"
+                              OnPick="Record" />
+            }
         </div>
 
         <RecentHistory />
@@ -37,24 +39,40 @@
 @code {
     private string _query = string.Empty;
 
-    private string ListTitle(bool searching, bool useful) =>
-        searching ? L["Evs.List.Results"] : useful ? L["Evs.List.Useful"] : L["Evs.List.All"];
+    private bool Searching => !string.IsNullOrWhiteSpace(_query);
 
-    private IReadOnlyList<SearchHit> MainItems(TrainingPokemon pokemon, bool searching, bool useful, HashSet<string> recent)
+    private sealed record Group(string Title, IReadOnlyList<SearchHit> Items);
+
+    /// <summary>
+    /// The grids of the main list (contracts/ev-lists.md): the "Úteis" filter shows one grid of useful opponents;
+    /// a search or "Todos" shows the useful ones first and the others after, each group only when it has items.
+    /// </summary>
+    private IEnumerable<Group> MainGroups(TrainingPokemon pokemon, bool searching, bool useful, HashSet<string> recent)
     {
-        if (searching)
+        var totals = Store.SelectedTotals;
+        if (!searching && useful)
         {
-            return Search.Find(_query);
+            yield return new Group(L["Evs.List.Useful"],
+                [.. Store.Data.Opponents.Where(o => !recent.Contains(o.Name) && Evs.IsUseful(o, totals, pokemon.Targets)).Select(o => new SearchHit(o))]);
+            yield break;
         }
 
-        var totals = Store.SelectedTotals;
-        return
-        [
-            .. Store.Data.Opponents
-                .Where(o => !recent.Contains(o.Name))
-                .Where(o => !useful || Evs.IsUseful(o, totals, pokemon.Targets))
-                .Select(o => new SearchHit(o)),
-        ];
+        var items = searching
+            ? Search.Find(_query)
+            : [.. Store.Data.Opponents.Where(o => !recent.Contains(o.Name)).Select(o => new SearchHit(o))];
+        var (usefulItems, others) = Evs.UsefulFirst(items, totals, pokemon.Targets);
+        if (usefulItems.Count > 0)
+        {
+            yield return new Group(L["Evs.List.Useful"], usefulItems);
+        }
+
+        if (others.Count > 0 || usefulItems.Count == 0)
+        {
+            var title = usefulItems.Count == 0
+                ? searching ? L["Evs.List.Results"] : L["Evs.List.All"]
+                : searching ? L["Evs.List.OtherResults"] : L["Evs.List.Others"];
+            yield return new Group(title, others);
+        }
     }
 
     private void Record(string opponent)

@@ -77,6 +77,22 @@ public partial class NoHardcodedTextTests : AppTestContext
     }
 
     [Fact]
+    public void Grouped_search_and_disabled_filter_have_no_hardcoded_text()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<Home>();
+
+        cut.Find("input.search").Input("rota 4");
+        Assert.Equal(2, cut.FindAll(".main-list .section-title").Count);
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find("input.search").Input("");
+        cut.Find(".segmented button.all").Click();
+        Assert.Equal(2, cut.FindAll(".main-list .section-title").Count);
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
     public void Manual_edit_screens_have_no_hardcoded_text()
     {
         var pokemon = Pokemons.Squirtle().WithEvents(("Caterpie", 3, 1));

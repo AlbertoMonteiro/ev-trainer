@@ -2,6 +2,9 @@ using Bunit;
 
 using EvTrainer.Tests.Support;
 using EvTrainer.Web.Components.Evs;
+using EvTrainer.Web.Domain;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EvTrainer.Tests.Components.Evs;
 
@@ -9,6 +12,15 @@ public class OpponentSearchTests : AppTestContext
 {
     private static List<string> Names(IRenderedComponent<EvTab> cut, string section) =>
         [.. cut.FindAll($"{section} button.opponent").Select(b => b.GetAttribute("data-opp")!)];
+
+    private static List<string> Titles(IRenderedComponent<EvTab> cut) =>
+        [.. cut.FindAll(".main-list .section-title").Select(t => t.TextContent.Trim())];
+
+    /// <summary>Names per grid of the main list, in order (one entry per rendered group).</summary>
+    private static List<List<string>> Groups(IRenderedComponent<EvTab> cut) =>
+        [.. cut.FindAll(".main-list .opponent-grid").Select(g => g.QuerySelectorAll("button.opponent").Select(b => b.GetAttribute("data-opp")!).ToList())];
+
+    private static bool Useful(string name, int[] totals, int[] targets) => EvTrainer.Web.Domain.Evs.IsUseful(Data.Lookup(name)!, totals, targets);
 
     [Fact]
     public void Useful_is_the_default_and_the_choice_is_remembered()
@@ -25,8 +37,8 @@ public class OpponentSearchTests : AppTestContext
         cut.Find(".segmented button.all").Click();
 
         Assert.Equal("all", Repository.Preferences.Filter);
-        Assert.Equal(T("Evs.List.All"), cut.Find(".main-list .section-title").TextContent.Trim());
-        Assert.Contains("Ivysaur", Names(cut, ".main-list"));
+        Assert.Equal([T("Evs.List.Useful"), T("Evs.List.Others")], Titles(cut));
+        Assert.Contains("Ivysaur", Groups(cut)[1]);
     }
 
     [Fact]
@@ -116,16 +128,102 @@ public class OpponentSearchTests : AppTestContext
     [Fact]
     public void All_lists_the_386_species_in_dex_order_then_the_vitamins()
     {
-        Seed(Pokemons.Squirtle());
+        Seed(Pokemons.Squirtle(targets: [0, 0, 0, 0, 0, 0]));
         var cut = Render<EvTab>();
 
         cut.Find(".segmented button.all").Click();
         var names = Names(cut, ".main-list");
 
+        Assert.Equal([T("Evs.List.All")], Titles(cut));
         Assert.Equal(392, names.Count);
         Assert.Equal(Data.Opponents.Select(o => o.Name), names);
         Assert.Equal("Bulbasaur", names[0]);
         Assert.Equal("Deoxys", names[385]);
         Assert.Equal("Carbos", names[^1]);
+    }
+
+    [Fact]
+    public void All_shows_the_useful_first_then_the_others_each_in_dex_order()
+    {
+        int[] targets = [252, 0, 2, 252, 0, 4], totals = [0, 0, 0, 0, 0, 0];
+        Seed(Pokemons.Squirtle(targets: targets));
+        var cut = Render<EvTab>();
+
+        cut.Find(".segmented button.all").Click();
+        var groups = Groups(cut);
+
+        Assert.Equal([T("Evs.List.Useful"), T("Evs.List.Others")], Titles(cut));
+        Assert.Equal(392, groups.Sum(g => g.Count));
+        Assert.Equal(Data.Opponents.Select(o => o.Name).Where(n => Useful(n, totals, targets)), groups[0]);
+        Assert.Equal(Data.Opponents.Select(o => o.Name).Where(n => !Useful(n, totals, targets)), groups[1]);
+        Assert.Equal("Carbos", groups[0][^1]);
+    }
+
+    [Fact]
+    public void Search_shows_the_useful_first_then_the_other_results()
+    {
+        int[] targets = [252, 0, 2, 252, 0, 4], totals = [0, 0, 0, 0, 0, 0];
+        Seed(Pokemons.Squirtle(targets: targets));
+        var cut = Render<EvTab>();
+
+        cut.Find("input.search").Input("rota 4");
+        var found = Services.GetRequiredService<OpponentSearch>().Find("rota 4").Select(h => h.Opponent.Name).ToList();
+        var groups = Groups(cut);
+
+        Assert.Equal([T("Evs.List.Useful"), T("Evs.List.OtherResults")], Titles(cut));
+        Assert.Equal(found.Where(n => Useful(n, totals, targets)), groups[0]);
+        Assert.Equal(found.Where(n => !Useful(n, totals, targets)), groups[1]);
+        Assert.Contains("Spearow", groups[0]);
+        Assert.Contains("Mankey", groups[1]);
+        var paras = cut.Find(".main-list button.opponent[data-opp='Paras'] .trainers");
+        Assert.Equal(T("Evs.Card.Trainers", "Rota 4"), paras.TextContent.Trim());
+    }
+
+    [Fact]
+    public void Search_where_everything_is_useful_shows_only_the_useful_group()
+    {
+        Seed(Pokemons.Squirtle(targets: [0, 0, 0, 0, 0, 252]));
+        var cut = Render<EvTab>();
+
+        cut.Find("input.search").Input("pidgey");
+
+        Assert.Equal([T("Evs.List.Useful")], Titles(cut));
+        Assert.Equal(["Pidgey"], Groups(cut).Single());
+    }
+
+    [Fact]
+    public void Search_without_useful_results_keeps_the_results_title()
+    {
+        Seed(Pokemons.Squirtle().WithEvents(("Geodude", 2, 1)));
+        var cut = Render<EvTab>();
+
+        cut.Find("input.search").Input("geodude");
+
+        Assert.Equal([T("Evs.List.Results")], Titles(cut));
+        Assert.Equal(["Geodude"], Groups(cut).Single());
+    }
+
+    [Theory]
+    [InlineData("useful")]
+    [InlineData("all")]
+    public void While_searching_the_filter_is_disabled_and_nothing_is_pressed(string filter)
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<EvTab>();
+        cut.Find($".segmented button.{filter}").Click();
+
+        cut.Find("input.search").Input("rota 4");
+
+        Assert.All(cut.FindAll(".segmented button"), b =>
+        {
+            Assert.True(b.HasAttribute("disabled"));
+            Assert.Equal("false", b.GetAttribute("aria-pressed"));
+        });
+        Assert.Equal(filter, Repository.Preferences.Filter);
+
+        cut.Find("input.search").Input("");
+
+        Assert.All(cut.FindAll(".segmented button"), b => Assert.False(b.HasAttribute("disabled")));
+        Assert.Equal("true", cut.Find($".segmented button.{filter}").GetAttribute("aria-pressed"));
     }
 }

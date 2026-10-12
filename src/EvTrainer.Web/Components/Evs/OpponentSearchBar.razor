@@ -5,9 +5,10 @@
            aria-label="@L["Evs.Search.Label"]" placeholder="@L["Evs.Search.Placeholder"]"
            @oninput="e => QueryChanged.InvokeAsync(e.Value?.ToString() ?? string.Empty)" />
     <div class="segmented" role="group" aria-label="@L["Evs.Filter.Label"]">
-        <button type="button" class="useful" aria-pressed="@(Filter != "all" ? "true" : "false")"
+        @* While searching the filter does not apply (spec 009): disabled, nothing pressed, the saved choice kept. *@
+        <button type="button" class="useful" disabled="@Searching" aria-pressed="@(!Searching && Filter != "all" ? "true" : "false")"
                 @onclick="@(() => FilterChanged.InvokeAsync("useful"))">@L["Evs.Filter.Useful"]</button>
-        <button type="button" class="all" aria-pressed="@(Filter == "all" ? "true" : "false")"
+        <button type="button" class="all" disabled="@Searching" aria-pressed="@(!Searching && Filter == "all" ? "true" : "false")"
                 @onclick="@(() => FilterChanged.InvokeAsync("all"))">@L["Evs.Filter.All"]</button>
     </div>
 </div>
@@ -18,6 +19,9 @@
 
     [Parameter]
     public EventCallback<string> QueryChanged { get; set; }
+
+    [Parameter]
+    public bool Searching { get; set; }
 
     [Parameter]
     public string Filter { get; set; } = "useful";

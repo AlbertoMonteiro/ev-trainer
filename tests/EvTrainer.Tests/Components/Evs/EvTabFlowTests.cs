@@ -19,6 +19,26 @@ public class EvTabFlowTests : AppTestContext
         cut.Find($".opponent-grid button.opponent[data-opp='{name}']").Click();
 
     [Fact]
+    public void Reaching_a_target_moves_the_opponent_out_of_the_useful_results()
+    {
+        Seed(Pokemons.Squirtle(targets: [0, 0, 0, 0, 0, 1]));
+        var cut = Render<Home>();
+        cut.Find("input.search").Input("pidgey");
+        Assert.Equal([T("Evs.List.Useful")], Titles(cut));
+
+        Tap(cut, "Pidgey");
+
+        Assert.Equal([T("Evs.List.Results")], Titles(cut));
+
+        cut.Find(".toast button").Click();
+
+        Assert.Equal([T("Evs.List.Useful")], Titles(cut));
+    }
+
+    private static List<string> Titles(IRenderedComponent<Home> cut) =>
+        [.. cut.FindAll(".main-list .section-title").Select(t => t.TextContent.Trim())];
+
+    [Fact]
     public void Tapping_records_the_battle_shows_the_gain_and_saves()
     {
         Seed(Pokemons.Squirtle(targets: [252, 0, 2, 252, 0, 4]));
