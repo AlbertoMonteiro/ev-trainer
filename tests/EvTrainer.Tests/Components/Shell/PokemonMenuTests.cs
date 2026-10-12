@@ -71,7 +71,17 @@ public class PokemonMenuTests : AppTestContext
         Assert.Contains(T("Menu.ImportBackup"), text);
         Assert.Contains(T("Menu.Theme"), text);
         Assert.DoesNotContain("Tela cheia", text);
-        Assert.Empty(cut.FindAll(".menu-panel .languages"));
+    }
+
+    [Fact]
+    public void Lists_portuguese_and_english_each_in_its_own_language_with_the_active_one_pressed()
+    {
+        var cut = RenderWithTwo();
+
+        var buttons = cut.FindAll(".menu-panel .languages button");
+        Assert.Equal(["pt-BR", "en"], buttons.Select(b => b.GetAttribute("data-lang")));
+        Assert.Equal(["Português (Brasil)", "English"], buttons.Select(b => b.TextContent.Trim()));
+        Assert.Equal(["true", "false"], buttons.Select(b => b.GetAttribute("aria-pressed")));
     }
 
     [Fact]
@@ -188,5 +198,27 @@ public class PokemonMenuLanguageTests : AppTestContext
         Assert.Equal("en", Browser.Language);
         Assert.Equal("en", Repository.Preferences.Language);
         Assert.StartsWith("EN ", cut.FindAll("[role=tab]")[0].TextContent.Trim());
+    }
+}
+public class LanguageSwitchKeepsStateTests : AppTestContext
+{
+    [Fact]
+    public void Switching_to_english_keeps_the_search_the_tab_and_the_selected_pokemon()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<Home>();
+        cut.Find("input.search").Input("caterpie");
+        var selected = Store.Selected;
+
+        cut.Find("header button.menu").Click();
+        cut.Find(".menu-panel .languages button[data-lang='en']").Click();
+
+        Assert.Equal("en", Language.Current);
+        Assert.Equal("caterpie", cut.Find("input.search").GetAttribute("value"));
+        Assert.Equal(Catalog.Find("en", "Evs.Search.Placeholder"), cut.Find("input.search").GetAttribute("placeholder"));
+        Assert.Equal("true", cut.FindAll("[role=tab]")[0].GetAttribute("aria-selected"));
+        Assert.Equal(Catalog.Find("en", "Tabs.Evs"), cut.FindAll("[role=tab]")[0].TextContent.Trim());
+        Assert.Same(selected, Store.Selected);
+        Assert.NotEmpty(cut.FindAll("button.opponent[data-opp='Caterpie']"));
     }
 }

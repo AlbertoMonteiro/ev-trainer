@@ -140,6 +140,6 @@ public sealed record UiPreferences
     /// <summary>useful | all.</summary>
     public string Filter { get; init; } = "useful";
 
-    /// <summary>BCP-47 tag of the UI language.</summary>
-    public string Language { get; init; } = "pt-BR";
+    /// <summary>BCP-47 tag of the UI language chosen in the menu; null = follow the browser language (spec 011).</summary>
+    public string? Language { get; init; }
 }

@@ -16,6 +16,7 @@ public abstract class AppTestContext : BunitContext
 {
     public static readonly ReferenceData Data = ReferenceData.LoadEmbedded();
     public static readonly Pokedex Dex = Pokedex.LoadEmbedded();
+    public static readonly LocationNames Places = LocationNames.LoadEmbedded();
 
     protected AppTestContext(LocalizationCatalog? catalog = null)
     {
@@ -28,7 +29,8 @@ public abstract class AppTestContext : BunitContext
         Toasts = new ToastService(Time);
 
         Services.AddSingleton(Data);
-        Services.AddSingleton(new OpponentSearch(Data));
+        Services.AddSingleton(Places);
+        Services.AddSingleton(new OpponentSearch(Data, Places));
         Services.AddSingleton(Dex);
         Services.AddSingleton<IPokemonRepository>(Repository);
         Services.AddSingleton<IBrowserApi>(Browser);

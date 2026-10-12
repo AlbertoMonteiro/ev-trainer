@@ -68,11 +68,13 @@ public class JsonStringLocalizerTests
     }
 
     [Fact]
-    public void Embedded_catalog_has_only_pt_BR_for_now()
+    public void Embedded_catalog_has_pt_BR_first_then_en()
     {
         var catalog = LocalizationCatalog.LoadEmbedded();
 
-        Assert.Equal(["pt-BR"], catalog.Languages);
+        Assert.Equal(["pt-BR", "en"], catalog.Languages);
         Assert.Equal("EVs Trainer", catalog.Find("pt-BR", "App.Title"));
+        Assert.Equal("English", catalog.Find("en", "Language.Name"));
+        Assert.Equal("EVs Trainer", catalog.Find("en", "App.Title"));
     }
 }

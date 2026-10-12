@@ -33,8 +33,9 @@ up and it narrows down your IVs.
 
 <img src="docs/screenshots/desktop-light.png" width="820" alt="Desktop layout: Pokémon side panel, sticky EV summary and a wide opponent grid">
 
-> The interface is in **Brazilian Portuguese** for now. Every string lives in a resource file, so an
-> English version can be added without touching the screens.
+> The interface is in **English** and **Brazilian Portuguese**: the app follows your browser's language
+> (Portuguese for `pt-*`, English otherwise) and you can switch any time in the menu — the choice is
+> remembered on the device.
 
 ## Features
 
@@ -47,12 +48,12 @@ up and it narrows down your IVs.
   Pokérus and Macho Brace (×2 each, ×4 together) recorded per battle, totals always recomputed in order.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),
   recents, and search by name, Pokédex number, route, gym leader or trainer location
-  (`rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
+  (`route 4` / `rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
   current targets first.
 - **IV calculator** — note the 6 stats after each level up; the app shows the possible IV range per
   stat for each level and the intersection of all of them, using integer Gen 3 math and your nature.
 - **Is this catch worth keeping?** — right after catching, type the species, level, nature and the 6
-  stats from the summary screen: each stat gets its IV range and a grade (Ótimo/Bom/Médio/Ruim), plus an
+  stats from the summary screen: each stat gets its IV range and a grade (Great/Good/Fair/Poor), plus an
   overall verdict weighted by how much each stat matters: the main attack stat (physical or special,
   from the species' base stats) weighs 3×, the others 1×, the useless one is ignored — one tap changes
   it, and the choice is remembered per species. The app keeps the best catch so far per species and tells you whether the new one is

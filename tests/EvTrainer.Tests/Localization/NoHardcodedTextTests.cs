@@ -33,6 +33,7 @@ public partial class NoHardcodedTextTests : AppTestContext
             .. Data.Opponents.Select(o => o.Name),
             .. Data.Natures.Select(n => n.Name),
             .. Data.TrainersByLocation.Select(l => l.Name),
+            .. Data.TrainersByLocation.Select(l => Places.Display(l.Name, "en")),
             .. Dex.Species.Select(s => s.Name),
             // Sprite badges without a dex number show the initial of a data name (vitamins, unknown species).
             .. Data.Opponents.Select(o => o.Name[..1].ToUpperInvariant()),

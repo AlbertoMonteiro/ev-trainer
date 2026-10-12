@@ -4,13 +4,14 @@ namespace EvTrainer.Web.Domain;
 
 /// <summary>
 /// Opponent search (HANDOFF §4.5): matches "name #dex", the wild location or any trainer location,
-/// ignoring accents and case, with route lists expanded and a digit boundary at the end of the query.
+/// ignoring accents and case, with route lists expanded and a digit boundary at the end of the query. Places match in
+/// Portuguese or English whatever the UI language (spec 011); hits keep the Portuguese place as its identity.
 /// </summary>
 public sealed class OpponentSearch
 {
     private readonly IReadOnlyList<Entry> _entries;
 
-    public OpponentSearch(ReferenceData data)
+    public OpponentSearch(ReferenceData data, LocationNames names)
     {
         Dictionary<string, List<string>> trainers = new(StringComparer.Ordinal);
         foreach (var location in data.TrainersByLocation)
@@ -26,8 +27,8 @@ public sealed class OpponentSearch
             .. data.Opponents.Select(o => new Entry(
                 o,
                 Prepare($"{o.Name} #{o.Dex}"),
-                Prepare(o.WildLocation),
-                [.. (trainers.GetValueOrDefault(o.Name) ?? []).Select(l => (l, Prepare(l)))])),
+                [.. names.AllForms(o.WildLocation).Select(Prepare)],
+                [.. (trainers.GetValueOrDefault(o.Name) ?? []).Select(l => (l, (IReadOnlyList<string>)[.. names.AllForms(l).Select(Prepare)]))])),
         ];
     }
 
@@ -42,8 +43,8 @@ public sealed class OpponentSearch
         var hits = new List<SearchHit>();
         foreach (var entry in _entries)
         {
-            List<string> trainerHits = [.. entry.Trainers.Where(t => Matches(t.Prepared, folded)).Select(t => t.Name)];
-            if (trainerHits.Count > 0 || Matches(entry.NameAndDex, folded) || Matches(entry.Wild, folded))
+            List<string> trainerHits = [.. entry.Trainers.Where(t => t.Prepared.Any(p => Matches(p, folded))).Select(t => t.Name)];
+            if (trainerHits.Count > 0 || Matches(entry.NameAndDex, folded) || entry.Wild.Any(w => Matches(w, folded)))
             {
                 hits.Add(new SearchHit(entry.Opponent, trainerHits));
             }
@@ -70,5 +71,9 @@ public sealed class OpponentSearch
         return false;
     }
 
-    private sealed record Entry(Opponent Opponent, string NameAndDex, string Wild, IReadOnlyList<(string Name, string Prepared)> Trainers);
+    private sealed record Entry(
+        Opponent Opponent,
+        string NameAndDex,
+        IReadOnlyList<string> Wild,
+        IReadOnlyList<(string Name, IReadOnlyList<string> Prepared)> Trainers);
 }

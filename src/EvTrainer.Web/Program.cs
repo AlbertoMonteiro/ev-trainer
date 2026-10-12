@@ -14,6 +14,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddSingleton(_ => ReferenceData.LoadEmbedded());
+builder.Services.AddSingleton(_ => LocationNames.LoadEmbedded());
 builder.Services.AddSingleton<OpponentSearch>();
 builder.Services.AddSingleton(_ => Pokedex.LoadEmbedded());
 builder.Services.AddSingleton<IPokemonRepository, LocalStorageRepository>();
@@ -33,7 +34,12 @@ var host = builder.Build();
 
 var store = host.Services.GetRequiredService<TrainerStore>();
 store.Load();
-host.Services.GetRequiredService<LanguageState>().Current = store.Preferences.Language;
+// Language (spec 011): the choice saved from the menu, otherwise the browser language (not saved).
+var languageState = host.Services.GetRequiredService<LanguageState>();
+var browser = host.Services.GetRequiredService<IBrowserApi>();
+var language = LanguageMatcher.Resolve(store.Preferences.Language, languageState.Available, browser.Languages());
+languageState.Current = language;
+browser.SetLanguage(language);
 
 // Sync (spec 008): sync on start and whenever the page becomes visible again; a failure only leaves it pending.
 var sync = host.Services.GetRequiredService<SyncService>();

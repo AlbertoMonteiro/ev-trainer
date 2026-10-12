@@ -43,5 +43,8 @@ public interface IBrowserApi
 
     void SetLanguage(string language);
 
+    /// <summary>The browser's preferred languages, in order (navigator.languages); empty when unknown.</summary>
+    IReadOnlyList<string> Languages();
+
     void DownloadText(string fileName, string text);
 }

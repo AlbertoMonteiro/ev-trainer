@@ -41,6 +41,28 @@ public partial class KeyParityTests
         Assert.True(missing.Count == 0, "Missing keys: " + string.Join(", ", missing));
     }
 
+    /// <summary>Portuguese words that must never show up in the English texts (folded, matched at a word start).</summary>
+    internal static readonly string[] PortugueseWords =
+    [
+        "rota", "ginasio", "ataque", "defesa", "buscar", "editar", "salvar", "cancelar", "uteis", "metas", "nivel",
+        "nao", "voce", "treinador", "adversario", "sincroniz", "configura", "apagar", "aparelho", "laboratorio",
+        "raro", "pesca", "parcial", "foge",
+    ];
+
+    [Fact]
+    public void English_texts_have_no_portuguese_words()
+    {
+        var offending = Catalog.Strings("en")
+            .Where(kv => PortugueseWords.Any(w => ContainsWord(kv.Value, w)))
+            .Select(kv => $"{kv.Key}: {kv.Value}")
+            .ToList();
+
+        Assert.True(offending.Count == 0, "Portuguese in en: " + string.Join(" | ", offending));
+    }
+
+    internal static bool ContainsWord(string text, string foldedWord) =>
+        Regex.IsMatch(EvTrainer.Web.Domain.TextFold.Fold(text), $@"(?<![a-z]){Regex.Escape(foldedWord)}");
+
     private static HashSet<string> Placeholders(string text) =>
         [.. PlaceholderPattern().Matches(text).Select(m => m.Value)];
 

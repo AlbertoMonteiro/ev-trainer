@@ -68,6 +68,21 @@ public class OpponentSearchTests : AppTestContext
         Assert.Empty(cut.FindAll(".main-list button.opponent[data-opp='Mankey'] .trainers"));
     }
 
+    [Theory]
+    [InlineData("en", "pewter gym", "Pewter Gym (Brock)")]
+    [InlineData("pt-BR", "ginásio de pewter", "Ginásio de Pewter (Brock)")]
+    public void Trainer_places_show_in_the_active_language(string language, string query, string place)
+    {
+        Language.Current = language;
+        Seed(Pokemons.Squirtle());
+        var cut = Render<EvTab>();
+
+        cut.Find("input.search").Input(query);
+
+        var onix = cut.Find(".main-list button.opponent[data-opp='Onix'] .trainers");
+        Assert.Equal(T("Evs.Card.Trainers", place), onix.TextContent.Trim());
+    }
+
     [Fact]
     public void Empty_states_span_both_columns()
     {

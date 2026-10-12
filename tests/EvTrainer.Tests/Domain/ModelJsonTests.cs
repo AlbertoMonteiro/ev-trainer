@@ -133,6 +133,21 @@ public class ModelJsonTests
         Assert.Equal(new UiPreferences(), PokemonJson.DeserializePreferences("not json"));
     }
 
+    [Theory]
+    [InlineData("{}", null)]
+    [InlineData("""{ "language": null }""", null)]
+    [InlineData("""{ "language": "pt-BR" }""", "pt-BR")]
+    [InlineData("""{ "language": "en", "theme": "dark" }""", "en")]
+    public void Preferences_language_is_optional(string json, string? expected) =>
+        Assert.Equal(expected, PokemonJson.DeserializePreferences(json).Language);
+
+    [Fact]
+    public void Default_preferences_have_no_language_and_keep_it_that_way()
+    {
+        Assert.Null(new UiPreferences().Language);
+        Assert.Null(PokemonJson.DeserializePreferences(PokemonJson.SerializePreferences(new UiPreferences { Theme = "dark" })).Language);
+    }
+
     [Fact]
     public void Reads_and_writes_manual_adjustments_and_known_ivs()
     {

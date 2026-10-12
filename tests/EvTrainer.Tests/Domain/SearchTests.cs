@@ -6,7 +6,7 @@ namespace EvTrainer.Tests.Domain;
 public class SearchTests
 {
     private static readonly ReferenceData Data = ReferenceData.LoadEmbedded();
-    private static readonly OpponentSearch Search = new(Data);
+    private static readonly OpponentSearch Search = new(Data, LocationNames.LoadEmbedded());
 
     private static List<string> Names(string query) => [.. Search.Find(query).Select(h => h.Opponent.Name)];
 
@@ -19,6 +19,31 @@ public class SearchTests
         Assert.Contains(hits, h => h.Opponent.Name == "Paras" && h.TrainerLocations.Contains("Rota 4"));
         Assert.Contains(hits, h => h.Opponent.Name == "Parasect" && h.TrainerLocations.Contains("Rota 4"));
     }
+
+    [Theory]
+    [InlineData("route 22", "rota 22")]
+    [InlineData("route 3", "rota 3")]
+    [InlineData("route 13", "rota 13")]
+    [InlineData("pewter gym", "ginásio de pewter")]
+    [InlineData("prof. oak's lab", "laboratório do prof. oak")]
+    [InlineData("fishing", "pesca")]
+    public void English_place_names_find_the_same_opponents_as_the_portuguese_ones(string english, string portuguese)
+    {
+        Assert.NotEmpty(Names(portuguese));
+        Assert.Equal(Names(portuguese), Names(english));
+    }
+
+    [Fact]
+    public void English_trainer_matches_keep_the_portuguese_place_as_identity()
+    {
+        var hit = Assert.Single(Search.Find("pewter gym"), h => h.Opponent.Name == "Onix");
+
+        Assert.Equal(["Ginásio de Pewter (Brock)"], hit.TrainerLocations);
+    }
+
+    [Fact]
+    public void Route_1_does_not_match_routes_10_to_19() =>
+        Assert.Equal(["Pidgey", "Rattata"], Names("route 1"));
 
     [Fact]
     public void Rota_1_does_not_match_routes_10_to_19() =>

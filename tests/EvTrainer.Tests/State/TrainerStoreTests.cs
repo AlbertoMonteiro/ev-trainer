@@ -108,6 +108,22 @@ public class TrainerStoreTests
     }
 
     [Fact]
+    public void Saving_other_preferences_keeps_the_language_unset_until_chosen()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+
+        store.SetTheme("dark");
+        store.SetFilter("all");
+
+        Assert.Null(repository.Preferences.Language);
+
+        store.SetLanguage("en");
+
+        Assert.Equal("en", repository.Preferences.Language);
+    }
+
+    [Fact]
     public void AdjustEvs_appends_an_adjustment_and_undo_removes_it()
     {
         var repository = new InMemoryRepository(("a", Pokemons.Squirtle().WithEvents(("Caterpie", 10, 1))));

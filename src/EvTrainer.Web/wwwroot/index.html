@@ -13,9 +13,17 @@
                 if (prefs.theme === 'light' || prefs.theme === 'dark') {
                     document.documentElement.setAttribute('data-theme', prefs.theme);
                 }
-                if (prefs.language) {
-                    document.documentElement.setAttribute('lang', prefs.language);
+                // Language (spec 011): the choice saved from the menu, otherwise the first supported browser
+                // language (pt-* → pt-BR, en-* → en), otherwise English — same rule as LanguageMatcher.
+                var lang = prefs.language === 'pt-BR' || prefs.language === 'en' ? prefs.language : null;
+                if (!lang) {
+                    var list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+                    for (var i = 0; i < list.length && !lang; i++) {
+                        var primary = String(list[i]).trim().split('-')[0].toLowerCase();
+                        lang = primary === 'pt' ? 'pt-BR' : primary === 'en' ? 'en' : null;
+                    }
                 }
+                document.documentElement.setAttribute('lang', lang || 'en');
             } catch (e) { }
         })();
     </script>
@@ -35,11 +43,12 @@
     </div>
 
     <div id="blazor-error-ui">
-        Ocorreu um erro inesperado.
-        <a href="." class="reload">Recarregar</a>
+        <span class="error-text">An unexpected error has occurred.</span>
+        <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
     <script src="js/interop.js"></script>
+    <script>evt.setLanguage(document.documentElement.lang);</script>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
     <script>
         // Offline cache + updates: check for a new version on start and whenever the app comes back to the

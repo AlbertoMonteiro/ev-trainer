@@ -1,4 +1,5 @@
 @inherits StoreAwareComponent
+@inject LocationNames Places
 
 <button type="button" class="opponent @BumpClass" data-opp="@Opponent.Name" @onclick="Pick">
     <PokemonSprite Name="@Opponent.Name" Size="40" />
@@ -18,7 +19,7 @@
     </span>
     @if (TrainerLocations is { Count: > 0 })
     {
-        <span class="trainers">@L["Evs.Card.Trainers", string.Join(", ", TrainerLocations)]</span>
+        <span class="trainers">@L["Evs.Card.Trainers", string.Join(", ", TrainerLocations.Select(l => Places.Display(l, Language.Current)))]</span>
     }
     </span>
 </button>

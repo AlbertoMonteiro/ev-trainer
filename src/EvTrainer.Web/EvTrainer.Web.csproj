@@ -13,6 +13,7 @@
   <ItemGroup>
     <EmbeddedResource Include="../../reference-data.json" LogicalName="EvTrainer.reference-data.json" />
     <EmbeddedResource Include="../../pokedex-gen3.json" LogicalName="EvTrainer.pokedex-gen3.json" />
+    <EmbeddedResource Include="../../reference-data.en.json" LogicalName="EvTrainer.reference-data.en.json" WithCulture="false" />
     <!-- WithCulture=false: keep "strings.pt-BR.json" in the main assembly instead of a satellite assembly. -->
     <EmbeddedResource Include="Localization/strings.*.json" LogicalName="EvTrainer.%(Filename)%(Extension)" WithCulture="false" />
     <Content Remove="Localization/**" />

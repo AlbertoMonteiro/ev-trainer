@@ -56,5 +56,19 @@ window.evt = {
 
     setLanguage(language) {
         document.documentElement.setAttribute('lang', language);
+        // The error banner lives outside Blazor (index.html), so its two texts follow the language here.
+        const pt = language === 'pt-BR';
+        const text = document.querySelector('#blazor-error-ui .error-text');
+        const reload = document.querySelector('#blazor-error-ui .reload');
+        if (text) text.textContent = pt ? 'Ocorreu um erro inesperado.' : 'An unexpected error has occurred.';
+        if (reload) reload.textContent = pt ? 'Recarregar' : 'Reload';
+    },
+
+    // Browser language preferences (spec 011) — the configured languages, not the device location.
+    languages() {
+        if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+            return [...navigator.languages];
+        }
+        return navigator.language ? [navigator.language] : [];
     },
 };

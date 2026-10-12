@@ -87,6 +87,18 @@ public sealed class BrowserApi(IJSRuntime js) : IBrowserApi
 
     public void SetLanguage(string language) => Call("evt.setLanguage", language);
 
+    public IReadOnlyList<string> Languages()
+    {
+        try
+        {
+            return Js.Invoke<string[]?>("evt.languages") ?? [];
+        }
+        catch (JSException)
+        {
+            return [];
+        }
+    }
+
     public void DownloadText(string fileName, string text) => Call("evt.downloadText", fileName, text);
 
     private void Call(string identifier, params object?[] args)
