@@ -20,7 +20,10 @@ public class EvSummaryTests : AppTestContext
         Assert.Contains("--sprite-size: 64px", image.QuerySelector(".sprite")!.GetAttribute("style"));
         Assert.Equal("sprites/7.png", image.QuerySelector(".sprite img")!.GetAttribute("src"));
         Assert.DoesNotContain("Squirtle", title.TextContent);
-        Assert.Equal(T("Evs.Summary.Totals", 12, 510), cut.Find(".card-head .totals").TextContent.Trim());
+        var totals = cut.Find(".card-head .totals").TextContent.Trim();
+        Assert.Equal("12 / 510", totals);
+        Assert.Equal(T("Evs.Summary.Totals", 12), totals);
+        Assert.DoesNotContain("·", totals);
         var minis = cut.FindAll(".mini");
         Assert.Equal(6, minis.Count);
         Assert.Equal(T("Stat.Short.0"), minis[0].QuerySelector(".label")!.TextContent.Trim());
@@ -67,5 +70,35 @@ public class EvSummaryTests : AppTestContext
         Assert.Contains("done", minis[2].ClassList);
         Assert.DoesNotContain("done", minis[1].ClassList);
         Assert.DoesNotContain("over", minis[1].ClassList);
+    }
+
+    [Fact]
+    public void The_edit_button_sits_in_the_header_next_to_the_totals()
+    {
+        Seed(Pokemons.Squirtle().WithEvents(("Caterpie", 10, 1)));
+
+        var cut = Render<EvSummary>();
+
+        var button = Assert.Single(cut.FindAll(".summary button.edit-evs"));
+        Assert.Equal(T("Evs.Edit"), button.TextContent.Trim());
+        Assert.Contains("card-head", button.ParentElement!.ClassList);
+        Assert.Contains("totals", button.PreviousElementSibling!.ClassList);
+    }
+
+    [Fact]
+    public void The_edit_button_hides_while_the_editor_is_open_and_comes_back()
+    {
+        Seed(Pokemons.Squirtle().WithEvents(("Caterpie", 10, 1)));
+        var cut = Render<EvSummary>();
+
+        cut.Find("button.edit-evs").Click();
+
+        Assert.Empty(cut.FindAll("button.edit-evs"));
+        Assert.Contains("summary-grid", cut.Find(".ev-editor").PreviousElementSibling!.ClassList);
+
+        cut.Find(".ev-editor button.cancel").Click();
+
+        Assert.Empty(cut.FindAll(".ev-editor"));
+        Assert.Single(cut.FindAll(".card-head button.edit-evs"));
     }
 }

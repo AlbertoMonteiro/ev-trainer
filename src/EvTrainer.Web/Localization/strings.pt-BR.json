@@ -63,7 +63,7 @@
   "Header.Macho.Label": "Macho Brace",
   "Header.Double": "×2",
   "Evs.Summary.Label": "EVs de {0}",
-  "Evs.Summary.Totals": "{0} / 510 · metas {1}",
+  "Evs.Summary.Totals": "{0} / 510",
   "Evs.Edit": "Editar EVs",
   "EvEdit.Title": "Editar EVs",
   "EvEdit.KeepHistory": "Manter histórico (registra um ajuste manual)",

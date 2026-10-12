@@ -450,6 +450,12 @@ input[aria-invalid="true"] {
 
 .summary .card-head {
     align-items: center;
+    gap: 6px;
+}
+
+.summary .totals {
+    margin-left: auto;
+    white-space: nowrap;
 }
 
 .summary-grid {
@@ -1086,9 +1092,9 @@ button.species-current[aria-pressed="true"] {
 
 /* Manual EV edit */
 .summary .edit-evs {
-    margin-top: 10px;
     min-height: 44px;
-    width: 100%;
+    padding: 0 10px;
+    white-space: nowrap;
 }
 
 .ev-editor {
