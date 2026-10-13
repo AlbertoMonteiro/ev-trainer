@@ -1,0 +1,122 @@
+@inherits StoreAwareComponent
+@inject TrainingGuide Guide
+@inject LocationNames Places
+
+<section class="guide-view">
+    <div class="card card-head guide-top">
+        <h2>@L["Guide.Title"]</h2>
+        <button type="button" class="close-guide" @onclick="OnClose">@L["Guide.Close"]</button>
+    </div>
+
+    <div class="guide-controls">
+        <div class="segmented guide-stat" role="group" aria-label="@L["Guide.Stat.Label"]">
+            @foreach (var stat in TrainingGuide.Stats)
+            {
+                <button type="button" data-stat="@stat" aria-pressed="@(stat == _stat ? "true" : "false")"
+                        @onclick="() => _stat = stat">@StatShort(stat)</button>
+            }
+        </div>
+        <div class="segmented guide-phase" role="group" aria-label="@L["Guide.Phase.Label"]">
+            @foreach (var (phase, key) in Phases)
+            {
+                <button type="button" data-phase="@phase" aria-pressed="@(phase == Phase ? "true" : "false")"
+                        @onclick="() => Store.SetGuidePhase(phase)">@L[key]</button>
+            }
+        </div>
+    </div>
+
+    <ul class="guide-tips hint">
+        <li>@L["Guide.Tips.VsSeeker"]</li>
+        <li>@L["Guide.Tips.Multipliers"]</li>
+        <li>@L["Guide.Tips.Sevii"]</li>
+    </ul>
+
+    @{
+        var entries = Guide.Rank(_stat, Phase);
+        var totals = Store.SelectedTotals;
+        var targets = Store.Selected?.Targets;
+    }
+    @if (entries.Count == 0)
+    {
+        <p class="card empty">@L["Guide.Empty"]</p>
+    }
+    else
+    {
+        <ol class="guide-list">
+            @foreach (var entry in entries)
+            {
+                IReadOnlyList<int> wasted = targets is null ? [] : [.. Guide.WastedStats(entry.Best, totals, targets).Where(i => i != _stat)];
+                <li class="card guide-entry" data-trainer="@entry.Trainer.Id">
+                    <div class="guide-head">
+                        <span class="who">@L["Guide.Trainer", entry.Trainer.TrainerClass, entry.Trainer.Name]</span>
+                        <span class="where muted">@Places.Display(entry.Trainer.Location, Language.Current)</span>
+                    </div>
+                    @if (entry.Trainer.Double || entry.Trainer.Access.Count > 0)
+                    {
+                        <div class="marks">
+                            @if (entry.Trainer.Double)
+                            {
+                                <span class="mark double">@L["Guide.Double"]</span>
+                            }
+                            @foreach (var access in entry.Trainer.Access)
+                            {
+                                <span class="mark access-@access">@L[$"Guide.Access.{access}"]</span>
+                            }
+                        </div>
+                    }
+                    <ol class="stages">
+                        @foreach (var stage in entry.VisibleStages)
+                        {
+                            var evs = Guide.StageEvs(stage);
+                            var others = Enumerable.Range(0, evs.Length).Where(i => i != _stat && evs[i] > 0).ToList();
+                            <li class="stage @(stage == entry.Best ? "best" : "") @(stage.RequiresEliteFour ? "requires-e4" : "")" data-index="@stage.Index">
+                                <span class="label">@L[$"Guide.Stage.{stage.Index}"]</span>
+                                <span class="team">@string.Join(" · ", stage.Team.Select(p => L["Guide.Pokemon", p.Species, p.Level].Value))</span>
+                                <span class="evs">
+                                    @if (evs[_stat] > 0)
+                                    {
+                                        <span class="main">@L["Evs.Gain.Part", evs[_stat], StatShort(_stat)]</span>
+                                    }
+                                    @if (others.Count > 0)
+                                    {
+                                        <span class="also">@L["Guide.Also", string.Join(", ", others.Select(i => L["Evs.Gain.Part", evs[i], StatShort(i)].Value))]</span>
+                                    }
+                                </span>
+                            </li>
+                        }
+                    </ol>
+                    @if (wasted.Count > 0)
+                    {
+                        <p class="waste warn">@L["Guide.Waste", string.Join(", ", wasted.Select(i => L[$"Stat.Long.{i}"].Value))]</p>
+                    }
+                </li>
+            }
+        </ol>
+    }
+
+    <p class="guide-sources hint">
+        @L["Guide.Sources"]
+        <a href="https://github.com/pret/pokefirered" target="_blank" rel="noopener noreferrer">@L["Guide.Sources.Link"]</a>
+    </p>
+</section>
+
+@code {
+    private static readonly (string Phase, string Key)[] Phases =
+    [
+        (TrainingGuide.Before, "Guide.Phase.Before"),
+        (TrainingGuide.After, "Guide.Phase.After"),
+    ];
+
+    private int _stat;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private string Phase => Store.Preferences.GuidePhase;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _stat = Store.Selected is { } pokemon ? TrainingGuide.InitialStat(Store.SelectedTotals, pokemon.Targets) : 0;
+    }
+}

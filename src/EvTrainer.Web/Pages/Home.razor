@@ -3,12 +3,16 @@
 
 <PageTitle>@L["App.Title"]</PageTitle>
 
-<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" />
+<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" OnGuide="OpenGuide" />
 
 <div class="app-body">
     <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" />
     <main class="page">
-        @if (_syncing)
+        @if (_guiding)
+        {
+            <TrainingGuideView OnClose="() => _guiding = false" />
+        }
+        else if (_syncing)
         {
             <SyncView OnClose="() => _syncing = false" />
         }
@@ -29,7 +33,7 @@
                 @switch (_tab)
                 {
                     case Tab.Evs:
-                        <EvTab />
+                        <EvTab OnOpenGuide="OpenGuide" />
                         break;
                     case Tab.Ivs:
                         <IvTab />
@@ -54,15 +58,25 @@
     private Tab _tab = Tab.Evs;
     private bool _capturing;
     private bool _syncing;
+    private bool _guiding;
+
+    private void OpenGuide()
+    {
+        _capturing = false;
+        _syncing = false;
+        _guiding = true;
+    }
 
     private void OpenCapture()
     {
+        _guiding = false;
         _syncing = false;
         _capturing = true;
     }
 
     private void OpenSync()
     {
+        _guiding = false;
         _capturing = false;
         _syncing = true;
     }
@@ -72,6 +86,7 @@
     {
         _capturing = false;
         _syncing = false;
+        _guiding = false;
         Store.Select(id);
     }
 
@@ -79,6 +94,7 @@
     {
         _capturing = false;
         _syncing = false;
+        _guiding = false;
         _tab = tab;
     }
 
@@ -86,6 +102,7 @@
     {
         _capturing = false;
         _syncing = false;
+        _guiding = false;
         Store.AddPokemon();
         _tab = Tab.Settings;
     }

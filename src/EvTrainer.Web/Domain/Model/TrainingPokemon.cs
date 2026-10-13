@@ -150,4 +150,7 @@ public sealed record UiPreferences
 
     /// <summary>BCP-47 tag of the UI language chosen in the menu; null = follow the browser language (spec 011).</summary>
     public string? Language { get; init; }
+
+    /// <summary>"Where to train" page (spec 013): before | after the Elite Four.</summary>
+    public string GuidePhase { get; init; } = "before";
 }

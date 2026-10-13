@@ -17,6 +17,7 @@ public abstract class AppTestContext : BunitContext
     public static readonly ReferenceData Data = ReferenceData.LoadEmbedded();
     public static readonly Pokedex Dex = Pokedex.LoadEmbedded();
     public static readonly LocationNames Places = LocationNames.LoadEmbedded();
+    public static readonly VsSeekerGuide Guide = VsSeekerGuide.LoadEmbedded();
 
     protected AppTestContext(LocalizationCatalog? catalog = null)
     {
@@ -30,6 +31,8 @@ public abstract class AppTestContext : BunitContext
 
         Services.AddSingleton(Data);
         Services.AddSingleton(Places);
+        Services.AddSingleton(Guide);
+        Services.AddSingleton(new TrainingGuide(Guide, Dex));
         Services.AddSingleton(new OpponentSearch(Data, Places));
         Services.AddSingleton(Dex);
         Services.AddSingleton<IPokemonRepository>(Repository);

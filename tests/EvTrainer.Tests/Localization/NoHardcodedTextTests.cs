@@ -34,6 +34,7 @@ public partial class NoHardcodedTextTests : AppTestContext
             .. Data.Natures.Select(n => n.Name),
             .. Data.TrainersByLocation.Select(l => l.Name),
             .. Data.TrainersByLocation.Select(l => Places.Display(l.Name, "en")),
+            .. Guide.Trainers.Select(t => t.Location),
             .. Dex.Species.Select(s => s.Name),
             // Sprite badges without a dex number show the initial of a data name (vitamins, unknown species).
             .. Data.Opponents.Select(o => o.Name[..1].ToUpperInvariant()),
@@ -111,6 +112,22 @@ public partial class NoHardcodedTextTests : AppTestContext
 
         Store.Select("pidgey");
         AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
+    public void Training_guide_has_no_hardcoded_text()
+    {
+        Seed(Pokemons.Squirtle(targets: [252, 0, 0, 0, 0, 0]));
+        var cut = Render<Home>();
+        cut.Find("button.open-guide").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".guide-phase button[data-phase='after']").Click();
+        foreach (var stat in new[] { 1, 3, 5 })
+        {
+            cut.Find($".guide-stat button[data-stat='{stat}']").Click();
+            AssertNoHardcodedText(cut.Nodes);
+        }
     }
 
     [Fact]

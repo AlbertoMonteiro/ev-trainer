@@ -5,6 +5,7 @@
 <div class="ev-layout">
     <div class="ev-summary-area">
         <EvSummary />
+        <button type="button" class="link open-guide" @onclick="OnOpenGuide">@L["Guide.Open"]</button>
     </div>
 
     <OpponentSearchBar Query="@_query" QueryChanged="q => _query = q" Searching="@Searching" Filter="@Store.Preferences.Filter" FilterChanged="Store.SetFilter" />
@@ -37,6 +38,9 @@
 </div>
 
 @code {
+    [Parameter]
+    public EventCallback OnOpenGuide { get; set; }
+
     private string _query = string.Empty;
 
     private bool Searching => !string.IsNullOrWhiteSpace(_query);

@@ -17,6 +17,8 @@ builder.Services.AddSingleton(_ => ReferenceData.LoadEmbedded());
 builder.Services.AddSingleton(_ => LocationNames.LoadEmbedded());
 builder.Services.AddSingleton<OpponentSearch>();
 builder.Services.AddSingleton(_ => Pokedex.LoadEmbedded());
+builder.Services.AddSingleton(_ => VsSeekerGuide.LoadEmbedded());
+builder.Services.AddSingleton<TrainingGuide>();
 builder.Services.AddSingleton<IPokemonRepository, LocalStorageRepository>();
 builder.Services.AddSingleton<IBrowserApi, BrowserApi>();
 builder.Services.AddSingleton<TrainerStore>();

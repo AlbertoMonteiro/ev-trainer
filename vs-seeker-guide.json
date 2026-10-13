@@ -1,0 +1,5377 @@
+{
+  "_fonte": "pret/pokefirered@037335f4c725d7c9aecdac87066f2002b4bd7e14: src/vs_seeker.c (sRematches), src/data/trainers.h, src/data/trainer_parties.h. Gerado por scripts/BuildVsSeekerGuide.cs.",
+  "trainers": [
+    {
+      "id": "YOUNGSTER_BEN",
+      "class": "Youngster",
+      "name": "Ben",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              11
+            ],
+            [
+              "Ekans",
+              11
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Rattata",
+              17
+            ],
+            [
+              "Ekans",
+              17
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Raticate",
+              28
+            ],
+            [
+              "Ekans",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Raticate",
+              48
+            ],
+            [
+              "Arbok",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_CALVIN",
+      "class": "Youngster",
+      "name": "Calvin",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              14
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_COLTON",
+      "class": "Bug Catcher",
+      "name": "Colton",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Caterpie",
+              10
+            ],
+            [
+              "Weedle",
+              10
+            ],
+            [
+              "Caterpie",
+              10
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Metapod",
+              19
+            ],
+            [
+              "Weedle",
+              19
+            ],
+            [
+              "Metapod",
+              19
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Butterfree",
+              27
+            ],
+            [
+              "Kakuna",
+              27
+            ],
+            [
+              "Butterfree",
+              27
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Butterfree",
+              51
+            ],
+            [
+              "Beedrill",
+              54
+            ],
+            [
+              "Butterfree",
+              51
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_GREG",
+      "class": "Bug Catcher",
+      "name": "Greg",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weedle",
+              9
+            ],
+            [
+              "Kakuna",
+              9
+            ],
+            [
+              "Caterpie",
+              9
+            ],
+            [
+              "Metapod",
+              9
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_JAMES",
+      "class": "Bug Catcher",
+      "name": "James",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Caterpie",
+              11
+            ],
+            [
+              "Metapod",
+              11
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_JANICE",
+      "class": "Lass",
+      "name": "Janice",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              9
+            ],
+            [
+              "Pidgey",
+              9
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Pidgeotto",
+              20
+            ],
+            [
+              "Pidgeotto",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pidgeotto",
+              28
+            ],
+            [
+              "Pidgeotto",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_SALLY",
+      "class": "Lass",
+      "name": "Sally",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              10
+            ],
+            [
+              "Nidoran♀",
+              10
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_ROBIN",
+      "class": "Lass",
+      "name": "Robin",
+      "location": "Rota 3",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Jigglypuff",
+              14
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_CRISSY",
+      "class": "Lass",
+      "name": "Crissy",
+      "location": "Rota 4",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Paras",
+              31
+            ],
+            [
+              "Paras",
+              31
+            ],
+            [
+              "Parasect",
+              31
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_TIMMY",
+      "class": "Youngster",
+      "name": "Timmy",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Sandshrew",
+              14
+            ],
+            [
+              "Ekans",
+              14
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Raticate",
+              19
+            ],
+            [
+              "Ekans",
+              19
+            ],
+            [
+              "Zubat",
+              19
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Raticate",
+              27
+            ],
+            [
+              "Ekans",
+              27
+            ],
+            [
+              "Golbat",
+              27
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Raticate",
+              52
+            ],
+            [
+              "Arbok",
+              52
+            ],
+            [
+              "Golbat",
+              52
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_CALE",
+      "class": "Bug Catcher",
+      "name": "Cale",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Caterpie",
+              10
+            ],
+            [
+              "Weedle",
+              10
+            ],
+            [
+              "Metapod",
+              10
+            ],
+            [
+              "Kakuna",
+              10
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_RELI",
+      "class": "Lass",
+      "name": "Reli",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♂",
+              16
+            ],
+            [
+              "Nidoran♀",
+              16
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Pidgey",
+              20
+            ],
+            [
+              "Nidoran♀",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pidgeotto",
+              28
+            ],
+            [
+              "Nidorina",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_ALI",
+      "class": "Lass",
+      "name": "Ali",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              12
+            ],
+            [
+              "Oddish",
+              12
+            ],
+            [
+              "Bellsprout",
+              12
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_SHANE",
+      "class": "Camper",
+      "name": "Shane",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              14
+            ],
+            [
+              "Ekans",
+              14
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_ETHAN",
+      "class": "Camper",
+      "name": "Ethan",
+      "location": "Rota 24",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_JOEY",
+      "class": "Youngster",
+      "name": "Joey",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              15
+            ],
+            [
+              "Spearow",
+              15
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_DAN",
+      "class": "Youngster",
+      "name": "Dan",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Slowpoke",
+              17
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_CHAD",
+      "class": "Youngster",
+      "name": "Chad",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Ekans",
+              14
+            ],
+            [
+              "Sandshrew",
+              14
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Ekans",
+              20
+            ],
+            [
+              "Sandshrew",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Arbok",
+              28
+            ],
+            [
+              "Sandshrew",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Arbok",
+              48
+            ],
+            [
+              "Sandslash",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_KELSEY",
+      "class": "Picnicker",
+      "name": "Kelsey",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♂",
+              15
+            ],
+            [
+              "Nidoran♀",
+              15
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Nidoran♂",
+              21
+            ],
+            [
+              "Nidoran♀",
+              21
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Nidorino",
+              29
+            ],
+            [
+              "Nidorina",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Nidorino",
+              49
+            ],
+            [
+              "Nidorina",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_HALEY",
+      "class": "Lass",
+      "name": "Haley",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Oddish",
+              13
+            ],
+            [
+              "Pidgey",
+              13
+            ],
+            [
+              "Oddish",
+              13
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_FRANKLIN",
+      "class": "Hiker",
+      "name": "Franklin",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              15
+            ],
+            [
+              "Geodude",
+              15
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "team": [
+            [
+              "Machoke",
+              25
+            ],
+            [
+              "Graveler",
+              25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_NOB",
+      "class": "Hiker",
+      "name": "Nob",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Geodude",
+              13
+            ],
+            [
+              "Geodude",
+              13
+            ],
+            [
+              "Machop",
+              13
+            ],
+            [
+              "Geodude",
+              13
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_WAYNE",
+      "class": "Hiker",
+      "name": "Wayne",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Onix",
+              17
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_FLINT",
+      "class": "Camper",
+      "name": "Flint",
+      "location": "Rota 25",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              14
+            ],
+            [
+              "Ekans",
+              14
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_KEIGO",
+      "class": "Bug Catcher",
+      "name": "Keigo",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weedle",
+              16
+            ],
+            [
+              "Caterpie",
+              16
+            ],
+            [
+              "Weedle",
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_ELIJAH",
+      "class": "Bug Catcher",
+      "name": "Elijah",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Butterfree",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_RICKY",
+      "class": "Camper",
+      "name": "Ricky",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Squirtle",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Squirtle",
+              22
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Wartortle",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Wartortle",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_JEFF",
+      "class": "Camper",
+      "name": "Jeff",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              16
+            ],
+            [
+              "Raticate",
+              16
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Spearow",
+              21
+            ],
+            [
+              "Raticate",
+              21
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Fearow",
+              29
+            ],
+            [
+              "Raticate",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Fearow",
+              54
+            ],
+            [
+              "Raticate",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_NANCY",
+      "class": "Picnicker",
+      "name": "Nancy",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              16
+            ],
+            [
+              "Pikachu",
+              16
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_ISABELLE",
+      "class": "Picnicker",
+      "name": "Isabelle",
+      "location": "Rota 6",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              16
+            ],
+            [
+              "Pidgey",
+              16
+            ],
+            [
+              "Pidgey",
+              16
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "team": [
+            [
+              "Pidgeotto",
+              21
+            ],
+            [
+              "Pidgeotto",
+              21
+            ],
+            [
+              "Pidgey",
+              18
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pidgeotto",
+              29
+            ],
+            [
+              "Pidgeotto",
+              29
+            ],
+            [
+              "Pidgeotto",
+              26
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pidgeotto",
+              47
+            ],
+            [
+              "Pidgeotto",
+              47
+            ],
+            [
+              "Pidgeot",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_EDDIE",
+      "class": "Youngster",
+      "name": "Eddie",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Ekans",
+              21
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_DILLON",
+      "class": "Youngster",
+      "name": "Dillon",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Sandshrew",
+              19
+            ],
+            [
+              "Zubat",
+              19
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_YASU",
+      "class": "Youngster",
+      "name": "Yasu",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              17
+            ],
+            [
+              "Rattata",
+              17
+            ],
+            [
+              "Raticate",
+              17
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "team": [
+            [
+              "Rattata",
+              22
+            ],
+            [
+              "Raticate",
+              22
+            ],
+            [
+              "Raticate",
+              22
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Raticate",
+              47
+            ],
+            [
+              "Raticate",
+              47
+            ],
+            [
+              "Raticate",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_DAVE",
+      "class": "Youngster",
+      "name": "Dave",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♂",
+              18
+            ],
+            [
+              "Nidorino",
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENGINEER_BRAXTON",
+      "class": "Engineer",
+      "name": "Braxton",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Magnemite",
+              21
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ENGINEER_BERNIE",
+      "class": "Engineer",
+      "name": "Bernie",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Magnemite",
+              18
+            ],
+            [
+              "Magnemite",
+              18
+            ],
+            [
+              "Magneton",
+              18
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Magneton",
+              28
+            ],
+            [
+              "Magneton",
+              28
+            ],
+            [
+              "Magneton",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_HUGO",
+      "class": "Gamer",
+      "name": "Hugo",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              18
+            ],
+            [
+              "Horsea",
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_JASPER",
+      "class": "Gamer",
+      "name": "Jasper",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bellsprout",
+              18
+            ],
+            [
+              "Oddish",
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_DIRK",
+      "class": "Gamer",
+      "name": "Dirk",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              18
+            ],
+            [
+              "Magnemite",
+              18
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_DARIAN",
+      "class": "Gamer",
+      "name": "Darian",
+      "location": "Rota 11",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Growlithe",
+              18
+            ],
+            [
+              "Vulpix",
+              18
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Growlithe",
+              29
+            ],
+            [
+              "Vulpix",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_BRENT",
+      "class": "Bug Catcher",
+      "name": "Brent",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Beedrill",
+              19
+            ],
+            [
+              "Beedrill",
+              19
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BUG_CATCHER_CONNER",
+      "class": "Bug Catcher",
+      "name": "Conner",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Caterpie",
+              20
+            ],
+            [
+              "Weedle",
+              20
+            ],
+            [
+              "Venonat",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_CHRIS",
+      "class": "Camper",
+      "name": "Chris",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Growlithe",
+              21
+            ],
+            [
+              "Charmander",
+              21
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "team": [
+            [
+              "Growlithe",
+              24
+            ],
+            [
+              "Charmander",
+              24
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Growlithe",
+              29
+            ],
+            [
+              "Charmeleon",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Arcanine",
+              54
+            ],
+            [
+              "Charmeleon",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_DREW",
+      "class": "Camper",
+      "name": "Drew",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              19
+            ],
+            [
+              "Sandshrew",
+              19
+            ],
+            [
+              "Ekans",
+              19
+            ],
+            [
+              "Sandshrew",
+              19
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_ALICIA",
+      "class": "Picnicker",
+      "name": "Alicia",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Oddish",
+              18
+            ],
+            [
+              "Bellsprout",
+              18
+            ],
+            [
+              "Oddish",
+              18
+            ],
+            [
+              "Bellsprout",
+              18
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "team": [
+            [
+              "Meowth",
+              25
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Persian",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Persian",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_CAITLIN",
+      "class": "Picnicker",
+      "name": "Caitlin",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Meowth",
+              23
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_ALAN",
+      "class": "Hiker",
+      "name": "Alan",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Geodude",
+              21
+            ],
+            [
+              "Onix",
+              21
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_BRICE",
+      "class": "Hiker",
+      "name": "Brice",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Geodude",
+              20
+            ],
+            [
+              "Machop",
+              20
+            ],
+            [
+              "Geodude",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_JEREMY",
+      "class": "Hiker",
+      "name": "Jeremy",
+      "location": "Rota 9",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              20
+            ],
+            [
+              "Onix",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Machoke",
+              30
+            ],
+            [
+              "Onix",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_HEIDI",
+      "class": "Picnicker",
+      "name": "Heidi",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pikachu",
+              20
+            ],
+            [
+              "Clefairy",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_CAROL",
+      "class": "Picnicker",
+      "name": "Carol",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              21
+            ],
+            [
+              "Pidgeotto",
+              21
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "POKEMANIAC_MARK",
+      "class": "PokéManiac",
+      "name": "Mark",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rhyhorn",
+              29
+            ],
+            [
+              "Lickitung",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Rhyhorn",
+              33
+            ],
+            [
+              "Lickitung",
+              33
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Rhydon",
+              54
+            ],
+            [
+              "Lickitung",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "POKEMANIAC_HERMAN",
+      "class": "PokéManiac",
+      "name": "Herman",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Cubone",
+              20
+            ],
+            [
+              "Slowpoke",
+              20
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Marowak",
+              29
+            ],
+            [
+              "Slowbro",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Marowak",
+              54
+            ],
+            [
+              "Slowbro",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_CLARK",
+      "class": "Hiker",
+      "name": "Clark",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Geodude",
+              21
+            ],
+            [
+              "Onix",
+              21
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_TRENT",
+      "class": "Hiker",
+      "name": "Trent",
+      "location": "Rota 10",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Onix",
+              19
+            ],
+            [
+              "Graveler",
+              19
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Onix",
+              31
+            ],
+            [
+              "Graveler",
+              31
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_PAIGE",
+      "class": "Lass",
+      "name": "Paige",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♀",
+              23
+            ],
+            [
+              "Nidorina",
+              23
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_ANDREA",
+      "class": "Lass",
+      "name": "Andrea",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Meowth",
+              24
+            ],
+            [
+              "Meowth",
+              24
+            ],
+            [
+              "Meowth",
+              24
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_MEGAN",
+      "class": "Lass",
+      "name": "Megan",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              19
+            ],
+            [
+              "Rattata",
+              19
+            ],
+            [
+              "Nidoran♂",
+              19
+            ],
+            [
+              "Meowth",
+              19
+            ],
+            [
+              "Pikachu",
+              19
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "team": [
+            [
+              "Pidgeotto",
+              22
+            ],
+            [
+              "Raticate",
+              22
+            ],
+            [
+              "Nidoran♂",
+              23
+            ],
+            [
+              "Meowth",
+              21
+            ],
+            [
+              "Pikachu",
+              22
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pidgeot",
+              46
+            ],
+            [
+              "Raticate",
+              47
+            ],
+            [
+              "Nidorino",
+              47
+            ],
+            [
+              "Persian",
+              47
+            ],
+            [
+              "Raichu",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LASS_JULIA",
+      "class": "Lass",
+      "name": "Julia",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Clefairy",
+              22
+            ],
+            [
+              "Clefairy",
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SUPER_NERD_AIDAN",
+      "class": "Super Nerd",
+      "name": "Aidan",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              20
+            ],
+            [
+              "Koffing",
+              20
+            ],
+            [
+              "Voltorb",
+              20
+            ],
+            [
+              "Magnemite",
+              20
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SUPER_NERD_GLENN",
+      "class": "Super Nerd",
+      "name": "Glenn",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Grimer",
+              22
+            ],
+            [
+              "Muk",
+              22
+            ],
+            [
+              "Grimer",
+              22
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Muk",
+              28
+            ],
+            [
+              "Muk",
+              28
+            ],
+            [
+              "Muk",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SUPER_NERD_LESLIE",
+      "class": "Super Nerd",
+      "name": "Leslie",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              26
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_STAN",
+      "class": "Gamer",
+      "name": "Stan",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              22
+            ],
+            [
+              "Poliwag",
+              22
+            ],
+            [
+              "Poliwhirl",
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GAMER_RICH",
+      "class": "Gamer",
+      "name": "Rich",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Growlithe",
+              24
+            ],
+            [
+              "Vulpix",
+              24
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Growlithe",
+              30
+            ],
+            [
+              "Vulpix",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TWINS_ELI_ANNE",
+      "class": "Twins",
+      "name": "Eli & Anne",
+      "location": "Rota 8",
+      "double": true,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Clefairy",
+              22
+            ],
+            [
+              "Jigglypuff",
+              22
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Clefairy",
+              28
+            ],
+            [
+              "Jigglypuff",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_RICARDO",
+      "class": "Biker",
+      "name": "Ricardo",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              22
+            ],
+            [
+              "Koffing",
+              22
+            ],
+            [
+              "Grimer",
+              23
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_JAREN",
+      "class": "Biker",
+      "name": "Jaren",
+      "location": "Rota 8",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Grimer",
+              24
+            ],
+            [
+              "Grimer",
+              24
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Muk",
+              28
+            ],
+            [
+              "Muk",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_NED",
+      "class": "Fisherman",
+      "name": "Ned",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              22
+            ],
+            [
+              "Poliwag",
+              22
+            ],
+            [
+              "Goldeen",
+              22
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_CHIP",
+      "class": "Fisherman",
+      "name": "Chip",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Tentacool",
+              24
+            ],
+            [
+              "Goldeen",
+              24
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_HANK",
+      "class": "Fisherman",
+      "name": "Hank",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_ELLIOT",
+      "class": "Fisherman",
+      "name": "Elliot",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              21
+            ],
+            [
+              "Shellder",
+              21
+            ],
+            [
+              "Goldeen",
+              21
+            ],
+            [
+              "Horsea",
+              21
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Poliwhirl",
+              28
+            ],
+            [
+              "Cloyster",
+              28
+            ],
+            [
+              "Seaking",
+              28
+            ],
+            [
+              "Seadra",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_ANDREW",
+      "class": "Fisherman",
+      "name": "Andrew",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Magikarp",
+              24
+            ],
+            [
+              "Magikarp",
+              24
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ROCKER_LUCA",
+      "class": "Rocker",
+      "name": "Luca",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              29
+            ],
+            [
+              "Electrode",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Electrode",
+              33
+            ],
+            [
+              "Electrode",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_JUSTIN",
+      "class": "Camper",
+      "name": "Justin",
+      "location": "Rota 12",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♂",
+              29
+            ],
+            [
+              "Nidorino",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNG_COUPLE_GIA_JES",
+      "class": "Young Couple",
+      "name": "Gia & Jes",
+      "location": "Rota 12",
+      "double": true,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidoran♂",
+              24
+            ],
+            [
+              "Nidoran♀",
+              24
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Nidorina",
+              30
+            ],
+            [
+              "Nidorino",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Nidoking",
+              55
+            ],
+            [
+              "Nidoqueen",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_JARED",
+      "class": "Biker",
+      "name": "Jared",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              28
+            ],
+            [
+              "Koffing",
+              28
+            ],
+            [
+              "Koffing",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BEAUTY_LOLA",
+      "class": "Beauty",
+      "name": "Lola",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rattata",
+              27
+            ],
+            [
+              "Pikachu",
+              27
+            ],
+            [
+              "Rattata",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BEAUTY_SHEILA",
+      "class": "Beauty",
+      "name": "Sheila",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Clefairy",
+              29
+            ],
+            [
+              "Meowth",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Clefairy",
+              49
+            ],
+            [
+              "Persian",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_SEBASTIAN",
+      "class": "Bird Keeper",
+      "name": "Sebastian",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              29
+            ],
+            [
+              "Pidgeotto",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_PERRY",
+      "class": "Bird Keeper",
+      "name": "Perry",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              25
+            ],
+            [
+              "Pidgey",
+              25
+            ],
+            [
+              "Pidgey",
+              25
+            ],
+            [
+              "Spearow",
+              25
+            ],
+            [
+              "Spearow",
+              25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_ROBERT",
+      "class": "Bird Keeper",
+      "name": "Robert",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              26
+            ],
+            [
+              "Pidgeotto",
+              26
+            ],
+            [
+              "Spearow",
+              26
+            ],
+            [
+              "Fearow",
+              26
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pidgeotto",
+              28
+            ],
+            [
+              "Pidgeotto",
+              28
+            ],
+            [
+              "Fearow",
+              28
+            ],
+            [
+              "Fearow",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pidgeot",
+              47
+            ],
+            [
+              "Pidgeot",
+              47
+            ],
+            [
+              "Fearow",
+              47
+            ],
+            [
+              "Fearow",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_ALMA",
+      "class": "Picnicker",
+      "name": "Alma",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              28
+            ],
+            [
+              "Poliwag",
+              28
+            ],
+            [
+              "Horsea",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_SUSIE",
+      "class": "Picnicker",
+      "name": "Susie",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              24
+            ],
+            [
+              "Meowth",
+              24
+            ],
+            [
+              "Rattata",
+              24
+            ],
+            [
+              "Pikachu",
+              24
+            ],
+            [
+              "Meowth",
+              24
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pidgeotto",
+              27
+            ],
+            [
+              "Meowth",
+              27
+            ],
+            [
+              "Raticate",
+              27
+            ],
+            [
+              "Pikachu",
+              27
+            ],
+            [
+              "Meowth",
+              27
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pidgeotto",
+              47
+            ],
+            [
+              "Persian",
+              47
+            ],
+            [
+              "Raticate",
+              47
+            ],
+            [
+              "Pikachu",
+              47
+            ],
+            [
+              "Persian",
+              47
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Pidgeot",
+              52
+            ],
+            [
+              "Persian",
+              52
+            ],
+            [
+              "Raticate",
+              52
+            ],
+            [
+              "Raichu",
+              52
+            ],
+            [
+              "Persian",
+              52
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_VALERIE",
+      "class": "Picnicker",
+      "name": "Valerie",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              30
+            ],
+            [
+              "Poliwag",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_GWEN",
+      "class": "Picnicker",
+      "name": "Gwen",
+      "location": "Rota 13",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              27
+            ],
+            [
+              "Meowth",
+              27
+            ],
+            [
+              "Pidgey",
+              27
+            ],
+            [
+              "Pidgeotto",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_MALIK",
+      "class": "Biker",
+      "name": "Malik",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              29
+            ],
+            [
+              "Grimer",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_LUKAS",
+      "class": "Biker",
+      "name": "Lukas",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              26
+            ],
+            [
+              "Koffing",
+              26
+            ],
+            [
+              "Grimer",
+              26
+            ],
+            [
+              "Koffing",
+              26
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Koffing",
+              47
+            ],
+            [
+              "Koffing",
+              47
+            ],
+            [
+              "Muk",
+              47
+            ],
+            [
+              "Weezing",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_ISAAC",
+      "class": "Biker",
+      "name": "Isaac",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Grimer",
+              28
+            ],
+            [
+              "Grimer",
+              28
+            ],
+            [
+              "Koffing",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_GERALD",
+      "class": "Biker",
+      "name": "Gerald",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              29
+            ],
+            [
+              "Muk",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_DONALD",
+      "class": "Bird Keeper",
+      "name": "Donald",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Farfetch'd",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_BENNY",
+      "class": "Bird Keeper",
+      "name": "Benny",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              29
+            ],
+            [
+              "Fearow",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Fearow",
+              32
+            ],
+            [
+              "Fearow",
+              32
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Fearow",
+              49
+            ],
+            [
+              "Fearow",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_CARTER",
+      "class": "Bird Keeper",
+      "name": "Carter",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              28
+            ],
+            [
+              "Doduo",
+              28
+            ],
+            [
+              "Pidgeotto",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_MITCH",
+      "class": "Bird Keeper",
+      "name": "Mitch",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              26
+            ],
+            [
+              "Spearow",
+              26
+            ],
+            [
+              "Pidgey",
+              26
+            ],
+            [
+              "Fearow",
+              26
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_BECK",
+      "class": "Bird Keeper",
+      "name": "Beck",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgeotto",
+              29
+            ],
+            [
+              "Fearow",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_MARLON",
+      "class": "Bird Keeper",
+      "name": "Marlon",
+      "location": "Rota 14",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              28
+            ],
+            [
+              "Doduo",
+              28
+            ],
+            [
+              "Fearow",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Fearow",
+              30
+            ],
+            [
+              "Doduo",
+              30
+            ],
+            [
+              "Fearow",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Fearow",
+              48
+            ],
+            [
+              "Dodrio",
+              48
+            ],
+            [
+              "Fearow",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TWINS_KIRI_JAN",
+      "class": "Twins",
+      "name": "Kiri & Jan",
+      "location": "Rota 14",
+      "double": true,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Charmander",
+              29
+            ],
+            [
+              "Squirtle",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_ERNEST",
+      "class": "Biker",
+      "name": "Ernest",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Weezing",
+              25
+            ],
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Grimer",
+              25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_ALEX",
+      "class": "Biker",
+      "name": "Alex",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              28
+            ],
+            [
+              "Grimer",
+              28
+            ],
+            [
+              "Weezing",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BEAUTY_GRACE",
+      "class": "Beauty",
+      "name": "Grace",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgeotto",
+              29
+            ],
+            [
+              "Wigglytuff",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pidgeot",
+              49
+            ],
+            [
+              "Wigglytuff",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BEAUTY_OLIVIA",
+      "class": "Beauty",
+      "name": "Olivia",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bulbasaur",
+              29
+            ],
+            [
+              "Ivysaur",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_EDWIN",
+      "class": "Bird Keeper",
+      "name": "Edwin",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgeotto",
+              26
+            ],
+            [
+              "Farfetch'd",
+              26
+            ],
+            [
+              "Doduo",
+              26
+            ],
+            [
+              "Pidgey",
+              26
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_CHESTER",
+      "class": "Bird Keeper",
+      "name": "Chester",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Dodrio",
+              28
+            ],
+            [
+              "Doduo",
+              28
+            ],
+            [
+              "Doduo",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Dodrio",
+              30
+            ],
+            [
+              "Dodrio",
+              30
+            ],
+            [
+              "Doduo",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Dodrio",
+              48
+            ],
+            [
+              "Dodrio",
+              48
+            ],
+            [
+              "Dodrio",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_YAZMIN",
+      "class": "Picnicker",
+      "name": "Yazmin",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bellsprout",
+              29
+            ],
+            [
+              "Oddish",
+              29
+            ],
+            [
+              "Tangela",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_KINDRA",
+      "class": "Picnicker",
+      "name": "Kindra",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Gloom",
+              28
+            ],
+            [
+              "Oddish",
+              28
+            ],
+            [
+              "Oddish",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_BECKY",
+      "class": "Picnicker",
+      "name": "Becky",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pikachu",
+              29
+            ],
+            [
+              "Raichu",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Pikachu",
+              32
+            ],
+            [
+              "Raichu",
+              32
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Pikachu",
+              49
+            ],
+            [
+              "Raichu",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Raichu",
+              54
+            ],
+            [
+              "Raichu",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_CELIA",
+      "class": "Picnicker",
+      "name": "Celia",
+      "location": "Rota 15",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Clefairy",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CRUSH_KIN_RON_MYA",
+      "class": "Crush Kin",
+      "name": "Ron & Mya",
+      "location": "Rota 15",
+      "double": true,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Hitmonchan",
+              29
+            ],
+            [
+              "Hitmonlee",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Hitmonchan",
+              33
+            ],
+            [
+              "Hitmonlee",
+              33
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Hitmonchan",
+              51
+            ],
+            [
+              "Hitmonlee",
+              51
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Hitmonchan",
+              56
+            ],
+            [
+              "Hitmonlee",
+              56
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_LAO",
+      "class": "Biker",
+      "name": "Lao",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Grimer",
+              29
+            ],
+            [
+              "Koffing",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_HIDEO",
+      "class": "Biker",
+      "name": "Hideo",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weezing",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_RUBEN",
+      "class": "Biker",
+      "name": "Ruben",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weezing",
+              28
+            ],
+            [
+              "Koffing",
+              28
+            ],
+            [
+              "Weezing",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Weezing",
+              48
+            ],
+            [
+              "Weezing",
+              48
+            ],
+            [
+              "Weezing",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_KOJI",
+      "class": "Cue Ball",
+      "name": "Koji",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              28
+            ],
+            [
+              "Mankey",
+              28
+            ],
+            [
+              "Machop",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_LUKE",
+      "class": "Cue Ball",
+      "name": "Luke",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              29
+            ],
+            [
+              "Machop",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_CAMRON",
+      "class": "Cue Ball",
+      "name": "Camron",
+      "location": "Rota 16",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              29
+            ],
+            [
+              "Machop",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Primeape",
+              49
+            ],
+            [
+              "Machoke",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNG_COUPLE_LEA_JED",
+      "class": "Young Couple",
+      "name": "Lea & Jed",
+      "location": "Rota 16",
+      "double": true,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rapidash",
+              29
+            ],
+            [
+              "Ninetales",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_BILLY",
+      "class": "Biker",
+      "name": "Billy",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Muk",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_NIKOLAS",
+      "class": "Biker",
+      "name": "Nikolas",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              29
+            ],
+            [
+              "Voltorb",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_JAXON",
+      "class": "Biker",
+      "name": "Jaxon",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weezing",
+              29
+            ],
+            [
+              "Muk",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Weezing",
+              49
+            ],
+            [
+              "Muk",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_WILLIAM",
+      "class": "Biker",
+      "name": "William",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Weezing",
+              25
+            ],
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Koffing",
+              25
+            ],
+            [
+              "Weezing",
+              25
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_RAUL",
+      "class": "Cue Ball",
+      "name": "Raul",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              29
+            ],
+            [
+              "Primeape",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_ISAIAH",
+      "class": "Cue Ball",
+      "name": "Isaiah",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              29
+            ],
+            [
+              "Machamp",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Machoke",
+              49
+            ],
+            [
+              "Machamp",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_ZEEK",
+      "class": "Cue Ball",
+      "name": "Zeek",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machoke",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_JAMAL",
+      "class": "Cue Ball",
+      "name": "Jamal",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              26
+            ],
+            [
+              "Mankey",
+              26
+            ],
+            [
+              "Machamp",
+              26
+            ],
+            [
+              "Machop",
+              26
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CUE_BALL_COREY",
+      "class": "Cue Ball",
+      "name": "Corey",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Primeape",
+              29
+            ],
+            [
+              "Machoke",
+              29
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Primeape",
+              49
+            ],
+            [
+              "Machamp",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIKER_VIRGIL",
+      "class": "Biker",
+      "name": "Virgil",
+      "location": "Rota 17",
+      "double": false,
+      "access": [
+        "cyclingRoad"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weezing",
+              28
+            ],
+            [
+              "Koffing",
+              28
+            ],
+            [
+              "Weezing",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_WILTON",
+      "class": "Bird Keeper",
+      "name": "Wilton",
+      "location": "Rota 18",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              29
+            ],
+            [
+              "Fearow",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_RAMIRO",
+      "class": "Bird Keeper",
+      "name": "Ramiro",
+      "location": "Rota 18",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Dodrio",
+              34
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_JACOB",
+      "class": "Bird Keeper",
+      "name": "Jacob",
+      "location": "Rota 18",
+      "double": false,
+      "access": [],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              26
+            ],
+            [
+              "Spearow",
+              26
+            ],
+            [
+              "Fearow",
+              26
+            ],
+            [
+              "Spearow",
+              26
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "team": [
+            [
+              "Fearow",
+              28
+            ],
+            [
+              "Spearow",
+              28
+            ],
+            [
+              "Fearow",
+              28
+            ],
+            [
+              "Spearow",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Fearow",
+              47
+            ],
+            [
+              "Fearow",
+              47
+            ],
+            [
+              "Fearow",
+              47
+            ],
+            [
+              "Fearow",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_RICHARD",
+      "class": "Swimmer",
+      "name": "Richard",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Tentacool",
+              30
+            ],
+            [
+              "Shellder",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_REECE",
+      "class": "Swimmer",
+      "name": "Reece",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              29
+            ],
+            [
+              "Horsea",
+              29
+            ],
+            [
+              "Staryu",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_MATTHEW",
+      "class": "Swimmer",
+      "name": "Matthew",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              30
+            ],
+            [
+              "Poliwhirl",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Poliwhirl",
+              49
+            ],
+            [
+              "Poliwrath",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_DOUGLAS",
+      "class": "Swimmer",
+      "name": "Douglas",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Horsea",
+              27
+            ],
+            [
+              "Tentacool",
+              27
+            ],
+            [
+              "Tentacool",
+              27
+            ],
+            [
+              "Goldeen",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_DAVID",
+      "class": "Swimmer",
+      "name": "David",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              29
+            ],
+            [
+              "Shellder",
+              29
+            ],
+            [
+              "Seaking",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_TONY",
+      "class": "Swimmer",
+      "name": "Tony",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Horsea",
+              30
+            ],
+            [
+              "Horsea",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Seadra",
+              49
+            ],
+            [
+              "Seadra",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_AXLE",
+      "class": "Swimmer",
+      "name": "Axle",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Tentacool",
+              27
+            ],
+            [
+              "Tentacool",
+              27
+            ],
+            [
+              "Staryu",
+              27
+            ],
+            [
+              "Horsea",
+              27
+            ],
+            [
+              "Tentacruel",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_ANYA",
+      "class": "Swimmer",
+      "name": "Anya",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              27
+            ],
+            [
+              "Goldeen",
+              27
+            ],
+            [
+              "Seaking",
+              27
+            ],
+            [
+              "Goldeen",
+              27
+            ],
+            [
+              "Poliwag",
+              27
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_ALICE",
+      "class": "Swimmer",
+      "name": "Alice",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              30
+            ],
+            [
+              "Seaking",
+              30
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Seaking",
+              49
+            ],
+            [
+              "Seaking",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_CONNIE",
+      "class": "Swimmer",
+      "name": "Connie",
+      "location": "Rota 19",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Staryu",
+              29
+            ],
+            [
+              "Staryu",
+              29
+            ],
+            [
+              "Staryu",
+              29
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SIS_AND_BRO_LIA_LUC",
+      "class": "Sis and Bro",
+      "name": "Lia & Luc",
+      "location": "Rota 19",
+      "double": true,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              30
+            ],
+            [
+              "Seaking",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_BARRY",
+      "class": "Swimmer",
+      "name": "Barry",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Shellder",
+              31
+            ],
+            [
+              "Cloyster",
+              31
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_DEAN",
+      "class": "Swimmer",
+      "name": "Dean",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Staryu",
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_DARRIN",
+      "class": "Swimmer",
+      "name": "Darrin",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Horsea",
+              28
+            ],
+            [
+              "Horsea",
+              28
+            ],
+            [
+              "Seadra",
+              28
+            ],
+            [
+              "Horsea",
+              28
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Seadra",
+              52
+            ],
+            [
+              "Seadra",
+              52
+            ],
+            [
+              "Seadra",
+              52
+            ],
+            [
+              "Seadra",
+              52
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_TIFFANY",
+      "class": "Swimmer",
+      "name": "Tiffany",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seaking",
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_NORA",
+      "class": "Swimmer",
+      "name": "Nora",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Shellder",
+              30
+            ],
+            [
+              "Shellder",
+              30
+            ],
+            [
+              "Cloyster",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_MELISSA",
+      "class": "Swimmer",
+      "name": "Melissa",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              31
+            ],
+            [
+              "Seaking",
+              31
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Poliwhirl",
+              49
+            ],
+            [
+              "Seaking",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_SHIRLEY",
+      "class": "Swimmer",
+      "name": "Shirley",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seadra",
+              30
+            ],
+            [
+              "Horsea",
+              30
+            ],
+            [
+              "Seadra",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_ROGER",
+      "class": "Bird Keeper",
+      "name": "Roger",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Fearow",
+              30
+            ],
+            [
+              "Fearow",
+              30
+            ],
+            [
+              "Pidgeotto",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_MISSY",
+      "class": "Picnicker",
+      "name": "Missy",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              31
+            ],
+            [
+              "Seaking",
+              31
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Seaking",
+              49
+            ],
+            [
+              "Seaking",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Seaking",
+              54
+            ],
+            [
+              "Seaking",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_IRENE",
+      "class": "Picnicker",
+      "name": "Irene",
+      "location": "Rota 20",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Tentacool",
+              30
+            ],
+            [
+              "Horsea",
+              30
+            ],
+            [
+              "Seel",
+              30
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_RONALD",
+      "class": "Fisherman",
+      "name": "Ronald",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seaking",
+              28
+            ],
+            [
+              "Goldeen",
+              28
+            ],
+            [
+              "Seaking",
+              28
+            ],
+            [
+              "Seaking",
+              28
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_CLAUDE",
+      "class": "Fisherman",
+      "name": "Claude",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Shellder",
+              31
+            ],
+            [
+              "Cloyster",
+              31
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_WADE",
+      "class": "Fisherman",
+      "name": "Wade",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Magikarp",
+              27
+            ],
+            [
+              "Magikarp",
+              27
+            ],
+            [
+              "Magikarp",
+              27
+            ],
+            [
+              "Magikarp",
+              27
+            ],
+            [
+              "Magikarp",
+              27
+            ],
+            [
+              "Magikarp",
+              27
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Magikarp",
+              47
+            ],
+            [
+              "Magikarp",
+              47
+            ],
+            [
+              "Magikarp",
+              47
+            ],
+            [
+              "Magikarp",
+              47
+            ],
+            [
+              "Magikarp",
+              47
+            ],
+            [
+              "Magikarp",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_NOLAN",
+      "class": "Fisherman",
+      "name": "Nolan",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seaking",
+              33
+            ],
+            [
+              "Goldeen",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_SPENCER",
+      "class": "Swimmer",
+      "name": "Spencer",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seadra",
+              33
+            ],
+            [
+              "Tentacruel",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_JACK",
+      "class": "Swimmer",
+      "name": "Jack",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Starmie",
+              37
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Starmie",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_JEROME",
+      "class": "Swimmer",
+      "name": "Jerome",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Staryu",
+              33
+            ],
+            [
+              "Wartortle",
+              33
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_ROLAND",
+      "class": "Swimmer",
+      "name": "Roland",
+      "location": "Rota 21",
+      "double": false,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwhirl",
+              32
+            ],
+            [
+              "Tentacool",
+              32
+            ],
+            [
+              "Seadra",
+              32
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SIS_AND_BRO_LIL_IAN",
+      "class": "Sis and Bro",
+      "name": "Lil & Ian",
+      "location": "Rota 21",
+      "double": true,
+      "access": [
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seadra",
+              33
+            ],
+            [
+              "Starmie",
+              33
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Seadra",
+              50
+            ],
+            [
+              "Starmie",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Seadra",
+              55
+            ],
+            [
+              "Starmie",
+              55
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

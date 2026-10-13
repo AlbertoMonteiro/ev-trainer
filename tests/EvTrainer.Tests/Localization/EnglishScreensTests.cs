@@ -64,6 +64,21 @@ public class EnglishScreensTests : AppTestContext
     }
 
     [Fact]
+    public void Training_guide_shows_no_portuguese()
+    {
+        Seed(Pokemons.Squirtle(targets: [252, 0, 0, 0, 0, 0]));
+        var cut = Render<Home>();
+        cut.Find("button.open-guide").Click();
+        cut.Find(".guide-phase button[data-phase='after']").Click();
+
+        foreach (var stat in new[] { 0, 1, 3, 5 })
+        {
+            cut.Find($".guide-stat button[data-stat='{stat}']").Click();
+            AssertNoPortuguese(cut.Nodes);
+        }
+    }
+
+    [Fact]
     public void Capture_and_sync_show_no_portuguese()
     {
         Store.Load();

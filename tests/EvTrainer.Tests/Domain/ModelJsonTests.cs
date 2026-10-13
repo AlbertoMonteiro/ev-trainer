@@ -141,6 +141,13 @@ public class ModelJsonTests
     public void Preferences_language_is_optional(string json, string? expected) =>
         Assert.Equal(expected, PokemonJson.DeserializePreferences(json).Language);
 
+    [Theory]
+    [InlineData("{}", "before")]
+    [InlineData("""{ "guidePhase": "after" }""", "after")]
+    [InlineData("""{ "guidePhase": "later" }""", "before")]
+    public void Guide_phase_defaults_to_before_the_elite_four(string json, string expected) =>
+        Assert.Equal(expected, PokemonJson.DeserializePreferences(json).GuidePhase);
+
     [Fact]
     public void Default_preferences_have_no_language_and_keep_it_that_way()
     {

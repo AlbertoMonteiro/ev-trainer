@@ -1650,3 +1650,123 @@ button.species-current[aria-pressed="true"] {
     background: transparent;
     border-color: transparent;
 }
+
+/* Where to train (spec 013) */
+.guide-view {
+    display: grid;
+    gap: 12px;
+}
+
+.guide-controls {
+    display: grid;
+    gap: 8px;
+}
+
+.guide-controls .segmented button {
+    flex: 1;
+}
+
+.guide-tips {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+}
+
+.guide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.guide-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 8px;
+}
+
+.guide-head .who {
+    font-weight: 600;
+}
+
+.guide-entry .marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.guide-entry .mark {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+}
+
+.guide-entry .stages {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.guide-entry .stage {
+    display: grid;
+    gap: 2px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.guide-entry .stage.best {
+    border-color: var(--accent);
+}
+
+.guide-entry .stage .label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+}
+
+.guide-entry .stage.requires-e4 .label {
+    color: var(--accent);
+}
+
+.guide-entry .stage .evs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+}
+
+.guide-entry .stage .main {
+    font-weight: 700;
+}
+
+.guide-entry .stage .also {
+    color: var(--muted);
+}
+
+.guide-entry .waste {
+    margin: 8px 0 0;
+}
+
+.open-guide {
+    justify-self: start;
+}
+
+@media (min-width: 900px) {
+    .guide-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .guide-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+}

@@ -49,6 +49,11 @@ up and it narrows down your IVs.
 - **Exp. Share** — pick which Pokémon holds it and every battle also counts for it, the Gen 3 way: the whole EV
   yield (not split like experience), doubled only by its own Pokérus — Macho Brace never counts for the holder.
   The toast shows both gains and one Undo reverts both.
+- **Where to train with the VS Seeker** — a page lists, for HP, Attack, Sp. Atk or Speed, every Kanto trainer the
+  VS Seeker can rematch: route, team with levels and EVs per battle for each rematch stage (original, after Celadon,
+  after Fuchsia, after the Elite Four, after the Sevii Islands), the best stage you can reach highlighted. Teams come
+  from the game's own code ([pret/pokefirered](https://github.com/pret/pokefirered)); each trainer is its own entry,
+  since the VS Seeker only wakes up the trainers on screen.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),
   recents, and search by name, Pokédex number, route, gym leader or trainer location
   (`route 4` / `rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
@@ -154,6 +159,7 @@ dotnet run scripts/BuildPokedex.cs
 
 ```bash
 dotnet run scripts/DownloadSprites.cs
+dotnet run scripts/BuildVsSeekerGuide.cs   # vs-seeker-guide.json from the FireRed decompilation
 ```
 
 ### Project layout

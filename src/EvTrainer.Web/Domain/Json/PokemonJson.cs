@@ -109,7 +109,8 @@ public static class PokemonJson
 
         try
         {
-            return JsonSerializer.Deserialize(json, EvTrainerJsonContext.Default.UiPreferences) ?? new UiPreferences();
+            var preferences = JsonSerializer.Deserialize(json, EvTrainerJsonContext.Default.UiPreferences) ?? new UiPreferences();
+            return preferences.GuidePhase is "before" or "after" ? preferences : preferences with { GuidePhase = "before" };
         }
         catch (JsonException)
         {

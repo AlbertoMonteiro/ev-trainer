@@ -471,6 +471,12 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         NotifyChanged();
     }
 
+    public void SetGuidePhase(string phase)
+    {
+        UpdatePreferences(Preferences with { GuidePhase = phase });
+        NotifyChanged();
+    }
+
     public void SetLanguage(string language)
     {
         UpdatePreferences(Preferences with { Language = language });
