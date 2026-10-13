@@ -122,6 +122,20 @@ public class TrainerStoreTests
     }
 
     [Fact]
+    public void Game_version_is_saved()
+    {
+        var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));
+        var store = CreateStore(repository);
+        var changed = 0;
+        store.Changed += () => changed++;
+
+        store.SetGameVersion("leafGreen");
+
+        Assert.Equal("leafGreen", repository.Preferences.GameVersion);
+        Assert.Equal(1, changed);
+    }
+
+    [Fact]
     public void Saving_other_preferences_keeps_the_language_unset_until_chosen()
     {
         var repository = new InMemoryRepository(("a", Pokemons.Squirtle()));

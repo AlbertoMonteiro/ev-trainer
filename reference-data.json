@@ -1,7 +1,7 @@
 {
   "_fonte": {
     "evYields": "Bulbapedia – List of Pokémon by effort value yield (Generation III)",
-    "treinadores": "GameFAQs – FireRed Trainer Index (Joon) v1.02, até a Rota 19",
+    "treinadores": "GameFAQs – FireRed Trainer Index (Joon) v1.02, até a Rota 19; demais locais (todo o jogo) em locations.json, gerado da decompilação",
     "locaisSelvagens": "curadoria manual (FireRed)"
   },
   "stats": [
@@ -2698,19 +2698,6 @@
       "Farfetch'd",
       "Bellsprout",
       "Tangela"
-    ],
-    "Rota 19 (parcial)": [
-      "Tentacool",
-      "Shellder",
-      "Goldeen",
-      "Horsea",
-      "Staryu",
-      "Seadra",
-      "Seaking",
-      "Poliwag",
-      "Poliwhirl",
-      "Poliwrath",
-      "Tentacruel"
     ]
   },
   "natures": [

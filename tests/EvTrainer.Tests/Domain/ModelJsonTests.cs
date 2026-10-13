@@ -148,6 +148,14 @@ public class ModelJsonTests
     public void Guide_phase_defaults_to_before_the_elite_four(string json, string expected) =>
         Assert.Equal(expected, PokemonJson.DeserializePreferences(json).GuidePhase);
 
+    [Theory]
+    [InlineData("{}", "fireRed")]
+    [InlineData("""{ "gameVersion": "leafGreen" }""", "leafGreen")]
+    [InlineData("""{ "gameVersion": "fireRed" }""", "fireRed")]
+    [InlineData("""{ "gameVersion": "emerald" }""", "fireRed")]
+    public void Game_version_defaults_to_fire_red(string json, string expected) =>
+        Assert.Equal(expected, PokemonJson.DeserializePreferences(json).GameVersion);
+
     [Fact]
     public void Default_preferences_have_no_language_and_keep_it_that_way()
     {

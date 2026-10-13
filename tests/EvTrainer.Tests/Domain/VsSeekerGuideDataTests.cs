@@ -10,16 +10,35 @@ public class VsSeekerGuideDataTests
     private static readonly LocationNames Places = LocationNames.LoadEmbedded();
 
     [Fact]
-    public void Has_the_kanto_route_trainers_with_unique_ids()
+    public void Has_the_kanto_and_sevii_trainers_with_unique_ids()
     {
-        Assert.True(Guide.Trainers.Count >= 150);
+        Assert.True(Guide.Trainers.Count >= 210);
         Assert.Equal(Guide.Trainers.Count, Guide.Trainers.Select(t => t.Id).Distinct().Count());
         Assert.All(Guide.Trainers, t =>
         {
-            Assert.Matches(@"^Rota \d+$", t.Location);
             Assert.True(Places.HasTranslation(t.Location), t.Location);
-            Assert.All(t.Access, a => Assert.Contains(a, new[] { "surf", "cyclingRoad", "victoryRoad" }));
+            Assert.All(t.Access, a => Assert.Contains(a, new[] { "surf", "cyclingRoad", "victoryRoad", "sevii", "seviiPostgame" }));
+            Assert.False(t.Access.Contains("sevii") && t.Access.Contains("seviiPostgame"), t.Id);
         });
+    }
+
+    [Fact]
+    public void Sevii_trainers_are_marked_by_when_their_island_opens()
+    {
+        var kindleRoad = Guide.Trainers.Where(t => t.Location == "Kindle Road").ToList();
+        Assert.True(kindleRoad.Count >= 10);
+        Assert.All(kindleRoad, t => Assert.Contains("sevii", t.Access));
+        Assert.All(kindleRoad, t => Assert.False(t.RequiresEliteFour));
+
+        var canyon = Guide.Trainers.Where(t => t.Location == "Sevault Canyon").ToList();
+        Assert.NotEmpty(canyon);
+        Assert.All(canyon, t => Assert.Contains("seviiPostgame", t.Access));
+        Assert.All(canyon, t => Assert.True(t.RequiresEliteFour));
+
+        Assert.All(Guide.Trainers.Where(t => t.Access.Contains("sevii") || t.Access.Contains("seviiPostgame")),
+            t => Assert.DoesNotMatch(@"^Rota \d+$", t.Location));
+        Assert.All(Guide.Trainers.Where(t => t.Access.Contains("sevii") && t.TrainerClass == "Swimmer"),
+            t => Assert.Contains("surf", t.Access));
     }
 
     [Fact]

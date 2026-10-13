@@ -9,19 +9,38 @@ namespace EvTrainer.Web.Domain.Reference;
 public sealed class LocationNames
 {
     private const string ResourceName = "EvTrainer.reference-data.en.json";
+    private const string LocationsResourceName = "EvTrainer.locations.json";
 
     private readonly IReadOnlyDictionary<string, string> _english;
 
     public LocationNames(IReadOnlyDictionary<string, string> english) => _english = english;
 
+    /// <summary>Curated names (reference-data.en.json) plus every place generated from the game (locations.json).</summary>
     public static LocationNames LoadEmbedded()
     {
-        using var stream = typeof(LocationNames).Assembly.GetManifestResourceStream(ResourceName)
-            ?? throw new InvalidOperationException($"Embedded resource {ResourceName} not found.");
-        using var document = JsonDocument.Parse(stream);
-        return new LocationNames(document.RootElement.GetProperty("locations").EnumerateObject()
-            .ToDictionary(p => p.Name, p => p.Value.GetString() ?? p.Name, StringComparer.Ordinal));
+        var english = new Dictionary<string, string>(StringComparer.Ordinal);
+        using (var curated = JsonDocument.Parse(Resource(ResourceName)))
+        {
+            foreach (var p in curated.RootElement.GetProperty("locations").EnumerateObject())
+            {
+                english[p.Name] = p.Value.GetString() ?? p.Name;
+            }
+        }
+
+        using (var generated = JsonDocument.Parse(Resource(LocationsResourceName)))
+        {
+            foreach (var place in generated.RootElement.GetProperty("places").EnumerateArray())
+            {
+                english.TryAdd(place.GetProperty("pt").GetString()!, place.GetProperty("en").GetString()!);
+            }
+        }
+
+        return new LocationNames(english);
     }
+
+    private static Stream Resource(string name) =>
+        typeof(LocationNames).Assembly.GetManifestResourceStream(name)
+            ?? throw new InvalidOperationException($"Embedded resource {name} not found.");
 
     public bool HasTranslation(string place) => _english.ContainsKey(place);
 

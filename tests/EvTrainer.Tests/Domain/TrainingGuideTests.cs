@@ -32,6 +32,20 @@ public class TrainingGuideTests
     }
 
     [Fact]
+    public void Sevii_islands_4_to_7_only_appear_after_the_elite_four()
+    {
+        static bool Postgame(GuideEntry e) => e.Trainer.Access.Contains("seviiPostgame");
+
+        foreach (var stat in TrainingGuide.Stats)
+        {
+            Assert.DoesNotContain(Guide.Rank(stat, "before"), Postgame);
+        }
+
+        Assert.Contains(TrainingGuide.Stats.SelectMany(s => Guide.Rank(s, "after")), Postgame);
+        Assert.Contains(TrainingGuide.Stats.SelectMany(s => Guide.Rank(s, "before")), e => e.Trainer.Access.Contains("sevii"));
+    }
+
+    [Fact]
     public void Each_trainer_is_its_own_entry()
     {
         var hp = Guide.Rank(Hp, "before");

@@ -1,5 +1,5 @@
 {
-  "_fonte": "pret/pokefirered@037335f4c725d7c9aecdac87066f2002b4bd7e14: src/vs_seeker.c (sRematches), src/data/trainers.h, src/data/trainer_parties.h. Gerado por scripts/BuildVsSeekerGuide.cs.",
+  "_fonte": "pret/pokefirered@037335f4c725d7c9aecdac87066f2002b4bd7e14: src/vs_seeker.c (sRematches), src/data/trainers.h, src/data/trainer_parties.h, data/maps (map.json), src/data/region_map/region_map_sections.json. Gerado por scripts/BuildVsSeekerGuide.cs.",
   "trainers": [
     {
       "id": "YOUNGSTER_BEN",
@@ -5368,6 +5368,2214 @@
             [
               "Starmie",
               55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_MARIA",
+      "class": "Swimmer",
+      "name": "Maria",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seadra",
+              37
+            ],
+            [
+              "Seadra",
+              37
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_ABIGAIL",
+      "class": "Swimmer",
+      "name": "Abigail",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Psyduck",
+              35
+            ],
+            [
+              "Psyduck",
+              36
+            ],
+            [
+              "Golduck",
+              37
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_FINN",
+      "class": "Swimmer",
+      "name": "Finn",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Starmie",
+              38
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Starmie",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_GARRETT",
+      "class": "Swimmer",
+      "name": "Garrett",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Shellder",
+              35
+            ],
+            [
+              "Cloyster",
+              35
+            ],
+            [
+              "Wartortle",
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_TOMMY",
+      "class": "Fisherman",
+      "name": "Tommy",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Goldeen",
+              33
+            ],
+            [
+              "Goldeen",
+              33
+            ],
+            [
+              "Seaking",
+              35
+            ],
+            [
+              "Seaking",
+              35
+            ],
+            [
+              "Seaking",
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CRUSH_GIRL_SHARON",
+      "class": "Crush Girl",
+      "name": "Sharon",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mankey",
+              37
+            ],
+            [
+              "Primeape",
+              37
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Mankey",
+              50
+            ],
+            [
+              "Primeape",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Primeape",
+              55
+            ],
+            [
+              "Primeape",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CRUSH_GIRL_TANYA",
+      "class": "Crush Girl",
+      "name": "Tanya",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Hitmonlee",
+              38
+            ],
+            [
+              "Hitmonchan",
+              38
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Hitmonlee",
+              50
+            ],
+            [
+              "Hitmonchan",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Hitmonlee",
+              55
+            ],
+            [
+              "Hitmonchan",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLACK_BELT_SHEA",
+      "class": "Black Belt",
+      "name": "Shea",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              38
+            ],
+            [
+              "Machoke",
+              38
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Machoke",
+              50
+            ],
+            [
+              "Machoke",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Machoke",
+              55
+            ],
+            [
+              "Machamp",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BLACK_BELT_HUGH",
+      "class": "Black Belt",
+      "name": "Hugh",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machop",
+              37
+            ],
+            [
+              "Machoke",
+              37
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Machoke",
+              50
+            ],
+            [
+              "Machoke",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Machoke",
+              55
+            ],
+            [
+              "Machamp",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAMPER_BRYCE",
+      "class": "Camper",
+      "name": "Bryce",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Nidorino",
+              36
+            ],
+            [
+              "Raticate",
+              36
+            ],
+            [
+              "Sandslash",
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PICNICKER_CLAIRE",
+      "class": "Picnicker",
+      "name": "Claire",
+      "location": "Kindle Road",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Meowth",
+              35
+            ],
+            [
+              "Meowth",
+              35
+            ],
+            [
+              "Pikachu",
+              35
+            ],
+            [
+              "Clefairy",
+              35
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CRUSH_KIN_MIK_KIA",
+      "class": "Crush Kin",
+      "name": "Mik & Kia",
+      "location": "Kindle Road",
+      "double": true,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machoke",
+              39
+            ],
+            [
+              "Primeape",
+              39
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Machoke",
+              51
+            ],
+            [
+              "Primeape",
+              51
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Machamp",
+              56
+            ],
+            [
+              "Primeape",
+              56
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_AMARA",
+      "class": "Swimmer",
+      "name": "Amara",
+      "location": "Treasure Beach",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Seel",
+              36
+            ],
+            [
+              "Seel",
+              36
+            ],
+            [
+              "Dewgong",
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AROMA_LADY_NIKKI",
+      "class": "Aroma Lady",
+      "name": "Nikki",
+      "location": "Bond Bridge",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bellsprout",
+              37
+            ],
+            [
+              "Weepinbell",
+              37
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AROMA_LADY_VIOLET",
+      "class": "Aroma Lady",
+      "name": "Violet",
+      "location": "Bond Bridge",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bulbasaur",
+              36
+            ],
+            [
+              "Ivysaur",
+              36
+            ],
+            [
+              "Ivysaur",
+              36
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TUBER_AMIRA",
+      "class": "Tuber",
+      "name": "Amira",
+      "location": "Bond Bridge",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwag",
+              34
+            ],
+            [
+              "Poliwhirl",
+              35
+            ],
+            [
+              "Poliwag",
+              34
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Poliwhirl",
+              47
+            ],
+            [
+              "Poliwhirl",
+              47
+            ],
+            [
+              "Poliwhirl",
+              47
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TUBER_ALEXIS",
+      "class": "Tuber",
+      "name": "Alexis",
+      "location": "Bond Bridge",
+      "double": false,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Staryu",
+              34
+            ],
+            [
+              "Staryu",
+              34
+            ],
+            [
+              "Krabby",
+              34
+            ],
+            [
+              "Krabby",
+              34
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_TISHA",
+      "class": "Swimmer",
+      "name": "Tisha",
+      "location": "Bond Bridge",
+      "double": false,
+      "access": [
+        "sevii",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Kingler",
+              38
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TWINS_JOY_MEG",
+      "class": "Twins",
+      "name": "Joy & Meg",
+      "location": "Bond Bridge",
+      "double": true,
+      "access": [
+        "sevii"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Clefairy",
+              37
+            ],
+            [
+              "Clefairy",
+              37
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "team": [
+            [
+              "Clefairy",
+              49
+            ],
+            [
+              "Clefairy",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PAINTER_DAISY",
+      "class": "Painter",
+      "name": "Daisy",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Smeargle",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PAINTER_CELINA",
+      "class": "Painter",
+      "name": "Celina",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Smeargle",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PAINTER_RAYNA",
+      "class": "Painter",
+      "name": "Rayna",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Smeargle",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Smeargle",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LADY_JACKI",
+      "class": "Lady",
+      "name": "Jacki",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Hoppip",
+              48
+            ],
+            [
+              "Skiploom",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LADY_GILLIAN",
+      "class": "Lady",
+      "name": "Gillian",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Mareep",
+              47
+            ],
+            [
+              "Mareep",
+              48
+            ],
+            [
+              "Flaaffy",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNGSTER_DESTIN",
+      "class": "Youngster",
+      "name": "Destin",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Raticate",
+              48
+            ],
+            [
+              "Pidgeotto",
+              48
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Raticate",
+              53
+            ],
+            [
+              "Pidgeot",
+              53
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_TOBY",
+      "class": "Swimmer",
+      "name": "Toby",
+      "location": "Resort Gorgeous",
+      "double": false,
+      "access": [
+        "seviiPostgame",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwhirl",
+              48
+            ],
+            [
+              "Tentacool",
+              48
+            ],
+            [
+              "Tentacruel",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PKMN_BREEDER_ALIZE",
+      "class": "Pokémon Breeder",
+      "name": "Alize",
+      "location": "Water Labyrinth",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pikachu",
+              48
+            ],
+            [
+              "Clefairy",
+              48
+            ],
+            [
+              "Marill",
+              48
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Pikachu",
+              53
+            ],
+            [
+              "Clefairy",
+              53
+            ],
+            [
+              "Marill",
+              53
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_MILO",
+      "class": "Bird Keeper",
+      "name": "Milo",
+      "location": "Memorial Pillar",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pidgey",
+              47
+            ],
+            [
+              "Pidgeotto",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Pidgeotto",
+              53
+            ],
+            [
+              "Pidgeot",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_CHAZ",
+      "class": "Bird Keeper",
+      "name": "Chaz",
+      "location": "Memorial Pillar",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Spearow",
+              47
+            ],
+            [
+              "Fearow",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Fearow",
+              53
+            ],
+            [
+              "Fearow",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BIRD_KEEPER_HAROLD",
+      "class": "Bird Keeper",
+      "name": "Harold",
+      "location": "Memorial Pillar",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Hoothoot",
+              47
+            ],
+            [
+              "Noctowl",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Noctowl",
+              53
+            ],
+            [
+              "Noctowl",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FISHERMAN_TYLOR",
+      "class": "Fisherman",
+      "name": "Tylor",
+      "location": "Outcast Island",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Qwilfish",
+              49
+            ],
+            [
+              "Qwilfish",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_MYMO",
+      "class": "Swimmer",
+      "name": "Mymo",
+      "location": "Outcast Island",
+      "double": false,
+      "access": [
+        "seviiPostgame",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Kingler",
+              49
+            ],
+            [
+              "Wartortle",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_NICOLE",
+      "class": "Swimmer",
+      "name": "Nicole",
+      "location": "Outcast Island",
+      "double": false,
+      "access": [
+        "seviiPostgame",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Marill",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Marill",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SIS_AND_BRO_AVA_GEB",
+      "class": "Sis and Bro",
+      "name": "Ava & Geb",
+      "location": "Outcast Island",
+      "double": true,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Poliwhirl",
+              50
+            ],
+            [
+              "Starmie",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSYCHIC_JACLYN",
+      "class": "Psychic",
+      "name": "Jaclyn",
+      "location": "Green Path",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Natu",
+              48
+            ],
+            [
+              "Slowbro",
+              48
+            ],
+            [
+              "Kadabra",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Natu",
+              52
+            ],
+            [
+              "Slowbro",
+              52
+            ],
+            [
+              "Kadabra",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AROMA_LADY_ROSE",
+      "class": "Aroma Lady",
+      "name": "Rose",
+      "location": "Water Path",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Sunkern",
+              49
+            ],
+            [
+              "Sunflora",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "JUGGLER_EDWARD",
+      "class": "Juggler",
+      "name": "Edward",
+      "location": "Water Path",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              46
+            ],
+            [
+              "Voltorb",
+              46
+            ],
+            [
+              "Electrode",
+              47
+            ],
+            [
+              "Mr. Mime",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_MALE_SAMIR",
+      "class": "Swimmer",
+      "name": "Samir",
+      "location": "Water Path",
+      "double": false,
+      "access": [
+        "seviiPostgame",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Gyarados",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Gyarados",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SWIMMER_FEMALE_DENISE",
+      "class": "Swimmer",
+      "name": "Denise",
+      "location": "Water Path",
+      "double": false,
+      "access": [
+        "seviiPostgame",
+        "surf"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Chinchou",
+              49
+            ],
+            [
+              "Lanturn",
+              49
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TWINS_MIU_MIA",
+      "class": "Twins",
+      "name": "Miu & Mia",
+      "location": "Water Path",
+      "double": true,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Pikachu",
+              50
+            ],
+            [
+              "Pikachu",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_EARL",
+      "class": "Hiker",
+      "name": "Earl",
+      "location": "Water Path",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Onix",
+              49
+            ],
+            [
+              "Machoke",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Onix",
+              54
+            ],
+            [
+              "Machamp",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RUIN_MANIAC_STANLY",
+      "class": "Ruin Maniac",
+      "name": "Stanly",
+      "location": "Ruin Valley",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Graveler",
+              48
+            ],
+            [
+              "Onix",
+              48
+            ],
+            [
+              "Graveler",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RUIN_MANIAC_FOSTER",
+      "class": "Ruin Maniac",
+      "name": "Foster",
+      "location": "Ruin Valley",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Golem",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RUIN_MANIAC_LARRY",
+      "class": "Ruin Maniac",
+      "name": "Larry",
+      "location": "Ruin Valley",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Machoke",
+              49
+            ],
+            [
+              "Machoke",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Machoke",
+              54
+            ],
+            [
+              "Machoke",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HIKER_DARYL",
+      "class": "Hiker",
+      "name": "Daryl",
+      "location": "Ruin Valley",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Sudowoodo",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "POKEMANIAC_HECTOR",
+      "class": "PokéManiac",
+      "name": "Hector",
+      "location": "Ruin Valley",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rhyhorn",
+              49
+            ],
+            [
+              "Kangaskhan",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Rhydon",
+              55
+            ],
+            [
+              "Kangaskhan",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSYCHIC_DARIO",
+      "class": "Psychic",
+      "name": "Dario",
+      "location": "Trainer Tower",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Girafarig",
+              52
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Girafarig",
+              56
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSYCHIC_RODETTE",
+      "class": "Psychic",
+      "name": "Rodette",
+      "location": "Trainer Tower",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Natu",
+              48
+            ],
+            [
+              "Drowzee",
+              48
+            ],
+            [
+              "Hypno",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Natu",
+              53
+            ],
+            [
+              "Hypno",
+              53
+            ],
+            [
+              "Hypno",
+              53
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AROMA_LADY_MIAH",
+      "class": "Aroma Lady",
+      "name": "Miah",
+      "location": "Canyon Entrance",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Bellossom",
+              50
+            ],
+            [
+              "Bellossom",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YOUNG_COUPLE_EVE_JON",
+      "class": "Young Couple",
+      "name": "Eve & Jon",
+      "location": "Canyon Entrance",
+      "double": true,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Golduck",
+              50
+            ],
+            [
+              "Psyduck",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "JUGGLER_MASON",
+      "class": "Juggler",
+      "name": "Mason",
+      "location": "Canyon Entrance",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Voltorb",
+              47
+            ],
+            [
+              "Pineco",
+              47
+            ],
+            [
+              "Voltorb",
+              47
+            ],
+            [
+              "Pineco",
+              47
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Electrode",
+              52
+            ],
+            [
+              "Pineco",
+              52
+            ],
+            [
+              "Electrode",
+              52
+            ],
+            [
+              "Pineco",
+              52
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PKMN_RANGER_NICOLAS",
+      "class": "Pokémon Ranger",
+      "name": "Nicolas",
+      "location": "Canyon Entrance",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Weepinbell",
+              51
+            ],
+            [
+              "Victreebel",
+              51
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Victreebel",
+              55
+            ],
+            [
+              "Victreebel",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PKMN_RANGER_MADELINE",
+      "class": "Pokémon Ranger",
+      "name": "Madeline",
+      "location": "Canyon Entrance",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Gloom",
+              51
+            ],
+            [
+              "Vileplume",
+              51
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Vileplume",
+              55
+            ],
+            [
+              "Vileplume",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CRUSH_GIRL_CYNDY",
+      "class": "Crush Girl",
+      "name": "Cyndy",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Primeape",
+              48
+            ],
+            [
+              "Hitmontop",
+              48
+            ],
+            [
+              "Machoke",
+              48
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Primeape",
+              54
+            ],
+            [
+              "Hitmontop",
+              54
+            ],
+            [
+              "Machamp",
+              54
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TAMER_EVAN",
+      "class": "Tamer",
+      "name": "Evan",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Sandslash",
+              48
+            ],
+            [
+              "Lickitung",
+              48
+            ],
+            [
+              "Ursaring",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Sandslash",
+              52
+            ],
+            [
+              "Lickitung",
+              52
+            ],
+            [
+              "Ursaring",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PKMN_RANGER_JACKSON",
+      "class": "Pokémon Ranger",
+      "name": "Jackson",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Tangela",
+              49
+            ],
+            [
+              "Exeggcute",
+              49
+            ],
+            [
+              "Exeggutor",
+              49
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Tangela",
+              53
+            ],
+            [
+              "Exeggutor",
+              54
+            ],
+            [
+              "Exeggutor",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PKMN_RANGER_KATELYN",
+      "class": "Pokémon Ranger",
+      "name": "Katelyn",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Chansey",
+              52
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Chansey",
+              56
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "COOLTRAINER_LEROY",
+      "class": "Cooltrainer",
+      "name": "Leroy",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Rhydon",
+              47
+            ],
+            [
+              "Slowbro",
+              48
+            ],
+            [
+              "Kangaskhan",
+              47
+            ],
+            [
+              "Machoke",
+              48
+            ],
+            [
+              "Ursaring",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Rhydon",
+              52
+            ],
+            [
+              "Slowbro",
+              54
+            ],
+            [
+              "Kangaskhan",
+              52
+            ],
+            [
+              "Machamp",
+              52
+            ],
+            [
+              "Ursaring",
+              55
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "COOLTRAINER_MICHELLE",
+      "class": "Cooltrainer",
+      "name": "Michelle",
+      "location": "Sevault Canyon",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Persian",
+              47
+            ],
+            [
+              "Dewgong",
+              47
+            ],
+            [
+              "Ninetales",
+              48
+            ],
+            [
+              "Rapidash",
+              48
+            ],
+            [
+              "Girafarig",
+              50
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Persian",
+              53
+            ],
+            [
+              "Dewgong",
+              53
+            ],
+            [
+              "Ninetales",
+              54
+            ],
+            [
+              "Rapidash",
+              54
+            ],
+            [
+              "Girafarig",
+              56
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "COOL_COUPLE_LEX_NYA",
+      "class": "Cool Couple",
+      "name": "Lex & Nya",
+      "location": "Sevault Canyon",
+      "double": true,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Miltank",
+              52
+            ],
+            [
+              "Tauros",
+              52
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "team": [
+            [
+              "Miltank",
+              57
+            ],
+            [
+              "Tauros",
+              57
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RUIN_MANIAC_BRANDON",
+      "class": "Ruin Maniac",
+      "name": "Brandon",
+      "location": "Tanoby Ruins",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Onix",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RUIN_MANIAC_BENJAMIN",
+      "class": "Ruin Maniac",
+      "name": "Benjamin",
+      "location": "Tanoby Ruins",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Geodude",
+              48
+            ],
+            [
+              "Graveler",
+              48
+            ],
+            [
+              "Graveler",
+              48
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PAINTER_EDNA",
+      "class": "Painter",
+      "name": "Edna",
+      "location": "Tanoby Ruins",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Smeargle",
+              50
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GENTLEMAN_CLIFFORD",
+      "class": "Gentleman",
+      "name": "Clifford",
+      "location": "Tanoby Ruins",
+      "double": false,
+      "access": [
+        "seviiPostgame"
+      ],
+      "stages": [
+        {
+          "index": 0,
+          "team": [
+            [
+              "Marowak",
+              49
+            ],
+            [
+              "Golduck",
+              49
             ]
           ]
         }

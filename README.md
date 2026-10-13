@@ -49,15 +49,18 @@ up and it narrows down your IVs.
 - **Exp. Share** — pick which Pokémon holds it and every battle also counts for it, the Gen 3 way: the whole EV
   yield (not split like experience), doubled only by its own Pokérus — Macho Brace never counts for the holder.
   The toast shows both gains and one Undo reverts both.
-- **Where to train with the VS Seeker** — a page lists, for HP, Attack, Sp. Atk or Speed, every Kanto trainer the
-  VS Seeker can rematch: route, team with levels and EVs per battle for each rematch stage (original, after Celadon,
+- **Where to train with the VS Seeker** — a page lists, for HP, Attack, Sp. Atk or Speed, every Kanto and Sevii Islands
+  trainer the VS Seeker can rematch (islands 1–3 after Blaine, 4–7 after the Elite Four): place, team with levels and EVs per battle for each rematch stage (original, after Celadon,
   after Fuchsia, after the Elite Four, after the Sevii Islands), the best stage you can reach highlighted. Teams come
   from the game's own code ([pret/pokefirered](https://github.com/pret/pokefirered)); each trainer is its own entry,
   since the VS Seeker only wakes up the trainers on screen.
 - **Find the right opponent fast** — "Useful" filter (only opponents that still help your targets),
-  recents, and search by name, Pokédex number, route, gym leader or trainer location
+  recents, and search by name, Pokédex number, route, gym leader or trainer location — every place of the
+  game, Sevii Islands included, with its trainers and wild Pokémon taken from the game's decompilation
   (`route 4` / `rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
   current targets first.
+- **FireRed or LeafGreen** — choose your version in the menu: the wild Pokémon of each place follow it (Scyther or
+  Pinsir in the Safari Zone, Oddish or Bellsprout on Route 24…); trainers are the same in both.
 - **IV calculator** — note the 6 stats after each level up; the app shows the possible IV range per
   stat for each level and the intersection of all of them, using integer Gen 3 math and your nature.
 - **Is this catch worth keeping?** — right after catching, type the species, level, nature and the 6
@@ -160,6 +163,7 @@ dotnet run scripts/BuildPokedex.cs
 ```bash
 dotnet run scripts/DownloadSprites.cs
 dotnet run scripts/BuildVsSeekerGuide.cs   # vs-seeker-guide.json from the FireRed decompilation
+dotnet run scripts/BuildLocations.cs       # locations.json: trainers and wild Pokémon of every place, from the decompilation
 ```
 
 ### Project layout

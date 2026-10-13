@@ -3,13 +3,13 @@ using EvTrainer.Web.Domain.Reference;
 namespace EvTrainer.Web.Domain;
 
 /// <summary>
-/// Opponent search (HANDOFF §4.5): matches "name #dex", the wild location or any trainer location,
+/// Opponent search (HANDOFF §4.5): matches "name #dex", the wild places of the chosen game version or any trainer location,
 /// ignoring accents and case, with route lists expanded and a digit boundary at the end of the query. Places match in
 /// Portuguese or English whatever the UI language (spec 011); hits keep the Portuguese place as its identity.
 /// </summary>
 public sealed class OpponentSearch
 {
-    private readonly IReadOnlyList<Entry> _entries;
+    private readonly IReadOnlyDictionary<GameVersion, IReadOnlyList<Entry>> _entries;
 
     public OpponentSearch(ReferenceData data, LocationNames names)
     {
@@ -22,17 +22,22 @@ public sealed class OpponentSearch
             }
         }
 
-        _entries =
+        // Wild places come from the game data of each version (spec 014); the curated note only places the vitamins.
+        IReadOnlyList<Entry> Index(GameVersion version) =>
         [
             .. data.Opponents.Select(o => new Entry(
                 o,
                 Prepare($"{o.Name} #{o.Dex}"),
-                [.. names.AllForms(o.WildLocation).Select(Prepare)],
+                o.IsVitamin
+                    ? [.. names.AllForms(o.WildLocation).Select(Prepare)]
+                    : [.. (data.WildPlaces(version).GetValueOrDefault(o.Name) ?? []).SelectMany(names.AllForms).Select(Prepare)],
                 [.. (trainers.GetValueOrDefault(o.Name) ?? []).Select(l => (l, (IReadOnlyList<string>)[.. names.AllForms(l).Select(Prepare)]))])),
         ];
+
+        _entries = Enum.GetValues<GameVersion>().ToDictionary(v => v, Index);
     }
 
-    public IReadOnlyList<SearchHit> Find(string query)
+    public IReadOnlyList<SearchHit> Find(string query, GameVersion version)
     {
         var folded = TextFold.Fold(query.Trim());
         if (folded.Length == 0)
@@ -41,7 +46,7 @@ public sealed class OpponentSearch
         }
 
         var hits = new List<SearchHit>();
-        foreach (var entry in _entries)
+        foreach (var entry in _entries[version])
         {
             List<string> trainerHits = [.. entry.Trainers.Where(t => t.Prepared.Any(p => Matches(p, folded))).Select(t => t.Name)];
             if (trainerHits.Count > 0 || Matches(entry.NameAndDex, folded) || entry.Wild.Any(w => Matches(w, folded)))

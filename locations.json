@@ -1,0 +1,2985 @@
+{
+  "_fonte": "pret/pokefirered@037335f4c725d7c9aecdac87066f2002b4bd7e14: data/maps (map.json, scripts.inc), data/scripts/trainers.inc, src/data/trainers.h, src/data/trainer_parties.h, src/vs_seeker.c, src/data/wild_encounters.json (FireRed e LeafGreen), src/data/region_map/region_map_sections.json. Gerado por scripts/BuildLocations.cs.",
+  "places": [
+    {
+      "pt": "Altering Cave",
+      "en": "Altering Cave",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Aipom",
+          "Houndour",
+          "Mareep",
+          "Pineco",
+          "Shuckle",
+          "Smeargle",
+          "Stantler",
+          "Teddiursa",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Aipom",
+          "Houndour",
+          "Mareep",
+          "Pineco",
+          "Shuckle",
+          "Smeargle",
+          "Stantler",
+          "Teddiursa",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Berry Forest",
+      "en": "Berry Forest",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Drowzee",
+          "Exeggcute",
+          "Gloom",
+          "Goldeen",
+          "Golduck",
+          "Gyarados",
+          "Hypno",
+          "Magikarp",
+          "Oddish",
+          "Pidgeotto",
+          "Pidgey",
+          "Poliwag",
+          "Psyduck",
+          "Seaking",
+          "Venomoth",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Drowzee",
+          "Exeggcute",
+          "Goldeen",
+          "Gyarados",
+          "Hypno",
+          "Magikarp",
+          "Pidgeotto",
+          "Pidgey",
+          "Poliwag",
+          "Seaking",
+          "Slowbro",
+          "Slowpoke",
+          "Venomoth",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Bond Bridge",
+      "en": "Bond Bridge",
+      "trainers": [
+        "Bellsprout",
+        "Bulbasaur",
+        "Clefairy",
+        "Ivysaur",
+        "Kingler",
+        "Krabby",
+        "Poliwag",
+        "Poliwhirl",
+        "Staryu",
+        "Weepinbell"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gloom",
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Meowth",
+          "Oddish",
+          "Persian",
+          "Pidgeotto",
+          "Pidgey",
+          "Psyduck",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Pidgeotto",
+          "Pidgey",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Canyon Entrance",
+      "en": "Canyon Entrance",
+      "trainers": [
+        "Bellossom",
+        "Electrode",
+        "Gloom",
+        "Golduck",
+        "Pineco",
+        "Psyduck",
+        "Victreebel",
+        "Vileplume",
+        "Voltorb",
+        "Weepinbell"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Meowth",
+          "Persian",
+          "Phanpy",
+          "Psyduck",
+          "Sentret",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Meowth",
+          "Persian",
+          "Phanpy",
+          "Sentret",
+          "Slowpoke",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Cape Brink",
+      "en": "Cape Brink",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Gloom",
+          "Goldeen",
+          "Golduck",
+          "Gyarados",
+          "Magikarp",
+          "Meowth",
+          "Oddish",
+          "Persian",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Fearow",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowbro",
+          "Slowpoke",
+          "Spearow",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Celadon City",
+      "en": "Celadon City",
+      "trainers": [
+        "Raticate",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Grimer",
+          "Koffing",
+          "Magikarp",
+          "Psyduck"
+        ],
+        "leafGreen": [
+          "Grimer",
+          "Koffing",
+          "Magikarp",
+          "Slowpoke"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Celadon (Erika)",
+      "en": "Celadon Gym (Erika)",
+      "trainers": [
+        "Bellsprout",
+        "Bulbasaur",
+        "Exeggcute",
+        "Gloom",
+        "Ivysaur",
+        "Oddish",
+        "Tangela",
+        "Victreebel",
+        "Vileplume",
+        "Weepinbell"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Cerulean Cave",
+      "en": "Cerulean Cave",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Ditto",
+          "Electrode",
+          "Geodude",
+          "Golbat",
+          "Goldeen",
+          "Golduck",
+          "Graveler",
+          "Gyarados",
+          "Kadabra",
+          "Machoke",
+          "Magikarp",
+          "Magneton",
+          "Parasect",
+          "Poliwag",
+          "Poliwhirl",
+          "Primeape",
+          "Psyduck",
+          "Wobbuffet"
+        ],
+        "leafGreen": [
+          "Ditto",
+          "Electrode",
+          "Geodude",
+          "Golbat",
+          "Goldeen",
+          "Graveler",
+          "Gyarados",
+          "Kadabra",
+          "Machoke",
+          "Magikarp",
+          "Magneton",
+          "Parasect",
+          "Poliwag",
+          "Poliwhirl",
+          "Primeape",
+          "Slowbro",
+          "Slowpoke",
+          "Wobbuffet"
+        ]
+      }
+    },
+    {
+      "pt": "Cerulean City",
+      "en": "Cerulean City",
+      "trainers": [
+        "Abra",
+        "Bulbasaur",
+        "Charmander",
+        "Drowzee",
+        "Machop",
+        "Pidgeotto",
+        "Rattata",
+        "Squirtle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Cerulean (Misty)",
+      "en": "Cerulean Gym (Misty)",
+      "trainers": [
+        "Goldeen",
+        "Horsea",
+        "Shellder",
+        "Starmie",
+        "Staryu"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Ginásio de Cinnabar (Blaine)",
+      "en": "Cinnabar Gym (Blaine)",
+      "trainers": [
+        "Arcanine",
+        "Charmander",
+        "Growlithe",
+        "Ninetales",
+        "Ponyta",
+        "Rapidash",
+        "Vulpix"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Cinnabar Island",
+      "en": "Cinnabar Island",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Shellder",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Slowbro",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Diglett's Cave",
+      "en": "Diglett's Cave",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Diglett",
+          "Dugtrio"
+        ],
+        "leafGreen": [
+          "Diglett",
+          "Dugtrio"
+        ]
+      }
+    },
+    {
+      "pt": "Dilford Chamber",
+      "en": "Dilford Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Five Island",
+      "en": "Five Island",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Hoppip",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Shellder",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Hoppip",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Five Isle Meadow",
+      "en": "Five Isle Meadow",
+      "trainers": [
+        "Ekans",
+        "Gloom",
+        "Grimer",
+        "Koffing",
+        "Muk",
+        "Rattata",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Hoppip",
+          "Horsea",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Pidgeotto",
+          "Pidgey",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Sentret",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Hoppip",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Pidgeotto",
+          "Pidgey",
+          "Remoraid",
+          "Sentret",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Four Island",
+      "en": "Four Island",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Wooper"
+        ],
+        "leafGreen": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Marill",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowpoke"
+        ]
+      }
+    },
+    {
+      "pt": "Fuchsia City",
+      "en": "Fuchsia City",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Poliwag",
+          "Psyduck",
+          "Seaking"
+        ],
+        "leafGreen": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Poliwag",
+          "Seaking",
+          "Slowpoke"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Fuchsia (Koga)",
+      "en": "Fuchsia Gym (Koga)",
+      "trainers": [
+        "Arbok",
+        "Drowzee",
+        "Hypno",
+        "Kadabra",
+        "Koffing",
+        "Muk",
+        "Sandslash",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Green Path",
+      "en": "Green Path",
+      "trainers": [
+        "Kadabra",
+        "Natu",
+        "Slowbro"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Icefall Cave",
+      "en": "Icefall Cave",
+      "trainers": [
+        "Golbat",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Delibird",
+          "Dewgong",
+          "Golbat",
+          "Goldeen",
+          "Gyarados",
+          "Horsea",
+          "Lapras",
+          "Magikarp",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Seadra",
+          "Seel",
+          "Shellder",
+          "Swinub",
+          "Tentacool",
+          "Tentacruel",
+          "Wooper",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Dewgong",
+          "Golbat",
+          "Goldeen",
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Lapras",
+          "Magikarp",
+          "Marill",
+          "Poliwag",
+          "Poliwhirl",
+          "Seel",
+          "Slowpoke",
+          "Sneasel",
+          "Staryu",
+          "Swinub",
+          "Tentacool",
+          "Tentacruel",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Kindle Road",
+      "en": "Kindle Road",
+      "trainers": [
+        "Clefairy",
+        "Cloyster",
+        "Goldeen",
+        "Golduck",
+        "Hitmonchan",
+        "Hitmonlee",
+        "Machamp",
+        "Machoke",
+        "Machop",
+        "Mankey",
+        "Meowth",
+        "Nidorino",
+        "Pikachu",
+        "Primeape",
+        "Psyduck",
+        "Raticate",
+        "Sandslash",
+        "Seadra",
+        "Seaking",
+        "Shellder",
+        "Starmie",
+        "Wartortle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Ponyta",
+          "Psyduck",
+          "Rapidash",
+          "Seadra",
+          "Spearow",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Ponyta",
+          "Rapidash",
+          "Slowpoke",
+          "Spearow",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Liptoo Chamber",
+      "en": "Liptoo Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Lost Cave",
+      "en": "Lost Cave",
+      "trainers": [
+        "Graveler",
+        "Marowak",
+        "Natu",
+        "Onix",
+        "Persian",
+        "Xatu"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gastly",
+          "Golbat",
+          "Haunter",
+          "Murkrow",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Gastly",
+          "Golbat",
+          "Haunter",
+          "Misdreavus",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Memorial Pillar",
+      "en": "Memorial Pillar",
+      "trainers": [
+        "Fearow",
+        "Hoothoot",
+        "Noctowl",
+        "Pidgeot",
+        "Pidgeotto",
+        "Pidgey",
+        "Spearow"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Hoppip",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Hoppip",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Monean Chamber",
+      "en": "Monean Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Mt. Ember",
+      "en": "Mt. Ember",
+      "trainers": [
+        "Bellsprout",
+        "Cubone",
+        "Exeggcute",
+        "Exeggutor",
+        "Gloom",
+        "Hitmonchan",
+        "Marowak",
+        "Raticate",
+        "Rattata",
+        "Sandshrew",
+        "Sandslash"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Machoke",
+          "Machop",
+          "Magcargo",
+          "Ponyta",
+          "Rapidash",
+          "Slugma",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Machoke",
+          "Machop",
+          "Magcargo",
+          "Magmar",
+          "Ponyta",
+          "Rapidash",
+          "Slugma",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Mt. Moon",
+      "en": "Mt. Moon",
+      "trainers": [
+        "Bellsprout",
+        "Caterpie",
+        "Clefairy",
+        "Ekans",
+        "Geodude",
+        "Grimer",
+        "Kakuna",
+        "Koffing",
+        "Magnemite",
+        "Metapod",
+        "Oddish",
+        "Onix",
+        "Rattata",
+        "Sandshrew",
+        "Voltorb",
+        "Weedle",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Clefairy",
+          "Geodude",
+          "Paras",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Clefairy",
+          "Geodude",
+          "Paras",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "One Island",
+      "en": "One Island",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Shellder",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Outcast Island",
+      "en": "Outcast Island",
+      "trainers": [
+        "Golbat",
+        "Kingler",
+        "Marill",
+        "Muk",
+        "Poliwhirl",
+        "Qwilfish",
+        "Raticate",
+        "Starmie",
+        "Wartortle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Pallet Town",
+      "en": "Pallet Town",
+      "trainers": [
+        "Bulbasaur",
+        "Charmander",
+        "Squirtle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Shellder",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Pattern Bush",
+      "en": "Pattern Bush",
+      "trainers": [
+        "Beedrill",
+        "Chansey",
+        "Clefable",
+        "Clefairy",
+        "Farfetch'd",
+        "Heracross",
+        "Hoppip",
+        "Onix",
+        "Paras",
+        "Parasect",
+        "Pinsir",
+        "Sandslash",
+        "Skiploom",
+        "Snubbull",
+        "Venomoth",
+        "Venonat",
+        "Victreebel",
+        "Weepinbell",
+        "Yanma"
+      ],
+      "wild": {
+        "fireRed": [
+          "Caterpie",
+          "Heracross",
+          "Kakuna",
+          "Ledyba",
+          "Metapod",
+          "Spinarak",
+          "Weedle"
+        ],
+        "leafGreen": [
+          "Caterpie",
+          "Heracross",
+          "Kakuna",
+          "Ledyba",
+          "Metapod",
+          "Spinarak",
+          "Weedle"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Pewter (Brock)",
+      "en": "Pewter Gym (Brock)",
+      "trainers": [
+        "Geodude",
+        "Onix",
+        "Sandshrew"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Pokémon League",
+      "en": "Pokémon League",
+      "trainers": [
+        "Aerodactyl",
+        "Alakazam",
+        "Arbok",
+        "Arcanine",
+        "Blastoise",
+        "Charizard",
+        "Cloyster",
+        "Crobat",
+        "Dewgong",
+        "Dragonair",
+        "Dragonite",
+        "Exeggutor",
+        "Gengar",
+        "Golbat",
+        "Gyarados",
+        "Haunter",
+        "Heracross",
+        "Hitmonchan",
+        "Hitmonlee",
+        "Jynx",
+        "Kingdra",
+        "Lapras",
+        "Machamp",
+        "Misdreavus",
+        "Onix",
+        "Pidgeot",
+        "Piloswine",
+        "Rhydon",
+        "Slowbro",
+        "Steelix",
+        "Tyranitar",
+        "Venusaur"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Pokémon Mansion",
+      "en": "Pokémon Mansion",
+      "trainers": [
+        "Charmander",
+        "Charmeleon",
+        "Ekans",
+        "Electrode",
+        "Growlithe",
+        "Magnemite",
+        "Magneton",
+        "Ninetales",
+        "Ponyta",
+        "Raticate",
+        "Voltorb",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ditto",
+          "Grimer",
+          "Growlithe",
+          "Koffing",
+          "Raticate",
+          "Rattata",
+          "Weezing"
+        ],
+        "leafGreen": [
+          "Ditto",
+          "Grimer",
+          "Koffing",
+          "Muk",
+          "Raticate",
+          "Rattata",
+          "Vulpix"
+        ]
+      }
+    },
+    {
+      "pt": "Pokémon Tower",
+      "en": "Pokémon Tower",
+      "trainers": [
+        "Charmeleon",
+        "Drowzee",
+        "Exeggcute",
+        "Gastly",
+        "Golbat",
+        "Growlithe",
+        "Gyarados",
+        "Haunter",
+        "Ivysaur",
+        "Kadabra",
+        "Koffing",
+        "Pidgeotto",
+        "Raticate",
+        "Rattata",
+        "Wartortle",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Cubone",
+          "Gastly",
+          "Haunter"
+        ],
+        "leafGreen": [
+          "Cubone",
+          "Gastly",
+          "Haunter"
+        ]
+      }
+    },
+    {
+      "pt": "Power Plant",
+      "en": "Power Plant",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Electabuzz",
+          "Magnemite",
+          "Magneton",
+          "Pikachu",
+          "Voltorb"
+        ],
+        "leafGreen": [
+          "Magnemite",
+          "Magneton",
+          "Pikachu",
+          "Voltorb"
+        ]
+      }
+    },
+    {
+      "pt": "Resort Gorgeous",
+      "en": "Resort Gorgeous",
+      "trainers": [
+        "Flaaffy",
+        "Hoppip",
+        "Mareep",
+        "Pidgeot",
+        "Pidgeotto",
+        "Poliwhirl",
+        "Raticate",
+        "Skiploom",
+        "Smeargle",
+        "Tentacool",
+        "Tentacruel"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Hoppip",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Hoppip",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Rixy Chamber",
+      "en": "Rixy Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Rock Tunnel",
+      "en": "Rock Tunnel",
+      "trainers": [
+        "Bellsprout",
+        "Bulbasaur",
+        "Charmander",
+        "Clefairy",
+        "Cubone",
+        "Geodude",
+        "Graveler",
+        "Jigglypuff",
+        "Machop",
+        "Meowth",
+        "Oddish",
+        "Onix",
+        "Pidgey",
+        "Rattata",
+        "Slowpoke"
+      ],
+      "wild": {
+        "fireRed": [
+          "Geodude",
+          "Graveler",
+          "Machop",
+          "Mankey",
+          "Onix",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Geodude",
+          "Graveler",
+          "Machop",
+          "Mankey",
+          "Onix",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Rocket Hideout",
+      "en": "Rocket Hideout",
+      "trainers": [
+        "Arbok",
+        "Drowzee",
+        "Ekans",
+        "Grimer",
+        "Kangaskhan",
+        "Koffing",
+        "Machop",
+        "Onix",
+        "Raticate",
+        "Rattata",
+        "Rhyhorn",
+        "Sandshrew",
+        "Sandslash",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Rocket Warehouse",
+      "en": "Rocket Warehouse",
+      "trainers": [
+        "Arbok",
+        "Electrode",
+        "Golbat",
+        "Houndoom",
+        "Houndour",
+        "Hypno",
+        "Machoke",
+        "Machop",
+        "Magnemite",
+        "Magneton",
+        "Muk",
+        "Porygon",
+        "Vileplume",
+        "Voltorb",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Rota 1",
+      "en": "Route 1",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Pidgey",
+          "Rattata"
+        ],
+        "leafGreen": [
+          "Pidgey",
+          "Rattata"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 10",
+      "en": "Route 10",
+      "trainers": [
+        "Clefairy",
+        "Cubone",
+        "Geodude",
+        "Graveler",
+        "Lickitung",
+        "Marowak",
+        "Onix",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Rhydon",
+        "Rhyhorn",
+        "Slowbro",
+        "Slowpoke"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ekans",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Spearow",
+          "Tentacool",
+          "Voltorb"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Sandshrew",
+          "Slowpoke",
+          "Spearow",
+          "Tentacool",
+          "Voltorb"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 11",
+      "en": "Route 11",
+      "trainers": [
+        "Bellsprout",
+        "Ekans",
+        "Growlithe",
+        "Horsea",
+        "Magnemite",
+        "Magneton",
+        "Nidoran♂",
+        "Nidorino",
+        "Oddish",
+        "Poliwag",
+        "Raticate",
+        "Rattata",
+        "Sandshrew",
+        "Voltorb",
+        "Vulpix",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Drowzee",
+          "Ekans",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Spearow",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Drowzee",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Sandshrew",
+          "Slowpoke",
+          "Spearow",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 12",
+      "en": "Route 12",
+      "trainers": [
+        "Cloyster",
+        "Electrode",
+        "Goldeen",
+        "Horsea",
+        "Magikarp",
+        "Nidoking",
+        "Nidoqueen",
+        "Nidoran♀",
+        "Nidoran♂",
+        "Nidorina",
+        "Nidorino",
+        "Poliwag",
+        "Poliwhirl",
+        "Seadra",
+        "Seaking",
+        "Shellder",
+        "Tentacool",
+        "Voltorb"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gloom",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Oddish",
+          "Pidgey",
+          "Psyduck",
+          "Tentacool",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Pidgey",
+          "Slowpoke",
+          "Tentacool",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 13",
+      "en": "Route 13",
+      "trainers": [
+        "Clefairy",
+        "Fearow",
+        "Goldeen",
+        "Horsea",
+        "Koffing",
+        "Meowth",
+        "Persian",
+        "Pidgeot",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Poliwag",
+        "Raichu",
+        "Raticate",
+        "Rattata",
+        "Spearow"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ditto",
+          "Gloom",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Oddish",
+          "Pidgeotto",
+          "Pidgey",
+          "Psyduck",
+          "Tentacool",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Ditto",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Pidgeotto",
+          "Pidgey",
+          "Slowpoke",
+          "Tentacool",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 14",
+      "en": "Route 14",
+      "trainers": [
+        "Charmander",
+        "Dodrio",
+        "Doduo",
+        "Farfetch'd",
+        "Fearow",
+        "Grimer",
+        "Koffing",
+        "Muk",
+        "Pidgeotto",
+        "Pidgey",
+        "Spearow",
+        "Squirtle",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ditto",
+          "Gloom",
+          "Oddish",
+          "Pidgeotto",
+          "Pidgey",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Ditto",
+          "Pidgeotto",
+          "Pidgey",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 15",
+      "en": "Route 15",
+      "trainers": [
+        "Bellsprout",
+        "Bulbasaur",
+        "Clefairy",
+        "Dodrio",
+        "Doduo",
+        "Farfetch'd",
+        "Gloom",
+        "Grimer",
+        "Hitmonchan",
+        "Hitmonlee",
+        "Ivysaur",
+        "Koffing",
+        "Oddish",
+        "Pidgeot",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Raichu",
+        "Tangela",
+        "Weezing",
+        "Wigglytuff"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ditto",
+          "Gloom",
+          "Oddish",
+          "Pidgeotto",
+          "Pidgey",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Ditto",
+          "Pidgeotto",
+          "Pidgey",
+          "Venonat",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 16",
+      "en": "Route 16",
+      "trainers": [
+        "Grimer",
+        "Koffing",
+        "Machoke",
+        "Machop",
+        "Mankey",
+        "Ninetales",
+        "Primeape",
+        "Rapidash",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [
+          "Doduo",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Doduo",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 17",
+      "en": "Route 17",
+      "trainers": [
+        "Koffing",
+        "Machamp",
+        "Machoke",
+        "Machop",
+        "Mankey",
+        "Muk",
+        "Primeape",
+        "Voltorb",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [
+          "Doduo",
+          "Fearow",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Doduo",
+          "Fearow",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 18",
+      "en": "Route 18",
+      "trainers": [
+        "Dodrio",
+        "Fearow",
+        "Spearow"
+      ],
+      "wild": {
+        "fireRed": [
+          "Doduo",
+          "Fearow",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Doduo",
+          "Fearow",
+          "Raticate",
+          "Rattata",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 19",
+      "en": "Route 19",
+      "trainers": [
+        "Goldeen",
+        "Horsea",
+        "Poliwag",
+        "Poliwhirl",
+        "Poliwrath",
+        "Seadra",
+        "Seaking",
+        "Shellder",
+        "Staryu",
+        "Tentacool",
+        "Tentacruel"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 2",
+      "en": "Route 2",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Caterpie",
+          "Pidgey",
+          "Rattata",
+          "Weedle"
+        ],
+        "leafGreen": [
+          "Caterpie",
+          "Pidgey",
+          "Rattata",
+          "Weedle"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 20",
+      "en": "Route 20",
+      "trainers": [
+        "Cloyster",
+        "Fearow",
+        "Goldeen",
+        "Horsea",
+        "Pidgeotto",
+        "Poliwag",
+        "Poliwhirl",
+        "Seadra",
+        "Seaking",
+        "Seel",
+        "Shellder",
+        "Staryu",
+        "Tentacool"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 21",
+      "en": "Route 21",
+      "trainers": [
+        "Cloyster",
+        "Goldeen",
+        "Magikarp",
+        "Poliwhirl",
+        "Seadra",
+        "Seaking",
+        "Shellder",
+        "Starmie",
+        "Staryu",
+        "Tentacool",
+        "Tentacruel",
+        "Wartortle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seadra",
+          "Tangela",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Tangela",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 22",
+      "en": "Route 22",
+      "trainers": [
+        "Alakazam",
+        "Blastoise",
+        "Bulbasaur",
+        "Charizard",
+        "Charmander",
+        "Exeggcute",
+        "Growlithe",
+        "Gyarados",
+        "Pidgeot",
+        "Pidgey",
+        "Rhyhorn",
+        "Squirtle",
+        "Venusaur"
+      ],
+      "wild": {
+        "fireRed": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Mankey",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Rattata",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Mankey",
+          "Poliwag",
+          "Poliwhirl",
+          "Rattata",
+          "Slowpoke",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 23",
+      "en": "Route 23",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Arbok",
+          "Ekans",
+          "Fearow",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Mankey",
+          "Poliwag",
+          "Poliwhirl",
+          "Primeape",
+          "Psyduck",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Mankey",
+          "Poliwag",
+          "Poliwhirl",
+          "Primeape",
+          "Sandshrew",
+          "Sandslash",
+          "Slowpoke",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 24",
+      "en": "Route 24",
+      "trainers": [
+        "Arbok",
+        "Bellsprout",
+        "Caterpie",
+        "Ekans",
+        "Golbat",
+        "Kakuna",
+        "Mankey",
+        "Metapod",
+        "Nidoran♀",
+        "Nidoran♂",
+        "Nidorina",
+        "Oddish",
+        "Pidgeotto",
+        "Pidgey",
+        "Raticate",
+        "Rattata",
+        "Sandshrew",
+        "Weedle",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [
+          "Abra",
+          "Caterpie",
+          "Gyarados",
+          "Horsea",
+          "Kakuna",
+          "Krabby",
+          "Magikarp",
+          "Metapod",
+          "Oddish",
+          "Pidgey",
+          "Psyduck",
+          "Tentacool",
+          "Weedle"
+        ],
+        "leafGreen": [
+          "Abra",
+          "Bellsprout",
+          "Caterpie",
+          "Gyarados",
+          "Horsea",
+          "Kakuna",
+          "Krabby",
+          "Magikarp",
+          "Metapod",
+          "Pidgey",
+          "Slowpoke",
+          "Tentacool",
+          "Weedle"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 25",
+      "en": "Route 25",
+      "trainers": [
+        "Arbok",
+        "Ekans",
+        "Geodude",
+        "Graveler",
+        "Machoke",
+        "Machop",
+        "Nidoran♀",
+        "Nidoran♂",
+        "Nidorina",
+        "Nidorino",
+        "Oddish",
+        "Onix",
+        "Pidgey",
+        "Rattata",
+        "Sandshrew",
+        "Sandslash",
+        "Slowpoke",
+        "Spearow"
+      ],
+      "wild": {
+        "fireRed": [
+          "Abra",
+          "Caterpie",
+          "Goldeen",
+          "Gyarados",
+          "Kakuna",
+          "Magikarp",
+          "Metapod",
+          "Oddish",
+          "Pidgey",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Weedle"
+        ],
+        "leafGreen": [
+          "Abra",
+          "Bellsprout",
+          "Caterpie",
+          "Goldeen",
+          "Gyarados",
+          "Kakuna",
+          "Magikarp",
+          "Metapod",
+          "Pidgey",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowpoke",
+          "Weedle"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 3",
+      "en": "Route 3",
+      "trainers": [
+        "Arbok",
+        "Beedrill",
+        "Butterfree",
+        "Caterpie",
+        "Ekans",
+        "Jigglypuff",
+        "Kakuna",
+        "Metapod",
+        "Nidoran♀",
+        "Pidgeotto",
+        "Pidgey",
+        "Raticate",
+        "Rattata",
+        "Spearow",
+        "Weedle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Jigglypuff",
+          "Mankey",
+          "Nidoran♀",
+          "Nidoran♂",
+          "Pidgey",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Jigglypuff",
+          "Mankey",
+          "Nidoran♀",
+          "Nidoran♂",
+          "Pidgey",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 4",
+      "en": "Route 4",
+      "trainers": [
+        "Paras",
+        "Parasect"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ekans",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Mankey",
+          "Psyduck",
+          "Rattata",
+          "Spearow",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Mankey",
+          "Rattata",
+          "Sandshrew",
+          "Slowpoke",
+          "Spearow",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 5",
+      "en": "Route 5",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Meowth",
+          "Oddish",
+          "Pidgey"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Meowth",
+          "Pidgey"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 6",
+      "en": "Route 6",
+      "trainers": [
+        "Butterfree",
+        "Caterpie",
+        "Fearow",
+        "Pidgeot",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Raticate",
+        "Rattata",
+        "Spearow",
+        "Squirtle",
+        "Wartortle",
+        "Weedle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Meowth",
+          "Oddish",
+          "Pidgey",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Meowth",
+          "Pidgey",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowpoke"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 7",
+      "en": "Route 7",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Growlithe",
+          "Meowth",
+          "Oddish",
+          "Pidgey"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Meowth",
+          "Pidgey",
+          "Vulpix"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 8",
+      "en": "Route 8",
+      "trainers": [
+        "Clefairy",
+        "Grimer",
+        "Growlithe",
+        "Jigglypuff",
+        "Koffing",
+        "Magnemite",
+        "Meowth",
+        "Muk",
+        "Nidoran♀",
+        "Nidoran♂",
+        "Nidorina",
+        "Nidorino",
+        "Persian",
+        "Pidgeot",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Poliwag",
+        "Poliwhirl",
+        "Raichu",
+        "Raticate",
+        "Rattata",
+        "Voltorb",
+        "Vulpix"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ekans",
+          "Growlithe",
+          "Meowth",
+          "Pidgey"
+        ],
+        "leafGreen": [
+          "Meowth",
+          "Pidgey",
+          "Sandshrew",
+          "Vulpix"
+        ]
+      }
+    },
+    {
+      "pt": "Rota 9",
+      "en": "Route 9",
+      "trainers": [
+        "Arcanine",
+        "Beedrill",
+        "Bellsprout",
+        "Caterpie",
+        "Charmander",
+        "Charmeleon",
+        "Ekans",
+        "Geodude",
+        "Growlithe",
+        "Machoke",
+        "Machop",
+        "Meowth",
+        "Oddish",
+        "Onix",
+        "Persian",
+        "Rattata",
+        "Sandshrew",
+        "Venonat",
+        "Weedle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Ekans",
+          "Rattata",
+          "Spearow"
+        ],
+        "leafGreen": [
+          "Rattata",
+          "Sandshrew",
+          "Spearow"
+        ]
+      }
+    },
+    {
+      "pt": "Ruin Valley",
+      "en": "Ruin Valley",
+      "trainers": [
+        "Golem",
+        "Graveler",
+        "Kangaskhan",
+        "Machoke",
+        "Onix",
+        "Rhydon",
+        "Rhyhorn",
+        "Sudowoodo"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Meowth",
+          "Natu",
+          "Persian",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck",
+          "Spearow",
+          "Wobbuffet",
+          "Wooper",
+          "Yanma"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Marill",
+          "Meowth",
+          "Natu",
+          "Persian",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowpoke",
+          "Spearow",
+          "Wobbuffet",
+          "Yanma"
+        ]
+      }
+    },
+    {
+      "pt": "S.S. Anne",
+      "en": "S.S. Anne",
+      "trainers": [
+        "Charmeleon",
+        "Goldeen",
+        "Growlithe",
+        "Horsea",
+        "Ivysaur",
+        "Kadabra",
+        "Machop",
+        "Nidoran♀",
+        "Nidoran♂",
+        "Pidgeotto",
+        "Pidgey",
+        "Pikachu",
+        "Ponyta",
+        "Raticate",
+        "Rattata",
+        "Shellder",
+        "Staryu",
+        "Tentacool",
+        "Wartortle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Shellder",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Safari Zone",
+      "en": "Safari Zone",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Chansey",
+          "Doduo",
+          "Dragonair",
+          "Dratini",
+          "Exeggcute",
+          "Goldeen",
+          "Kangaskhan",
+          "Magikarp",
+          "Nidoran♀",
+          "Nidoran♂",
+          "Nidorina",
+          "Nidorino",
+          "Paras",
+          "Parasect",
+          "Poliwag",
+          "Psyduck",
+          "Rhyhorn",
+          "Scyther",
+          "Seaking",
+          "Tauros",
+          "Venomoth",
+          "Venonat"
+        ],
+        "leafGreen": [
+          "Chansey",
+          "Doduo",
+          "Dragonair",
+          "Dratini",
+          "Exeggcute",
+          "Goldeen",
+          "Kangaskhan",
+          "Magikarp",
+          "Nidoran♀",
+          "Nidoran♂",
+          "Nidorina",
+          "Nidorino",
+          "Paras",
+          "Parasect",
+          "Pinsir",
+          "Poliwag",
+          "Rhyhorn",
+          "Seaking",
+          "Slowpoke",
+          "Tauros",
+          "Venomoth",
+          "Venonat"
+        ]
+      }
+    },
+    {
+      "pt": "Saffron City",
+      "en": "Saffron City",
+      "trainers": [
+        "Hitmonchan",
+        "Hitmonlee",
+        "Machoke",
+        "Machop",
+        "Mankey",
+        "Primeape"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Ginásio de Saffron (Sabrina)",
+      "en": "Saffron Gym (Sabrina)",
+      "trainers": [
+        "Alakazam",
+        "Gastly",
+        "Haunter",
+        "Kadabra",
+        "Mr. Mime",
+        "Slowbro",
+        "Slowpoke",
+        "Venomoth"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Scufib Chamber",
+      "en": "Scufib Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Seafoam Islands",
+      "en": "Seafoam Islands",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Dewgong",
+          "Golbat",
+          "Golduck",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Seel",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Dewgong",
+          "Golbat",
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Seel",
+          "Slowbro",
+          "Slowpoke",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Sevault Canyon",
+      "en": "Sevault Canyon",
+      "trainers": [
+        "Chansey",
+        "Dewgong",
+        "Exeggcute",
+        "Exeggutor",
+        "Girafarig",
+        "Hitmontop",
+        "Kangaskhan",
+        "Lickitung",
+        "Machamp",
+        "Machoke",
+        "Miltank",
+        "Ninetales",
+        "Persian",
+        "Primeape",
+        "Rapidash",
+        "Rhydon",
+        "Sandslash",
+        "Slowbro",
+        "Tangela",
+        "Tauros",
+        "Ursaring"
+      ],
+      "wild": {
+        "fireRed": [
+          "Cubone",
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Larvitar",
+          "Marowak",
+          "Meowth",
+          "Onix",
+          "Persian",
+          "Phanpy",
+          "Skarmory"
+        ],
+        "leafGreen": [
+          "Cubone",
+          "Fearow",
+          "Geodude",
+          "Graveler",
+          "Larvitar",
+          "Marowak",
+          "Meowth",
+          "Onix",
+          "Persian",
+          "Phanpy"
+        ]
+      }
+    },
+    {
+      "pt": "Silph Co.",
+      "en": "Silph Co.",
+      "trainers": [
+        "Alakazam",
+        "Arbok",
+        "Blastoise",
+        "Charizard",
+        "Cubone",
+        "Drowzee",
+        "Ekans",
+        "Electrode",
+        "Exeggcute",
+        "Golbat",
+        "Grimer",
+        "Growlithe",
+        "Gyarados",
+        "Hypno",
+        "Kadabra",
+        "Kangaskhan",
+        "Koffing",
+        "Machoke",
+        "Machop",
+        "Magnemite",
+        "Magneton",
+        "Marowak",
+        "Mr. Mime",
+        "Muk",
+        "Nidoqueen",
+        "Nidorino",
+        "Pidgeot",
+        "Raticate",
+        "Rattata",
+        "Rhyhorn",
+        "Sandshrew",
+        "Sandslash",
+        "Venusaur",
+        "Voltorb",
+        "Weezing",
+        "Zubat"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Tanoby Ruins",
+      "en": "Tanoby Ruins",
+      "trainers": [
+        "Geodude",
+        "Golduck",
+        "Graveler",
+        "Marowak",
+        "Onix",
+        "Smeargle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Mantine",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Three Island",
+      "en": "Three Island",
+      "trainers": [
+        "Grimer",
+        "Koffing",
+        "Muk",
+        "Weezing"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Three Isle Port",
+      "en": "Three Isle Port",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Dunsparce"
+        ],
+        "leafGreen": [
+          "Dunsparce"
+        ]
+      }
+    },
+    {
+      "pt": "Trainer Tower",
+      "en": "Trainer Tower",
+      "trainers": [
+        "Drowzee",
+        "Girafarig",
+        "Hypno",
+        "Natu"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Mantine",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Treasure Beach",
+      "en": "Treasure Beach",
+      "trainers": [
+        "Dewgong",
+        "Seel"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Psyduck",
+          "Seadra",
+          "Spearow",
+          "Tangela",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Fearow",
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Slowpoke",
+          "Spearow",
+          "Tangela",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Vermilion City",
+      "en": "Vermilion City",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Psyduck",
+          "Shellder",
+          "Tentacool"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Horsea",
+          "Krabby",
+          "Magikarp",
+          "Slowpoke",
+          "Staryu",
+          "Tentacool"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Vermilion (Lt. Surge)",
+      "en": "Vermilion Gym (Lt. Surge)",
+      "trainers": [
+        "Magnemite",
+        "Pikachu",
+        "Raichu",
+        "Voltorb"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Viapois Chamber",
+      "en": "Viapois Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    },
+    {
+      "pt": "Victory Road",
+      "en": "Victory Road",
+      "trainers": [
+        "Arcanine",
+        "Bellsprout",
+        "Blastoise",
+        "Chansey",
+        "Charizard",
+        "Charmeleon",
+        "Clefairy",
+        "Cloyster",
+        "Dewgong",
+        "Drowzee",
+        "Electrode",
+        "Exeggutor",
+        "Golduck",
+        "Hypno",
+        "Ivysaur",
+        "Jigglypuff",
+        "Kadabra",
+        "Kingler",
+        "Lapras",
+        "Lickitung",
+        "Machoke",
+        "Machop",
+        "Mr. Mime",
+        "Nidoking",
+        "Nidoqueen",
+        "Ninetales",
+        "Paras",
+        "Parasect",
+        "Persian",
+        "Poliwhirl",
+        "Ponyta",
+        "Rapidash",
+        "Raticate",
+        "Sandslash",
+        "Seadra",
+        "Tentacruel",
+        "Victreebel",
+        "Vulpix",
+        "Wartortle",
+        "Weepinbell"
+      ],
+      "wild": {
+        "fireRed": [
+          "Arbok",
+          "Geodude",
+          "Golbat",
+          "Machoke",
+          "Machop",
+          "Marowak",
+          "Onix",
+          "Primeape",
+          "Zubat"
+        ],
+        "leafGreen": [
+          "Geodude",
+          "Golbat",
+          "Machoke",
+          "Machop",
+          "Marowak",
+          "Onix",
+          "Primeape",
+          "Sandslash",
+          "Zubat"
+        ]
+      }
+    },
+    {
+      "pt": "Viridian City",
+      "en": "Viridian City",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Poliwag",
+          "Poliwhirl",
+          "Psyduck"
+        ],
+        "leafGreen": [
+          "Goldeen",
+          "Gyarados",
+          "Magikarp",
+          "Poliwag",
+          "Poliwhirl",
+          "Slowpoke"
+        ]
+      }
+    },
+    {
+      "pt": "Viridian Forest",
+      "en": "Viridian Forest",
+      "trainers": [
+        "Caterpie",
+        "Kakuna",
+        "Metapod",
+        "Weedle"
+      ],
+      "wild": {
+        "fireRed": [
+          "Caterpie",
+          "Kakuna",
+          "Metapod",
+          "Pikachu",
+          "Weedle"
+        ],
+        "leafGreen": [
+          "Caterpie",
+          "Kakuna",
+          "Metapod",
+          "Pikachu",
+          "Weedle"
+        ]
+      }
+    },
+    {
+      "pt": "Ginásio de Viridian (Giovanni)",
+      "en": "Viridian Gym (Giovanni)",
+      "trainers": [
+        "Arbok",
+        "Dugtrio",
+        "Graveler",
+        "Machoke",
+        "Machop",
+        "Marowak",
+        "Nidoking",
+        "Nidoqueen",
+        "Nidorina",
+        "Nidorino",
+        "Onix",
+        "Rhyhorn",
+        "Sandslash",
+        "Tauros"
+      ],
+      "wild": {
+        "fireRed": [],
+        "leafGreen": []
+      }
+    },
+    {
+      "pt": "Water Labyrinth",
+      "en": "Water Labyrinth",
+      "trainers": [
+        "Clefairy",
+        "Marill",
+        "Pikachu"
+      ],
+      "wild": {
+        "fireRed": [
+          "Gyarados",
+          "Hoppip",
+          "Horsea",
+          "Magikarp",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Gyarados",
+          "Hoppip",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Remoraid",
+          "Slowpoke",
+          "Tentacool",
+          "Tentacruel"
+        ]
+      }
+    },
+    {
+      "pt": "Water Path",
+      "en": "Water Path",
+      "trainers": [
+        "Chinchou",
+        "Electrode",
+        "Gyarados",
+        "Lanturn",
+        "Machamp",
+        "Machoke",
+        "Mr. Mime",
+        "Onix",
+        "Pikachu",
+        "Sunflora",
+        "Sunkern",
+        "Voltorb"
+      ],
+      "wild": {
+        "fireRed": [
+          "Fearow",
+          "Gloom",
+          "Gyarados",
+          "Horsea",
+          "Magikarp",
+          "Meowth",
+          "Oddish",
+          "Persian",
+          "Psyduck",
+          "Qwilfish",
+          "Seadra",
+          "Sentret",
+          "Spearow",
+          "Tentacool",
+          "Tentacruel"
+        ],
+        "leafGreen": [
+          "Bellsprout",
+          "Fearow",
+          "Gyarados",
+          "Kingler",
+          "Krabby",
+          "Magikarp",
+          "Meowth",
+          "Persian",
+          "Remoraid",
+          "Sentret",
+          "Slowpoke",
+          "Spearow",
+          "Tentacool",
+          "Tentacruel",
+          "Weepinbell"
+        ]
+      }
+    },
+    {
+      "pt": "Weepth Chamber",
+      "en": "Weepth Chamber",
+      "trainers": [],
+      "wild": {
+        "fireRed": [
+          "Unown"
+        ],
+        "leafGreen": [
+          "Unown"
+        ]
+      }
+    }
+  ]
+}

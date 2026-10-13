@@ -69,7 +69,7 @@
                         {
                             var evs = Guide.StageEvs(stage);
                             var others = Enumerable.Range(0, evs.Length).Where(i => i != _stat && evs[i] > 0).ToList();
-                            <li class="stage @(stage == entry.Best ? "best" : "") @(stage.RequiresEliteFour ? "requires-e4" : "")" data-index="@stage.Index">
+                            <li class="stage @(stage == entry.Best ? "best" : "") @(stage.RequiresEliteFour || entry.Trainer.RequiresEliteFour ? "requires-e4" : "")" data-index="@stage.Index">
                                 <span class="label">@L[$"Guide.Stage.{stage.Index}"]</span>
                                 <span class="team">@string.Join(" · ", stage.Team.Select(p => L["Guide.Pokemon", p.Species, p.Level].Value))</span>
                                 <span class="evs">

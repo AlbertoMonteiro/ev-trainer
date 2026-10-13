@@ -98,6 +98,24 @@ public class PokemonMenuTests : AppTestContext
     }
 
     [Fact]
+    public void Game_version_choice_lists_fire_red_and_leaf_green_and_is_remembered()
+    {
+        var cut = RenderWithTwo();
+
+        Assert.Contains(T("Menu.GameVersion"), cut.Find(".menu-panel").TextContent);
+        var buttons = cut.FindAll(".menu-panel .choices.versions button");
+        Assert.Equal(["fireRed", "leafGreen"], buttons.Select(b => b.GetAttribute("data-version")));
+        Assert.Equal([T("Version.FireRed"), T("Version.LeafGreen")], buttons.Select(b => b.TextContent.Trim()));
+        Assert.Equal(["true", "false"], buttons.Select(b => b.GetAttribute("aria-pressed")));
+
+        cut.Find(".menu-panel .versions button[data-version='leafGreen']").Click();
+
+        Assert.Equal("leafGreen", Repository.Preferences.GameVersion);
+        cut.Find("header button.menu").Click();
+        Assert.Equal("true", cut.Find(".menu-panel .versions button[data-version='leafGreen']").GetAttribute("aria-pressed"));
+    }
+
+    [Fact]
     public void Export_from_the_menu_downloads_the_backup()
     {
         var cut = RenderWithTwo();
@@ -220,5 +238,25 @@ public class LanguageSwitchKeepsStateTests : AppTestContext
         Assert.Equal(Catalog.Find("en", "Tabs.Evs"), cut.FindAll("[role=tab]")[0].TextContent.Trim());
         Assert.Same(selected, Store.Selected);
         Assert.NotEmpty(cut.FindAll("button.opponent[data-opp='Caterpie']"));
+    }
+}
+
+public class GameVersionSwitchTests : AppTestContext
+{
+    [Fact]
+    public void Switching_the_version_keeps_the_search_and_changes_the_wild_pokemon()
+    {
+        Seed(Pokemons.Squirtle());
+        var cut = Render<Home>();
+        cut.Find("input.search").Input("safari zone");
+        Assert.NotEmpty(cut.FindAll("button.opponent[data-opp='Scyther']"));
+        Assert.Empty(cut.FindAll("button.opponent[data-opp='Pinsir']"));
+
+        cut.Find("header button.menu").Click();
+        cut.Find(".menu-panel .versions button[data-version='leafGreen']").Click();
+
+        Assert.Equal("safari zone", cut.Find("input.search").GetAttribute("value"));
+        Assert.NotEmpty(cut.FindAll("button.opponent[data-opp='Pinsir']"));
+        Assert.Empty(cut.FindAll("button.opponent[data-opp='Scyther']"));
     }
 }

@@ -1,3 +1,4 @@
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Reference;
 
 namespace EvTrainer.Tests.Domain;
@@ -42,7 +43,7 @@ public class ReferenceDataTests
         Assert.Equal([0, 0, 0, 0, 2, 0], milotic.EvYield);
         Assert.Equal("", milotic.WildLocation);
         Assert.Equal("Rota 3, 4, 22", Data.Lookup("Mankey")!.WildLocation);
-        Assert.Equal(34, Data.TrainersByLocation.Count);
+        Assert.False(Data.WildPlaces(GameVersion.FireRed).ContainsKey("Milotic"));
     }
 
     [Fact]
@@ -55,11 +56,49 @@ public class ReferenceDataTests
     }
 
     [Fact]
-    public void Keeps_trainer_locations_in_file_order()
+    public void Keeps_curated_trainer_locations_first_then_every_other_place_of_the_game()
     {
-        Assert.Equal(34, Data.TrainersByLocation.Count);
         Assert.Equal("Laboratório do Prof. Oak", Data.TrainersByLocation[0].Name);
         Assert.Equal(["Bulbasaur", "Charmander", "Squirtle"], Data.TrainersByLocation[0].Opponents);
+        Assert.Equal(Data.TrainersByLocation.Count, Data.TrainersByLocation.Select(t => t.Name).Distinct().Count());
+        Assert.Contains(Data.TrainersByLocation, t => t.Name == "Rota 20" && t.Opponents.Contains("Seaking"));
+        Assert.Contains(Data.TrainersByLocation, t => t.Name == "Sevault Canyon");
+        Assert.DoesNotContain(Data.TrainersByLocation, t => t.Name == "Rota 19 (parcial)");
+    }
+
+    [Fact]
+    public void Curated_and_generated_trainers_of_the_same_place_are_merged()
+    {
+        var route3 = Data.TrainersByLocation.Single(t => t.Name == "Rota 3");
+
+        Assert.Equal("Pidgey", route3.Opponents[0]);
+        Assert.Equal(route3.Opponents.Count, route3.Opponents.Distinct().Count());
+    }
+
+    [Fact]
+    public void Wild_places_come_from_the_game_for_each_version()
+    {
+        foreach (var version in new[] { GameVersion.FireRed, GameVersion.LeafGreen })
+        {
+            Assert.Contains("Rota 20", Data.WildPlaces(version)["Tentacool"]);
+            Assert.Contains("Monean Chamber", Data.WildPlaces(version)["Unown"]);
+        }
+
+        Assert.Contains("Safari Zone", Data.WildPlaces(GameVersion.FireRed)["Scyther"]);
+        Assert.False(Data.WildPlaces(GameVersion.LeafGreen).ContainsKey("Scyther"));
+        Assert.Contains("Safari Zone", Data.WildPlaces(GameVersion.LeafGreen)["Pinsir"]);
+        Assert.False(Data.WildPlaces(GameVersion.FireRed).ContainsKey("Pinsir"));
+    }
+
+    [Theory]
+    [InlineData(null, GameVersion.FireRed)]
+    [InlineData("fireRed", GameVersion.FireRed)]
+    [InlineData("leafGreen", GameVersion.LeafGreen)]
+    [InlineData("ruby", GameVersion.FireRed)]
+    public void Game_version_keys(string? key, GameVersion expected)
+    {
+        Assert.Equal(expected, GameVersions.Parse(key));
+        Assert.Equal(expected, GameVersions.Parse(GameVersions.Key(expected)));
     }
 
     [Theory]

@@ -26,6 +26,14 @@
                     @onclick="() => SetTheme(theme)">@L[key]</button>
         }
     </div>
+    <div class="group-label">@L["Menu.GameVersion"]</div>
+    <div class="choices versions">
+        @foreach (var (version, key) in Versions)
+        {
+            <button type="button" data-version="@version" aria-pressed="@(Store.Preferences.GameVersion == version ? "true" : "false")"
+                    @onclick="() => SetGameVersion(version)">@L[key]</button>
+        }
+    </div>
     @if (Language.Available.Count > 1)
     {
         <div class="group-label">@L["Menu.Language"]</div>
@@ -51,6 +59,12 @@
         ("system", "Menu.Theme.System"),
         ("light", "Menu.Theme.Light"),
         ("dark", "Menu.Theme.Dark"),
+    ];
+
+    private static readonly (string Version, string Key)[] Versions =
+    [
+        (GameVersions.FireRedKey, "Version.FireRed"),
+        (GameVersions.LeafGreenKey, "Version.LeafGreen"),
     ];
 
     private ElementReference _panel;
@@ -133,6 +147,12 @@
     {
         Store.SetTheme(theme);
         Browser.SetTheme(theme);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task SetGameVersion(string version)
+    {
+        Store.SetGameVersion(version);
         await OnClose.InvokeAsync();
     }
 

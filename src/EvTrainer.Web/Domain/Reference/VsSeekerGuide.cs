@@ -12,7 +12,10 @@ public sealed record GuideStage(int Index, IReadOnlyList<(string Species, int Le
     public bool RequiresEliteFour => Index >= 4;
 }
 
-/// <summary>A Kanto trainer the VS Seeker can rematch, with every stage of its team in order.</summary>
+/// <summary>
+/// A Kanto or Sevii Islands trainer the VS Seeker can rematch, with every stage of its team in order. <see cref="Access"/>
+/// may say "sevii" (islands 1-3, after Blaine) or "seviiPostgame" (islands 4-7, after the Elite Four).
+/// </summary>
 public sealed record GuideTrainer(
     string Id,
     string TrainerClass,
@@ -20,7 +23,11 @@ public sealed record GuideTrainer(
     string Location,
     bool Double,
     IReadOnlyList<string> Access,
-    IReadOnlyList<GuideStage> Stages);
+    IReadOnlyList<GuideStage> Stages)
+{
+    /// <summary>Sevii Islands 4-7 only open after the Elite Four, whatever the stage.</summary>
+    public bool RequiresEliteFour => Access.Contains("seviiPostgame");
+}
 
 /// <summary>The embedded <c>vs-seeker-guide.json</c>, generated from the FireRed decompilation.</summary>
 public sealed class VsSeekerGuide(IReadOnlyList<GuideTrainer> trainers)

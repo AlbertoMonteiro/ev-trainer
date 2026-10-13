@@ -182,7 +182,7 @@ public class OpponentSearchTests : AppTestContext
         var cut = Render<EvTab>();
 
         cut.Find("input.search").Input("rota 4");
-        var found = Services.GetRequiredService<OpponentSearch>().Find("rota 4").Select(h => h.Opponent.Name).ToList();
+        var found = Services.GetRequiredService<OpponentSearch>().Find("rota 4", GameVersion.FireRed).Select(h => h.Opponent.Name).ToList();
         var groups = Groups(cut);
 
         Assert.Equal([T("Evs.List.Useful"), T("Evs.List.OtherResults")], Titles(cut));

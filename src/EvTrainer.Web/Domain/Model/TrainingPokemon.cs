@@ -153,4 +153,7 @@ public sealed record UiPreferences
 
     /// <summary>"Where to train" page (spec 013): before | after the Elite Four.</summary>
     public string GuidePhase { get; init; } = "before";
+
+    /// <summary>Game being played (spec 014): fireRed | leafGreen; decides the wild Pokémon of each place.</summary>
+    public string GameVersion { get; init; } = GameVersions.FireRedKey;
 }

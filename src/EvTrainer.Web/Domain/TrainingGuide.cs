@@ -36,9 +36,11 @@ public sealed class TrainingGuide(VsSeekerGuide guide, Pokedex dex)
         return evs;
     }
 
-    /// <summary>Stages reachable in the phase: before the Elite Four hides stages 4 and 5.</summary>
+    /// <summary>Stages reachable in the phase: before the Elite Four hides stages 4 and 5 and Sevii Islands 4-7.</summary>
     public static IReadOnlyList<GuideStage> Visible(GuideTrainer trainer, string phase) =>
-        phase == After ? trainer.Stages : [.. trainer.Stages.Where(s => !s.RequiresEliteFour)];
+        phase == After ? trainer.Stages
+        : trainer.RequiresEliteFour ? []
+        : [.. trainer.Stages.Where(s => !s.RequiresEliteFour)];
 
     /// <summary>
     /// Trainers with a visible stage giving <paramref name="stat"/>, by that stat's EVs in their best visible stage

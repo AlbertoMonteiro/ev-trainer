@@ -477,6 +477,12 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         NotifyChanged();
     }
 
+    public void SetGameVersion(string version)
+    {
+        UpdatePreferences(Preferences with { GameVersion = version });
+        NotifyChanged();
+    }
+
     public void SetLanguage(string language)
     {
         UpdatePreferences(Preferences with { Language = language });

@@ -1,6 +1,7 @@
 using Bunit;
 
 using EvTrainer.Tests.Support;
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Pages;
 
 namespace EvTrainer.Tests.Components.Guide;
@@ -131,5 +132,24 @@ public class TrainingGuideViewTests : AppTestContext
         Assert.Contains(T("Guide.Tips.VsSeeker"), tips);
         Assert.Contains(T("Guide.Tips.Sevii"), tips);
         Assert.Equal("https://github.com/pret/pokefirered", cut.Find(".guide-sources a").GetAttribute("href"));
+    }
+
+    [Fact]
+    public void Sevii_trainers_show_when_their_island_opens()
+    {
+        Store.Load();
+        var cut = OpenFromMenu();
+        cut.Find(".guide-phase button[data-phase='after']").Click();
+
+        var kindle = cut.FindAll("li.guide-entry").First(e => e.QuerySelector(".where")!.TextContent.Trim() == "Kindle Road");
+        Assert.Equal(T("Guide.Access.sevii"), kindle.QuerySelector(".mark.access-sevii")!.TextContent.Trim());
+
+        var entries = TrainingGuide.Stats.SelectMany(stat =>
+        {
+            ChooseStat(cut, stat);
+            return cut.FindAll("li.guide-entry").Where(e => e.QuerySelector(".mark.access-seviiPostgame") is not null).ToList();
+        }).ToList();
+        Assert.NotEmpty(entries);
+        Assert.All(entries, e => Assert.All(e.QuerySelectorAll("li.stage"), s => Assert.Contains("requires-e4", s.ClassList)));
     }
 }

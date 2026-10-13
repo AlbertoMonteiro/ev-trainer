@@ -62,7 +62,7 @@
         }
 
         var items = searching
-            ? Search.Find(_query)
+            ? Search.Find(_query, GameVersions.Parse(Store.Preferences.GameVersion))
             : [.. Store.Data.Opponents.Where(o => !recent.Contains(o.Name)).Select(o => new SearchHit(o))];
         var (usefulItems, others) = Evs.UsefulFirst(items, totals, pokemon.Targets);
         if (usefulItems.Count > 0)

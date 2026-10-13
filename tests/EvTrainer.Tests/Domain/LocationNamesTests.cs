@@ -1,4 +1,5 @@
 using EvTrainer.Tests.Localization;
+using EvTrainer.Web.Domain;
 using EvTrainer.Web.Domain.Reference;
 
 namespace EvTrainer.Tests.Domain;
@@ -12,6 +13,8 @@ public class LocationNamesTests
     [
         .. Data.TrainersByLocation.Select(l => l.Name),
         .. Data.Opponents.Select(o => o.WildLocation).Where(w => w.Length > 0),
+        .. Data.WildPlaces(GameVersion.FireRed).Values.SelectMany(p => p),
+        .. Data.WildPlaces(GameVersion.LeafGreen).Values.SelectMany(p => p),
     ];
 
     [Fact]
