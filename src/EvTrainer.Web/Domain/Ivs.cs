@@ -46,20 +46,22 @@ public sealed record FinalKnown(int Value, bool MatchesNotes) : FinalCell;
 /// <summary>IV estimation (HANDOFF §4.7, §4.8).</summary>
 public static class Ivs
 {
-    public static IvCell[] RangeFor(LevelEntry entry, TrainingPokemon pokemon, ReferenceData data) =>
+    public static IvCell[] RangeFor(LevelEntry entry, TrainingPokemon pokemon, ReferenceData data, GameVersion version) =>
         RangeFor(
             pokemon.Species.FirstOrDefault(s => s.Name == entry.Species),
             data.FindNature(pokemon.Nature),
             entry.Level,
             entry.Stats,
-            entry.Evs);
+            entry.Evs,
+            version);
 
     /// <summary>
     /// IV range of each stat for a species at a level with the given stats and EVs; null species makes every
     /// filled stat inconsistent and a null nature is neutral.
     /// </summary>
-    public static IvCell[] RangeFor(SpeciesEntry? species, Nature? nature, int level, int[] stats, int[] evs)
+    public static IvCell[] RangeFor(SpeciesEntry? species, Nature? nature, int level, int[] stats, int[] evs, GameVersion version)
     {
+        var baseStats = species is null ? null : GameVersions.BaseStats(species.Name, species.Base, version);
         var cells = new IvCell[StatVector.Count];
         for (var i = 0; i < StatVector.Count; i++)
         {
@@ -69,13 +71,13 @@ public static class Ivs
                 continue;
             }
 
-            if (species is null)
+            if (baseStats is null)
             {
                 cells[i] = new IvInconsistent();
                 continue;
             }
 
-            if (i == StatVector.Hp && species.Base[i] == 1)
+            if (i == StatVector.Hp && baseStats[i] == 1)
             {
                 cells[i] = new IvUnknowable();
                 continue;
@@ -84,7 +86,7 @@ public static class Ivs
             int? min = null, max = null;
             for (var iv = 0; iv <= StatVector.MaxIv; iv++)
             {
-                var value = StatFormula.Value(species.Base[i], iv, evs[i], level, nature?.Multiplier(i) ?? 10, i == StatVector.Hp);
+                var value = StatFormula.Value(baseStats[i], iv, evs[i], level, nature?.Multiplier(i) ?? 10, i == StatVector.Hp);
                 if (value == stats[i])
                 {
                     min ??= iv;
@@ -99,9 +101,9 @@ public static class Ivs
     }
 
     /// <summary>Intersection of every row per stat; a known IV (typed by the player) takes precedence.</summary>
-    public static FinalCell[] Final(TrainingPokemon pokemon, ReferenceData data)
+    public static FinalCell[] Final(TrainingPokemon pokemon, ReferenceData data, GameVersion version)
     {
-        var rows = pokemon.IvLog.Select(entry => RangeFor(entry, pokemon, data)).ToList();
+        var rows = pokemon.IvLog.Select(entry => RangeFor(entry, pokemon, data, version)).ToList();
         var final = new FinalCell[StatVector.Count];
         for (var i = 0; i < StatVector.Count; i++)
         {

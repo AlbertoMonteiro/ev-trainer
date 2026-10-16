@@ -120,8 +120,9 @@ public sealed class CaptureStore
         Commit();
     }
 
-    /// <summary>Evaluates a capture with the species' current importance.</summary>
-    public CaptureResult Evaluate(CaptureInput input) => Capture.Evaluate(input, ImportanceFor(input.Species), _dex, _data);
+    /// <summary>Evaluates a capture with the species' current importance, in the saved game version (Deoxys's forme).</summary>
+    public CaptureResult Evaluate(CaptureInput input) =>
+        Capture.Evaluate(input, ImportanceFor(input.Species), _dex, _data, GameVersions.Parse(_repository.LoadPreferences().GameVersion));
 
     private void Commit()
     {

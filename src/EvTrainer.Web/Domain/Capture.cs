@@ -143,10 +143,10 @@ public static class Capture
         };
     }
 
-    public static CaptureResult Evaluate(CaptureInput input, StatImportance[] importance, Pokedex dex, ReferenceData data)
+    public static CaptureResult Evaluate(CaptureInput input, StatImportance[] importance, Pokedex dex, ReferenceData data, GameVersion version)
     {
         var nature = data.FindNature(input.Nature);
-        var cells = Ivs.RangeFor(dex.Find(input.Species)?.ToEntry(), nature, input.Level, input.Stats, new int[StatVector.Count]);
+        var cells = Ivs.RangeFor(dex.Find(input.Species)?.ToEntry(), nature, input.Level, input.Stats, new int[StatVector.Count], version);
         GradeSpan?[] grades = [.. cells.Select(c => c is IvSpan(var min, var max) ? new GradeSpan(Grade(min), Grade(max)) : null)];
         var weights = cells.Select((cell, i) => cell is IvUnknowable ? 0 : (int)importance[i]).ToArray();
 

@@ -22,7 +22,7 @@
                         <PokemonSprite Name="@name" Size="48" />
                         <span class="chip-text">
                             <span class="name">@name</span>
-                            <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", entry.Base)</span>
+                            <span class="base-stats num muted" title="@L["Settings.Species.Base"]">@string.Join(" ", GameVersions.BaseStats(entry.Name, entry.Base, GameVersions.Parse(Store.Preferences.GameVersion)))</span>
                         </span>
                     </button>
                 </li>

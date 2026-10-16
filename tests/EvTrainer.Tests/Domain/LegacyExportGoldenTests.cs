@@ -51,7 +51,7 @@ public partial class LegacyExportGoldenTests
     [Fact]
     public void Final_iv_ranges_match_the_current_app()
     {
-        var final = Ivs.Final(Squirtle(), Data);
+        var final = Ivs.Final(Squirtle(), Data, GameVersion.FireRed);
 
         Assert.Equal(["25", "20-21", "18", "27", "29", "30"], final.Select(IvTests.Show));
     }
@@ -63,7 +63,7 @@ public partial class LegacyExportGoldenTests
         var row = pokemon.IvLog.Single(l => l.Level == 23);
 
         Assert.Equal("Wartortle", row.Species);
-        Assert.Equal(["25-28", "18-21", "14-18", "23-27", "27-31", "27-30"], Ivs.RangeFor(row, pokemon, Data).Select(IvTests.Show));
+        Assert.Equal(["25-28", "18-21", "14-18", "23-27", "27-31", "27-30"], Ivs.RangeFor(row, pokemon, Data, GameVersion.FireRed).Select(IvTests.Show));
     }
 
     [Theory]

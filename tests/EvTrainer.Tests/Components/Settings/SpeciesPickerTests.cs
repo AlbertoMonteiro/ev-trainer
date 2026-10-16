@@ -124,4 +124,16 @@ public class SpeciesPickerTests : AppTestContext
             ["sprites/7.png", "sprites/8.png", "sprites/9.png"],
             line.FindAll(".species-chip .sprite img").Select(i => i.GetAttribute("src")));
     }
+
+    [Theory]
+    [InlineData("fireRed", "50 180 20 180 20 150")]
+    [InlineData("leafGreen", "50 70 160 70 160 90")]
+    public void Deoxys_shows_the_base_stats_of_the_chosen_version(string version, string expected)
+    {
+        Store.SetGameVersion(version);
+
+        var cut = RenderPicker([new SpeciesEntry { Name = "Deoxys", Base = [50, 150, 50, 150, 50, 150] }], "Deoxys");
+
+        Assert.Equal(expected, cut.Find(".species-chip .base-stats").TextContent.Trim());
+    }
 }

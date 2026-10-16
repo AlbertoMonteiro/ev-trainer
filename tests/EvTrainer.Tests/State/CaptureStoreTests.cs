@@ -1,5 +1,6 @@
 using EvTrainer.Tests.Support;
 using EvTrainer.Web.Domain;
+using EvTrainer.Web.Domain.Model;
 using EvTrainer.Web.Domain.Reference;
 using EvTrainer.Web.State;
 
@@ -176,5 +177,18 @@ public class CaptureStoreTests
         Assert.Equal(CaptureComparison.Better, store.CompareWithBest(hasty));
         Assert.NotNull(store.Conclude(hasty));
         Assert.Equal("Hasty", store.BestFor("Machop")!.Nature);
+    }
+
+    [Theory]
+    [InlineData("fireRed", new[] { 75, 113, 18, 118, 19, 99 })]
+    [InlineData("leafGreen", new[] { 75, 47, 102, 52, 103, 63 })]
+    public void Deoxys_is_evaluated_with_the_forme_of_the_saved_game_version(string version, int[] stats)
+    {
+        var repository = new InMemoryRepository();
+        repository.SavePreferences(new UiPreferences { GameVersion = version });
+
+        var result = CreateStore(repository).Evaluate(new CaptureInput("Deoxys", 30, "Quirky", stats));
+
+        Assert.DoesNotContain(result.Cells, c => c is IvInconsistent);
     }
 }

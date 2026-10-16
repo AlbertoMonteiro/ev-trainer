@@ -33,7 +33,7 @@ public class KnownIvsTests
         pokemon.KnownIvs[5] = 30;
         pokemon.KnownIvs[0] = 24;
 
-        var final = Ivs.Final(pokemon, Data);
+        var final = Ivs.Final(pokemon, Data, GameVersion.FireRed);
 
         Assert.Equal(new FinalKnown(30, MatchesNotes: true), final[5]);
         Assert.Equal(new FinalKnown(24, MatchesNotes: true), final[0]);
@@ -45,7 +45,7 @@ public class KnownIvsTests
         var pokemon = WithHandoffLevels();
         pokemon.KnownIvs[5] = 10;
 
-        Assert.Equal(new FinalKnown(10, MatchesNotes: false), Ivs.Final(pokemon, Data)[5]);
+        Assert.Equal(new FinalKnown(10, MatchesNotes: false), Ivs.Final(pokemon, Data, GameVersion.FireRed)[5]);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class KnownIvsTests
         var pokemon = Pokemons.Squirtle("Timid");
         pokemon.KnownIvs[0] = 5;
 
-        var final = Ivs.Final(pokemon, Data);
+        var final = Ivs.Final(pokemon, Data, GameVersion.FireRed);
 
         Assert.Equal(new FinalKnown(5, MatchesNotes: true), final[0]);
         Assert.IsType<FinalNoData>(final[1]);
@@ -66,11 +66,11 @@ public class KnownIvsTests
         var pokemon = Pokemons.Squirtle("Timid");
         pokemon.IvLog.Add(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]));
         pokemon.IvLog.Add(Level(5, "Squirtle", [19, 9, 12, 11, 12, 11], new int[6]));
-        Assert.IsType<FinalConflict>(Ivs.Final(pokemon, Data)[0]);
+        Assert.IsType<FinalConflict>(Ivs.Final(pokemon, Data, GameVersion.FireRed)[0]);
 
         pokemon.KnownIvs[0] = 20;
 
-        Assert.Equal(new FinalKnown(20, MatchesNotes: false), Ivs.Final(pokemon, Data)[0]);
+        Assert.Equal(new FinalKnown(20, MatchesNotes: false), Ivs.Final(pokemon, Data, GameVersion.FireRed)[0]);
     }
 
     [Fact]
@@ -79,6 +79,6 @@ public class KnownIvsTests
         var pokemon = WithHandoffLevels();
         pokemon.KnownIvs[5] = 30;
 
-        Assert.Equal(["23-25", "20-21", "18-19", "26-28", "29", "30*"], Ivs.Final(pokemon, Data).Select(IvTests.Show));
+        Assert.Equal(["23-25", "20-21", "18-19", "26-28", "29", "30*"], Ivs.Final(pokemon, Data, GameVersion.FireRed).Select(IvTests.Show));
     }
 }

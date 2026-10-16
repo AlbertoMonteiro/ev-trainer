@@ -33,7 +33,7 @@ public class IvTests
     {
         var pokemon = Pokemons.Squirtle("Timid");
 
-        var cells = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), pokemon, Data);
+        var cells = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), pokemon, Data, GameVersion.FireRed);
 
         Assert.Equal(["12-31", "4-31", "10-29", "20-31", "12-31", "14-31"], cells.Select(Show));
     }
@@ -52,7 +52,7 @@ public class IvTests
             Level(21, "Wartortle", [62, 31, 42, 39, 44, 38], [38, 0, 2, 27, 0, 4]),
         ]);
 
-        var final = Ivs.Final(pokemon, Data);
+        var final = Ivs.Final(pokemon, Data, GameVersion.FireRed);
 
         Assert.Equal(["23-25", "20-21", "18-19", "26-28", "29", "30"], final.Select(Show));
     }
@@ -60,7 +60,7 @@ public class IvTests
     [Fact]
     public void Impossible_stat_is_inconsistent()
     {
-        var cells = Ivs.RangeFor(Level(5, "Squirtle", [99, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Timid"), Data);
+        var cells = Ivs.RangeFor(Level(5, "Squirtle", [99, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Timid"), Data, GameVersion.FireRed);
 
         Assert.Equal("?", Show(cells[0]));
         Assert.Equal("4-31", Show(cells[1]));
@@ -69,7 +69,7 @@ public class IvTests
     [Fact]
     public void Unknown_species_is_inconsistent_everywhere()
     {
-        var cells = Ivs.RangeFor(Level(5, "Charmander", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle(), Data);
+        var cells = Ivs.RangeFor(Level(5, "Charmander", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle(), Data, GameVersion.FireRed);
 
         Assert.All(cells, c => Assert.IsType<IvInconsistent>(c));
     }
@@ -77,7 +77,7 @@ public class IvTests
     [Fact]
     public void Zero_stat_means_no_data()
     {
-        var cells = Ivs.RangeFor(Level(5, "Squirtle", [20, 0, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Timid"), Data);
+        var cells = Ivs.RangeFor(Level(5, "Squirtle", [20, 0, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Timid"), Data, GameVersion.FireRed);
 
         Assert.IsType<IvNoData>(cells[1]);
     }
@@ -86,19 +86,19 @@ public class IvTests
     public void Disjoint_ranges_ask_to_check_and_no_rows_give_no_data()
     {
         var pokemon = Pokemons.Squirtle("Timid");
-        Assert.All(Ivs.Final(pokemon, Data), c => Assert.IsType<FinalNoData>(c));
+        Assert.All(Ivs.Final(pokemon, Data, GameVersion.FireRed), c => Assert.IsType<FinalNoData>(c));
 
         pokemon.IvLog.Add(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]));
         pokemon.IvLog.Add(Level(5, "Squirtle", [19, 9, 12, 11, 12, 11], new int[6]));
 
-        Assert.IsType<FinalConflict>(Ivs.Final(pokemon, Data)[0]);
+        Assert.IsType<FinalConflict>(Ivs.Final(pokemon, Data, GameVersion.FireRed)[0]);
     }
 
     [Fact]
     public void Empty_nature_is_neutral()
     {
-        var neutral = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle(""), Data);
-        var hardy = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Hardy"), Data);
+        var neutral = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle(""), Data, GameVersion.FireRed);
+        var hardy = Ivs.RangeFor(Level(5, "Squirtle", [20, 9, 12, 11, 12, 11], new int[6]), Pokemons.Squirtle("Hardy"), Data, GameVersion.FireRed);
 
         Assert.Equal(hardy.Select(Show), neutral.Select(Show));
     }
@@ -121,15 +121,15 @@ public class IvTests
         {
             var species = pokemon.Species.First(s => s.Name == level.Species);
             Assert.Equal(
-                Ivs.RangeFor(level, pokemon, Data).Select(Show),
-                Ivs.RangeFor(species, Data.FindNature("Timid"), level.Level, level.Stats, level.Evs).Select(Show));
+                Ivs.RangeFor(level, pokemon, Data, GameVersion.FireRed).Select(Show),
+                Ivs.RangeFor(species, Data.FindNature("Timid"), level.Level, level.Stats, level.Evs, GameVersion.FireRed).Select(Show));
         }
     }
 
     [Fact]
     public void Pure_overload_without_species_is_inconsistent()
     {
-        var cells = Ivs.RangeFor(null, Data.FindNature("Timid"), 5, [20, 9, 12, 11, 12, 0], new int[6]);
+        var cells = Ivs.RangeFor(null, Data.FindNature("Timid"), 5, [20, 9, 12, 11, 12, 0], new int[6], GameVersion.FireRed);
 
         Assert.All(cells[..5], c => Assert.IsType<IvInconsistent>(c));
         Assert.IsType<IvNoData>(cells[5]);
@@ -140,13 +140,35 @@ public class IvTests
     {
         var shedinja = new SpeciesEntry { Name = "Shedinja", Base = [1, 90, 45, 30, 30, 40] };
 
-        var cells = Ivs.RangeFor(shedinja, Data.FindNature("Hardy"), 25, [1, 54, 33, 26, 26, 30], new int[6]);
+        var cells = Ivs.RangeFor(shedinja, Data.FindNature("Hardy"), 25, [1, 54, 33, 26, 26, 30], new int[6], GameVersion.FireRed);
 
         Assert.IsType<IvUnknowable>(cells[0]);
         Assert.IsType<IvSpan>(cells[1]);
 
         var pokemon = new TrainingPokemon { Nature = "Hardy", Species = [shedinja] };
         pokemon.IvLog.Add(Level(25, "Shedinja", [1, 54, 33, 26, 26, 30], new int[6]));
-        Assert.IsType<FinalNoData>(Ivs.Final(pokemon, Data)[0]);
+        Assert.IsType<FinalNoData>(Ivs.Final(pokemon, Data, GameVersion.FireRed)[0]);
+    }
+
+    [Theory]
+    [InlineData(GameVersion.FireRed, new[] { 75, 113, 18, 118, 19, 99 })]
+    [InlineData(GameVersion.LeafGreen, new[] { 75, 47, 102, 52, 103, 63 })]
+    public void Deoxys_uses_the_forme_of_the_chosen_version(GameVersion version, int[] stats)
+    {
+        var deoxys = Pokedex.LoadEmbedded().Find("Deoxys")!.ToEntry();
+
+        var cells = Ivs.RangeFor(deoxys, Data.FindNature("Quirky"), 30, stats, new int[6], version);
+
+        Assert.Equal(["17-19", "0-3", "4-6", "17-19", "7-9", "14-16"], cells.Select(Show));
+    }
+
+    [Fact]
+    public void Forme_base_stats_follow_the_game()
+    {
+        int[] normal = [50, 150, 50, 150, 50, 150];
+
+        Assert.Equal([50, 180, 20, 180, 20, 150], GameVersions.BaseStats("Deoxys", normal, GameVersion.FireRed));
+        Assert.Equal([50, 70, 160, 70, 160, 90], GameVersions.BaseStats("Deoxys", normal, GameVersion.LeafGreen));
+        Assert.Equal([44, 48, 65, 50, 64, 43], GameVersions.BaseStats("Squirtle", [44, 48, 65, 50, 64, 43], GameVersion.LeafGreen));
     }
 }

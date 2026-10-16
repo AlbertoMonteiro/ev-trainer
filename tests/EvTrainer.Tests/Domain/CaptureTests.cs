@@ -18,7 +18,7 @@ public class CaptureTests
     private const StatImportance M = StatImportance.Main;
 
     private static CaptureResult Evaluate(CaptureInput input, StatImportance[]? importance = null) =>
-        Capture.Evaluate(input, importance ?? Capture.DefaultImportance(Dex.Find(input.Species)!.Base), Dex, Data);
+        Capture.Evaluate(input, importance ?? Capture.DefaultImportance(Dex.Find(input.Species)!.Base), Dex, Data, GameVersion.FireRed);
 
     [Theory]
     [InlineData(0, IvGrade.Poor)]
@@ -188,5 +188,15 @@ public class CaptureTests
         var docile = Evaluate(new CaptureInput("Machop", 16, "Docile", [50, 31, 25, 21, 19, 20]));
 
         Assert.Equal(new VerdictKnown(VerdictGrade.Fair), docile.Verdict);
+    }
+
+    [Fact]
+    public void Deoxys_caught_in_fire_red_is_evaluated_with_the_attack_forme()
+    {
+        var result = Capture.Evaluate(
+            new CaptureInput("Deoxys", 30, "Quirky", [75, 113, 18, 118, 19, 99]),
+            Capture.DefaultImportance(Dex.Find("Deoxys")!.Base), Dex, Data, GameVersion.FireRed);
+
+        Assert.DoesNotContain(result.Cells, c => c is IvInconsistent);
     }
 }

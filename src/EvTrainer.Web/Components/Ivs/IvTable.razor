@@ -3,8 +3,9 @@
 
 @if (Store.Selected is { } pokemon)
 {
-    var rows = pokemon.IvLog.Select(entry => (Entry: entry, Cells: Ivs.RangeFor(entry, pokemon, Store.Data))).ToList();
-    var final = Ivs.Final(pokemon, Store.Data);
+    var version = GameVersions.Parse(Store.Preferences.GameVersion);
+    var rows = pokemon.IvLog.Select(entry => (Entry: entry, Cells: Ivs.RangeFor(entry, pokemon, Store.Data, version))).ToList();
+    var final = Ivs.Final(pokemon, Store.Data, version);
     var nature = Store.Data.FindNature(pokemon.Nature);
 
     <section class="card">
