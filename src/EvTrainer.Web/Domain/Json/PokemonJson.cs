@@ -15,16 +15,19 @@ public static class PokemonJson
     public const string Collection = "pokemon";
 
     /// <param name="deleted">Deletion records (sync, spec 008); written only when there are any.</param>
+    /// <param name="plan">Planned team (sync, spec 015); written only when given.</param>
     public static string Serialize(
         IReadOnlyDictionary<string, TrainingPokemon> all,
         bool indented,
-        IReadOnlyDictionary<string, DateTimeOffset>? deleted = null)
+        IReadOnlyDictionary<string, DateTimeOffset>? deleted = null,
+        LeaguePlan? plan = null)
     {
         var dto = new BackupDto
         {
             Collection = Collection,
             Documents = all.ToDictionary(kv => kv.Key, kv => (PokemonDto?)ToDto(kv.Value)),
             Deleted = deleted is { Count: > 0 } ? deleted.ToDictionary(kv => kv.Key, kv => ToElement(kv.Value)) : null,
+            Plan = plan is null ? null : JsonSerializer.SerializeToElement(LeaguePlanJson.ToDto(plan), EvTrainerJsonContext.Default.LeaguePlanDto),
         };
         var context = indented ? EvTrainerJsonContext.Indented : EvTrainerJsonContext.Default;
         return JsonSerializer.Serialize(dto, context.BackupDto);
@@ -53,21 +56,39 @@ public static class PokemonJson
             }
         }
 
-        return new SyncSnapshot(FromDocuments(dto.Documents), deleted);
+        return new SyncSnapshot(FromDocuments(dto.Documents), deleted, PlanOf(dto.Plan));
     }
 
     /// <summary>ISO 8601 in UTC with full precision, so a value read back is identical to the one written.</summary>
     internal static string FormatTimestamp(DateTimeOffset value) =>
         value.UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'", CultureInfo.InvariantCulture);
 
-    private static JsonElement ToElement(DateTimeOffset value) =>
+    internal static JsonElement ToElement(DateTimeOffset value) =>
         JsonSerializer.SerializeToElement(FormatTimestamp(value), EvTrainerJsonContext.Default.String);
 
-    private static DateTimeOffset? ParseTimestamp(JsonElement? value) =>
+    internal static DateTimeOffset? ParseTimestamp(JsonElement? value) =>
         value is { ValueKind: JsonValueKind.String } text
         && DateTimeOffset.TryParse(text.GetString(), CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var at)
             ? at
             : null;
+
+    /// <summary>The plan section, read tolerantly: anything but an object is no plan.</summary>
+    private static LeaguePlan? PlanOf(JsonElement? plan)
+    {
+        if (plan is not { ValueKind: JsonValueKind.Object } value)
+        {
+            return null;
+        }
+
+        try
+        {
+            return value.Deserialize(EvTrainerJsonContext.Default.LeaguePlanDto) is { } dto ? LeaguePlanJson.FromDto(dto) : null;
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
 
     internal static bool TryParse(string json, out BackupDto dto)
     {
@@ -207,6 +228,11 @@ internal sealed class BackupDto
     [JsonPropertyName("deleted")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, JsonElement>? Deleted { get; set; }
+
+    /// <summary>Planned team (spec 015), only in the synced document; read tolerantly.</summary>
+    [JsonPropertyName("plan")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public JsonElement? Plan { get; set; }
 }
 
 internal sealed class PokemonDto
@@ -301,6 +327,7 @@ internal sealed class LevelDto
 [JsonSerializable(typeof(BackupDto))]
 [JsonSerializable(typeof(UiPreferences))]
 [JsonSerializable(typeof(CaptureNotesDto))]
+[JsonSerializable(typeof(LeaguePlanDto))]
 [JsonSerializable(typeof(string))]
 internal sealed partial class EvTrainerJsonContext : JsonSerializerContext
 {

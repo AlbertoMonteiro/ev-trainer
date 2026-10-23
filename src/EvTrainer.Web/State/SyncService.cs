@@ -151,7 +151,7 @@ public sealed class SyncService : IDisposable
                     continue;
                 }
 
-                var json = PokemonJson.Serialize(merge.Documents, indented: false, merge.Deleted);
+                var json = PokemonJson.Serialize(merge.Documents, indented: false, merge.Deleted, merge.Plan);
                 var etag = await _provider.WriteAsync(connection, json);
                 _remoteJson = json;
                 connection = connection with { ETag = etag };

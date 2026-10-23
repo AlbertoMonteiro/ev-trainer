@@ -12,6 +12,7 @@
     <button type="button" class="capture" role="menuitem" @onclick="Capture">@L["Menu.Capture"]</button>
     <button type="button" class="sync" role="menuitem" @onclick="OpenSync">@L["Menu.Sync"]</button>
     <button type="button" class="guide" role="menuitem" @onclick="OpenGuide">@L["Menu.Guide"]</button>
+    <button type="button" class="league" role="menuitem" @onclick="OpenLeague">@L["Menu.League"]</button>
     @if (Store.Ordered.Count > 0)
     {
         <button type="button" class="export" role="menuitem" @onclick="Export">@L["Menu.ExportBackup"]</button>
@@ -105,6 +106,15 @@
 
     [Parameter]
     public EventCallback OnGuide { get; set; }
+
+    [Parameter]
+    public EventCallback OnLeague { get; set; }
+
+    private async Task OpenLeague()
+    {
+        await OnLeague.InvokeAsync();
+        await OnClose.InvokeAsync();
+    }
 
     private async Task OpenGuide()
     {

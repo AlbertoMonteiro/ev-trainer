@@ -59,6 +59,12 @@ up and it narrows down your IVs.
   game, Sevii Islands included, with its trainers and wild Pokémon taken from the game's decompilation
   (`route 4` / `rota 4`, `brock`, `nidoran f`…); search results (and "All") list the opponents that help your
   current targets first.
+- **Plan the Elite Four** — pick the battle (first or rematch) and your starter (it decides the Champion's team)
+  and see every League Pokémon with its level, ability, item and real moves; build a team of up to 6 with moves
+  each species can learn in FireRed/LeafGreen (level-up, TM/HM, tutors) and see, for each opponent, your best move
+  and its effectiveness (abilities such as Levitate included), who threatens each member and which opponents are left
+  unanswered. "Suggest moves" fills the free slots to cover the whole League; locked moves stay. The team syncs
+  between devices with the rest of your data. All of it comes from the game's decompilation.
 - **FireRed or LeafGreen** — choose your version in the menu: the wild Pokémon of each place follow it (Scyther or
   Pinsir in the Safari Zone, Oddish or Bellsprout on Route 24…); trainers are the same in both.
 - **IV calculator** — note the 6 stats after each level up; the app shows the possible IV range per
@@ -126,7 +132,7 @@ commit you're running are shown at the bottom of the ☰ menu.
 | Runtime | [.NET 11](https://dotnet.microsoft.com/) (C# 15), Blazor WebAssembly standalone, PWA |
 | Hosting | GitHub Pages, deployed by [GitHub Actions](.github/workflows/deploy.yml) on every push to `main` |
 | Tests | xUnit v3 on Microsoft Testing Platform + bUnit — test-first (TDD) |
-| Data | `localStorage` (same format as the backup file); embedded [`reference-data.json`](reference-data.json) and [`pokedex-gen3.json`](pokedex-gen3.json) |
+| Data | `localStorage` (same format as the backup file); embedded [`reference-data.json`](reference-data.json), [`pokedex-gen3.json`](pokedex-gen3.json) and [`league.json`](league.json) |
 | C# 15 in use | closed hierarchies (IV cells), union types (backup read result), collection-expression arguments, labeled `continue` |
 
 The project is spec-driven with [Spec Kit](https://github.com/github/spec-kit): see the
@@ -164,6 +170,7 @@ dotnet run scripts/BuildPokedex.cs
 dotnet run scripts/DownloadSprites.cs
 dotnet run scripts/BuildVsSeekerGuide.cs   # vs-seeker-guide.json from the FireRed decompilation
 dotnet run scripts/BuildLocations.cs       # locations.json: trainers and wild Pokémon of every place, from the decompilation
+dotnet run scripts/BuildLeague.cs          # league.json: Elite Four teams, moves and learnsets, from the decompilation
 ```
 
 ### Project layout

@@ -3,16 +3,19 @@ using EvTrainer.Web.Domain.Model;
 
 namespace EvTrainer.Web.Domain;
 
-/// <summary>Everything a device syncs: the Pokémon and the deletion records (spec 008).</summary>
+/// <summary>Everything a device syncs: the Pokémon, the deletion records (spec 008) and the planned team (spec 015).</summary>
 public sealed record SyncSnapshot(
     IReadOnlyDictionary<string, TrainingPokemon> Documents,
-    IReadOnlyDictionary<string, DateTimeOffset> Deleted);
+    IReadOnlyDictionary<string, DateTimeOffset> Deleted,
+    LeaguePlan? Plan = null);
 
 /// <param name="Updated">Local Pokémon replaced by a newer remote version.</param>
 /// <param name="Added">Pokémon that exist locally only because of the remote side.</param>
 /// <param name="Removed">Local Pokémon removed by a newer remote deletion.</param>
 /// <param name="LocalChanged">The local data must be replaced by the result.</param>
 /// <param name="RemoteChanged">The remote copy must be rewritten with the result.</param>
+/// <param name="Plan">The planned team that won (spec 015).</param>
+/// <param name="PlanChanged">The local planned team must be replaced by <paramref name="Plan"/>.</param>
 public sealed record MergeResult(
     Dictionary<string, TrainingPokemon> Documents,
     Dictionary<string, DateTimeOffset> Deleted,
@@ -20,12 +23,15 @@ public sealed record MergeResult(
     int Added,
     int Removed,
     bool LocalChanged,
-    bool RemoteChanged);
+    bool RemoteChanged,
+    LeaguePlan? Plan = null,
+    bool PlanChanged = false);
 
 /// <summary>
 /// Merge rule of the sync (research R4): per Pokémon, the most recent event — a version (its
 /// <see cref="TrainingPokemon.UpdatedAt"/>) or a deletion — wins. The result does not depend on which side is
-/// local, and merging again with the same remote changes nothing, so devices converge in any order.
+/// local, and merging again with the same remote changes nothing, so devices converge in any order. The planned team
+/// follows the same rule as a single document without deletions.
 /// </summary>
 public static class SyncMerge
 {
@@ -104,8 +110,22 @@ public static class SyncMerge
             }
         }
 
-        return new MergeResult(documents, deleted, updated, added, removed, localChanged, remoteChanged);
+        var plan = NewestPlan(local.Plan, remote.Plan);
+        var planChanged = !SamePlan(local.Plan, plan);
+        remoteChanged |= !SamePlan(remote.Plan, plan);
+        return new MergeResult(documents, deleted, updated, added, removed, localChanged || planChanged, remoteChanged, plan, planChanged);
     }
+
+    private static LeaguePlan? NewestPlan(LeaguePlan? a, LeaguePlan? b) => (a, b) switch
+    {
+        (null, _) => b,
+        (_, null) => a,
+        _ when a.UpdatedAt != b.UpdatedAt => (a.UpdatedAt ?? DateTimeOffset.MinValue) > (b.UpdatedAt ?? DateTimeOffset.MinValue) ? a : b,
+        _ => string.CompareOrdinal(LeaguePlanJson.Serialize(a), LeaguePlanJson.Serialize(b)) >= 0 ? a : b,
+    };
+
+    private static bool SamePlan(LeaguePlan? side, LeaguePlan? winner) =>
+        side is null ? winner is null : winner is not null && LeaguePlanJson.Serialize(side) == LeaguePlanJson.Serialize(winner);
 
     private static DateTimeOffset? RecordOf(SyncSnapshot snapshot, string id) =>
         snapshot.Deleted.TryGetValue(id, out var at) ? at : null;

@@ -15,9 +15,10 @@ public enum SaveStatus
 /// In-memory state of every trained Pokémon. Applies domain commands, saves immediately through
 /// <see cref="IPokemonRepository"/> and raises <see cref="Changed"/>. Every command that changes a Pokémon
 /// stamps it (<see cref="TrainingPokemon.UpdatedAt"/>) and every removal is recorded, for the sync (spec 008).
+/// Also holds the team planned against the League (spec 015), checked against <paramref name="league"/> when given.
 /// Holds no UI text.
 /// </summary>
-public sealed partial class TrainerStore(IPokemonRepository repository, ReferenceData data, TimeProvider? time = null)
+public sealed partial class TrainerStore(IPokemonRepository repository, ReferenceData data, TimeProvider? time = null, League? league = null)
 {
     private readonly Dictionary<string, TrainingPokemon> _all = new(StringComparer.Ordinal);
     private readonly Dictionary<string, DateTimeOffset> _deleted = new(StringComparer.Ordinal);
@@ -33,6 +34,9 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
     public SaveStatus Status { get; private set; } = SaveStatus.Saved;
 
     public UiPreferences Preferences { get; private set; } = new();
+
+    /// <summary>The team planned against the League (spec 015); <see cref="LeaguePlan.Empty"/> until the first change.</summary>
+    public LeaguePlan Plan { get; private set; } = LeaguePlan.Empty;
 
     public string? SelectedId => Preferences.SelectedId is { } id && _all.ContainsKey(id) ? id : null;
 
@@ -61,6 +65,8 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         {
             Save();
         }
+
+        Plan = Checked(repository.LoadPlan() ?? LeaguePlan.Empty);
 
         Preferences = repository.LoadPreferences();
         if (SelectedId is null && Ordered.Count > 0)
@@ -489,10 +495,20 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         NotifyChanged();
     }
 
-    /// <summary>Copy of everything the sync exchanges: the Pokémon and the deletion records.</summary>
+    /// <summary>Replaces the planned team (checked against the game data), stamps it, saves it and notifies.</summary>
+    public void UpdatePlan(LeaguePlan plan)
+    {
+        Plan = Checked(plan) with { UpdatedAt = _time.GetUtcNow() };
+        repository.SavePlan(Plan);
+        NotifyChanged();
+        LocalDataChanged?.Invoke();
+    }
+
+    /// <summary>Copy of everything the sync exchanges: the Pokémon, the deletion records and the plan once changed.</summary>
     public SyncSnapshot Snapshot() => new(
         _all.ToDictionary(kv => kv.Key, kv => kv.Value.Clone(), StringComparer.Ordinal),
-        new Dictionary<string, DateTimeOffset>(_deleted, StringComparer.Ordinal));
+        new Dictionary<string, DateTimeOffset>(_deleted, StringComparer.Ordinal),
+        Plan.UpdatedAt is null ? null : Plan);
 
     /// <summary>
     /// Replaces the data with the result of a sync merge, without stamping (the stamps come with the merge) and
@@ -519,9 +535,17 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             UpdatePreferences(Preferences with { SelectedId = Ordered.FirstOrDefault().Id });
         }
 
+        if (result is { PlanChanged: true, Plan: { } plan })
+        {
+            Plan = Checked(plan);
+            repository.SavePlan(Plan);
+        }
+
         Save();
         NotifyChanged();
     }
+
+    private LeaguePlan Checked(LeaguePlan plan) => league is null ? plan : LeaguePlans.Normalize(plan, league);
 
     /// <summary>
     /// With more than one Exp. Share holder (a sync or an import), keeps <paramref name="preferred"/> or else the

@@ -14,6 +14,7 @@ public sealed class InMemoryRepository : IPokemonRepository
     public int CaptureSaveCount { get; private set; }
     public Dictionary<string, DateTimeOffset> Deleted { get; private set; } = [];
     public SyncConnection? SyncConnection { get; private set; }
+    public LeaguePlan? Plan { get; private set; }
 
     public InMemoryRepository(params (string Id, TrainingPokemon Pokemon)[] seed)
     {
@@ -46,6 +47,10 @@ public sealed class InMemoryRepository : IPokemonRepository
     public void SavePreferences(UiPreferences preferences) => Preferences = preferences with { };
 
     public CaptureNotes LoadCaptureNotes() => CaptureNotes.Clone();
+
+    public LeaguePlan? LoadPlan() => Plan;
+
+    public void SavePlan(LeaguePlan plan) => Plan = plan;
 
     public SyncConnection? LoadSyncConnection() => SyncConnection;
 

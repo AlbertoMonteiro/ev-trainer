@@ -28,6 +28,11 @@ public interface IPokemonRepository
 
     void SaveCaptureNotes(CaptureNotes notes);
 
+    /// <summary>The team planned against the League (spec 015), or null when none was saved or it is invalid.</summary>
+    LeaguePlan? LoadPlan();
+
+    void SavePlan(LeaguePlan plan);
+
     /// <summary>The device's link to external storage, or null when sync is off (spec 008).</summary>
     SyncConnection? LoadSyncConnection();
 

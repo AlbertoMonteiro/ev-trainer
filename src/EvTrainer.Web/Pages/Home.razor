@@ -3,12 +3,16 @@
 
 <PageTitle>@L["App.Title"]</PageTitle>
 
-<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" OnGuide="OpenGuide" />
+<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" OnGuide="OpenGuide" OnLeague="OpenLeague" />
 
 <div class="app-body">
     <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" />
     <main class="page">
-        @if (_guiding)
+        @if (_planning)
+        {
+            <LeaguePlannerView OnClose="() => _planning = false" />
+        }
+        else if (_guiding)
         {
             <TrainingGuideView OnClose="() => _guiding = false" />
         }
@@ -59,9 +63,19 @@
     private bool _capturing;
     private bool _syncing;
     private bool _guiding;
+    private bool _planning;
+
+    private void OpenLeague()
+    {
+        _capturing = false;
+        _syncing = false;
+        _guiding = false;
+        _planning = true;
+    }
 
     private void OpenGuide()
     {
+        _planning = false;
         _capturing = false;
         _syncing = false;
         _guiding = true;
@@ -69,6 +83,7 @@
 
     private void OpenCapture()
     {
+        _planning = false;
         _guiding = false;
         _syncing = false;
         _capturing = true;
@@ -76,6 +91,7 @@
 
     private void OpenSync()
     {
+        _planning = false;
         _guiding = false;
         _capturing = false;
         _syncing = true;
@@ -84,6 +100,7 @@
     /// <summary>Picking a Pokémon in the side panel keeps the tab and leaves the capture screen.</summary>
     private void Choose(string id)
     {
+        _planning = false;
         _capturing = false;
         _syncing = false;
         _guiding = false;
@@ -92,6 +109,7 @@
 
     private void Navigate(Tab tab)
     {
+        _planning = false;
         _capturing = false;
         _syncing = false;
         _guiding = false;
@@ -100,6 +118,7 @@
 
     private void AddPokemon()
     {
+        _planning = false;
         _capturing = false;
         _syncing = false;
         _guiding = false;

@@ -1,0 +1,166 @@
+@inherits StoreAwareComponent
+@inject LeaguePlanner Planner
+
+@{
+    var species = Planner.League.Species(Member.Species)!;
+    var learnable = species.Learnset.GroupBy(l => l.Move)
+        .Select(g => (Move: Planner.League.Move(g.Key)!, Sources: g.ToList()))
+        .OrderBy(m => m.Move.Name, StringComparer.Ordinal)
+        .ToList();
+}
+
+<div class="plan-member" data-index="@Index">
+    <div class="member-head">
+        <PokemonSprite Name="@Member.Species" Size="48" />
+        <div class="member-title">
+            <span class="species">@Member.Species</span>
+            <span class="types">
+                @foreach (var type in species.Types)
+                {
+                    <span class="type @LeagueText.TypeClass(type)">@type</span>
+                }
+            </span>
+        </div>
+        <button type="button" class="link change-species" @onclick="() => _changing = !_changing">
+            @(_changing ? L["League.Member.CancelChange"] : L["League.Member.Change"])
+        </button>
+        <button type="button" class="link remove-member" aria-label="@L["League.Member.RemoveLabel", Member.Species]"
+                @onclick="Remove">@L["League.Member.Remove"]</button>
+    </div>
+
+    @if (_changing)
+    {
+        <SpeciesSearch OnPick="ChangeSpecies" />
+    }
+    @if (_dropped is { } dropped)
+    {
+        <p class="hint warn">@L["League.Member.Dropped", dropped]</p>
+    }
+
+    <label class="ability-row">
+        <span class="label muted">@L["League.Member.Ability"]</span>
+        @if (species.Abilities.Count > 1)
+        {
+            <select class="ability" value="@Member.Ability" @onchange="e => SetAbility(e.Value?.ToString())">
+                @foreach (var ability in species.Abilities)
+                {
+                    <option value="@ability" selected="@(ability == Member.Ability)">@ability</option>
+                }
+            </select>
+        }
+        else
+        {
+            <span class="ability">@Member.Ability</span>
+        }
+    </label>
+
+    <ol class="move-slots">
+        @for (var s = 0; s < PlanMember.MaxMoves; s++)
+        {
+            var slot = s;
+            var current = slot < Member.Moves.Count ? Member.Moves[slot] : null;
+            <li class="move-row">
+                <select class="move-slot" data-slot="@slot" aria-label="@L["League.Member.Move", slot + 1]"
+                        @onchange="e => SetMove(slot, e.Value?.ToString())">
+                    <option value="" selected="@(current is null)">@L["League.Member.NoMove"]</option>
+                    <optgroup label="@L["League.Member.Damaging"]">
+                        @foreach (var (move, sources) in learnable.Where(m => m.Move.DealsDamage))
+                        {
+                            <option value="@move.Name" selected="@(move.Name == current)">@LeagueText.MoveOption(L, move, sources)</option>
+                        }
+                    </optgroup>
+                    <optgroup label="@L["League.Member.Status"]">
+                        @foreach (var (move, sources) in learnable.Where(m => !m.Move.DealsDamage))
+                        {
+                            <option value="@move.Name" selected="@(move.Name == current)">@LeagueText.MoveOption(L, move, sources)</option>
+                        }
+                    </optgroup>
+                </select>
+                @if (current is not null)
+                {
+                    <button type="button" class="lock" data-move="@current" aria-pressed="@(Member.Locked.Contains(current) ? "true" : "false")"
+                            aria-label="@L["League.Member.Lock", current]" title="@L["League.Member.Lock", current]"
+                            @onclick="() => ToggleLock(current)">🔒</button>
+                }
+            </li>
+        }
+    </ol>
+
+    <button type="button" class="suggest-member" @onclick="Suggest">@L["League.Member.Suggest"]</button>
+
+    <div class="member-threats">
+        @if (Threats.Count == 0)
+        {
+            <p class="hint">@L["League.Member.NoThreats"]</p>
+        }
+        else
+        {
+            <span class="label warn">@L["League.Member.Threats"]</span>
+            <ul>
+                @foreach (var group in Threats.GroupBy(t => t.Opponent.Key))
+                {
+                    var opponent = group.First().Opponent;
+                    <li>
+                        <span>@L["League.Member.ThreatFrom", opponent.Mon.Species, LeagueText.TrainerName(L, opponent.Trainer)]</span>
+                        @foreach (var threat in group)
+                        {
+                            <span class="threat-move">@L["League.Threat.Move", threat.Move, LeagueText.Multiplier(threat.Multiplier)]</span>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    @if (Walls.Count > 0)
+    {
+        <div class="member-walls">
+            <span class="label ok">@L["League.Member.Walls"]</span>
+            @foreach (var wall in Walls)
+            {
+                <span class="wall">@L["League.Member.WallOf", wall.Mon.Species, LeagueText.TrainerName(L, wall.Trainer)]</span>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private bool _changing;
+    private string? _dropped;
+
+    [Parameter, EditorRequired]
+    public int Index { get; set; }
+
+    [Parameter, EditorRequired]
+    public PlanMember Member { get; set; } = default!;
+
+    [Parameter]
+    public IReadOnlyList<Threat> Threats { get; set; } = [];
+
+    [Parameter]
+    public IReadOnlyList<LeagueOpponent> Walls { get; set; } = [];
+
+    private void Update(PlanMember member) => Store.UpdatePlan(LeaguePlans.Replace(Store.Plan, Index, member));
+
+    private void SetMove(int slot, string? move) =>
+        Update(LeaguePlans.WithMove(Member, slot, string.IsNullOrEmpty(move) ? null : move));
+
+    private void ToggleLock(string move) => Update(LeaguePlans.ToggleLock(Member, move));
+
+    private void SetAbility(string? ability) => Update(Member with { Ability = ability ?? "" });
+
+    private void ChangeSpecies(PokedexSpecies species)
+    {
+        var changed = LeaguePlans.WithSpecies(Member, species.Name, Planner.League);
+        _dropped = changed.Moves.Count < Member.Moves.Count ? species.Name : null;
+        _changing = false;
+        Update(changed);
+    }
+
+    private void Remove()
+    {
+        _dropped = null;
+        Store.UpdatePlan(LeaguePlans.Remove(Store.Plan, Index));
+    }
+
+    private void Suggest() => Store.UpdatePlan(Planner.Suggest(Store.Plan, Index));
+}

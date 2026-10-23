@@ -18,13 +18,15 @@ public abstract class AppTestContext : BunitContext
     public static readonly Pokedex Dex = Pokedex.LoadEmbedded();
     public static readonly LocationNames Places = LocationNames.LoadEmbedded();
     public static readonly VsSeekerGuide Guide = VsSeekerGuide.LoadEmbedded();
+    public static readonly League League = League.LoadEmbedded();
+    public static readonly LeaguePlanner Planner = new(League, Dex);
 
     protected AppTestContext(LocalizationCatalog? catalog = null)
     {
         JSInterop.Mode = JSRuntimeMode.Strict;
         Catalog = catalog ?? LocalizationCatalog.LoadEmbedded();
         Language = new LanguageState(Catalog);
-        Store = new TrainerStore(Repository, Data, Time);
+        Store = new TrainerStore(Repository, Data, Time, League);
         Capture = new CaptureStore(Repository, Dex, Data);
         Sync = new SyncService(Store, Repository, SyncProvider, Time);
         Toasts = new ToastService(Time);
@@ -33,6 +35,8 @@ public abstract class AppTestContext : BunitContext
         Services.AddSingleton(Places);
         Services.AddSingleton(Guide);
         Services.AddSingleton(new TrainingGuide(Guide, Dex));
+        Services.AddSingleton(League);
+        Services.AddSingleton(Planner);
         Services.AddSingleton(new OpponentSearch(Data, Places));
         Services.AddSingleton(Dex);
         Services.AddSingleton<IPokemonRepository>(Repository);

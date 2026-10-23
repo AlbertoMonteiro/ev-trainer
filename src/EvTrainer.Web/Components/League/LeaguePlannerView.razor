@@ -1,0 +1,111 @@
+@inherits StoreAwareComponent
+@inject LeaguePlanner Planner
+
+@{
+    var plan = Store.Plan;
+    var coverage = Planner.Coverage(plan);
+    var summary = Planner.Summary(coverage);
+    var threats = Planner.Threats(plan);
+}
+
+<section class="league-view">
+    <div class="card card-head league-top">
+        <h2>@L["League.Title"]</h2>
+        <button type="button" class="close-league" @onclick="OnClose">@L["League.Close"]</button>
+    </div>
+
+    <div class="league-controls">
+        <div class="segmented league-round" role="group" aria-label="@L["League.Round.Label"]">
+            @foreach (var round in Enum.GetValues<LeagueRound>())
+            {
+                var key = League.RoundKey(round);
+                <button type="button" data-round="@key" aria-pressed="@(plan.Round == round ? "true" : "false")"
+                        @onclick="() => Store.UpdatePlan(Store.Plan with { Round = round })">@L[$"League.Round.{key}"]</button>
+            }
+        </div>
+        <div class="league-starter-group">
+            <span class="label muted">@L["League.Starter.Label"]</span>
+            <div class="segmented league-starter" role="group" aria-label="@L["League.Starter.Label"]">
+                @foreach (var starter in Enum.GetValues<Starter>())
+                {
+                    <button type="button" data-starter="@League.StarterKey(starter)" aria-pressed="@(plan.Starter == starter ? "true" : "false")"
+                            @onclick="() => Store.UpdatePlan(Store.Plan with { Starter = starter })">@starter</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <p class="hint">@L["League.Hint"]</p>
+
+    <div class="card league-summary" aria-live="polite">
+        <h3>@L["League.Summary.Title"] <span class="muted">@L["League.Summary.Total", summary.Total]</span></h3>
+        <ul>
+            <li class="se">@L["League.Summary.SuperEffective", summary.SuperEffective]</li>
+            <li class="neutral">@L["League.Summary.Neutral", summary.Neutral]</li>
+            <li class="unanswered">@L["League.Summary.Unanswered", summary.Unanswered]</li>
+        </ul>
+    </div>
+
+    <section class="card league-team">
+        <h3>@L["League.Team.Title"]</h3>
+        @if (plan.Members.Count == 0)
+        {
+            <p class="hint">@L["League.Team.Empty"]</p>
+        }
+        <div class="plan-members">
+            @for (var i = 0; i < plan.Members.Count; i++)
+            {
+                var index = i;
+                <PlanMemberCard @key="index" Index="index" Member="plan.Members[index]"
+                                Threats="threats.Where(t => t.Member == index).ToList()"
+                                Walls="Planner.Walls(plan, index)" />
+            }
+        </div>
+        @if (plan.Members.Count < LeaguePlan.MaxMembers)
+        {
+            <div class="add-member">
+                <span class="label">@L["League.Team.Add"]</span>
+                <SpeciesSearch OnPick="Add" />
+            </div>
+        }
+        else
+        {
+            <p class="hint">@L["League.Team.Full"]</p>
+        }
+        @if (plan.Members.Count > 0)
+        {
+            <button type="button" class="suggest-team" @onclick="SuggestAll">@L["League.Team.SuggestAll"]</button>
+            <p class="hint">@L["League.Team.SuggestHint"]</p>
+        }
+    </section>
+
+    <ol class="league-trainers">
+        @foreach (var trainer in Planner.League.Trainers)
+        {
+            <li class="card league-trainer" data-trainer="@trainer.Id">
+                <h3>@LeagueText.TrainerName(L, trainer)</h3>
+                <ol class="league-mons">
+                    @foreach (var item in coverage.Where(c => c.Opponent.Trainer.Id == trainer.Id))
+                    {
+                        <LeagueOpponentCard Coverage="item" Plan="plan" Threats="threats.Where(t => t.Opponent.Key == item.Opponent.Key).ToList()" />
+                    }
+                </ol>
+            </li>
+        }
+    </ol>
+
+    <p class="league-sources hint">
+        @L["League.Sources"]
+        <a href="https://github.com/pret/pokefirered" target="_blank" rel="noopener noreferrer">@L["League.Sources.Link"]</a>
+    </p>
+</section>
+
+@code {
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private void Add(PokedexSpecies species) =>
+        Store.UpdatePlan(LeaguePlans.Add(Store.Plan, LeaguePlans.NewMember(species.Name, Planner.League)));
+
+    private void SuggestAll() => Store.UpdatePlan(Planner.Suggest(Store.Plan));
+}

@@ -79,6 +79,27 @@ public class EnglishScreensTests : AppTestContext
     }
 
     [Fact]
+    public void Elite_four_planner_shows_no_portuguese()
+    {
+        Store.Load();
+        Store.UpdatePlan(Store.Plan with
+        {
+            Members =
+            [
+                EvTrainer.Web.Domain.Model.LeaguePlans.NewMember("Charizard", League) with { Moves = ["Flamethrower", "Earthquake"] },
+                EvTrainer.Web.Domain.Model.LeaguePlans.NewMember("Gengar", League) with { Moves = ["Shadow Ball"] },
+            ],
+        });
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+        cut.Find(".menu-panel button.league").Click();
+        AssertNoPortuguese(cut.Nodes);
+
+        cut.Find(".league-round button[data-round='rematch']").Click();
+        AssertNoPortuguese(cut.Nodes);
+    }
+
+    [Fact]
     public void Capture_and_sync_show_no_portuguese()
     {
         Store.Load();

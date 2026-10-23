@@ -36,6 +36,13 @@ public partial class NoHardcodedTextTests : AppTestContext
             .. Data.TrainersByLocation.Select(l => Places.Display(l.Name, "en")),
             .. Guide.Trainers.Select(t => t.Location),
             .. Dex.Species.Select(s => s.Name),
+            // Elite Four planner (spec 015): game names of trainers, moves, types, abilities and items.
+            .. League.Trainers.Select(t => t.Name),
+            .. Dex.Species.SelectMany(s => League.Species(s.Name)!.Learnset.Select(l => l.Move)),
+            .. Dex.Species.SelectMany(s => League.Species(s.Name)!.Abilities),
+            .. EvTrainer.Web.Domain.TypeChart.Types,
+            .. Enum.GetValues<EvTrainer.Web.Domain.Reference.LeagueRound>().SelectMany(r => Enum.GetValues<EvTrainer.Web.Domain.Reference.Starter>()
+                .SelectMany(st => League.Opponents(r, st)).SelectMany(o => (string?[])[.. o.Mon.Moves, o.Mon.Item, o.Mon.Ability]).OfType<string>()),
             // Sprite badges without a dex number show the initial of a data name (vitamins, unknown species).
             .. Data.Opponents.Select(o => o.Name[..1].ToUpperInvariant()),
             // Each language is listed by its own name (endonym), taken from its resource file.
@@ -128,6 +135,29 @@ public partial class NoHardcodedTextTests : AppTestContext
             cut.Find($".guide-stat button[data-stat='{stat}']").Click();
             AssertNoHardcodedText(cut.Nodes);
         }
+    }
+
+    [Fact]
+    public void Elite_four_planner_has_no_hardcoded_text()
+    {
+        Store.Load();
+        Store.UpdatePlan(Store.Plan with
+        {
+            Members =
+            [
+                EvTrainer.Web.Domain.Model.LeaguePlans.NewMember("Charizard", League) with { Moves = ["Flamethrower", "Earthquake"], Locked = ["Earthquake"] },
+                EvTrainer.Web.Domain.Model.LeaguePlans.NewMember("Gengar", League) with { Moves = ["Shadow Ball"] },
+                EvTrainer.Web.Domain.Model.LeaguePlans.NewMember("Lapras", League),
+            ],
+        });
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+        cut.Find(".menu-panel button.league").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".league-round button[data-round='rematch']").Click();
+        cut.Find(".plan-member[data-index='0'] button.change-species").Click();
+        AssertNoHardcodedText(cut.Nodes);
     }
 
     [Fact]
@@ -269,6 +299,6 @@ public partial class NoHardcodedTextTests : AppTestContext
     [GeneratedRegex(@"^(«[A-Za-z0-9_.]+»\s*)+$")]
     private static partial Regex Localized();
 
-    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️☁⏳]*$")]
+    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️☁⏳🔒½¼⅛?]*$")]
     private static partial Regex NumbersAndSymbols();
 }

@@ -14,6 +14,7 @@ public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, Reference
     public const string PreferencesKey = "evtrainer:v1:prefs";
     public const string CaptureKey = "evtrainer:v1:capture";
     public const string SyncKey = "evtrainer:v1:sync";
+    public const string PlanKey = "evtrainer:v1:plan";
 
     private IJSInProcessRuntime Js => (IJSInProcessRuntime)js;
 
@@ -35,6 +36,10 @@ public sealed class LocalStorageRepository(IJSRuntime js, Pokedex dex, Reference
     public CaptureNotes LoadCaptureNotes() => CaptureNotesJson.Deserialize(Get(CaptureKey), dex, data);
 
     public void SaveCaptureNotes(CaptureNotes notes) => Set(CaptureKey, CaptureNotesJson.Serialize(notes));
+
+    public LeaguePlan? LoadPlan() => LeaguePlanJson.Deserialize(Get(PlanKey));
+
+    public void SavePlan(LeaguePlan plan) => Set(PlanKey, LeaguePlanJson.Serialize(plan));
 
     public SyncConnection? LoadSyncConnection() => SyncConnectionJson.Deserialize(Get(SyncKey));
 

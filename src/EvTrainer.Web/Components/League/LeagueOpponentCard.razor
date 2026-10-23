@@ -1,0 +1,91 @@
+@inherits StoreAwareComponent
+@inject LeaguePlanner Planner
+
+@{
+    var opponent = Coverage.Opponent;
+    var mon = opponent.Mon;
+    var species = Planner.League.Species(mon.Species)!;
+    var threatMoves = Threats.Select(t => t.Move).ToHashSet();
+}
+
+<li class="league-mon" data-index="@opponent.Index">
+    <div class="mon-head">
+        <PokemonSprite Name="@mon.Species" Size="48" />
+        <div class="mon-title">
+            <span class="species">@mon.Species</span>
+            <span class="level num muted">@L["League.Mon.Level", mon.Level]</span>
+            <span class="types">
+                @foreach (var type in species.Types)
+                {
+                    <span class="type @LeagueText.TypeClass(type)">@type</span>
+                }
+            </span>
+        </div>
+    </div>
+    <div class="mon-info muted">
+        <span>@L["League.Mon.Ability", mon.Ability]</span>
+        @if (mon.Item is { } item)
+        {
+            <span>@L["League.Mon.Item", item]</span>
+        }
+    </div>
+    <ul class="moves">
+        @foreach (var name in mon.Moves)
+        {
+            var move = Planner.League.Move(name);
+            <li class="move @(threatMoves.Contains(name) ? "threat" : "")">
+                <span class="name">@name</span>
+                @if (move is not null)
+                {
+                    <span class="type @LeagueText.TypeClass(move.Type)">@move.Type</span>
+                }
+            </li>
+        }
+    </ul>
+    <p class="cover level-@LevelClass(Coverage.Level)">@CoverText()</p>
+    @if (Threats.Count > 0)
+    {
+        <ul class="threats">
+            @foreach (var group in Threats.GroupBy(t => t.Member))
+            {
+                <li class="warn">
+                    <span>@L["League.Threat", mon.Species, Plan.Members[group.Key].Species]</span>
+                    @foreach (var threat in group)
+                    {
+                        <span class="threat-move">@L["League.Threat.Move", threat.Move, LeagueText.Multiplier(threat.Multiplier)]</span>
+                    }
+                </li>
+            }
+        </ul>
+    }
+</li>
+
+@code {
+    [Parameter, EditorRequired]
+    public OpponentCoverage Coverage { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public LeaguePlan Plan { get; set; } = default!;
+
+    [Parameter]
+    public IReadOnlyList<Threat> Threats { get; set; } = [];
+
+    private static string LevelClass(CoverageLevel level) => level switch
+    {
+        CoverageLevel.SuperEffective => "super",
+        CoverageLevel.Neutral => "neutral",
+        CoverageLevel.Resisted => "resisted",
+        _ => "none",
+    };
+
+    private string CoverText() => Coverage switch
+    {
+        { Level: CoverageLevel.None } => L["League.Cover.None"],
+        { Best: { } best, Level: CoverageLevel.Resisted } =>
+            L["League.Cover.Resisted", Plan.Members[best.Member].Species, best.Move, LeagueText.Multiplier(best.Multiplier)],
+        { Best: { } best, Level: CoverageLevel.Neutral } =>
+            $"{L["League.Cover.Best", Plan.Members[best.Member].Species, best.Move, LeagueText.Multiplier(best.Multiplier)]} · {L["League.Cover.NoSuper"]}",
+        { Best: { } best } => L["League.Cover.Best", Plan.Members[best.Member].Species, best.Move, LeagueText.Multiplier(best.Multiplier)],
+        _ => L["League.Cover.None"],
+    };
+}
