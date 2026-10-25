@@ -1,22 +1,13 @@
 @inherits StoreAwareComponent
 
-@* The Pokémon in training (sprite, current form, nature, EV total), shared by the menu and the desktop side panel. *@
-<ul class="pokemon-list">
-    @foreach (var (id, pokemon) in Store.Ordered)
-    {
-        var selected = id == Store.SelectedId;
-        <li>
-            <button type="button" class="pokemon-item" role="@(InMenu ? "menuitem" : null)" data-id="@id" aria-current="@(selected ? "true" : "false")"
-                    @onclick="() => OnChoose.InvokeAsync(id)">
-                <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />@PokemonLabel(pokemon)@if (!string.IsNullOrEmpty(pokemon.Nature))
-                {
-                    <span class="nature muted">@pokemon.Nature</span>
-                }</span>
-                <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
-            </button>
-        </li>
-    }
-</ul>
+@* The current party (spec 016: sprite, current form, nature, EV total), shared by the menu and the desktop side panel;
+   a stored Pokémon opened from the party page is listed apart. *@
+@ListOf(Store.PartyOrdered, "pokemon-list")
+@if (Store.SelectedId is { } selectedId && !Store.IsInParty(selectedId))
+{
+    <div class="group-label opened-label">@L["Menu.Opened"]</div>
+    @ListOf([(selectedId, Store.Selected!)], "pokemon-list opened")
+}
 
 @code {
     /// <summary>Inside the ☰ menu the items are menu items; in the side panel they are plain buttons.</summary>
@@ -25,4 +16,24 @@
 
     [Parameter]
     public EventCallback<string> OnChoose { get; set; }
+
+    private RenderFragment ListOf(IReadOnlyList<(string Id, TrainingPokemon Pokemon)> items, string css) => __builder =>
+    {
+        <ul class="@css">
+            @foreach (var (id, pokemon) in items)
+            {
+                var selected = id == Store.SelectedId;
+                <li>
+                    <button type="button" class="pokemon-item" role="@(InMenu ? "menuitem" : null)" data-id="@id" aria-current="@(selected ? "true" : "false")"
+                            @onclick="() => OnChoose.InvokeAsync(id)">
+                        <span class="who"><span class="mark">@(selected ? "●" : "")</span><PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />@PokemonLabel(pokemon)@if (!string.IsNullOrEmpty(pokemon.Nature))
+                        {
+                            <span class="nature muted">@pokemon.Nature</span>
+                        }</span>
+                        <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
+                    </button>
+                </li>
+            }
+        </ul>
+    };
 }

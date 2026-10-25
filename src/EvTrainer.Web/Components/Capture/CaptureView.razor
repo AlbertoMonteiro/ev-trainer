@@ -160,8 +160,8 @@
 
         // Keeping it also concludes the evaluation; the toast offers undoing the addition.
         Capture.Conclude(input);
-        var (_, undo) = Store.AddFromCapture(input, Dex);
-        Toasts.Show(L["Capture.Added", input.Species], undo);
+        var (id, undo) = Store.AddFromCapture(input, Dex);
+        Toasts.Show(L["Capture.Added", input.Species] + (Store.IsInParty(id) ? "" : " · " + L["Party.FullOnAdd"]), undo);
         await OnAdded.InvokeAsync();
     }
 }

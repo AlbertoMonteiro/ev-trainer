@@ -1,0 +1,112 @@
+@inherits StoreAwareComponent
+
+@{
+    var party = Store.PartyOrdered;
+    var stored = Store.Stored;
+    var full = !Store.HasPartyRoom;
+}
+
+<section class="party-view">
+    <div class="card card-head party-top">
+        <h2>@L["Party.Title"]</h2>
+        <button type="button" class="close-party" @onclick="OnClose">@L["Party.Close"]</button>
+    </div>
+
+    <p class="hint">@L["Party.Hint"]</p>
+
+    <section class="card party-members">
+        <h3>@L["Party.Members", party.Count, Party.MaxSize]</h3>
+        @if (party.Count == 0)
+        {
+            <p class="hint">@L["Party.Empty"]</p>
+        }
+        <ol class="party-rows">
+            @for (var i = 0; i < party.Count; i++)
+            {
+                var (id, pokemon) = party[i];
+                var name = PokemonLabel(pokemon);
+                <li class="party-row" data-id="@id">
+                    @Who(pokemon)
+                    <div class="party-actions">
+                        <button type="button" class="move-up" aria-label="@L["Party.MoveUp", name]" title="@L["Party.MoveUp", name]"
+                                disabled="@(i == 0)" @onclick="() => Store.MoveInParty(id, -1)">↑</button>
+                        <button type="button" class="move-down" aria-label="@L["Party.MoveDown", name]" title="@L["Party.MoveDown", name]"
+                                disabled="@(i == party.Count - 1)" @onclick="() => Store.MoveInParty(id, 1)">↓</button>
+                        <button type="button" class="leave" @onclick="() => Store.LeaveParty(id)">@L["Party.Leave"]</button>
+                        <button type="button" class="open" @onclick="() => OnOpen.InvokeAsync(id)">@L["Party.Open"]</button>
+                    </div>
+                </li>
+            }
+        </ol>
+    </section>
+
+    <section class="card party-stored">
+        <h3>@L["Party.Stored", stored.Count]</h3>
+        @if (stored.Count == 0)
+        {
+            <p class="hint">@L["Party.NoStored"]</p>
+        }
+        <ol class="party-rows">
+            @foreach (var (id, pokemon) in stored)
+            {
+                <li class="stored-row" data-id="@id">
+                    @Who(pokemon)
+                    <div class="party-actions">
+                        @if (full)
+                        {
+                            <button type="button" class="swap" aria-expanded="@(_swapping == id ? "true" : "false")"
+                                    @onclick="() => _swapping = _swapping == id ? null : id">@L["Party.Swap"]</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="join" @onclick="() => Store.JoinParty(id)">@L["Party.Join"]</button>
+                        }
+                        <button type="button" class="open" @onclick="() => OnOpen.InvokeAsync(id)">@L["Party.Open"]</button>
+                    </div>
+                    @if (full && _swapping == id)
+                    {
+                        <div class="swap-choices" role="group" aria-label="@L["Party.SwapLabel", PokemonLabel(pokemon)]">
+                            <span class="label muted">@L["Party.SwapLabel", PokemonLabel(pokemon)]</span>
+                            @foreach (var (memberId, member) in party)
+                            {
+                                <button type="button" class="swap-with" data-id="@memberId" @onclick="() => Swap(id, memberId)">
+                                    <PokemonSprite Name="@member.CurrentSpecies" Size="32" />@PokemonLabel(member)
+                                </button>
+                            }
+                        </div>
+                    }
+                </li>
+            }
+        </ol>
+    </section>
+</section>
+
+@code {
+    private string? _swapping;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    /// <summary>Opens a Pokémon (party or stored) in the tabs.</summary>
+    [Parameter]
+    public EventCallback<string> OnOpen { get; set; }
+
+    private void Swap(string id, string replacing)
+    {
+        _swapping = null;
+        Store.JoinParty(id, replacing);
+    }
+
+    private RenderFragment Who(TrainingPokemon pokemon) => __builder =>
+    {
+        <span class="who">
+            <PokemonSprite Name="@pokemon.CurrentSpecies" Size="40" />
+            <span class="name">@PokemonLabel(pokemon)</span>
+            @if (!string.IsNullOrEmpty(pokemon.Nature))
+            {
+                <span class="nature muted">@pokemon.Nature</span>
+            }
+            <span class="num muted">@L["Menu.Total", Evs.Totals(pokemon.Events, Store.Data).Sum()]</span>
+        </span>
+    };
+}

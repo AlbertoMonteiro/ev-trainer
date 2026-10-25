@@ -1,0 +1,347 @@
+@inherits StoreAwareComponent
+@using System.Globalization
+@inject OpponentSearch Search
+@inject VsSeekerGuide Trainers
+@inject TrainingGuide Guide
+@inject ToastService Toasts
+
+@{
+    var choicesA = ChoicesA();
+    var a = _a is not null && Store.All.TryGetValue(_a, out var pa) ? pa : null;
+    var b = _b is not null && _b != _a && Store.All.TryGetValue(_b, out var pb) ? pb : null;
+    var stage = _trainer?.Stages.FirstOrDefault(s => s.Index == _stage);
+    var yield = stage is not null ? Guide.StageEvs(stage) : _wild?.EvYield;
+    var plan = a is not null && yield is not null && !(_trainer?.Double ?? false)
+        ? ExpSharePlanner.Plan(Mon(a), b is null ? null : Mon(b), yield)
+        : null;
+}
+
+<section class="exp-plan-view">
+    <div class="card card-head exp-plan-top">
+        <h2>@L["Plan.Title"]</h2>
+        <button type="button" class="close-plan" @onclick="OnClose">@L["Plan.Close"]</button>
+    </div>
+
+    <p class="hint">@L["Plan.Hint"]</p>
+
+    <div class="card plan-inputs">
+        <label class="plan-field">
+            <span class="label">@L["Plan.A"]</span>
+            <select class="plan-a" @onchange="e => _a = e.Value?.ToString()">
+                @foreach (var (id, pokemon) in choicesA)
+                {
+                    <option value="@id" selected="@(id == _a)">@PokemonLabel(pokemon)</option>
+                }
+            </select>
+        </label>
+        <label class="plan-field">
+            <span class="label">@L["Plan.B"]</span>
+            <select class="plan-b" @onchange="e => _b = e.Value?.ToString() is { Length: > 0 } id ? id : null">
+                <option value="" selected="@(b is null)">@L["Plan.Nobody"]</option>
+                @foreach (var (id, pokemon) in Store.PartyOrdered.Where(p => p.Id != _a))
+                {
+                    <option value="@id" selected="@(id == _b)">@PokemonLabel(pokemon)</option>
+                }
+            </select>
+        </label>
+
+        <div class="plan-field plan-opponent">
+            <span class="label">@L["Plan.Opponent"]</span>
+            @if (_trainer is not null || _wild is not null)
+            {
+                <div class="chosen">
+                    <span class="name">@(_trainer is { } t ? L["Guide.Trainer", t.TrainerClass, t.Name].Value : _wild!.Name)</span>
+                    <button type="button" class="link change-opponent" @onclick="ClearOpponent">@L["Plan.ChangeOpponent"]</button>
+                </div>
+                @if (_trainer is { } trainer)
+                {
+                    <select class="plan-stage" aria-label="@L["Plan.Stage"]" @onchange="e => _stage = int.Parse(e.Value!.ToString()!, CultureInfo.InvariantCulture)">
+                        @foreach (var s in trainer.Stages)
+                        {
+                            <option value="@s.Index" selected="@(s.Index == _stage)">@StageText(s)</option>
+                        }
+                    </select>
+                    @if (trainer.Double)
+                    {
+                        <p class="hint warn plan-double">@L["TrainerCard.DoubleWhy"]</p>
+                    }
+                }
+            }
+            else
+            {
+                <input type="search" class="plan-search" placeholder="@L["Plan.SearchPlaceholder"]" aria-label="@L["Plan.Opponent"]"
+                       value="@_query" @oninput="e => _query = e.Value?.ToString() ?? string.Empty" />
+                @if (!string.IsNullOrWhiteSpace(_query))
+                {
+                    var trainers = Search.FindTrainers(_query);
+                    var wild = WildMatches();
+                    <ul class="plan-picks">
+                        @foreach (var t in trainers)
+                        {
+                            <li>
+                                <button type="button" class="pick-trainer" data-trainer="@t.Id" disabled="@t.Double" @onclick="() => PickTrainer(t)">
+                                    @L["Guide.Trainer", t.TrainerClass, t.Name]@if (t.Double)
+                                    {
+                                        <span class="mark double">@L["Guide.Double"]</span>
+                                    }
+                                </button>
+                            </li>
+                        }
+                        @foreach (var o in wild)
+                        {
+                            <li><button type="button" class="pick-wild" data-name="@o.Name" @onclick="() => PickWild(o)">@L["Plan.Wild", o.Name]</button></li>
+                        }
+                    </ul>
+                    @if (trainers.Count == 0 && wild.Count == 0)
+                    {
+                        <p class="hint">@L["Empty.NoResults"]</p>
+                    }
+                }
+            }
+        </div>
+    </div>
+
+    @if (plan is not null && a is not null)
+    {
+        <div class="card plan-result" aria-live="polite">
+            @if (plan.Useless)
+            {
+                <p class="plan-useless">@L["Plan.Useless"]</p>
+            }
+            else
+            {
+                <ol class="plan-phases">
+                    @foreach (var phase in plan.Phases)
+                    {
+                        var (lead, partner, shares) = Roles(phase.Setup);
+                        var leadMon = Store.All[lead];
+                        <li class="plan-phase" data-setup="@phase.Setup">
+                            <strong class="battles">@L["Plan.Battles", phase.Battles]</strong>
+                            <span class="setup">
+                                @L["Plan.Lead", PokemonLabel(leadMon)]
+                                ·
+                                @(shares && partner is not null ? L["Plan.Holder", PokemonLabel(Store.All[partner])] : L["Plan.NoShare"])
+                            </span>
+                            <span class="gains muted">@PerBattle(phase, a, b)</span>
+                            <button type="button" class="use-setup" @onclick="() => Use(lead, partner, shares)">@L["Plan.Use"]</button>
+                        </li>
+                    }
+                </ol>
+                <ul class="plan-finals">
+                    @Finals(a, plan.FinalA, yield!)
+                    @if (b is not null)
+                    {
+                        @Finals(b, plan.FinalB, yield!)
+                    }
+                </ul>
+                <p class="plan-total"><strong>@Total(plan)</strong></p>
+            }
+            @foreach (var (mon, left) in Left(plan, a, b))
+            {
+                <p class="plan-left warn">@L["Plan.Left", BattleToast.Gains(L, left), PokemonLabel(mon)]</p>
+            }
+            @if (stage is not null)
+            {
+                <button type="button" class="record-battle" @onclick="() => Record(stage)">@L["Plan.Record"]</button>
+            }
+        </div>
+    }
+
+    @if (_joining is { } joining)
+    {
+        <div class="card plan-join" role="alertdialog" aria-label="@L["Plan.Join", PokemonLabel(Store.All[joining.Missing])]">
+            @if (Store.HasPartyRoom)
+            {
+                <p>@L["Plan.Join", PokemonLabel(Store.All[joining.Missing])]</p>
+                <button type="button" class="confirm-join" @onclick="ConfirmJoin">@L["Plan.JoinYes"]</button>
+            }
+            else
+            {
+                <p>@L["Plan.JoinFull", PokemonLabel(Store.All[joining.Missing])]</p>
+                <button type="button" class="open-party" @onclick="OnParty">@L["Menu.Party"]</button>
+            }
+            <button type="button" class="link cancel-join" @onclick="() => _joining = null">@L["Plan.JoinNo"]</button>
+        </div>
+    }
+</section>
+
+@code {
+    private sealed record Pending(string Lead, string? Partner, bool Shares, string Missing);
+
+    private string? _a;
+    private string? _b;
+    private string _query = string.Empty;
+    private GuideTrainer? _trainer;
+    private int _stage;
+    private Opponent? _wild;
+    private Pending? _joining;
+    private bool _initialized;
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    /// <summary>Opens the party page (a Pokémon of the plan must join a full party).</summary>
+    [Parameter]
+    public EventCallback OnParty { get; set; }
+
+    /// <summary>Trainer and stage chosen in a trainer card (spec 016, US6).</summary>
+    [Parameter]
+    public string? InitialTrainerId { get; set; }
+
+    [Parameter]
+    public int? InitialStage { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (_initialized)
+        {
+            return;
+        }
+
+        _initialized = true;
+        _a = Store.SelectedId ?? Store.PartyOrdered.FirstOrDefault().Id;
+        _b = Store.ExpShareHolderId is { } holder && holder != _a ? holder : Store.PartyOrdered.FirstOrDefault(p => p.Id != _a).Id;
+        if (Trainers.Trainers.FirstOrDefault(t => t.Id == InitialTrainerId) is { } trainer)
+        {
+            PickTrainer(trainer);
+            if (InitialStage is { } index && trainer.Stages.Any(s => s.Index == index))
+            {
+                _stage = index;
+            }
+        }
+    }
+
+    /// <summary>The party, plus the selected Pokémon when it is stored (it is the one being trained).</summary>
+    private IReadOnlyList<(string Id, TrainingPokemon Pokemon)> ChoicesA() =>
+        Store.SelectedId is { } id && !Store.IsInParty(id) ? [.. Store.PartyOrdered, (id, Store.Selected!)] : Store.PartyOrdered;
+
+    private PlanMon Mon(TrainingPokemon pokemon) => new(Evs.Totals(pokemon.Events, Store.Data), pokemon.Targets, pokemon.Pokerus);
+
+    private IReadOnlyList<Opponent> WildMatches()
+    {
+        var folded = TextFold.Fold(_query.Trim());
+        return [.. Store.Data.Opponents.Where(o => !o.IsVitamin && TextFold.Fold(o.Name).Contains(folded, StringComparison.Ordinal)).Take(8)];
+    }
+
+    private void PickTrainer(GuideTrainer trainer)
+    {
+        _trainer = trainer;
+        _wild = null;
+        _stage = (TrainingGuide.Visible(trainer, Store.Preferences.GuidePhase).FirstOrDefault() ?? trainer.Stages[0]).Index;
+    }
+
+    private void PickWild(Opponent opponent)
+    {
+        _wild = opponent;
+        _trainer = null;
+    }
+
+    private void ClearOpponent()
+    {
+        _trainer = null;
+        _wild = null;
+        _query = string.Empty;
+    }
+
+    private string StageText(GuideStage stage) =>
+        L["Plan.StageOption", L[$"Guide.Stage.{stage.Index}"].Value, BattleToast.Gains(L, Guide.StageEvs(stage))];
+
+    /// <summary>Lead, partner and whether the partner holds the Exp. Share in a setup.</summary>
+    private (string Lead, string? Partner, bool Shares) Roles(Setup setup) => setup switch
+    {
+        Setup.ALeadsBShares => (_a!, _b, true),
+        Setup.BLeadsAShares => (_b!, _a, true),
+        Setup.AAlone => (_a!, _b, false),
+        _ => (_b!, _a, false),
+    };
+
+    private string PerBattle(PlanPhase phase, TrainingPokemon a, TrainingPokemon? b)
+    {
+        var parts = new List<string>();
+        if (phase.GainA.Any(g => g > 0))
+        {
+            parts.Add(L["Plan.PerBattle", PokemonLabel(a), BattleToast.Gains(L, phase.GainA)]);
+        }
+
+        if (b is not null && phase.GainB.Any(g => g > 0))
+        {
+            parts.Add(L["Plan.PerBattle", PokemonLabel(b), BattleToast.Gains(L, phase.GainB)]);
+        }
+
+        return string.Join(" · ", parts);
+    }
+
+    private RenderFragment Finals(TrainingPokemon pokemon, int[] final, int[] yield) => __builder =>
+    {
+        var totals = Evs.Totals(pokemon.Events, Store.Data);
+        for (var i = 0; i < yield.Length; i++)
+        {
+            if (yield[i] > 0)
+            {
+                <li class="plan-final">@L["Plan.Final", PokemonLabel(pokemon), L[$"Stat.Long.{i}"].Value, totals[i], final[i], pokemon.Targets[i]]</li>
+            }
+        }
+    };
+
+    private string Total(SharePlan plan) => plan.AloneBattles > plan.Battles
+        ? L["Plan.Total", plan.Battles, plan.AloneBattles, plan.AloneBattles - plan.Battles]
+        : L["Plan.TotalOnly", plan.Battles];
+
+    private static IEnumerable<(TrainingPokemon Mon, int[] Left)> Left(SharePlan plan, TrainingPokemon a, TrainingPokemon? b)
+    {
+        if (plan.LeftA.Any(l => l > 0))
+        {
+            yield return (a, plan.LeftA);
+        }
+
+        if (b is not null && plan.LeftB.Any(l => l > 0))
+        {
+            yield return (b, plan.LeftB);
+        }
+    }
+
+    private void Use(string lead, string? partner, bool shares)
+    {
+        var missing = new[] { lead, shares ? partner : null }.FirstOrDefault(id => id is not null && !Store.IsInParty(id));
+        if (missing is not null)
+        {
+            _joining = new Pending(lead, partner, shares, missing);
+            return;
+        }
+
+        Apply(lead, partner, shares);
+    }
+
+    private void ConfirmJoin()
+    {
+        if (_joining is not { } pending)
+        {
+            return;
+        }
+
+        _joining = null;
+        Store.JoinParty(pending.Missing);
+        Use(pending.Lead, pending.Partner, pending.Shares);
+    }
+
+    private void Apply(string lead, string? partner, bool shares)
+    {
+        if (Store.ApplyConfiguration(lead, partner, shares) is { } undo)
+        {
+            var message = shares && partner is not null
+                ? L["Plan.Applied", PokemonLabel(Store.All[lead]), PokemonLabel(Store.All[partner])]
+                : L["Plan.AppliedAlone", PokemonLabel(Store.All[lead])];
+            Toasts.Show(message, undo);
+        }
+    }
+
+    private void Record(GuideStage stage)
+    {
+        var records = Store.RecordTeam([.. stage.Team.Select(p => p.Species)]);
+        if (records.Count > 0)
+        {
+            var title = L["Guide.Trainer", _trainer!.TrainerClass, _trainer.Name].Value;
+            Toasts.Show(BattleToast.Message(L, Store, title, records), () => Store.UndoTeam(records));
+        }
+    }
+}

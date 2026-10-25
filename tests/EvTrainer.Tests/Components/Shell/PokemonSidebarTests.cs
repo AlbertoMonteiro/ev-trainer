@@ -104,4 +104,26 @@ public class PokemonSidebarTests : AppTestContext
         var body = cut.Find(".app-body");
         Assert.Equal(["aside", "main"], body.Children.Select(c => c.LocalName));
     }
+
+    [Fact]
+    public void Lists_only_the_party_and_opens_the_party_page()
+    {
+        for (var i = 1; i <= 7; i++)
+        {
+            var pokemon = Pokemons.Pidgey();
+            pokemon.Order = i;
+            pokemon.Party = i != 4;
+            Repository.Stored[$"p{i}"] = pokemon;
+        }
+
+        Store.Load();
+        var cut = Render<Home>();
+
+        var items = cut.FindAll("aside.pokemon-sidebar .pokemon-list:not(.opened) button.pokemon-item");
+        Assert.Equal(["p1", "p2", "p3", "p5", "p6", "p7"], items.Select(i => i.GetAttribute("data-id")));
+
+        cut.Find("aside.pokemon-sidebar button.manage-party").Click();
+
+        Assert.NotNull(cut.Find(".party-view"));
+    }
 }

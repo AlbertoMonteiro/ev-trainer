@@ -6,7 +6,7 @@ namespace EvTrainer.Tests.Domain;
 public class SearchTests
 {
     private static readonly ReferenceData Data = ReferenceData.LoadEmbedded();
-    private static readonly OpponentSearch Search = new(Data, LocationNames.LoadEmbedded());
+    private static readonly OpponentSearch Search = new(Data, LocationNames.LoadEmbedded(), VsSeekerGuide.LoadEmbedded());
 
     private static List<string> Names(string query) => [.. Search.Find(query, GameVersion.FireRed).Select(h => h.Opponent.Name)];
 
@@ -181,5 +181,45 @@ public class SearchTests
 
         Assert.Equal("Zigzagoon", hit.Opponent.Name);
         Assert.Empty(hit.TrainerLocations);
+    }
+
+    private static List<string> Trainers(string query) => [.. Search.FindTrainers(query).Select(t => t.Id)];
+
+    [Theory]
+    [InlineData("bernie")]
+    [InlineData("Engineer Bernie")]
+    [InlineData("BÉRNIE")]
+    [InlineData("  engineer bernie ")]
+    public void Trainers_are_found_by_name_or_class_and_name(string query) =>
+        Assert.Equal(["ENGINEER_BERNIE"], Trainers(query));
+
+    [Fact]
+    public void A_class_finds_all_its_trainers_in_guide_order() =>
+        Assert.Equal(["ENGINEER_BRAXTON", "ENGINEER_BERNIE"], Trainers("engineer"));
+
+    [Theory]
+    [InlineData("rota 11")]
+    [InlineData("brock")]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Places_unknown_trainers_and_empty_queries_find_no_trainer(string query) => Assert.Empty(Trainers(query));
+
+    [Fact]
+    public void A_trainer_search_lists_the_species_of_its_teams_with_the_place()
+    {
+        var hits = Search.Find("bernie", GameVersion.FireRed);
+
+        Assert.Contains(hits, h => h.Opponent.Name == "Magnemite" && h.TrainerLocations.Contains("Rota 11"));
+        Assert.Contains(hits, h => h.Opponent.Name == "Magneton" && h.TrainerLocations.Contains("Rota 11"));
+    }
+
+    [Fact]
+    public void A_species_matched_twice_is_listed_once()
+    {
+        var hits = Search.Find("magneton", GameVersion.FireRed);
+        var trainerHits = Search.Find("engineer", GameVersion.FireRed);
+
+        Assert.Single(hits, h => h.Opponent.Name == "Magneton");
+        Assert.Single(trainerHits, h => h.Opponent.Name == "Magneton");
     }
 }

@@ -274,4 +274,47 @@ public class ModelJsonTests
 
         Assert.Equal(["a"], snapshot.Deleted.Keys);
     }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void Party_round_trips(bool party)
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.Party = party;
+
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = pokemon }, indented: false);
+
+        Assert.Equal(party, JsonNode.Parse(json)!["documents"]!["sq"]!["party"]!.GetValue<bool>());
+        Assert.Equal(party, PokemonJson.Deserialize(json)!["sq"].Party);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(", \"party\": \"x\"")]
+    [InlineData(", \"party\": 1")]
+    [InlineData(", \"party\": null")]
+    public void Missing_or_invalid_party_is_unknown(string field)
+    {
+        var json = $$"""{ "collection": "pokemon", "documents": { "a": { "name": "Abra", "species": [{ "name": "Abra" }]{{field}} } } }""";
+
+        Assert.Null(PokemonJson.Deserialize(json)!["a"].Party);
+    }
+
+    [Fact]
+    public void Unknown_party_is_not_written()
+    {
+        var json = PokemonJson.Serialize(new Dictionary<string, TrainingPokemon> { ["sq"] = Pokemons.Squirtle() }, indented: false);
+
+        Assert.Null(JsonNode.Parse(json)!["documents"]!["sq"]!["party"]);
+    }
+
+    [Fact]
+    public void Clone_copies_party()
+    {
+        var pokemon = Pokemons.Squirtle();
+        pokemon.Party = false;
+
+        Assert.False(pokemon.Clone().Party);
+    }
 }

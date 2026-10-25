@@ -24,7 +24,7 @@
 
 @if (_menuOpen)
 {
-    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" OnCapture="OnCapture" OnSync="OnSync" OnGuide="OnGuide" OnLeague="OnLeague" />
+    <PokemonMenu OnClose="() => _menuOpen = false" OnNavigate="OnNavigate" OnCapture="OnCapture" OnSync="OnSync" OnGuide="OnGuide" OnLeague="OnLeague" OnParty="OnParty" />
 }
 
 @code {
@@ -44,6 +44,9 @@
 
     [Parameter]
     public EventCallback OnLeague { get; set; }
+
+    [Parameter]
+    public EventCallback OnParty { get; set; }
 
     protected override void OnInitialized()
     {

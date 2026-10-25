@@ -49,6 +49,11 @@ up and it narrows down your IVs.
 - **Exp. Share** — pick which Pokémon holds it and every battle also counts for it, the Gen 3 way: the whole EV
   yield (not split like experience), doubled only by its own Pokérus — Macho Brace never counts for the holder.
   The toast shows both gains and one Undo reverts both.
+- **Exp. Share battle plan** — pick two party Pokémon and an opponent (a VS Seeker trainer and its rematch, or a
+  wild Pokémon): the app tells how many battles to fight with each one in front holding the Macho Brace while the
+  other holds the Exp. Share (e.g. Engineer Bernie's 3 Magneton, 120 + 96 Sp. Atk to go: 8 + 4 = 12 battles instead
+  of 18), never going past a target and counting each one's Pokérus. "Use this setup" selects the lead and moves the
+  Macho Brace and the Exp. Share in one tap (with Undo).
 - **Where to train with the VS Seeker** — a page lists, for HP, Attack, Sp. Atk or Speed, every Kanto and Sevii Islands
   trainer the VS Seeker can rematch (islands 1–3 after Blaine, 4–7 after the Elite Four): place, team with levels and EVs per battle for each rematch stage (original, after Celadon,
   after Fuchsia, after the Elite Four, after the Sevii Islands), the best stage you can reach highlighted. Teams come
@@ -89,6 +94,10 @@ up and it narrows down your IVs.
 - **Phone first, great on desktop** — on a wide window the EV summary stays in view next to a wide
   opponent grid, IVs / settings / capture evaluation sit side by side, and a side panel lists your
   Pokémon so switching is one click; the phone layout is unchanged.
+- **Your current party** — the menu and the side panel list only the (up to) 6 Pokémon of your party; the others
+  stay stored, with all their data, in the "Party and stored" page (add, store, swap, reorder, open).
+- **Search by trainer** — type a VS Seeker trainer's name or class (`bernie`, `engineer`) to get a card with every
+  rematch team and its EVs per battle: record the whole battle in one tap (one Undo) or plan it with the Exp. Share.
 - **Several Pokémon**, history, light/dark theme, spreadsheet paste import.
 
 ## Your data stays on your device

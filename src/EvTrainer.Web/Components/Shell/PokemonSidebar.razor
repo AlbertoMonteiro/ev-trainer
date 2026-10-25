@@ -4,6 +4,7 @@
 <aside class="pokemon-sidebar" aria-label="@L["Sidebar.Title"]">
     <h2>@L["Sidebar.Title"]</h2>
     <PokemonList OnChoose="OnChoose" />
+    <button type="button" class="manage-party" @onclick="OnParty">@L["Menu.Party"]</button>
     <button type="button" class="add" @onclick="OnAdd">@L["Menu.AddPokemon"]</button>
 </aside>
 
@@ -13,4 +14,7 @@
 
     [Parameter]
     public EventCallback OnAdd { get; set; }
+
+    [Parameter]
+    public EventCallback OnParty { get; set; }
 }

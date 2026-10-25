@@ -259,4 +259,77 @@ public class GameVersionSwitchTests : AppTestContext
         Assert.NotEmpty(cut.FindAll("button.opponent[data-opp='Pinsir']"));
         Assert.Empty(cut.FindAll("button.opponent[data-opp='Scyther']"));
     }
+
+    /// <summary>Eight Pokémon "p1".."p8"; p7 and p8 stored (spec 016).</summary>
+    private void SeedEightWithTwoStored()
+    {
+        for (var i = 1; i <= 8; i++)
+        {
+            var pokemon = Pokemons.Pidgey();
+            pokemon.Order = i;
+            pokemon.Party = i <= 6;
+            Repository.Stored[$"p{i}"] = pokemon;
+        }
+
+        Store.Load();
+    }
+
+    [Fact]
+    public void Lists_only_the_party()
+    {
+        SeedEightWithTwoStored();
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        var items = cut.FindAll(".menu-panel .pokemon-list:not(.opened) button.pokemon-item");
+        Assert.Equal(["p1", "p2", "p3", "p4", "p5", "p6"], items.Select(i => i.GetAttribute("data-id")));
+        Assert.Empty(cut.FindAll(".menu-panel .pokemon-list.opened"));
+    }
+
+    [Fact]
+    public void A_stored_pokemon_being_trained_is_shown_apart()
+    {
+        SeedEightWithTwoStored();
+        Store.Select("p8");
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        var opened = cut.Find(".menu-panel .pokemon-list.opened");
+        Assert.Equal(["p8"], opened.QuerySelectorAll("button.pokemon-item").Select(i => i.GetAttribute("data-id")));
+        Assert.Contains(T("Menu.Opened"), cut.Find(".menu-panel").TextContent);
+    }
+
+    [Fact]
+    public void The_party_item_opens_the_party_page()
+    {
+        SeedEightWithTwoStored();
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        cut.Find(".menu-panel button.party").Click();
+
+        Assert.Empty(cut.FindAll(".menu-panel"));
+        Assert.NotNull(cut.Find(".party-view"));
+    }
+
+    [Fact]
+    public void Adding_with_a_full_party_stores_the_new_one_and_says_how_to_swap()
+    {
+        for (var i = 1; i <= 6; i++)
+        {
+            Repository.Stored[$"p{i}"] = Pokemons.Pidgey();
+            Repository.Stored[$"p{i}"].Order = i;
+        }
+
+        Store.Load();
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+
+        cut.Find(".menu-panel button.add").Click();
+
+        Assert.False(Store.IsInParty(Store.SelectedId!));
+        Assert.Equal(T("Party.FullOnAdd"), Toasts.Message);
+        cut.Find("header button.menu").Click();
+        Assert.NotNull(cut.Find(".menu-panel .pokemon-list.opened"));
+    }
 }

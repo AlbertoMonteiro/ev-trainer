@@ -35,6 +35,8 @@ public partial class NoHardcodedTextTests : AppTestContext
             .. Data.TrainersByLocation.Select(l => l.Name),
             .. Data.TrainersByLocation.Select(l => Places.Display(l.Name, "en")),
             .. Guide.Trainers.Select(t => t.Location),
+            // Trainer cards and the Exp. Share plan (spec 016) show the game's trainer classes and names.
+            .. Guide.Trainers.SelectMany(t => new[] { t.TrainerClass, t.Name }),
             .. Dex.Species.Select(s => s.Name),
             // Elite Four planner (spec 015): game names of trainers, moves, types, abilities and items.
             .. League.Trainers.Select(t => t.Name),
@@ -157,6 +159,58 @@ public partial class NoHardcodedTextTests : AppTestContext
 
         cut.Find(".league-round button[data-round='rematch']").Click();
         cut.Find(".plan-member[data-index='0'] button.change-species").Click();
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
+    public void Party_page_has_no_hardcoded_text()
+    {
+        for (var i = 1; i <= 7; i++)
+        {
+            var pokemon = Pokemons.Pidgey();
+            pokemon.Order = i;
+            pokemon.Party = i <= 6;
+            Repository.Stored[$"p{i}"] = pokemon;
+        }
+
+        Store.Load();
+        Store.Select("p7");
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".menu-panel button.party").Click();
+        cut.Find(".stored-row button.swap").Click();
+        AssertNoHardcodedText(cut.Nodes);
+    }
+
+    [Fact]
+    public void Trainer_cards_and_the_exp_share_plan_have_no_hardcoded_text()
+    {
+        var buzz = Pokemons.Pidgey();
+        buzz.Targets = [0, 0, 0, 100, 0, 0];
+        Seed(buzz, "buzz");
+        var jolt = Pokemons.Squirtle(targets: [0, 0, 0, 90, 0, 0]);
+        jolt.Order = 2;
+        Seed(jolt, "jolt");
+        Store.Select("buzz");
+        Store.SetExpShare("jolt");
+        var cut = Render<Home>();
+        cut.FindAll(".segmented button").LastOrDefault()?.Click();
+        cut.Find("input.search").Input("engineer");
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".trainer-card[data-trainer='ENGINEER_BERNIE'] .trainer-stage[data-stage='3'] button.record-team").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find(".trainer-card[data-trainer='ENGINEER_BERNIE'] .trainer-stage[data-stage='3'] button.plan-team").Click();
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find("button.change-opponent").Click();
+        cut.Find("input.plan-search").Input("ma");
+        AssertNoHardcodedText(cut.Nodes);
+
+        cut.Find("button.pick-wild[data-name='Magnemite']").Click();
         AssertNoHardcodedText(cut.Nodes);
     }
 
@@ -299,6 +353,6 @@ public partial class NoHardcodedTextTests : AppTestContext
     [GeneratedRegex(@"^(«[A-Za-z0-9_.]+»\s*)+$")]
     private static partial Regex Localized();
 
-    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️☁⏳🔒½¼⅛?]*$")]
+    [GeneratedRegex(@"^[\d\s/–\-·×+#●☰()📱🔄⚠️🗙️☁⏳🔒½¼⅛?↑↓]*$")]
     private static partial Regex NumbersAndSymbols();
 }

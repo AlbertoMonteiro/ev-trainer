@@ -47,6 +47,83 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
     public IReadOnlyDictionary<string, TrainingPokemon> All => _all;
 
+    /// <summary>The current party (spec 016), in the user's order.</summary>
+    public IReadOnlyList<(string Id, TrainingPokemon Pokemon)> PartyOrdered => [.. Ordered.Where(p => p.Pokemon.Party == true)];
+
+    /// <summary>Pokémon in training outside the party, in the user's order.</summary>
+    public IReadOnlyList<(string Id, TrainingPokemon Pokemon)> Stored => [.. Ordered.Where(p => p.Pokemon.Party != true)];
+
+    public bool IsInParty(string id) => _all.TryGetValue(id, out var pokemon) && pokemon.Party == true;
+
+    /// <summary>Whether the party still has a free place.</summary>
+    public bool HasPartyRoom => _all.Values.Count(p => p.Party == true) < Party.MaxSize;
+
+    /// <summary>
+    /// Puts a stored Pokémon in the party; with the party full, <paramref name="replacing"/> (a party member) is stored
+    /// in its place. False when it does not fit.
+    /// </summary>
+    public bool JoinParty(string id, string? replacing = null)
+    {
+        if (!_all.TryGetValue(id, out var pokemon) || pokemon.Party == true)
+        {
+            return false;
+        }
+
+        if (!HasPartyRoom)
+        {
+            if (replacing is null || !IsInParty(replacing))
+            {
+                return false;
+            }
+
+            Store(replacing);
+            pokemon.Party = true;
+            Commit(id, replacing);
+            return true;
+        }
+
+        pokemon.Party = true;
+        Commit(id);
+        return true;
+    }
+
+    /// <summary>Stores a party member; its training data stays as it is, but it no longer holds the Exp. Share.</summary>
+    public void LeaveParty(string id)
+    {
+        if (IsInParty(id))
+        {
+            Store(id);
+            Commit(id);
+        }
+    }
+
+    /// <summary>Moves a party member one place up (-1) or down (+1), swapping the order with its neighbour.</summary>
+    public void MoveInParty(string id, int delta)
+    {
+        var party = PartyOrdered;
+        var index = party.ToList().FindIndex(p => p.Id == id);
+        var other = index + Math.Sign(delta);
+        if (index < 0 || delta == 0 || other < 0 || other >= party.Count)
+        {
+            return;
+        }
+
+        var (a, b) = (party[index].Pokemon, party[other].Pokemon);
+        (a.Order, b.Order) = (b.Order, a.Order);
+        if (a.Order == b.Order)
+        {
+            a.Order += Math.Sign(delta);
+        }
+
+        Commit(id, party[other].Id);
+    }
+
+    private void Store(string id)
+    {
+        _all[id].Party = false;
+        _all[id].ExpShare = false;
+    }
+
     public void Load()
     {
         _all.Clear();
@@ -61,7 +138,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             _deleted[id] = at;
         }
 
-        if (KeepOneExpShareHolder(preferred: null) is { Length: > 0 })
+        if (KeepOneExpShareHolder(preferred: null) is { Length: > 0 } | Party.Normalize(_all) is { Length: > 0 })
         {
             Save();
         }
@@ -83,6 +160,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         {
             Species = [new SpeciesEntry()],
             Order = (_all.Count == 0 ? 0 : _all.Values.Max(p => p.Order)) + 1,
+            Party = HasPartyRoom,
         };
         UpdatePreferences(Preferences with { SelectedId = id });
         Commit(id);
@@ -107,6 +185,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
             Nature = input.Nature,
             Species = line,
             Order = (_all.Count == 0 ? 0 : _all.Values.Max(p => p.Order)) + 1,
+            Party = HasPartyRoom,
             IvLog =
             [
                 new LevelEntry
@@ -137,6 +216,11 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
     /// <summary>Gives the Exp. Share to <paramref name="id"/> (taking it from anyone else); null takes it away.</summary>
     public void SetExpShare(string? id)
     {
+        if (id is not null && !IsInParty(id))
+        {
+            return;
+        }
+
         List<string> changed = [];
         foreach (var (key, pokemon) in _all)
         {
@@ -190,6 +274,71 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
 
         Commit(record.MainId);
+    }
+
+    /// <summary>
+    /// Records a whole trainer battle (spec 016): every Pokémon of the team, in order, as <see cref="RecordBattle"/>
+    /// does (Exp. Share, multipliers and caps included); empty when nothing is selected.
+    /// </summary>
+    public IReadOnlyList<SharedRecord> RecordTeam(IReadOnlyList<string> team) =>
+        SelectedId is null ? [] : [.. team.Select(RecordBattle).OfType<SharedRecord>()];
+
+    /// <summary>
+    /// Sets up a phase of the Exp. Share plan (spec 016, research R5): selects the lead and gives it the Macho Brace,
+    /// takes the Macho Brace from the partner, and gives the partner the Exp. Share (or nobody when it trains alone).
+    /// Returns the undo, or null when the lead does not exist.
+    /// </summary>
+    public Action? ApplyConfiguration(string leadId, string? partnerId, bool partnerShares)
+    {
+        if (!_all.TryGetValue(leadId, out var lead))
+        {
+            return null;
+        }
+
+        var partner = partnerId is not null && partnerId != leadId ? _all.GetValueOrDefault(partnerId) : null;
+        var previous = (Selected: Preferences.SelectedId, LeadMacho: lead.MachoBrace, PartnerMacho: partner?.MachoBrace, Holder: ExpShareHolderId);
+        string[] touched = [leadId, .. partner is null ? [] : new[] { partnerId! }, .. previous.Holder is { } h ? [h] : Array.Empty<string>()];
+
+        lead.MachoBrace = true;
+        if (partner is not null)
+        {
+            partner.MachoBrace = false;
+        }
+
+        var holder = partnerShares && partner is not null && IsInParty(partnerId!) ? partnerId : null;
+        foreach (var (id, pokemon) in _all)
+        {
+            pokemon.ExpShare = id == holder;
+        }
+
+        UpdatePreferences(Preferences with { SelectedId = leadId });
+        Commit([.. touched.Distinct()]);
+
+        return () =>
+        {
+            lead.MachoBrace = previous.LeadMacho;
+            if (partner is not null)
+            {
+                partner.MachoBrace = previous.PartnerMacho!.Value;
+            }
+
+            foreach (var (id, pokemon) in _all)
+            {
+                pokemon.ExpShare = id == previous.Holder;
+            }
+
+            UpdatePreferences(Preferences with { SelectedId = previous.Selected });
+            Commit([.. touched.Distinct()]);
+        };
+    }
+
+    /// <summary>Undoes a whole trainer battle, last Pokémon first.</summary>
+    public void UndoTeam(IReadOnlyList<SharedRecord> records)
+    {
+        foreach (var record in records.Reverse())
+        {
+            UndoBattle(record);
+        }
     }
 
     public void TogglePokerus()
@@ -317,6 +466,8 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         return () =>
         {
             _deleted.Remove(id);
+            removed.Party = HasPartyRoom;
+            removed.ExpShare &= removed.Party == true;
             _all[id] = removed;
             UpdatePreferences(Preferences with { SelectedId = id });
             Commit(id);
@@ -443,13 +594,14 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
 
         // The holder in the imported file is an explicit choice, so it wins over the local one.
         var unmarked = KeepOneExpShareHolder(preferred: backup.Items.FirstOrDefault(kv => kv.Value.ExpShare).Key);
+        var regrouped = Party.Normalize(_all);
 
         if (SelectedId is null && Ordered.Count > 0)
         {
             UpdatePreferences(Preferences with { SelectedId = backup.Items.Keys.FirstOrDefault() ?? Ordered[0].Id });
         }
 
-        Commit([.. backup.Items.Keys, .. unmarked]);
+        Commit([.. backup.Items.Keys, .. unmarked, .. regrouped]);
         return preview;
     }
 
@@ -529,6 +681,7 @@ public sealed partial class TrainerStore(IPokemonRepository repository, Referenc
         }
 
         KeepOneExpShareHolder(preferred: null);
+        Party.Normalize(_all);
 
         if (SelectedId is null)
         {

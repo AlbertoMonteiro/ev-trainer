@@ -100,6 +100,36 @@ public class EnglishScreensTests : AppTestContext
     }
 
     [Fact]
+    public void Party_trainer_cards_and_the_exp_share_plan_show_no_portuguese()
+    {
+        var buzz = Pokemons.Pidgey();
+        buzz.Targets = [0, 0, 0, 100, 0, 0];
+        Seed(buzz, "buzz");
+        var jolt = Pokemons.Squirtle(targets: [0, 0, 0, 90, 0, 0]);
+        jolt.Order = 2;
+        jolt.Party = false;
+        Seed(jolt, "jolt");
+        Store.Select("jolt");
+        var cut = Render<Home>();
+        cut.Find("header button.menu").Click();
+        AssertNoPortuguese(cut.Nodes);
+        cut.Find(".menu-panel button.party").Click();
+        AssertNoPortuguese(cut.Nodes);
+
+        cut.Find(".stored-row[data-id='jolt'] button.join").Click();
+        cut.Find(".party-row[data-id='buzz'] button.open").Click();
+        Store.SetExpShare("jolt");
+        cut.Find("input.search").Input("bernie");
+        cut.Find(".trainer-card .trainer-stage[data-stage='3'] button.record-team").Click();
+        AssertNoPortuguese(cut.Nodes);
+
+        cut.Find(".trainer-card .trainer-stage[data-stage='3'] button.plan-team").Click();
+        AssertNoPortuguese(cut.Nodes);
+        cut.FindAll(".plan-phase button.use-setup")[0].Click();
+        AssertNoPortuguese(cut.Nodes);
+    }
+
+    [Fact]
     public void Capture_and_sync_show_no_portuguese()
     {
         Store.Load();

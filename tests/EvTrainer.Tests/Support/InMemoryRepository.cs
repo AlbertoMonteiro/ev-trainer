@@ -18,9 +18,11 @@ public sealed class InMemoryRepository : IPokemonRepository
 
     public InMemoryRepository(params (string Id, TrainingPokemon Pokemon)[] seed)
     {
+        // Seeds are current data: in the party unless the test says otherwise (spec 016), so Load has nothing to fix.
         foreach (var (id, pokemon) in seed)
         {
             Stored[id] = pokemon.Clone();
+            Stored[id].Party ??= true;
         }
     }
 

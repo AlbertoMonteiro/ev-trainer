@@ -4,7 +4,7 @@
 
 <div class="ev-layout">
     <div class="ev-summary-area">
-        <EvSummary />
+        <EvSummary OnPlan="() => OnPlan.InvokeAsync((null, null))" />
         <button type="button" class="link open-guide" @onclick="OnOpenGuide">@L["Guide.Open"]</button>
     </div>
 
@@ -16,6 +16,16 @@
         var recent = searching ? [] : Evs.Recent(pokemon.Events, Store.Data);
         var recentNames = recent.Select(o => o.Name).ToHashSet(StringComparer.Ordinal);
         var useful = Store.Preferences.Filter != "all";
+
+        @if (searching && Search.FindTrainers(_query) is { Count: > 0 } trainers)
+        {
+            <ol class="trainer-results" aria-label="@L["TrainerCard.Results"]">
+                @foreach (var trainer in trainers)
+                {
+                    <TrainerCard @key="trainer.Id" Trainer="trainer" OnPlan="OnPlan" />
+                }
+            </ol>
+        }
 
         @if (recent.Count > 0)
         {
@@ -40,6 +50,10 @@
 @code {
     [Parameter]
     public EventCallback OnOpenGuide { get; set; }
+
+    /// <summary>Opens the Exp. Share plan (spec 016), with a trainer and the index of one of its stages when chosen in a card.</summary>
+    [Parameter]
+    public EventCallback<(string? TrainerId, int? Stage)> OnPlan { get; set; }
 
     private string _query = string.Empty;
 
@@ -86,24 +100,7 @@
             return;
         }
 
-        var message = record.Main.GainedAny
-            ? L["Toast.EvGain", opponent, Gains(record.Main)].Value
-            : L["Toast.NoEvGain", opponent].Value;
-
-        // Exp. Share (spec 012): the holder's gain goes on the same line.
-        if (record.HolderId is { } holderId && Store.All.TryGetValue(holderId, out var holder))
-        {
-            var name = PokemonLabel(holder);
-            message += " · " + (record.Holder!.GainedAny
-                ? L["Toast.ExpShareGain", name, Gains(record.Holder)].Value
-                : L["Toast.ExpShareNoGain", name].Value);
-        }
-
+        var message = BattleToast.Message(L, Store, opponent, [record]);
         Toasts.Show(message, () => Store.UndoBattle(record));
     }
-
-    private string Gains(RecordResult result) => string.Join(", ", result.Gain
-        .Select((gain, i) => (gain, i))
-        .Where(x => x.gain > 0)
-        .Select(x => L["Evs.Gain.Part", x.gain, L[$"Stat.Long.{x.i}"].Value].Value));
 }

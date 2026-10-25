@@ -1,0 +1,66 @@
+@inherits StoreAwareComponent
+@inject TrainingGuide Guide
+@inject LocationNames Places
+@inject ToastService Toasts
+
+@* A trainer found by name or class in the opponent search (spec 016, contracts/trainer-search.md). *@
+<li class="card trainer-card" data-trainer="@Trainer.Id">
+    <div class="guide-head">
+        <span class="who">@Title</span>
+        <span class="where muted">@Places.Display(Trainer.Location, Language.Current)</span>
+    </div>
+    @if (Trainer.Double)
+    {
+        <p class="marks"><span class="mark double">@L["Guide.Double"]</span> <span class="hint">@L["TrainerCard.DoubleWhy"]</span></p>
+    }
+    <ol class="stages">
+        @foreach (var stage in Trainer.Stages)
+        {
+            var evs = Guide.StageEvs(stage);
+            <li class="trainer-stage @(stage.RequiresEliteFour || Trainer.RequiresEliteFour ? "requires-e4" : "")" data-stage="@stage.Index">
+                <div class="stage-info">
+                    <span class="label">@L[$"Guide.Stage.{stage.Index}"]</span>
+                    @if ((stage.RequiresEliteFour || Trainer.RequiresEliteFour) && stage.Index < 4)
+                    {
+                        <span class="mark e4">@L["TrainerCard.AfterE4"]</span>
+                    }
+                    <span class="team">@TeamText(stage)</span>
+                    <span class="evs">@L["TrainerCard.PerBattle", BattleToast.Gains(L, evs)]</span>
+                </div>
+                <div class="stage-actions">
+                    <button type="button" class="record-team" @onclick="() => Record(stage)">@L["TrainerCard.Record"]</button>
+                    @if (!Trainer.Double)
+                    {
+                        <button type="button" class="plan-team" @onclick="() => OnPlan.InvokeAsync((Trainer.Id, stage.Index))">@L["TrainerCard.Plan"]</button>
+                    }
+                </div>
+            </li>
+        }
+    </ol>
+</li>
+
+@code {
+    [Parameter, EditorRequired]
+    public GuideTrainer Trainer { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<(string? TrainerId, int? Stage)> OnPlan { get; set; }
+
+    private string Title => L["Guide.Trainer", Trainer.TrainerClass, Trainer.Name];
+
+    /// <summary>"Magneton ×3 · nv 28", grouping the same species and level.</summary>
+    private string TeamText(GuideStage stage) => string.Join(" · ", stage.Team
+        .GroupBy(p => p)
+        .Select(g => g.Count() > 1
+            ? L["TrainerCard.Many", L["Guide.Pokemon", g.Key.Species, g.Key.Level].Value, g.Count()].Value
+            : L["Guide.Pokemon", g.Key.Species, g.Key.Level].Value));
+
+    private void Record(GuideStage stage)
+    {
+        var records = Store.RecordTeam([.. stage.Team.Select(p => p.Species)]);
+        if (records.Count > 0)
+        {
+            Toasts.Show(BattleToast.Message(L, Store, Title, records), () => Store.UndoTeam(records));
+        }
+    }
+}

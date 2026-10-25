@@ -61,8 +61,8 @@
 
     private async Task AddBest(CaptureInput best)
     {
-        var (_, undo) = Store.AddFromCapture(best, Dex);
-        Toasts.Show(L["Capture.Added", best.Species], undo);
+        var (id, undo) = Store.AddFromCapture(best, Dex);
+        Toasts.Show(L["Capture.Added", best.Species] + (Store.IsInParty(id) ? "" : " · " + L["Party.FullOnAdd"]), undo);
         await OnAdded.InvokeAsync();
     }
 

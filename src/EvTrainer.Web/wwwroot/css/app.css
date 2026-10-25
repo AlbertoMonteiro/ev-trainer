@@ -1600,7 +1600,7 @@ button.species-current[aria-pressed="true"] {
 
     /* The side panel already lists the Pokémon: the menu keeps only its other actions. */
     .menu-panel .pokemon-list,
-    .menu-panel .pokemon-list + hr {
+    .menu-panel .opened-label {
         display: none;
     }
 }
@@ -2057,5 +2057,306 @@ button.species-current[aria-pressed="true"] {
     .plan-members,
     .league-mons {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Party, trainer cards and Exp. Share plan (spec 016) */
+.opened-label {
+    font-family: var(--font-display);
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 6px 14px 2px;
+}
+
+.pokemon-sidebar .opened-label {
+    padding: 8px 0 2px;
+}
+
+.pokemon-sidebar .manage-party {
+    margin-top: 4px;
+}
+
+.party-view,
+.exp-plan-view {
+    display: grid;
+    gap: 12px;
+}
+
+.party-members h3,
+.party-stored h3 {
+    margin: 0 0 8px;
+}
+
+.party-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.party-row,
+.stored-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 10px;
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.party-row .who,
+.stored-row .who {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.party-row .name,
+.stored-row .name {
+    font-weight: 600;
+}
+
+.party-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.party-actions button,
+.swap-choices button,
+.close-party,
+.close-plan {
+    min-height: 44px;
+}
+
+.party-actions .move-up,
+.party-actions .move-down {
+    min-width: 44px;
+    padding: 0;
+}
+
+.swap-choices {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.swap-choices .label {
+    flex-basis: 100%;
+    font-size: 13px;
+}
+
+.swap-choices button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trainer-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.trainer-card .marks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0;
+}
+
+.trainer-card .mark {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+}
+
+.trainer-card .stages {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.trainer-stage {
+    display: grid;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.trainer-stage .stage-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+}
+
+.trainer-stage .label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+}
+
+.trainer-stage.requires-e4 .label {
+    color: var(--accent);
+}
+
+.trainer-stage .evs {
+    font-weight: 700;
+}
+
+.stage-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.stage-actions button,
+.record-battle,
+.use-setup,
+.confirm-join,
+.open-party,
+.cancel-join {
+    min-height: 44px;
+}
+
+.plan-inputs {
+    display: grid;
+    gap: 10px;
+}
+
+.plan-field {
+    display: grid;
+    gap: 4px;
+}
+
+.plan-field .label {
+    font-size: 13px;
+}
+
+.plan-field select,
+.plan-field input {
+    min-height: 44px;
+    min-width: 0;
+}
+
+.plan-opponent .chosen {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.plan-opponent .chosen .name {
+    font-weight: 600;
+}
+
+.plan-opponent .change-opponent {
+    min-height: 44px;
+}
+
+.plan-picks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.plan-picks button {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.plan-result {
+    display: grid;
+    gap: 10px;
+}
+
+.plan-phases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.plan-phase {
+    display: grid;
+    gap: 4px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+}
+
+.plan-phase .battles {
+    font-size: 18px;
+}
+
+.plan-phase .use-setup {
+    justify-self: start;
+}
+
+.plan-finals {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 2px;
+}
+
+.plan-total,
+.plan-left,
+.plan-useless {
+    margin: 0;
+}
+
+.record-battle {
+    justify-self: start;
+}
+
+.plan-join {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+}
+
+.plan-join p {
+    margin: 0;
+}
+
+@media (min-width: 900px) {
+    .trainer-results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .plan-inputs {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .plan-opponent {
+        grid-column: 1 / -1;
     }
 }

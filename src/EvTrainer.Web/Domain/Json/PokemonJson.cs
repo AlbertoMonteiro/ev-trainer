@@ -63,6 +63,9 @@ public static class PokemonJson
     internal static string FormatTimestamp(DateTimeOffset value) =>
         value.UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'", CultureInfo.InvariantCulture);
 
+    private static readonly JsonElement True = JsonDocument.Parse("true").RootElement;
+    private static readonly JsonElement False = JsonDocument.Parse("false").RootElement;
+
     internal static JsonElement ToElement(DateTimeOffset value) =>
         JsonSerializer.SerializeToElement(FormatTimestamp(value), EvTrainerJsonContext.Default.String);
 
@@ -171,6 +174,12 @@ public static class PokemonJson
             Pokerus = dto.Pokerus,
             MachoBrace = dto.Macho,
             ExpShare = dto.ExpShare == true,
+            Party = dto.Party?.ValueKind switch
+            {
+                JsonValueKind.True => true,
+                JsonValueKind.False => false,
+                _ => null,
+            },
             KnownIvs = [.. Enumerable.Range(0, StatVector.Count).Select(i =>
                 dto.KnownIvs is { } known && i < known.Length && known[i] is >= 0 and <= StatVector.MaxIv ? known[i] : null)],
         };
@@ -210,6 +219,7 @@ public static class PokemonJson
         Pokerus = p.Pokerus,
         Macho = p.MachoBrace,
         ExpShare = p.ExpShare ? true : null,
+        Party = p.Party is { } party ? (party ? True : False) : null,
         Order = p.Order,
         KnownIvs = [.. p.KnownIvs],
         UpdatedAt = p.UpdatedAt is { } at ? ToElement(at) : null,
@@ -265,6 +275,11 @@ internal sealed class PokemonDto
     [JsonPropertyName("expShare")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? ExpShare { get; set; }
+
+    /// <summary>In the party (spec 016); omitted when unknown, read tolerantly (anything but a boolean is unknown).</summary>
+    [JsonPropertyName("party")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public JsonElement? Party { get; set; }
 
     [JsonPropertyName("order")]
     public int? Order { get; set; }

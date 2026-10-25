@@ -7,6 +7,7 @@
 <button type="button" class="menu-backdrop" tabindex="-1" aria-hidden="true" @onclick="OnClose"></button>
 <div class="menu-panel" role="menu" tabindex="-1" @ref="_panel" @onkeydown="KeyDown">
     <PokemonList InMenu OnChoose="Choose" />
+    <button type="button" class="party" role="menuitem" @onclick="OpenParty">@L["Menu.Party"]</button>
     <hr />
     <button type="button" class="add" role="menuitem" @onclick="() => Navigate(Tab.Settings, add: true)">@L["Menu.AddPokemon"]</button>
     <button type="button" class="capture" role="menuitem" @onclick="Capture">@L["Menu.Capture"]</button>
@@ -110,6 +111,15 @@
     [Parameter]
     public EventCallback OnLeague { get; set; }
 
+    [Parameter]
+    public EventCallback OnParty { get; set; }
+
+    private async Task OpenParty()
+    {
+        await OnParty.InvokeAsync();
+        await OnClose.InvokeAsync();
+    }
+
     private async Task OpenLeague()
     {
         await OnLeague.InvokeAsync();
@@ -136,9 +146,9 @@
 
     private async Task Navigate(Tab tab, bool add)
     {
-        if (add)
+        if (add && !Store.IsInParty(Store.AddPokemon()))
         {
-            Store.AddPokemon();
+            Toasts.Show(L["Party.FullOnAdd"]);
         }
 
         await OnNavigate.InvokeAsync(tab);

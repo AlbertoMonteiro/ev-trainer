@@ -154,4 +154,20 @@ public class EvSummaryExpShareTests : AppTestContext
         Assert.Equal("main", cut.Find("select#exp-share option[selected]").GetAttribute("value"));
         Assert.Equal(T("ExpShare.Self"), cut.Find(".exp-share-self").TextContent.Trim());
     }
+
+    [Fact]
+    public void Only_the_party_can_get_the_exp_share()
+    {
+        SeedTwo();
+        var stored = Pokemons.Pidgey();
+        stored.CurrentSpecies = "Pidgeotto";
+        stored.Order = 3;
+        stored.Party = false;
+        Seed(stored, "stored");
+        Store.Select("main");
+
+        var cut = Render<EvSummary>();
+
+        Assert.Equal([T("ExpShare.None"), "Pidgey"], cut.FindAll("select#exp-share option").Select(o => o.TextContent.Trim()));
+    }
 }

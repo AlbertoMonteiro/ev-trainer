@@ -1,57 +1,67 @@
 @page "/"
 @inherits StoreAwareComponent
+@inject ToastService Toasts
 
 <PageTitle>@L["App.Title"]</PageTitle>
 
-<AppHeader OnNavigate="Navigate" OnCapture="OpenCapture" OnSync="OpenSync" OnGuide="OpenGuide" OnLeague="OpenLeague" />
+<AppHeader OnNavigate="Navigate" OnCapture="() => Open(Page.Capture)" OnSync="() => Open(Page.Sync)" OnGuide="() => Open(Page.Guide)"
+           OnLeague="() => Open(Page.League)" OnParty="() => Open(Page.Party)" />
 
 <div class="app-body">
-    <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" />
+    <PokemonSidebar OnChoose="Choose" OnAdd="AddPokemon" OnParty="() => Open(Page.Party)" />
     <main class="page">
-        @if (_planning)
+        @switch (_page)
         {
-            <LeaguePlannerView OnClose="() => _planning = false" />
-        }
-        else if (_guiding)
-        {
-            <TrainingGuideView OnClose="() => _guiding = false" />
-        }
-        else if (_syncing)
-        {
-            <SyncView OnClose="() => _syncing = false" />
-        }
-        else if (_capturing)
-        {
-            <CaptureView OnClose="() => _capturing = false" OnAdded="() => Navigate(Tab.Ivs)" />
-        }
-        else if (Store.Selected is null)
-        {
-            <EmptyState OnAdd="AddPokemon" OnCapture="OpenCapture">
-                <BackupPanel ImportOnly />
-            </EmptyState>
-        }
-        else
-        {
-            <Tabs Active="_tab" ActiveChanged="tab => _tab = tab" />
-            <section class="tab-panel" role="tabpanel">
-                @switch (_tab)
+            case Page.League:
+                <LeaguePlannerView OnClose="Close" />
+                break;
+            case Page.Guide:
+                <TrainingGuideView OnClose="Close" />
+                break;
+            case Page.Sync:
+                <SyncView OnClose="Close" />
+                break;
+            case Page.Capture:
+                <CaptureView OnClose="Close" OnAdded="() => Navigate(Tab.Ivs)" />
+                break;
+            case Page.Party:
+                <PartyView OnClose="Close" OnOpen="Choose" />
+                break;
+            case Page.ExpPlan:
+                <ExpSharePlanView OnClose="Close" OnParty="() => Open(Page.Party)" InitialTrainerId="@_planTrainer" InitialStage="_planStage" />
+                break;
+            default:
+                @if (Store.Selected is null)
                 {
-                    case Tab.Evs:
-                        <EvTab OnOpenGuide="OpenGuide" />
-                        break;
-                    case Tab.Ivs:
-                        <IvTab />
-                        break;
-                    case Tab.Settings:
-                        <div class="settings-layout">
-                            <SettingsForm />
-                            <BackupPanel />
-                            <SpreadsheetImportPanel />
-                            <DeletePanel />
-                        </div>
-                        break;
+                    <EmptyState OnAdd="AddPokemon" OnCapture="() => Open(Page.Capture)">
+                        <BackupPanel ImportOnly />
+                    </EmptyState>
                 }
-            </section>
+                else
+                {
+                    <Tabs Active="_tab" ActiveChanged="tab => _tab = tab" />
+                    <section class="tab-panel" role="tabpanel">
+                        @switch (_tab)
+                        {
+                            case Tab.Evs:
+                                <EvTab OnOpenGuide="() => Open(Page.Guide)" OnPlan="OpenPlan" />
+                                break;
+                            case Tab.Ivs:
+                                <IvTab />
+                                break;
+                            case Tab.Settings:
+                                <div class="settings-layout">
+                                    <SettingsForm />
+                                    <BackupPanel />
+                                    <SpreadsheetImportPanel />
+                                    <DeletePanel />
+                                </div>
+                                break;
+                        }
+                    </section>
+                }
+
+                break;
         }
     </main>
 </div>
@@ -59,70 +69,55 @@
 <Toast />
 
 @code {
+    /// <summary>What the main area shows: the tabs of the selected Pokémon or one of the full pages.</summary>
+    private enum Page
+    {
+        Tabs,
+        League,
+        Guide,
+        Sync,
+        Capture,
+        Party,
+        ExpPlan,
+    }
+
     private Tab _tab = Tab.Evs;
-    private bool _capturing;
-    private bool _syncing;
-    private bool _guiding;
-    private bool _planning;
+    private Page _page = Page.Tabs;
 
-    private void OpenLeague()
+    private string? _planTrainer;
+    private int? _planStage;
+
+    private void Open(Page page) => _page = page;
+
+    private void OpenPlan((string? TrainerId, int? Stage) start)
     {
-        _capturing = false;
-        _syncing = false;
-        _guiding = false;
-        _planning = true;
+        (_planTrainer, _planStage) = start;
+        _page = Page.ExpPlan;
     }
 
-    private void OpenGuide()
-    {
-        _planning = false;
-        _capturing = false;
-        _syncing = false;
-        _guiding = true;
-    }
+    private void Close() => _page = Page.Tabs;
 
-    private void OpenCapture()
-    {
-        _planning = false;
-        _guiding = false;
-        _syncing = false;
-        _capturing = true;
-    }
-
-    private void OpenSync()
-    {
-        _planning = false;
-        _guiding = false;
-        _capturing = false;
-        _syncing = true;
-    }
-
-    /// <summary>Picking a Pokémon in the side panel keeps the tab and leaves the capture screen.</summary>
+    /// <summary>Picking a Pokémon in the side panel keeps the tab and leaves any page.</summary>
     private void Choose(string id)
     {
-        _planning = false;
-        _capturing = false;
-        _syncing = false;
-        _guiding = false;
+        _page = Page.Tabs;
         Store.Select(id);
     }
 
     private void Navigate(Tab tab)
     {
-        _planning = false;
-        _capturing = false;
-        _syncing = false;
-        _guiding = false;
+        _page = Page.Tabs;
         _tab = tab;
     }
 
     private void AddPokemon()
     {
-        _planning = false;
-        _capturing = false;
-        _syncing = false;
-        _guiding = false;
-        Store.AddPokemon();
+        _page = Page.Tabs;
+        if (!Store.IsInParty(Store.AddPokemon()))
+        {
+            Toasts.Show(L["Party.FullOnAdd"]);
+        }
+
         _tab = Tab.Settings;
     }
 }

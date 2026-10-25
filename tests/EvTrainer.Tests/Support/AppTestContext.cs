@@ -37,7 +37,7 @@ public abstract class AppTestContext : BunitContext
         Services.AddSingleton(new TrainingGuide(Guide, Dex));
         Services.AddSingleton(League);
         Services.AddSingleton(Planner);
-        Services.AddSingleton(new OpponentSearch(Data, Places));
+        Services.AddSingleton(new OpponentSearch(Data, Places, Guide));
         Services.AddSingleton(Dex);
         Services.AddSingleton<IPokemonRepository>(Repository);
         Services.AddSingleton<IBrowserApi>(Browser);
